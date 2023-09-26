@@ -28,6 +28,10 @@ const User = require('../models/User');
   };
   // ... otros métodos para crear, actualizar y eliminar usuarios
 
+  const postUser = async (req, res) => {
+    
+  }
+
 module.exports = {
   getAllUsers,
   getUserById

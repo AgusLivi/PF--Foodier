@@ -7,14 +7,10 @@ module.exports = (sequelize) => {
           type: DataTypes.UUID,
           defaultValue: DataTypes.UUIDV4,
           primaryKey: true,
-          autoIncrement: true,
         },
         Nombre: {
           type: DataTypes.STRING,
           allowNull: false,
-        },
-        HistorialDeCompra: {
-          type: DataTypes.JSONB, // dato ajustable
         },
         Ubicacion: {
           type: DataTypes.STRING,

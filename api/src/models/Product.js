@@ -7,7 +7,6 @@ module.exports = (sequelize) => {
             type: DataTypes.UUID,
             defaultValue: DataTypes.UUIDV4,
             primaryKey: true,
-            autoIncrement: true,
           },
           Fecha: {
             type: DataTypes.DATE,
@@ -25,7 +24,7 @@ module.exports = (sequelize) => {
             allowNull: false,
           },
           Categoria: {
-            type: DataTypes.ENUM, //Agregar categorias
+            type: DataTypes.ENUM("Harinas", "posho"), //Agregar categorias
           },
           Imagen: {
             type: DataTypes.STRING,
