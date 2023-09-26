@@ -5,7 +5,7 @@ import logo from '../../assets/logoFoodier.png'; // Asegúrate de que la ruta se
 const NavBar = () => {
   return (
     <div>
-      
+        <div>Navegacion</div>
         <div><Link to="/Ubicacion"></Link></div>
         <div><Link to="/Shops"></Link></div>
         <div>
