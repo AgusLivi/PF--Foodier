@@ -1,8 +1,15 @@
 import React from 'react'
+import PerfilUsuario from './Views/PerfilUsuario/PerfilUsuario'
 
 const App = () => {
   return (
-    <div>F O O D I E R</div>
+    <div>
+
+
+
+      {/*renderizo PerfilUsuario para ver si funciona correctamente*/}
+      <PerfilUsuario/>
+    </div>
   )
 }
 
