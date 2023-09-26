@@ -32,7 +32,7 @@ const cargarPruevas = async () =>{
     const produto1b = await Product.create(pebetesPepes)
     await produto1b.addSeller(seller1)
 
-    // con el aguait
+    // con el aguait nksjdoaiwe
 
 }
 
