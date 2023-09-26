@@ -38,8 +38,8 @@ bower_components
 build/Release
 
 # Dependency directories
-node_modules/
-jspm_packages/
+api/node_modules/
+api/jspm_packages/
 
 # TypeScript v1 declaration files
 typings/
@@ -104,4 +104,4 @@ dist
 .tern-port
 
 # package-lock.json
-package-lock.json
+api/package-lock.json
