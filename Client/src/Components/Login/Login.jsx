@@ -24,6 +24,7 @@ const Login = () => {
 
       </div>
 
+
       <GoogleLogin
         clientId={clientID}
         buttonText="Iniciar sesión con Google"
@@ -36,6 +37,7 @@ const Login = () => {
       </Link>
       
       <button>Empresa</button>
+
 
       <div>
         <p>Al registrarte aceptas los
