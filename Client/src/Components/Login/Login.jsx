@@ -1,10 +1,10 @@
 import React, { useState } from 'react'
-//import GoogleLogin from 'react-google-login'
+import GoogleLogin from 'react-google-login'
 import { useEffect } from 'react'
 //import style from './Login.module.css'
 
 const Login = () => {
- {/* const [user, setUser] = useState({});
+  const [user, setUser] = useState({});
   const  clientID = '213587509979-9539rfrnm5e9bf8m8r1mj5tl15rhjej0.apps.googleusercontent.com'
   
   useEffect(()=>{
@@ -18,7 +18,7 @@ const Login = () => {
 
   const onSucces = (response) => {
     setUser(response.profileObj)
-  }*/}
+  }
     return (
     <div>
       <div>
