@@ -24,7 +24,7 @@ module.exports = (sequelize) => {
             allowNull: false,
           },
           Categoria: {
-            type: DataTypes.ENUM("Harinas", "posho"), //Agregar categorias
+            type: DataTypes.ENUM("Harinas", "posho", "carne", "papa"), //Agregar categorias
           },
           Imagen: {
             type: DataTypes.STRING,

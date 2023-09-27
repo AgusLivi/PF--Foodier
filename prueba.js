@@ -57,6 +57,8 @@ const vendedor1 = {
     Horario: "08 - 18",
     Contacto: "1125464597",
     TipoDePago: "tarjeta",
+    Validaciones: []
+
 }
 
 const PanPepes = {
@@ -87,6 +89,7 @@ const vendedor2 = {
     Horario: "08 - 18",
     Contacto: "1125464597",
     TipoDePago: "tarjeta",
+    Validaciones: []
 }
 
 const bigpeps = {
@@ -94,7 +97,7 @@ const bigpeps = {
     Nombre: "bigpepes",
     Descripcion: "se callo al piso",
     Precio: 200,
-    Categoria: "Carne",
+    Categoria: "carne",
     
     Cantidad: 2
 }
@@ -104,7 +107,7 @@ const papasGrandes = {
     Nombre: "papas",
     Descripcion: "papas fritas frias x porcion",
     Precio: 200,
-    Categoria: "Papa",
+    Categoria: "papa",
     
     Cantidad: 4
 }

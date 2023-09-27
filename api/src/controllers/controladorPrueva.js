@@ -22,20 +22,23 @@ const cargarPruevas = async () =>{
     // crear vendedores en la DB
 
     const seller1 = await Seller.create(vendedor1)
-    console.log(seller1.Seller_ID);
+    
+    //crear productos en la DB
+    
+    const produto1a = await Product.create(PanPepes, seller1)
+    const produto1b = await Product.create(pebetesPepes)
+    await seller1.addProduct(produto1a)
+    await seller1.addProduct(produto1b)
+
+
+
+
     const seller2 = await Seller.create(vendedor2)
 
-    //crear productos en la DB 
-
-    const produto1a = await Product.create(PanPepes, )
-
-    const produto1b = await Product.create(pebetesPepes)
-    await produto1b.addSeller(seller1.Seller_ID)
-
-
-
-
-
+    const produto2a = await Product.create(bigpeps)
+    const produto2b = await Product.create(papasGrandes)
+    await seller2.addProduct(produto2a)
+    await seller2.addProduct(produto2b)
 
 
 }

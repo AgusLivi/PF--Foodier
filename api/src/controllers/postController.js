@@ -1,4 +1,4 @@
-const { Post, Seller } = require("../db.js");
+const { Post, Seller, User } = require("../db.js");
 
 // Obtener todos los posteos
 const getAllPost = async (req, res) => {
@@ -33,13 +33,19 @@ const createPost = async (req, res) => {
   try {
     if (!user_ID || !seller_ID || !valoration) res.status(400).json("faltan datos")
 
-    const newPost = await Post.create({comment});
-    await newPost.addUser(user_ID)
-    await newPost.addSeller(seller_ID)
-
-    const findSeller = await Seller.findOne(seller_ID)
-    findSeller.valoraciones = [...findSeller.valoraciones, valoration]
+    const findUser = await User.findByPk(user_ID);
+    const findSeller = await Seller.findByPk(seller_ID)
+    console.log(findSeller); 
+    findSeller.Valoraciones = [...findSeller.Valoraciones, valoration]
     await findSeller.save()
+    
+    const newPost = await Post.create({comment});
+
+    await findUser.addPost(newPost)
+    await findSeller.addPost(newPost)
+    
+    
+    res.json("posteado")
 
   } catch (error) {
     res.json(error.message)
