@@ -54,10 +54,12 @@ module.exports = (sequelize) => {
     {
         // hoock para q la valoracion promedio se defina cada vez q algien actualiza el modelo
       hooks: {
-        afterUpdate: (seller) => {
+        afterSave: (seller, option) => {
           let total = 0;
+          let promedio = total
+          console.log(promedio);
           seller.Valoraciones.forEach((star) => (total = total + star));
-          seller.ValoracionPromedio = total / seller.Valoraciones.length;
+          seller.ValoracionPromedio = promedio
         },
       },
     }
