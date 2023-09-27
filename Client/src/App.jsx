@@ -4,6 +4,7 @@ import PerfilUsuario from './Views/PerfilUsuario/PerfilUsuario'
 import NavBar from './Components/NavBar/NavBar'
 import Login from './Components/Login/Login';
 import Landing from './Views/Landing/landing'
+
 import PerfilNegocio from "./Views/PerfilNegocio/PerfilNegocio";
 
 
@@ -12,6 +13,7 @@ const App = () => {
   return (
     <div>
 
+
       {location.pathname !== "/" && <NavBar />}
       <Routes>
         <Route path='/' element={<Landing />} />
@@ -19,6 +21,7 @@ const App = () => {
         <Route path='/login' element={<Login />} />
         <Route path='/business' element={<PerfilNegocio />} />
       </Routes>
+
 
     </div>
   )
