@@ -1,0 +1,11 @@
+/*
+    colores: #495057, #219E80
+*/
+.container{
+    width: 100%;
+    background: #495057;
+}
+.container i{
+    font-size: 2em;
+    color: #219E80;
+}
