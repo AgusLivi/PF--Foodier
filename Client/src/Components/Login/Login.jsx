@@ -25,10 +25,12 @@ const Login = () => {
         <h1>Lorem ipsum dolor sit amet consectetur adipisicing</h1>
 
       </div>
+
       <div className={user? "profile":"hidden"}>
         <img src={user.imageUrl} alt="" />
         <h3>{user.name}</h3>
       </div>
+
 
       <div>
         <p>Al registrarte aceptas los
