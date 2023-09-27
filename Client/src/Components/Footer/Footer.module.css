@@ -9,6 +9,7 @@
     align-items: center;
     position: fixed;
     bottom: 0;
+    margin-top: 2em;
 }
 .container div{
     margin: 10px;
@@ -19,6 +20,7 @@
 }
 .container div p{
     margin: 0px;
+    color: #ffffff;
 }
 .container i{
     font-size: 2em;
