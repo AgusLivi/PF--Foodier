@@ -1,8 +1,18 @@
+/*
+    colores: #495057, #219E80
+*/
 .container{
     display: flex;
-    background: #333;
+    background: #495057;
     width: 100%;
+    justify-content: space-around;
+    align-items: center;
+}
+.container i{
+    font-size: 2em;
+    color: #219E80;
+
 }
 .logo{
-    max-width: 200px;
+    max-width: 10em;
 }
