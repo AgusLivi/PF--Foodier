@@ -16,17 +16,17 @@ const PerfilUsuario = () => {
             </div>
             <div className={Style.containerItem}>{/*caja de item*/}
                 <div><i className="fa-solid fa-user"></i><p>Datos Personales</p></div>
-                <div><p>Historial de compras</p></div>
-                <div><p>Ayuda en linea</p></div>
-                <div><p>Metodos de pago</p></div>
+                <div><i className="fa-regular fa-address-card"></i><p>Historial de compras</p></div>
+                <div><i className="fa-solid fa-headphones"></i><p>Ayuda en linea</p></div>
+                <div><i className="fa-solid fa-wallet"></i><p>Metodos de pago</p></div>
             </div>
             <div className={Style.form}>
               <label>Mi perfil</label>
-              <div><p>Direccion</p></div>
-              <div><p>Notificaciones</p></div>
-              <div><p>Donaciones</p></div>
-              <div><p>Registra tu negocio</p></div>
-              <div><p>Invita amigos</p></div>
+              <div><i className="fa-solid fa-location-dot"></i><p>Direccion</p></div>
+              <div><i className="fa-regular fa-bell"></i><p>Notificaciones</p></div>
+              <div><i className="fa-solid fa-hand-holding-dollar"></i><p>Donaciones</p></div>
+              <div><i className="fa-solid fa-store"></i><p>Registra tu negocio</p></div>
+              <div><i className="fa-solid fa-users"></i><p>Invita amigos</p></div>
               <div className={Style.ultp}><p>Cerrar sesion</p></div>
             </div>
         </div>
