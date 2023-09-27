@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import GoogleLogin from 'react-google-login'
+import { Link } from 'react-router-dom'
 
 //import style from './Login.module.css'
 
@@ -19,13 +20,22 @@ const Login = () => {
     return (
     <div>
       <div>
-        <h1>Lorem ipsum dolor sit amet consectetur adipisicing</h1>
+        <h1>Iniciar Sesión</h1>
 
       </div>
-      <div className={user? "profile":"hidden"}>
-        <img src={user.imageUrl} alt="" />
-        <h3>{user.name}</h3>
-      </div>
+
+      <GoogleLogin
+        clientId={clientID}
+        buttonText="Iniciar sesión con Google"
+        onSuccess={onSuccess}
+        onFailure={onFailure}
+        cookiePolicy={'single_host_origin'}
+      />
+      <Link to={`/formUser`}>
+      <button>Usuario</button>
+      </Link>
+      
+      <button>Empresa</button>
 
       <div>
         <p>Al registrarte aceptas los
@@ -38,14 +48,9 @@ const Login = () => {
             ¿Ya tienes una cuenta?
             <button>Inicia sesión</button>
         </p>
+
       </div>
-      <GoogleLogin
-        clientId={clientID}
-        buttonText="Iniciar sesión con Google"
-        onSuccess={onSuccess}
-        onFailure={onFailure}
-        cookiePolicy={'single_host_origin'}
-      />
+
 
     </div>
   )
