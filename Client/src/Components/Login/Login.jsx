@@ -16,7 +16,7 @@ const Login = () => {
     console.error('Inicio de sesión fallido:', error);
     
   };
-
+//o
     return (
     <div>
       <div>
