@@ -1,0 +1,8 @@
+.container{
+    display: flex;
+    background: #333;
+    width: 100%;
+}
+.logo{
+    max-width: 200px;
+}
