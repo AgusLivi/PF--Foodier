@@ -6,6 +6,7 @@ import Login from './Components/Login/Login';
 import Landing from './Views/Landing/landing'
 
 import PerfilNegocio from "./Views/PerfilNegocio/PerfilNegocio";
+import Footer from "./Components/Footer/Footer";
 
 
 const App = () => {
@@ -21,7 +22,7 @@ const App = () => {
         <Route path='/login' element={<Login />} />
         <Route path='/business' element={<PerfilNegocio />} />
       </Routes>
-
+      {location.pathname !== "/" && <Footer />}
 
     </div>
   )
