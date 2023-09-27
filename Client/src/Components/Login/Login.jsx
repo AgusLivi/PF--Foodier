@@ -11,6 +11,7 @@ const Login = () => {
     
        <button>Continuar con Google</button>
        <button>Crear Cuenta</button>
+       <button>Crear Usuario de Empresa</button>
 
 
       <div>
