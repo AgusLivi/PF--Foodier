@@ -32,7 +32,7 @@ const Login = () => {
         onFailure={onFailure}
         cookiePolicy={'single_host_origin'}
       />
-      <Link to={`/formUser`}>
+      <Link to={`/formuser`}>
       <button>Usuario</button>
       </Link>
       
