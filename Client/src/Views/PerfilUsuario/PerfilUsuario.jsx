@@ -22,12 +22,12 @@ const PerfilUsuario = () => {
             </div>
             <div className={Style.form}>
               <label>Mi perfil</label>
-              <div><i className="fa-solid fa-location-dot"></i><p>Direccion</p></div>
-              <div><i className="fa-regular fa-bell"></i><p>Notificaciones</p></div>
-              <div><i className="fa-solid fa-hand-holding-dollar"></i><p>Donaciones</p></div>
-              <div><i className="fa-solid fa-store"></i><p>Registra tu negocio</p></div>
-              <div><i className="fa-solid fa-users"></i><p>Invita amigos</p></div>
-              <div className={Style.ultp}><p>Cerrar sesion</p></div>
+              <div className={Style.containerDetail}><i className="fa-solid fa-location-dot"></i><p>Direccion</p></div>
+              <div className={Style.containerDetail}><i className="fa-regular fa-bell"></i><p>Notificaciones</p><p className={Style.ntf}>10</p>{/*numero variante*/}</div>
+              <div className={Style.containerDetail}><i className="fa-solid fa-hand-holding-dollar"></i><p>Donaciones</p></div>
+              <div className={Style.containerDetail}><i className="fa-solid fa-store"></i><p>Registra tu negocio</p></div>
+              <div className={Style.containerDetail}><i className="fa-solid fa-users"></i><p>Invita amigos</p></div>
+              <div className={Style.containerDetail }><i class="fa-solid fa-right-from-bracket"></i><p>Cerrar sesion</p></div>
             </div>
         </div>
 
