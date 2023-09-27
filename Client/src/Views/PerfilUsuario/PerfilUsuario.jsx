@@ -15,19 +15,19 @@ const PerfilUsuario = () => {
             
             </div>
             <div className={Style.containerItem}>{/*caja de item*/}
-                <div><i className={Style.icon}></i><p>Datos Personales</p></div>
-                <div><i className={Style.icon}></i><p>Historial de compras</p></div>
-                <div><i className={Style.icon}></i><p>Ayuda en linea</p></div>
-                <div><i className={Style.icon}></i><p>Metodos de pago</p></div>
+                <div><i className="fa-solid fa-user"></i><p>Datos Personales</p></div>
+                <div><p>Historial de compras</p></div>
+                <div><p>Ayuda en linea</p></div>
+                <div><p>Metodos de pago</p></div>
             </div>
             <div className={Style.form}>
               <label>Mi perfil</label>
-              <div><i className={Style.icon}></i><p>Direccion</p></div>
-              <div><i className={Style.icon}></i><p>Notificaciones</p></div>
-              <div><i className={Style.icon}></i><p>Donaciones</p></div>
-              <div><i className={Style.icon}></i><p>Registra tu negocio</p></div>
-              <div><i className={Style.icon}></i><p>Invita amigos</p></div>
-              <div className={Style.ultp}><i className={Style.icon}></i><p>Cerrar sesion</p></div>
+              <div><p>Direccion</p></div>
+              <div><p>Notificaciones</p></div>
+              <div><p>Donaciones</p></div>
+              <div><p>Registra tu negocio</p></div>
+              <div><p>Invita amigos</p></div>
+              <div className={Style.ultp}><p>Cerrar sesion</p></div>
             </div>
         </div>
 

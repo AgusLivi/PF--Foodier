@@ -1,6 +1,7 @@
 const { Router } = require("express");
 
 // import de los controler
+const { getAllPost, getPostById, createPost} = require('../controllers/postController')
 
 
 // define las rutas
@@ -8,7 +9,7 @@ const { Router } = require("express");
 const router = Router();
 
 
-// router.push('/post', )
+router.post('/post', createPost)
 
 
 
