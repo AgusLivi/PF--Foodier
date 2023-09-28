@@ -36,7 +36,7 @@ const Login = () => {
       <button>Registrarse como Usuario</button>
       </Link>
       
-      <Link to={`formcomercio`}>
+      <Link to={`/formcomercio`}>
       <button>Registrarse como Empresa</button>
       </Link>
 
