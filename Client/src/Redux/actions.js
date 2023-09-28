@@ -71,8 +71,8 @@ export const getAllFav = () => {
 export const getSellerById = (id) => {
 	return async (dispatch) => {
 	try {
-	  const { data } = await axios.get(`http://localhost:3001/dogs/${id}`)
-	  return dispatch({ 
+	  const { data } = await axios.get(`http://localhost:3001/${id}`) //definir las rutas del back
+ 	  return dispatch({ 
 			type: SEARCH_SELLER_BY_ID,
 	 		payload: data 
 		})
