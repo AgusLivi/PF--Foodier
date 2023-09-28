@@ -35,11 +35,10 @@ const createPost = async (req, res) => {
 
     const findUser = await User.findByPk(user_ID);
     const findSeller = await Seller.findByPk(seller_ID)
-    console.log(findSeller); 
-    findSeller.Valoraciones = [...findSeller.Valoraciones, valoration]
+    findSeller.valoraciones = [...findSeller.valoraciones, valoration]
     await findSeller.save()
     
-    const newPost = await Post.create({comment});
+    const newPost = await Post.create({comentario: comment});
 
     await findUser.addPost(newPost)
     await findSeller.addPost(newPost)

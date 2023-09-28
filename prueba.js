@@ -40,76 +40,78 @@
 // }
 
 const usuario1 = {
-    Nombre: "ayrton",
-    Ubicacion: "moreno"
+    nombre: "ayrton",
+    ubicacion: "moreno",
+    contraseña: "123456"
 }
 
 const usuario2 = {
-    Nombre: "eve",
-    Ubicacion: "lujan"
+    nombre: "eve",
+    ubicacion: "lujan",
+    contraseña: "123456"
 }
 
 const vendedor1 = {
-    Nombre: "Pepes",
-    Email: "pepespanaderia@gmail.com",
-    Contraseña: "123456",
-    Direccion: "moreno",
-    Horario: "08 - 18",
-    Contacto: "1125464597",
-    TipoDePago: "tarjeta",
-    Validaciones: []
+    nombre: "Pepes",
+    email: "pepespanaderia@gmail.com",
+    contraseña: "123456",
+    direccion: "moreno",
+    horario: "08 - 18",
+    contacto: "1125464597",
+    tipoDePago: "tarjeta",
+    validaciones: []
 
 }
 
 const PanPepes = {
 
-    Nombre: "pan",
-    Descripcion: "pan no tan fresco x kilo",
-    Precio: 149.99,
-    Categoria: "Harinas",
+    nombre: "pan",
+    descripcion: "pan no tan fresco x kilo",
+    precio: 149.99,
+    categoria: "Harinas",
 
-    Cantidad: 1
+    cantidad: 1
 }
 
 const pebetesPepes = {
 
-    Nombre: "pebetes",
-    Descripcion: "pebetes no tan frescos x kilo",
-    Precio: 249.99,
-    Categoria: "Harinas",
+    nombre: "pebetes",
+    descripcion: "pebetes no tan frescos x kilo",
+    precio: 249.99,
+    categoria: "Harinas",
     
-    Cantidad: 3
+    cantidad: 3
 }
 
 const vendedor2 = {
-    Nombre: "Peps burger",
-    Email: "pepsburger@gmail.com",
-    Contraseña: "654321",
-    Direccion: "CABA",
-    Horario: "08 - 18",
-    Contacto: "1125464597",
-    TipoDePago: "tarjeta",
-    Validaciones: []
+    nombre: "Peps burger",
+    email: "pepsburger@gmail.com",
+    contraseña: "123456",
+    direccion: "CABA",
+    horario: "08 - 18",
+    contacto: "1125464597",
+    tipoDePago: "tarjeta",
+    validaciones: []
 }
 
 const bigpeps = {
 
-    Nombre: "bigpepes",
-    Descripcion: "se callo al piso",
-    Precio: 200,
-    Categoria: "carne",
+    nombre: "bigpepes",
+    descripcion: "se callo al piso",
+    precio: 200,
+    categoria: "carne",
     
-    Cantidad: 2
+    cantidad: 2
 }
 
 const papasGrandes = {
 
-    Nombre: "papas",
-    Descripcion: "papas fritas frias x porcion",
-    Precio: 200,
-    Categoria: "papa",
+    nombre: "papas",
+    descripcion: "papas fritas frias x porcion",
+    precio: 200,
+    categoria: "papa",
     
-    Cantidad: 4
+    cantidad: 4
 }
 
 module.exports= {

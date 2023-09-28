@@ -3,16 +3,20 @@ const { v4: UUIDV4 } = require('uuid');
 
 module.exports = (sequelize) => {
     sequelize.define('User', {
-        User_ID: {
+        user_ID: {
           type: DataTypes.UUID,
           defaultValue: DataTypes.UUIDV4,
           primaryKey: true,
         },
-        Nombre: {
+        nombre: {
           type: DataTypes.STRING,
           allowNull: false,
         },
-        Ubicacion: {
+        contraseña: {
+          type:DataTypes.STRING,
+          allowNull: false
+        },
+        ubicacion: {
           type: DataTypes.STRING,
         },
     }, {
