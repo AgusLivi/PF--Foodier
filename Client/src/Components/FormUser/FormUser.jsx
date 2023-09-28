@@ -1,11 +1,14 @@
 import { useFormik } from 'formik';
 import React from 'react';
-//import style from './FormUser.module.css'
+import { Link } from 'react-router-dom';
 
-const FormUser = () => {
-  const submitForm = (values) => {};
+const FormLogin = () => {
+  const submitForm = (values) => {
+    // Aquí puedes realizar la lógica de envío del formulario, como enviar una solicitud a un servidor.
+    console.log(values);
+  };
 
-  const { handleSubmit, handleChange } = useFormik({
+  const formik = useFormik({
     initialValues: {
       nombre: '',
       usuario: '',
@@ -13,39 +16,49 @@ const FormUser = () => {
       password: '',
     },
     onSubmit: submitForm,
+    // Puedes agregar validaciones aquí utilizando la propiedad "validate" si es necesario.
   });
 
   return (
     <div>
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={formik.handleSubmit}>
+
       <input
           type='text'
-          placeholder='Nombre'
+          placeholder='nombre'
           name='nombre'
-          onChange={handleChange}
+          onChange={formik.handleChange}
+          value={formik.values.nombre}
         />
-         <input
+
+        <input
           type='text'
-          placeholder='Nombre de Usuario'
+          placeholder='usuario'
           name='usuario'
-          onChange={handleChange}
+          onChange={formik.handleChange}
+          value={formik.values.usuario}
         />
+
         <input
           type='email'
           placeholder='email'
           name='email'
-          onChange={handleChange}
+          onChange={formik.handleChange}
+          value={formik.values.email}
         />
         <input
           type='password'
           placeholder='password'
           name='password'
-          onChange={handleChange}
+          onChange={formik.handleChange}
+          value={formik.values.password}
         />
-        <button type='submit'>iniciar sesión</button>
+        <Link to={`/home`}>
+        <button type='submit'>Iniciar sesión</button>
+        </Link>
       </form>
     </div>
   );
 };
 
-export default FormUser
+export default FormLogin;

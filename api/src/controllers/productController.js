@@ -75,10 +75,45 @@ const Product = require('../models/Product');
     }
   };
 
+  // Post de productos
+  const createProduct = async (req, res) => {
+    try {
+      const {
+        nombre,
+        fecha,
+        descripcion,
+        precio,
+        categoria,
+        imagen,
+        cantidad
+      } = req.body;
+      
+      const sellerId = req.params.sellerId; // sacamos el ID del vendedor con params
+
+      const newProduct = await Product.create({ // creamos el nuevo producto en la base de datos
+        nombre,
+        fecha,
+        descripcion,
+        precio,
+        categoria,
+        imagen,
+        cantidad,
+      });
+
+      await newProduct.setSeller(sellerId); // agregamos la relación entre el producto y el vendedor
+
+      res.status(201).json(newProduct);
+    } catch (error) {
+      console.error(error);
+      res.status(500).json({ error: 'Error al crear el producto.' });
+    }
+  };
+
   // ... otros metodos para crear, actualizar y eliminar productos
 
 module.exports = {
   getAllProducts,
   getProductById,
-  getFilteredProducts
+  getFilteredProducts,
+  createProduct
 };
