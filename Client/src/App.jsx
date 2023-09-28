@@ -7,6 +7,7 @@ import FormUser from "./Components/FormUser/FormUser";
 import PerfilNegocio from "./Views/PerfilNegocio/PerfilNegocio";
 import Footer from "./Components/Footer/Footer";
 import Home from "./Views/Home/Home"
+import Favoritos from "./Views/Favoritos/Favoritos";
 
 
 const App = () => {
@@ -21,6 +22,7 @@ const App = () => {
         <Route path='/login' element={<Login />} />
         <Route path='/business' element={<PerfilNegocio />} /> //vacio
         <Route path='/formuser' element={<FormUser />} />
+        <Route path='/favoritos' element={<Favoritos />} />
       </Routes>
       {location.pathname !== "/" && <Footer />}
 
