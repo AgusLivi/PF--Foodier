@@ -5,16 +5,16 @@ module.exports = (sequelize) => {
   sequelize.define(
     "Seller",
     {
-      Seller_ID: {
+      seller_ID: {
         type: DataTypes.UUID,
         defaultValue: DataTypes.UUIDV4,
         primaryKey: true,
       },
-      Nombre: {
+      name: {
         type: DataTypes.STRING,
         allowNull: false,
       },
-      Email: {
+      email: {
         type: DataTypes.STRING,
         allowNull: false,
         unique: true,
@@ -22,32 +22,32 @@ module.exports = (sequelize) => {
           isEmail: true,
         },
       },
-      Contraseña: {
+      password: {
         type:DataTypes.STRING,
         allowNull: false
       },
-      Direccion: {
+      adress: {
         type: DataTypes.STRING,
         allowNull: false,
       },
-      Horario: {
+      time: {
         type: DataTypes.STRING,
       },
-      ValoracionPromedio: {
+      average_rating: {
         type: DataTypes.FLOAT,
         defaultValue: 0.0,
       },
-      Valoraciones: {
+      rating: {
         type: DataTypes.ARRAY(DataTypes.FLOAT),
         defaultValue: []
       },
-      Contacto: {
+      contact: {
         type: DataTypes.STRING,
       },
-      TipoDePago: {
-        type: DataTypes.ENUM("efectivo", "tarjeta"), //agregar array
+      payment: {
+        type: DataTypes.ENUM("Efectivo", "Pago Online/Tarjeta"), //agregar array
       },
-      Imagen: {
+      image: {
         type: DataTypes.STRING,
       },
     },
