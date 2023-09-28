@@ -3,7 +3,7 @@ import Card from './Card';
 
 const CardContainer = ({ cards, onAddToCart }) => {
     return (
-        <div className='cardContainer'>
+        <div>
             {cards.map((card) => (
                 <Card
                     key={card.Product_ID}
