@@ -110,7 +110,7 @@ const getFilteredProducts = async (categories, adress, average_rating, payment) 
     const sellerFilterConditions = {};
 
     if (adress) {
-      sellerFilterConditions.direccion = {
+      sellerFilterConditions.adress = {
         [Op.iLike]: adress,
       };
     }
@@ -143,10 +143,10 @@ const getFilteredProducts = async (categories, adress, average_rating, payment) 
 };
 
 // Post de productos
-const createProduct = async (name,date,description,price,categories,image,amount) => {
+const createProduct = async (name, date, description, price, categories, image, amount) => {
   try {
 
-    const sellerId = req.params.sellerId; // sacamos el ID del vendedor con params
+    const seller_ID = req.params.seller_ID; // sacamos el ID del vendedor con params
 
     const newProduct = await Product.create({
       // creamos el nuevo producto en la base de datos
@@ -159,7 +159,7 @@ const createProduct = async (name,date,description,price,categories,image,amount
       amount,
     });
 
-    await newProduct.setSeller(sellerId); // agregamos la relación entre el producto y el vendedor
+    await newProduct.setSeller(seller_ID); // agregamos la relación entre el producto y el vendedor
 
     res.status(201).json(newProduct);
   } catch (error) {

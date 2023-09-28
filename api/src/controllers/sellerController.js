@@ -1,4 +1,4 @@
-const Seller = require('../models/Seller');
+const { Seller } = require('../db.js');
 const bcrypt = require('bcrypt');    // npm install bcrypt
 
  // Obtener todos los vendedores
@@ -14,9 +14,9 @@ const bcrypt = require('bcrypt');    // npm install bcrypt
 
   // Obtener un vendedor por ID
   const getSellerById = async (req, res) => {
-    const { Seller_ID } = req.params;
+    const { seller_ID } = req.params;
     try {
-      const seller = await Seller.findByPk(Seller_ID);
+      const seller = await Seller.findByPk(seller_ID);
       if (seller) {
         res.json(seller);
       } else {
@@ -31,18 +31,18 @@ const bcrypt = require('bcrypt');    // npm install bcrypt
     // Crear un nuevo comercio
   const createSeller = async (req, res) => {
   try {
-    const { nombre, email, contraseña, direccion, horario, contacto, opcionPago } = req.body;
+    const { name, email, direction, time, contact, payment } = req.body;
 
-    const hashedPassword = await bcrypt.hash(contraseña, 10);
+    const hashedPassword = await bcrypt.hash(password, 10);
 
     const newSeller = await Seller.create({
-      nombre,
+      name,
       email,
-      contraseña: hashedPassword,
-      direccion,
-      horario,
-      contacto,
-      opcionPago
+      password: hashedPassword,
+      direction,
+      time,
+      contact,
+      payment
     });
 
     res.status(201).json(newSeller);
@@ -59,34 +59,34 @@ const bcrypt = require('bcrypt');    // npm install bcrypt
  // Controlador para actualizar los datos de un vendedor
 const updateSeller = async (req, res) => {
   try {
-    const { Seller_ID } = req.params;
+    const { seller_ID } = req.params;
     const updatedData = req.body;
-    const seller = await Seller.findByPk(Seller_ID);
+    const seller = await Seller.findByPk(seller_ID);
 
     if (seller) {
       // Actualizar los datos del vendedor con los nuevos datos proporcionados
-      if (updatedData.nombre) {
-        seller.nombre = updatedData.nombre;
+      if (updatedData.name) {
+        seller.name = updatedData.name;
       }
       if (updatedData.email) {
         seller.email = updatedData.email;
       }
-      if (updatedData.contraseña) {
+      if (updatedData.password) {
         // Si se proporciona una nueva contraseña, hashearla antes de almacenarla
-        const hashedPassword = await bcrypt.hash(updatedData.contraseña, 10);
-        seller.contraseña = hashedPassword;
+        const hashedPassword = await bcrypt.hash(updatedData.password, 10);
+        seller.password = hashedPassword;
       }
-      if (updatedData.direccion) {
-        seller.direccion = updatedData.direccion;
+      if (updatedData.direction) {
+        seller.direction = updatedData.direction;
       }
-      if (updatedData.horario) {
-        seller.horario = updatedData.horario;
+      if (updatedData.time) {
+        seller.time = updatedData.time;
       }
-      if (updatedData.contacto) {
-        seller.contacto = updatedData.contacto;
+      if (updatedData.contact) {
+        seller.contact = updatedData.contact;
       }
-      if (updatedData.opcionPago) {
-        seller.opcionPago = updatedData.opcionPago;
+      if (updatedData.payment) {
+        seller.payment = updatedData.payment;
       }
 
       await seller.save();
