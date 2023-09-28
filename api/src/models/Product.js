@@ -8,28 +8,36 @@ module.exports = (sequelize) => {
             defaultValue: DataTypes.UUIDV4,
             primaryKey: true,
           },
-          fecha: {
+
+          date: {
             type: DataTypes.DATE,
             defaultValue: DataTypes.NOW,
           },
-          nombre: {
+          name: {
             type: DataTypes.STRING,
             allowNull: false,
           },
-          descripcion: {
+          description: {
             type: DataTypes.TEXT,
           },
-          precio: {
+          price: {
             type: DataTypes.FLOAT,
             allowNull: false,
           },
-          categoria: {
-            type: DataTypes.ENUM("Harinas", "posho", "carne", "papa"), //Agregar categorias
+          old_price: {
+            type: DataTypes.FLOAT, // Precio anterior
           },
-          imagen: {
+          categories: {
+            type: DataTypes.ENUM("Americana", "Argentina", "Bebidas", "Cafetería", "Carnes", "Chocolates", "Congelados", "Desayunos/Meriendas", 
+            "Empanadas", "Ensaladas", "Fiambres y Embutidos", "Frutas y Verduras", "Hamburguesas", "Helados", "Lacteos/Quesos", 
+            "Milanesas", "Panaderia", "Papas Fritas", "Parrilla", "Pastas", "Pescados", "Picadas", "Pizzas", "Pollo", "Postres",
+            "Sushi", "Sandwiches", "Tartas", "Vegetariano/Vegano"),
+          },
+          image: {
             type: DataTypes.STRING,
           },
-          cantidad: {
+          amount: {
+
             type: DataTypes.INTEGER,
           },
     }, {

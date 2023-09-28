@@ -8,7 +8,8 @@ module.exports = (sequelize) => {
           defaultValue: DataTypes.UUIDV4,
           primaryKey: true,
         },
-        comentario: {
+        comments: {
+
           type: DataTypes.TEXT,
         },
     });

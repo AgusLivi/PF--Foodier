@@ -10,7 +10,9 @@ module.exports = (sequelize) => {
         defaultValue: DataTypes.UUIDV4,
         primaryKey: true,
       },
-      nombre: {
+
+      name: {
+
         type: DataTypes.STRING,
         allowNull: false,
       },
@@ -22,32 +24,34 @@ module.exports = (sequelize) => {
           isEmail: true,
         },
       },
-      contraseña: {
+
+      password: {
         type:DataTypes.STRING,
         allowNull: false
       },
-      direccion: {
+      adress: {
         type: DataTypes.STRING,
         allowNull: false,
       },
-      horario: {
+      time: {
         type: DataTypes.STRING,
       },
-      valoracionPromedio: {
+      average_rating: {
         type: DataTypes.FLOAT,
         defaultValue: 0.0,
       },
-      valoraciones: {
+      rating: {
         type: DataTypes.ARRAY(DataTypes.FLOAT),
         defaultValue: []
       },
-      contacto: {
+      contact: {
         type: DataTypes.STRING,
       },
-      tipoDePago: {
-        type: DataTypes.ENUM("efectivo", "tarjeta"), //agregar array
+      payment: {
+        type: DataTypes.ENUM("Efectivo", "Pago Online/Tarjeta"), //agregar array
       },
-      imagen: {
+      image: {
+
         type: DataTypes.STRING,
       },
     },
