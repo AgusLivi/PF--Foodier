@@ -47,8 +47,8 @@ const FormLogin = () => {
           value={formik.values.email}
         />
         <input
-          type='Contraseña'
-          placeholder='password'
+          type='password'
+          placeholder='Contraseña'
           name='password'
           onChange={formik.handleChange}
           value={formik.values.password}
