@@ -14,7 +14,7 @@ const App = () => {
   const location = useLocation();
   return (
     <div>
-      {location.pathname !== "/" || location.pathname !== "/login"  && <NavBar />}
+      {location.pathname !== "/" && location.pathname !== "/login"  && <NavBar />}
       <Routes>
         <Route path='/' element={<Landing />} />
         <Route path='/profile' element={<PerfilUsuario />} /> //esta vacio
@@ -24,7 +24,7 @@ const App = () => {
         <Route path='/formuser' element={<FormUser />} />
         <Route path='/favoritos' element={<Favoritos />} />
       </Routes>
-      {location.pathname !== "/"  || location.pathname !== "/login" && <Footer />}
+      {location.pathname !== "/"  && location.pathname !== "/login" && <Footer />}
 
     </div>
   )
