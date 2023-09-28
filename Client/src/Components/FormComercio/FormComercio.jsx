@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 //import style from './FormComercio.module.css'
 
 
-const FormLogin = () => {
+const FormComercio = () => {
   const submitForm = (values) => {
     // Aquí puedes realizar la lógica de envío del formulario, como enviar una solicitud a un servidor.
     console.log(values);
@@ -82,4 +82,4 @@ const FormLogin = () => {
   );
 };
 
-export default FormLogin;
+export default FormComercio;
