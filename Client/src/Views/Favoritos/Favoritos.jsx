@@ -3,7 +3,7 @@ const Favoritos = () => {
         <div>
             <div>
                 <img src="" alt="" />
-                <p></p>
+                <p>Favoritos, samu podrias trabjar mas</p>
             </div>
 
             <div>
