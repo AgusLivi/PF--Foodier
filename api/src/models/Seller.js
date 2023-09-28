@@ -5,16 +5,16 @@ module.exports = (sequelize) => {
   sequelize.define(
     "Seller",
     {
-      Seller_ID: {
+      seller_ID: {
         type: DataTypes.UUID,
         defaultValue: DataTypes.UUIDV4,
         primaryKey: true,
       },
-      Nombre: {
+      nombre: {
         type: DataTypes.STRING,
         allowNull: false,
       },
-      Email: {
+      email: {
         type: DataTypes.STRING,
         allowNull: false,
         unique: true,
@@ -22,32 +22,32 @@ module.exports = (sequelize) => {
           isEmail: true,
         },
       },
-      Contraseña: {
+      contraseña: {
         type:DataTypes.STRING,
         allowNull: false
       },
-      Direccion: {
+      direccion: {
         type: DataTypes.STRING,
         allowNull: false,
       },
-      Horario: {
+      horario: {
         type: DataTypes.STRING,
       },
-      ValoracionPromedio: {
+      valoracionPromedio: {
         type: DataTypes.FLOAT,
         defaultValue: 0.0,
       },
-      Valoraciones: {
+      valoraciones: {
         type: DataTypes.ARRAY(DataTypes.FLOAT),
         defaultValue: []
       },
-      Contacto: {
+      contacto: {
         type: DataTypes.STRING,
       },
-      TipoDePago: {
+      tipoDePago: {
         type: DataTypes.ENUM("efectivo", "tarjeta"), //agregar array
       },
-      Imagen: {
+      imagen: {
         type: DataTypes.STRING,
       },
     },
@@ -56,10 +56,9 @@ module.exports = (sequelize) => {
       hooks: {
         afterSave: (seller, option) => {
           let total = 0;
-          let promedio = total
-          console.log(promedio);
-          seller.Valoraciones.forEach((star) => (total = total + star));
-          seller.ValoracionPromedio = promedio
+          seller.valoraciones.forEach((star) => (total = total + star));
+          let promedio = total / seller.valoraciones.length || 0
+          seller.setDataValue("valoracionPromedio", promedio)
         },
       },
     }

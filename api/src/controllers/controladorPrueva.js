@@ -30,11 +30,7 @@ const cargarPruevas = async () =>{
     await seller1.addProduct(produto1a)
     await seller1.addProduct(produto1b)
 
-
-
-
     const seller2 = await Seller.create(vendedor2)
-
     const produto2a = await Product.create(bigpeps)
     const produto2b = await Product.create(papasGrandes)
     await seller2.addProduct(produto2a)

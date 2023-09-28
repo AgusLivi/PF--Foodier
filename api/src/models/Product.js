@@ -3,33 +3,33 @@ const { v4: UUIDV4 } = require('uuid');
 
 module.exports = (sequelize) => {
     sequelize.define('Product', {
-        Product_ID: {
+        product_ID: {
             type: DataTypes.UUID,
             defaultValue: DataTypes.UUIDV4,
             primaryKey: true,
           },
-          Fecha: {
+          fecha: {
             type: DataTypes.DATE,
             defaultValue: DataTypes.NOW,
           },
-          Nombre: {
+          nombre: {
             type: DataTypes.STRING,
             allowNull: false,
           },
-          Descripcion: {
+          descripcion: {
             type: DataTypes.TEXT,
           },
-          Precio: {
+          precio: {
             type: DataTypes.FLOAT,
             allowNull: false,
           },
-          Categoria: {
+          categoria: {
             type: DataTypes.ENUM("Harinas", "posho", "carne", "papa"), //Agregar categorias
           },
-          Imagen: {
+          imagen: {
             type: DataTypes.STRING,
           },
-          Cantidad: {
+          cantidad: {
             type: DataTypes.INTEGER,
           },
     }, {
