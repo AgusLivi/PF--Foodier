@@ -54,7 +54,7 @@ const FormLogin = () => {
           value={formik.values.password}
         />
         <Link to={`/home`}>
-        <button type='submit'>Registrarse</button>
+        <button type='submit'>Registrarse!</button>
         </Link>
       </form>
     </div>
