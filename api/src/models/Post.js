@@ -9,6 +9,7 @@ module.exports = (sequelize) => {
           primaryKey: true,
         },
         comments: {
+
           type: DataTypes.TEXT,
         },
     });

@@ -10,7 +10,9 @@ module.exports = (sequelize) => {
         defaultValue: DataTypes.UUIDV4,
         primaryKey: true,
       },
+
       name: {
+
         type: DataTypes.STRING,
         allowNull: false,
       },
@@ -22,6 +24,7 @@ module.exports = (sequelize) => {
           isEmail: true,
         },
       },
+
       password: {
         type:DataTypes.STRING,
         allowNull: false
@@ -48,6 +51,7 @@ module.exports = (sequelize) => {
         type: DataTypes.ENUM("Efectivo", "Pago Online/Tarjeta"), //agregar array
       },
       image: {
+
         type: DataTypes.STRING,
       },
     },
@@ -56,10 +60,9 @@ module.exports = (sequelize) => {
       hooks: {
         afterSave: (seller, option) => {
           let total = 0;
-          let promedio = total
-          console.log(promedio);
-          seller.Valoraciones.forEach((star) => (total = total + star));
-          seller.ValoracionPromedio = promedio
+          seller.valoraciones.forEach((star) => (total = total + star));
+          let promedio = total / seller.valoraciones.length || 0
+          seller.setDataValue("valoracionPromedio", promedio)
         },
       },
     }

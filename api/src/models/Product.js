@@ -8,6 +8,7 @@ module.exports = (sequelize) => {
             defaultValue: DataTypes.UUIDV4,
             primaryKey: true,
           },
+
           date: {
             type: DataTypes.DATE,
             defaultValue: DataTypes.NOW,
@@ -36,6 +37,7 @@ module.exports = (sequelize) => {
             type: DataTypes.STRING,
           },
           amount: {
+
             type: DataTypes.INTEGER,
           },
     }, {
