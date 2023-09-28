@@ -1,4 +1,4 @@
-const { getAllProducts, getProductById, getFilteredProducts, createProduct } = require("../controllers/productController");
+const { getAllProducts, getProductById, getFilteredProducts, createProduct, deleteProduct } = require("../controllers/productController");
 
 
 const getProductsHandler = async (req, res)=>{
@@ -22,10 +22,10 @@ const getProductsHandlerById = async (req, res) => {
 }
 
 const getProductsFilteredHandler = async (req,res) => {
-    const { categoria, pais, provincia, ciudad, valoracion, tipoDePago } = req.query;
+    const { categories, adress, average_rating, payment } = req.query;
 
     try {
-        const response = await getFilteredProducts(categoria, pais, provincia, ciudad, valoracion, tipoDePago);
+        const response = await getFilteredProducts(categories, adress, average_rating, payment);
         return res.status(201).json(response)
     } catch (error) {
         res.status(400).json({error: error.message})
@@ -34,17 +34,11 @@ const getProductsFilteredHandler = async (req,res) => {
 
 const createProductsHandler = async (req,res)=>{
     const {
-        nombre,
-        fecha,
-        descripcion,
-        precio,
-        categoria,
-        imagen,
-        cantidad
+        name,date,description,price,categories,image,amount
       } = req.body;
     
     try {
-        const response = await createProduct(nombre,fecha,descripcion,precio,categoria,imagen,cantidad);
+        const response = await createProduct(name,date,description,price,categories,image,amount);
         return res.status(201).json(response)
     } catch (error) {
         res.status(400).json({error: error.message})

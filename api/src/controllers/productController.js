@@ -77,8 +77,7 @@ const getAllProducts = async ( page, pageSize, name) => {
 };
 
 // Obtener un producto por ID
-const getProductById = async (req, res) => {
-  const { product_ID } = req.params;
+const getProductById = async (product_ID) => {
   try {
     const product = await Product.findByPk(product_ID, {include: [
       {
@@ -97,35 +96,33 @@ const getProductById = async (req, res) => {
 };
 
 // Controlador para obtener productos con filtros combinados
-const getFilteredProducts = async (req, res) => {
+const getFilteredProducts = async (categories, adress, average_rating, payment) => {
   try {
-    const { categoria, pais, provincia, ciudad, valoracion, tipoDePago } =
-      req.query;
 
     // Construye un objeto de condiciones de filtro basado en los parámetros proporcionados
     const filterConditions = {};
 
-    if (categoria) {
-      filterConditions.categoria = categoria; // Filtra por categoría exacta en la tabla 'products'
+    if (categories) {
+      filterConditions.categories = categories; // Filtra por categoría exacta en la tabla 'products'
     }
 
     // Condiciones de filtro para la tabla 'sellers'
     const sellerFilterConditions = {};
 
-    if (pais && provincia && ciudad) {
+    if (adress) {
       sellerFilterConditions.direccion = {
-        [Op.iLike]: `%${pais},${provincia},${ciudad}%`,
+        [Op.iLike]: adress,
       };
     }
 
-    if (valoracion) {
-      sellerFilterConditions.ValoracionPromedio = {
-        [Op.gte]: valoracion,
+    if (average_rating) {
+      sellerFilterConditions.average_rating = {
+        [Op.gte]: average_rating,
       };
     }
 
-    if (tipoDePago) {
-      sellerFilterConditions.TipoDePago = tipoDePago;
+    if (payment) {
+      sellerFilterConditions.payment = payment;
     }
 
     // Consulta de Sequelize que aplica las condiciones de filtro
@@ -146,22 +143,20 @@ const getFilteredProducts = async (req, res) => {
 };
 
 // Post de productos
-const createProduct = async (req, res) => {
+const createProduct = async (name,date,description,price,categories,image,amount) => {
   try {
-    const { nombre, fecha, descripcion, precio, categoria, imagen, cantidad } =
-      req.body;
 
     const sellerId = req.params.sellerId; // sacamos el ID del vendedor con params
 
     const newProduct = await Product.create({
       // creamos el nuevo producto en la base de datos
-      nombre,
-      fecha,
-      descripcion,
-      precio,
-      categoria,
-      imagen,
-      cantidad,
+      name,
+      date,
+      description,
+      price,
+      categories,
+      image,
+      amount,
     });
 
     await newProduct.setSeller(sellerId); // agregamos la relación entre el producto y el vendedor
@@ -173,6 +168,9 @@ const createProduct = async (req, res) => {
   }
 };
 
+const deleteProduct = async (id)=>{
+  await Product.destroy({where: {id}})
+}
 // ... otros metodos para crear, actualizar y eliminar productos
 
 module.exports = {
@@ -180,4 +178,5 @@ module.exports = {
   getProductById,
   getFilteredProducts,
   createProduct,
+  deleteProduct
 };
