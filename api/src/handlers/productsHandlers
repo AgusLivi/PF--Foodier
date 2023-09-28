@@ -1,0 +1,66 @@
+const { getAllProducts, getProductById, getFilteredProducts, createProduct } = require("../controllers/productController");
+
+
+const getProductsHandler = async (req, res)=>{
+    const {name} = req.query;
+    try {
+        const response = await getAllProducts(name);
+        return res.status(200).json(response)
+    } catch (error) {
+        res.status(400).json({error: error.message})
+    }
+};
+
+const getProductsHandlerById = async (req, res) => {
+    const {id} = req.params; // ya esta desestructurado, modificar el controller
+    try {
+        const response = await getProductById(id);
+        return res.status(200).json(response)
+    } catch (error) {
+        res.status(400).json({error: error.message})
+    }
+}
+
+const getProductsFilteredHandler = async (req,res) => {
+    const { categoria, pais, provincia, ciudad, valoracion, tipoDePago } = req.query;
+
+    try {
+        const response = await getFilteredProducts(categoria, pais, provincia, ciudad, valoracion, tipoDePago);
+        return res.status(201).json(response)
+    } catch (error) {
+        res.status(400).json({error: error.message})
+    }
+}
+
+const createProductsHandler = async (req,res)=>{
+    const {
+        nombre,
+        fecha,
+        descripcion,
+        precio,
+        categoria,
+        imagen,
+        cantidad
+      } = req.body;
+    
+    try {
+        const response = await createProduct(nombre,fecha,descripcion,precio,categoria,imagen,cantidad);
+        return res.status(201).json(response)
+    } catch (error) {
+        res.status(400).json({error: error.message})
+    }
+}
+
+const deleteProductHandler = async (req,res)=>{
+    const {id} = req.params;
+    try {
+        await deleteProduct(id) // importar
+        res.status(200).send(`producto ${id} eliminado correctamente`)
+    } catch (error) {
+        res.status(400).json({error: error.message})
+    }
+}
+
+module.exports={
+    getProductsHandler, getProductsHandlerById, getProductsFilteredHandler, createProductsHandler, deleteProductHandler
+}

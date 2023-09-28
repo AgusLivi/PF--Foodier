@@ -1,5 +1,6 @@
 import { useFormik } from 'formik';
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 const FormLogin = () => {
   const submitForm = (values) => {
@@ -52,7 +53,9 @@ const FormLogin = () => {
           onChange={formik.handleChange}
           value={formik.values.password}
         />
+        <Link to={`/home`}>
         <button type='submit'>Iniciar sesión</button>
+        </Link>
       </form>
     </div>
   );
