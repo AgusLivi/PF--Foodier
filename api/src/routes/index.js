@@ -3,6 +3,7 @@ const router = express.Router();
 //Importo y mas abajo agrego la ruta para el payment
 const paymentController = require('../controllers/paymentController');
 const favController = require('../controllers/favController');
+const productRouters = require('./productRoutes')
 
 // import de los controler
 const { getAllPost, getPostById, createPost} = require('../controllers/postController')
@@ -23,7 +24,7 @@ router.post('/add-favorites', favController.addFavorites);
 // Ruta para obtener la lista de vendedores favoritos de un usuario
 router.get('/get-favorites/:user_ID', favController.getFavorites);
 
-router.use('/products', productRoutes)
+router.use('/products', productRouters)
 
 
 module.exports = router; 
