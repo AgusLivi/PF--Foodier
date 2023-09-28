@@ -1,5 +1,5 @@
 import { useFormik } from 'formik';
-import React from 'react';ç
+import React from 'react';
 import { Link } from 'react-router-dom';
 
 const FormLogin = () => {
