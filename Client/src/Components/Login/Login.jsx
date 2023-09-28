@@ -33,10 +33,12 @@ const Login = () => {
         cookiePolicy={'single_host_origin'}
       />
       <Link to={`/formuser`}>
-      <button>Usuario</button>
+      <button>Registrarse como Usuario</button>
       </Link>
       
-      <button>Empresa</button>
+      <Link to={`formcomercio`}>
+      <button>Registrarse como Empresa</button>
+      </Link>
 
 
       <div>
