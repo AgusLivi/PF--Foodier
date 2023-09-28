@@ -9,7 +9,7 @@ const paginate = ({ page, pageSize }) => {
   return { offset, limit };
 };
 
-// Obtener todos los productos
+// Obtener todos los productos paginados y filtrados por nombre segun se requieran x query
 const getAllProducts = async ( page, pageSize, name) => {
   try {
     if (name) {
