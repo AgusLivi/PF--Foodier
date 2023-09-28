@@ -25,7 +25,7 @@ const FormLogin = () => {
 
       <input
           type='text'
-          placeholder='nombre'
+          placeholder='Nombre'
           name='nombre'
           onChange={formik.handleChange}
           value={formik.values.nombre}
@@ -33,7 +33,7 @@ const FormLogin = () => {
 
         <input
           type='text'
-          placeholder='usuario'
+          placeholder='Usuario'
           name='usuario'
           onChange={formik.handleChange}
           value={formik.values.usuario}
@@ -41,20 +41,20 @@ const FormLogin = () => {
 
         <input
           type='email'
-          placeholder='email'
+          placeholder='Correo'
           name='email'
           onChange={formik.handleChange}
           value={formik.values.email}
         />
         <input
-          type='password'
+          type='Contraseña'
           placeholder='password'
           name='password'
           onChange={formik.handleChange}
           value={formik.values.password}
         />
         <Link to={`/home`}>
-        <button type='submit'>Iniciar sesión</button>
+        <button type='submit'>Registrarse</button>
         </Link>
       </form>
     </div>
