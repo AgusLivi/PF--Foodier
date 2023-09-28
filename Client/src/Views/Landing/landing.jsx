@@ -18,7 +18,7 @@ const Landing = () => {
                     <div><p className={Style.p3}> ALIMENTOS</p></div>
                 </div>
                 <div className={Style.pDescripcion}>
-                <p>¿TIENES HAMBRE? CON LA</p>
+                <p>CON LA</p>
                 <p>APLICACIÓN <strong>FOODIER</strong> PUEDES</p>
                 <p> SALVAR COMIDA DELICIOSA DE</p>
                 <p> RESTAURANTES Y</p>
