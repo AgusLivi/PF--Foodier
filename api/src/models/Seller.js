@@ -24,7 +24,6 @@ module.exports = (sequelize) => {
           isEmail: true,
         },
       },
-
       password: {
         type:DataTypes.STRING,
         allowNull: false
@@ -51,7 +50,6 @@ module.exports = (sequelize) => {
         type: DataTypes.ENUM("Efectivo", "Pago Online/Tarjeta"), //agregar array
       },
       image: {
-
         type: DataTypes.STRING,
       },
     },
