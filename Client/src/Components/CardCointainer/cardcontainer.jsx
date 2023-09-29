@@ -1,10 +1,11 @@
 import React from 'react';
 import Card from './Card'; 
 
-const CardContainer = ({ cards, onAddToCart }) => {
+
+const CardContainer = ({ card, onAddToCart }) => {
     return (
         <div>
-            {cards.map((card) => (
+            {card.map((card) => (
                 <Card
                     key={card.Product_ID}
                     Product_ID={card.Product_ID}
@@ -18,6 +19,7 @@ const CardContainer = ({ cards, onAddToCart }) => {
                     onAddToCart={onAddToCart}
                 />
             ))}
+            
         </div>
     );
 }
