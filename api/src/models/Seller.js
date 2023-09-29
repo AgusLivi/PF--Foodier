@@ -10,9 +10,7 @@ module.exports = (sequelize) => {
         defaultValue: DataTypes.UUIDV4,
         primaryKey: true,
       },
-
       name: {
-
         type: DataTypes.STRING,
         allowNull: false,
       },
@@ -28,12 +26,12 @@ module.exports = (sequelize) => {
         type:DataTypes.STRING,
         allowNull: false
       },
-      adress: {
+      address: {
         type: DataTypes.STRING,
         allowNull: false,
       },
       time: {
-        type: DataTypes.STRING,
+        type: DataTypes.DATEONLY,
       },
       average_rating: {
         type: DataTypes.FLOAT,

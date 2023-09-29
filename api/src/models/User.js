@@ -8,9 +8,7 @@ module.exports = (sequelize) => {
           defaultValue: UUIDV4,
           primaryKey: true,
         },
-
         email: {
-
           type: DataTypes.STRING,
           allowNull: false,
           unique: true,
@@ -18,7 +16,6 @@ module.exports = (sequelize) => {
             isEmail: true
           },
         },
-
         password: {
           type: DataTypes.STRING, // se puede ajustar el tipo de dato según lo que necesitemos
           allowNull: false,
@@ -28,10 +25,7 @@ module.exports = (sequelize) => {
           allowNull: false,
         },
         location: {
-
           type: DataTypes.STRING,
         },
-    }, {
-        timestamps: false,
     });
 }
