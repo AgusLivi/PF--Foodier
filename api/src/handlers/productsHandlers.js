@@ -36,9 +36,10 @@ const createProductsHandler = async (req,res)=>{
     const {
         name,date,description,price,categories,image,amount
       } = req.body;
+    const seller_ID = req.params.seller_ID; // sacamos el ID del vendedor con params
     
     try {
-        const response = await createProduct(name,date,description,price,categories,image,amount);
+        const response = await createProduct(seller_ID,name,date,description,price,categories,image,amount);
         return res.status(201).json(response)
     } catch (error) {
         res.status(400).json({error: error.message})

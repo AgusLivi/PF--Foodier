@@ -7,7 +7,7 @@ const {
   vendedor2,
   bigpeps,
   papasGrandes,
-} = require("../../../prueba.js");
+} = require("../../../prueba");
 
 const { User, Seller, Product, Post } = require("../db.js");
 

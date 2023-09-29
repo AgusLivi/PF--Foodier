@@ -100,6 +100,10 @@ const updateSeller = async (req, res) => {
   }
 };
 
+const deleteSeller = async (seller_ID)=>{
+  await Seller.destroy({where: {seller_ID}})
+}
+
 
   // ... otros métodos para crear, actualizar y eliminar vendedores
 
@@ -107,5 +111,6 @@ module.exports = {
   getAllSellers,
   getSellerById,
   createSeller,
-  updateSeller
+  updateSeller,
+  deleteSeller
 };

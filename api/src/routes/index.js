@@ -5,6 +5,7 @@ const paymentController = require('../controllers/paymentController');
 const favController = require('../controllers/favController');
 const productRouters = require('./productRoutes');
 const userController = require('../controllers/userController');
+const { createPost } = require("../controllers/postController");
 
 
 // define las rutas
