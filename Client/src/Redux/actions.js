@@ -2,12 +2,14 @@ import axios from 'axios';
 import {
 	GET_ALL_PRODUCTS,
  	SEARCH_BY_NAME,
- 	SEARCH_SELLER_BY_ID,
+ 	SEARCH_BY_ID,
  	CREATE_PRODUCT,
  	GET_ALL_FAV,
+    GET_FILTER,
+    DELETE_PRODUCT
 } from './actionsType'
 
-const endPoint='http://localhost:3001/'  //definir rutas del back
+const endPoint='http://localhost:3001/products'  //definir rutas del back
 
 export const getAllProducts= () => {
     return async dispatch => {
@@ -26,7 +28,7 @@ export const getAllProducts= () => {
 export const getProductByName = search => {
     return async dispatch => {
         try {
-            const { data } = await axios(`${endPoint}/?name=${search}`) //en name tengo que cambiar por la ruta del back
+            const { data } = await axios(`${endPoint}?name=${search}`) //en name tengo que cambiar por la ruta del back
          
             return dispatch({
                 type: SEARCH_BY_NAME,
@@ -42,7 +44,7 @@ export const getProductByName = search => {
 export const createProduct = (formData)=>{
     return async (dispatch)=>{
         try{
-            const { data } = await axios.post('http://localhost:3001/', formData); // despues de la barra tengo que poner la ruta que definieron en el back
+            const { data } = await axios.post(`http://localhost:3001/products/${id}`, formData); // despues de la barra tengo que poner la ruta que definieron en el back
             return dispatch({
                 type: CREATE_PRODUCT,
                 payload: data
@@ -68,12 +70,12 @@ export const getAllFav = () => {
     }
 }
 
-export const getSellerById = (id) => {
+export const getById = (id) => {
 	return async (dispatch) => {
 	try {
-	  const { data } = await axios.get(`http://localhost:3001/${id}`) //definir las rutas del back
+	  const { data } = await axios.get(`${endPoint}/${id}`) //definir las rutas del back
  	  return dispatch({ 
-			type: SEARCH_SELLER_BY_ID,
+			type: SEARCH_BY_ID,
 	 		payload: data 
 		})
 	} catch (error) {
@@ -81,3 +83,34 @@ export const getSellerById = (id) => {
 	}
   }
 }
+
+export const getFilter= () => {
+	return async (dispatch) => {
+	try {
+	  const { data } = await axios.get(`${endPoint}/filter`) //definir las rutas del back
+ 	  return dispatch({ 
+			type: GET_FILTER,
+	 		payload: data 
+		})
+	} catch (error) {
+	  alert(error.message)
+	}
+  }
+}
+
+export const deleteProduct = (id) => {
+	return async (dispatch) => {
+	try {
+	  const { data } = await axios.delete(`${endPoint}/${id}`) //definir las rutas del back
+ 	  return dispatch({ 
+			type: GET_FILTER,
+	 		payload: data 
+		})
+	} catch (error) {
+	  alert(error.message)
+	}
+  }
+}
+
+
+
