@@ -1,20 +1,20 @@
 import React from 'react';
-import Card from './Card'; 
+import Card from '../Card/card'; 
 
-const CardContainer = ({ cards, onAddToCart }) => {
+const CardContainer = ({ CardContainer, onAddToCart }) => {
     return (
         <div>
-            {cards.map((card) => (
-                <Card
-                    key={card.Product_ID}
-                    Product_ID={card.Product_ID}
-                    Fecha={card.Fecha}
-                    Nombre={card.Nombre}
-                    Descripcion={card.Descripcion}
-                    Precio={card.Precio}
-                    Imagen={card.Imagen}
-                    Cantidad={card.Cantidad}
-                    Categoria={card.Categoria}
+            {CardContainer.map((card) => (
+                <card
+                    key={card.product_ID}
+                    Product_ID={card.product_ID}
+                    Fecha={card.date}
+                    Nombre={card.name}
+                    Descripcion={card.description}
+                    Precio={card.price}
+                    Imagen={card.image}
+                    Cantidad={card.amount}
+                    Categoria={card.categories}
                     onAddToCart={onAddToCart}
                 />
             ))}
