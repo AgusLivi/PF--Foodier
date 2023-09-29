@@ -1,27 +1,46 @@
 const express = require("express");
 const router = express.Router();
-//Importo y mas abajo agrego la ruta para el payment
+
+// Importo los controladores
 const paymentController = require('../controllers/paymentController');
 const favController = require('../controllers/favController');
 const productRouters = require('./productRoutes');
 const userController = require('../controllers/userController');
-const { createPost } = require("../controllers/postController");
+const loginController = require('../controllers/loginController')
+const postController = require('../controllers/postController');
+const sellerController = require('../controllers/sellerController');
 
+// Rutas relacionadas con los productos
+router.use('/products', productRouters);
 
-// define las rutas
-router.post('/post', createPost)
-router.post('/create-payment', paymentController.createPayment);
+// Rutas para gestionar publicaciones
+router.post('/posts', postController.createPost);
+router.get('/posts', postController.getAllPost);
+router.get('/posts/:post_ID', postController.getPostById);
 
-// Ruta para agregar un vendedor a favoritos
-router.post('/add-favorites', favController.addFavorites);
-router.post('/login', userController.createUser);
+// Rutas de autenticacion y usuarios
+router.post('/login', loginController.login);
 
-router.post
+// Rutas relacionadas a los usuarios
+router.post("/users", userController.createUser);
+router.put("/users/:user_ID", userController.updateUser);
+router.delete("/users/:user_ID", userController.deleteUser);
+router.get("/users", userController.getAllUsers);
+router.get("/users/:user_ID", userController.getUserById);
 
-// Ruta para obtener la lista de vendedores favoritos de un usuario
-router.get('/get-favorites/:user_ID', favController.getFavorites);
+// Rutas relacionadas a los vendedores
+router.post('/sellers', sellerController.createSeller);
+router.put('/sellers/:seller_ID', sellerController.updateSeller);
+router.delete('/sellers/:seller_ID', sellerController.deleteSeller);
+router.get('/sellers', sellerController.getAllSellers);
+router.get('/sellers/:seller_ID', sellerController.getSellerById);
 
-router.use('/products', productRouters)
+// Rutas de favoritos
+router.post('/favorites', favController.addFavorites);
+router.get('/favorites/:user_ID', favController.getFavorites);
+
+// Rutas de pagos
+router.post('/payments', paymentController.createPayment);
 
 
 module.exports = router; 
