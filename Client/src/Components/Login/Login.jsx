@@ -43,15 +43,15 @@ const Login = () => {
           <p>O usa tu email para registrarte como usuario</p>
           <form className={style.form}>
             <label>
-            <i class='bx bx-user' ></i>
+            <i class={'bx bx-user'} ></i>
             <input type="text" placeholder="Nombre Completo"></input>
             </label>
             <label>
-            <i class='bx bx-envelope'></i>
+            <i className={'bx bx-envelope'}></i>
             <input type="email" placeholder="Correo Electrónico"></input>
             </label>
             <label>
-            <i class='bx bx-lock-alt' ></i>
+            <i class={'bx bx-lock-alt'} ></i>
             <input type="password" placeholder="Contraseña"></input>
             </label>
             <Link to={`/home`}>
