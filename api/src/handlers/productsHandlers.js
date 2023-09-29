@@ -2,9 +2,9 @@ const { getAllProducts, getProductById, getFilteredProducts, createProduct, dele
 
 
 const getProductsHandler = async (req, res)=>{
-    const {name} = req.query;
+    const {page, pageSize, name} = req.query;
     try {
-        const response = await getAllProducts(name);
+        const response = await getAllProducts(page, pageSize, name);
         return res.status(200).json(response)
     } catch (error) {
         res.status(400).json({error: error.message})
