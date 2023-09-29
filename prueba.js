@@ -39,7 +39,7 @@
 //     }
 // }
 
-["Product",
+module.exports = [
     {
       "date": "2023-09-28T22:38:24.059Z",
       "name": "Croissant de chocolate",
@@ -640,44 +640,44 @@
       "image": null,
       "amount": 10
     },
-    {
-      "date": "2023-11-27T12:05:23.082Z",
-      "name": "Pollo al curry",
-      "description": "Pollo al curry con arroz basmati",
-      "price": 320,
-      "old_price": 350,
-      "categories": ["Pollo"],
-      "image": null,
-      "amount": 7
-    },
-    {
-      "date": "2023-11-28T14:55:30.648Z",
-      "name": "Ensalada de quinoa",
-      "description": "Ensalada de quinoa con aguacate y pepino",
-      "price": 220,
-      "old_price": 250,
-      "categories": ["Ensaladas", "Saludable"],
-      "image": null,
-      "amount": 9
-    },
-    {
-      "date": "2023-11-29T17:45:38.214Z",
-      "name": "Hamburguesa de pavo",
-      "description": "Hamburguesa de pavo con espinacas y tomate seco",
-      "price": 260,
-      "old_price": 290,
-      "categories": ["Hamburguesas"],
-      "image": null,
-      "amount": 5
-    },
-    {
-      "date": "2023-11-30T10:35:45.781Z",
-      "name": "Sándwich de roast beef",
-      "description": "Sándwich de roast beef con mostaza y rúcula",
-      "price": 240,
-      "old_price": 270,
-      "categories": ["Sandwiches"],
-      "image": null,
-      "amount": 8
-    }
+    // {
+    //   "date": "2023-11-27T12:05:23.082Z",
+    //   "name": "Pollo al curry",
+    //   "description": "Pollo al curry con arroz basmati",
+    //   "price": 320,
+    //   "old_price": 350,
+    //   "categories": ["Pollo"],
+    //   "image": null,
+    //   "amount": 7
+    // },
+    // {
+    //   "date": "2023-11-28T14:55:30.648Z",
+    //   "name": "Ensalada de quinoa",
+    //   "description": "Ensalada de quinoa con aguacate y pepino",
+    //   "price": 220,
+    //   "old_price": 250,
+    //   "categories": ["Ensaladas", "Saludable"],
+    //   "image": null,
+    //   "amount": 9
+    // },
+    // {
+    //   "date": "2023-11-29T17:45:38.214Z",
+    //   "name": "Hamburguesa de pavo",
+    //   "description": "Hamburguesa de pavo con espinacas y tomate seco",
+    //   "price": 260,
+    //   "old_price": 290,
+    //   "categories": ["Hamburguesas"],
+    //   "image": null,
+    //   "amount": 5
+    // },
+    // {
+    //   "date": "2023-11-30T10:35:45.781Z",
+    //   "name": "Sándwich de roast beef",
+    //   "description": "Sándwich de roast beef con mostaza y rúcula",
+    //   "price": 240,
+    //   "old_price": 270,
+    //   "categories": ["Sandwiches"],
+    //   "image": null,
+    //   "amount": 8
+    // }
   ]
