@@ -2,7 +2,7 @@ import { Routes, Route, useLocation } from "react-router-dom";
 import PerfilUsuario from './Views/PerfilUsuario/PerfilUsuario'
 import NavBar from './Components/NavBar/NavBar'
 import Login from './Components/Login/Login';
-import Landing from './Views'
+import Landing from './Views/Landing/Landing'
 import FormUser from "./Components/FormUser/FormUser";
 import PerfilNegocio from "./Views/PerfilNegocio/PerfilNegocio";
 import Footer from "./Components/Footer/Footer";
