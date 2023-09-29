@@ -31,7 +31,7 @@ const bcrypt = require('bcrypt');    // npm install bcrypt
     // Crear un nuevo comercio
   const createSeller = async (req, res) => {
   try {
-    const { name, email, direction, time, contact, payment } = req.body;
+    const { name, email, address, time, contact, payment, image } = req.body;
 
     const hashedPassword = await bcrypt.hash(password, 10);
 
@@ -39,10 +39,11 @@ const bcrypt = require('bcrypt');    // npm install bcrypt
       name,
       email,
       password: hashedPassword,
-      direction,
+      address,
       time,
       contact,
-      payment
+      payment,
+      image
     });
 
     res.status(201).json(newSeller);
@@ -77,7 +78,7 @@ const updateSeller = async (req, res) => {
         seller.password = hashedPassword;
       }
       if (updatedData.direction) {
-        seller.direction = updatedData.direction;
+        seller.address = updatedData.address;
       }
       if (updatedData.time) {
         seller.time = updatedData.time;
@@ -87,6 +88,9 @@ const updateSeller = async (req, res) => {
       }
       if (updatedData.payment) {
         seller.payment = updatedData.payment;
+      }
+      if (updatedData.image) {
+        seller.image = updatedData.image;
       }
 
       await seller.save();
