@@ -185,7 +185,7 @@ export const createPost = (post) => {
 export const categoriesFilter = () => {
     return async(dispatch) => {
         try{
-            const { data } = await axios.get(`${endPoint}/categories`)
+            const { data } = await axios.get(`${endPoint}/products/categories`)
             return dispatch({
                 type: CATEGORIES,
                 payload: data
@@ -199,7 +199,7 @@ export const categoriesFilter = () => {
 export const addressFilter = () => {
     return async(dispatch) => {
         try{
-            const { data } = await axios.get(`${endPoint}/adress`)
+            const { data } = await axios.get(`${endPoint}/products/adress`)
             return dispatch({
                 type: ADDRESS,
                 payload: data
@@ -213,7 +213,7 @@ export const addressFilter = () => {
 export const averageRating = () => {
     return async(dispatch) => {
         try{
-            const { data } = await axios.get(`${endPoint}/average_rating`)
+            const { data } = await axios.get(`${endPoint}/products/average_rating`)
             return dispatch({
                 type: AVERAGE_RATING,
                 payload: data
