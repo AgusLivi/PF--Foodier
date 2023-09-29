@@ -58,8 +58,8 @@ module.exports = (sequelize) => {
       hooks: {
         afterSave: (seller, option) => {
           let total = 0;
-          seller.valoraciones.forEach((star) => (total = total + star));
-          let promedio = total / seller.valoraciones.length || 0
+          seller.rating.forEach((star) => (total = total + star));
+          let promedio = total / seller.rating.length || 0
           seller.setDataValue("valoracionPromedio", promedio)
         },
       },

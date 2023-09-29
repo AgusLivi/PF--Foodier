@@ -87,6 +87,10 @@ const bcrypt = require('bcrypt');    // npm install bcrypt
     }
   };
 
+  const deleteUser = async (user_ID)=>{
+    await User.destroy({where: {user_ID}})
+  }
+
   
   // ... otros métodos para crear, actualizar y eliminar usuarios
 
@@ -95,5 +99,6 @@ module.exports = {
   getAllUsers,
   getUserById,
   createUser,
-  updateUser
+  updateUser,
+  deleteUser
 };

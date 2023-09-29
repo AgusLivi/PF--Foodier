@@ -25,7 +25,7 @@ const getAllProducts = async ( page, pageSize, name) => {
             },
           ],
         });
-        res.json(findByName);
+        return findByName;
       } else {
         console.log(2);
         const pageByName = await Product.findAll(
@@ -41,7 +41,7 @@ const getAllProducts = async ( page, pageSize, name) => {
             },
             ...paginate({ page, pageSize })
         );
-        res.json(pageByName);
+        return pageByName;
       }
     } else if (!name && (!page || !pageSize)) {
       console.log(3);
@@ -53,7 +53,7 @@ const getAllProducts = async ( page, pageSize, name) => {
           },
         ],
       });
-      res.json(findAll);
+      return findAll;
     }else {
       console.log(4);
       const findAll = await Product.findAll(
@@ -68,11 +68,11 @@ const getAllProducts = async ( page, pageSize, name) => {
           },
         
       );
-      res.json(findAll);
+      return findAll;
     }
   } catch (error) {
     console.error(error);
-    res.status(500).json(error.message);
+    throw new Error(error.message);
   }
 };
 
@@ -85,13 +85,12 @@ const getProductById = async (product_ID) => {
       },
     ],});
     if (product) {
-      res.json(product);
+      return product;
     } else {
-      res.status(404).json({ error: "Producto no encontrado." });
+      throw new Error("Producto no encontrado.");
     }
   } catch (error) {
-    console.error(error);
-    res.status(500).json({ error: "Error al obtener el producto." });
+   throw new Error("Error al obtener el producto.");
   }
 };
 
@@ -136,17 +135,15 @@ const getFilteredProducts = async (categories, adress, average_rating, payment) 
       where: filterConditions,
     });
 
-    res.json(filteredProducts);
+   return filteredProducts;
   } catch (error) {
-    res.status(500).json({ error: "Error al obtener productos filtrados." });
+    throw new Error("Error al obtener productos filtrados.");
   }
 };
 
 // Post de productos
-const createProduct = async (name, date, description, price, categories, image, amount) => {
+const createProduct = async (seller_ID, name, date, description, price, categories, image, amount) => {
   try {
-
-    const seller_ID = req.params.seller_ID; // sacamos el ID del vendedor con params
 
     const newProduct = await Product.create({
       // creamos el nuevo producto en la base de datos
@@ -161,10 +158,10 @@ const createProduct = async (name, date, description, price, categories, image, 
 
     await newProduct.setSeller(seller_ID); // agregamos la relación entre el producto y el vendedor
 
-    res.status(201).json(newProduct);
+    return newProduct;
   } catch (error) {
     console.error(error);
-    res.status(500).json({ error: "Error al crear el producto." });
+    throw new Error("Error al crear el producto.");
   }
 };
 
