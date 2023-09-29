@@ -8,20 +8,12 @@ const {
 
 const getProductsHandler = async (req, res) => {
   const {
-    categories,
-    adress,
-    average_rating,
-    payment,
-    order,
-    orderBy,
-    page,
-    pageSize,
-    name,
+    categories, address, average_rating, payment, order, orderBy, page, pageSize, name
   } = req.query;
   try {
     const response = await getAllProducts(
       categories,
-      adress,
+      address,
       average_rating,
       payment,
       order,

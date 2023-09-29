@@ -1,89 +1,30 @@
 const {  User, Seller, Product, Post  } = require("../db.js");
 const { Op } = require("sequelize");
 
-const paginate = ({ page, pageSize }) => {
+const paginate = (query, { page, pageSize }) => {
   const offset = ( page - 1) * pageSize;
   const limit = pageSize;
 
 
-  return { offset, limit };
+  return {query, offset, limit };
 };
 
 // Obtener todos los productos paginados y filtrados por nombre segun se requieran x query
-const getAllProducts = async ( categories, adress, average_rating, payment, order, orderBy, page, pageSize, name ) => {
+const getAllProducts = async ( categories, address, average_rating, payment, order, orderBy, page, pageSize, name ) => {
   try {
-    // if (name) {
-    //   if (!page || !pageSize) {
-    //     console.log(1);
-    //     const findByName = await Product.findAll({
-    //       where: {
-    //         name: { [Op.iLike]: `%${name}%` },
-    //       },
-    //       include: [
-    //         {
-    //           model: Seller,
-    //         },
-    //       ],
-    //     });
-    //     return findByName;
-    //   } else {
-    //     console.log(2);
-    //     const pageByName = await Product.findAll(
-    //         {
-    //           where: {
-    //             name: { [Op.iLike]: `%${name}%` },
-    //           },
-    //           include: [
-    //             {
-    //               model: Seller,
-    //             },
-    //           ],
-    //         },
-    //         ...paginate({ page, pageSize })
-    //     );
-    //     return pageByName;
-    //   }
-    // } else if (!name && (!page || !pageSize)) {
-    //   console.log(3);
-    //   const findAll = await Product.findAll({
-    //     include: [
-    //       {
-    //         model: Seller,
-
-    //       },
-    //     ],
-    //   });
-    //   return findAll;
-    // }else {
-    //   console.log(4);
-    //   const findAll = await Product.findAll(
-    //       {
-    //         ...paginate({ page, pageSize }),
-    //         include: [
-    //           {
-    //             model: Seller,
-               
-    //           },
-    //         ],
-    //       },
-        
-    //   );
-    // }
-    //return findAll;
-
     // Filtra por categoría exacta en la tabla 'products'
-    const filterConditions = {};
-    if (categories) {
-      filterConditions.categories = categories; 
+    let filterConditions = {};
+    if (categories != null && categories != '') {
+      filterConditions.categories = {[Op.contains] : [categories]};
     }
     //Filtra por nombre 
-    if (name) {
+    if (name != null && name != "") {
       filterConditions.name = { [Op.iLike]: `%${name}%` }; 
     }
 
     //Ordenamiento 
     const ordenamiento = []
-    if (orderBy) {
+    if (orderBy != null && orderBy != '') {
       ordenamiento.push(orderBy)
       ordenamiento.push(order)
     }
@@ -92,25 +33,28 @@ const getAllProducts = async ( categories, adress, average_rating, payment, orde
     // Condiciones de filtro para la tabla 'sellers'
     const sellerFilterConditions = {};
 
-    if (adress) {
-      sellerFilterConditions.adress = {
-        [Op.iLike]: adress,
+    if (address != null && address != '') {
+      sellerFilterConditions.address = {
+        [Op.iLike]: address,
       };
     }
 
-    if (average_rating) {
+    if (average_rating != null && average_rating != '') {
+      let limit = Number(average_rating) + 0.9
       sellerFilterConditions.average_rating = {
-        [Op.gte]: average_rating,
+        [Op.between]: [average_rating, String(limit)],
       };
     }
 
-    if (payment) {
+    if (payment!= null && payment != '') {
       sellerFilterConditions.payment = payment;
     }
 
     // hace la peticion teniendo en cuenta los query q se envian
     if (page || pageSize) {
-      const filteredProducts = await Product.findAll({
+      console.log(sellerFilterConditions);
+      const filteredProducts = await Product.findAll(paginate({
+        order: [ordenamiento],
         include: [
           {
             model: Seller,
@@ -118,11 +62,13 @@ const getAllProducts = async ( categories, adress, average_rating, payment, orde
           },
         ],
         where: filterConditions,
-      }, ...paginate({ page, pageSize }));
+      }, { page, pageSize }));
       return (filteredProducts)
     } else {
+      console.log(ordenamiento);
+      console.log(filterConditions);
       const filteredProducts = await Product.findAll({
-        order: ordenamiento,
+        order: [ordenamiento],
         include: [
           {
             model: Seller,
@@ -141,50 +87,6 @@ const getAllProducts = async ( categories, adress, average_rating, payment, orde
   }
 };
 
-// // Controlador para obtener productos con filtros combinados
-// const getFilteredProducts = async (categories, adress, average_rating, payment) => {
-//   try {
-//     // Construye un objeto de condiciones de filtro basado en los parámetros proporcionados
-//     const filterConditions = {};
-//     if (categories) {
-//       filterConditions.categories = categories; // Filtra por categoría exacta en la tabla 'products'
-//     }
-
-//     // Condiciones de filtro para la tabla 'sellers'
-//     const sellerFilterConditions = {};
-
-//     if (adress) {
-//       sellerFilterConditions.adress = {
-//         [Op.iLike]: adress,
-//       };
-//     }
-
-//     if (average_rating) {
-//       sellerFilterConditions.average_rating = {
-//         [Op.gte]: average_rating,
-//       };
-//     }
-
-//     if (payment) {
-//       sellerFilterConditions.payment = payment;
-//     }
-
-//     // Consulta de Sequelize que aplica las condiciones de filtro
-//     const filteredProducts = await Product.findAll({
-//       include: [
-//         {
-//           model: Seller,
-//           where: sellerFilterConditions,
-//         },
-//       ],
-//       where: filterConditions,
-//     });
-    
-//    return filteredProducts;
-//   } catch (error) {
-//     throw new Error("Error al obtener productos filtrados.");
-//   }
-// };
 
 // Obtener un producto por ID
 const getProductById = async (product_ID) => {
