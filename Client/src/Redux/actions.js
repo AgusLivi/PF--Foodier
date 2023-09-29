@@ -129,7 +129,7 @@ export const postFav = (dataForm) => {
 export const createUser = (userData) => {
     return async (dispatch) => {
         try {
-            const { data } = await axios.post(`${endPoint}/login`, userData)
+            const { data } = await axios.post(`${endPoint}/users`, userData)
             return dispatch({
                 type: CREATE_USER,
                 payload: data,
@@ -171,7 +171,7 @@ export const createPayment = (pay) => {
 export const createPost = (post) => {
     return async(dispatch) => {
         try{
-            const { data } = await axios.post(`${endPoint}/post`, post)
+            const { data } = await axios.post(`${endPoint}/posts`, post)
             return dispatch({
                 type: CREATE_POST,
                 payload: data
@@ -289,6 +289,75 @@ export const pageSize = () => {
                 payload: data
             })
         } catch (error) {
+            alert(error.message)
+        }
+    }
+}
+export const getAllPost = () => {
+    return async(dispatch) => {
+        try{
+            const { data } = await axios.get(`${endPoint}/posts`)
+            return dispatch({
+                type: GET_POST,
+                payload: data
+            })
+        } catch (error){
+            alert(error.message)
+        }
+    }
+}
+
+export const getPostById = (id) => {
+    return async(dispatch) => {
+        try{
+            const { data } = await axios.get(`${endPoint}/posts/${id}`)
+            return dispatch({
+                type: GET_POST_BY_ID,
+                payload: data
+            })
+        } catch (error){
+            alert(error.message)
+        }
+    }
+}
+
+export const updateUser = (id, updatedUserData) => {
+    return async (dispatch) => {
+        try {
+            const { data } = await axios.put(`/users/${id}`, updatedUserData);
+            return dispatch({
+                type: UPDATE_USER,
+                payload: data 
+            });
+        } catch (error) {
+            alert(error.message);
+        }
+    }
+}
+
+export const deleteUser = (id) => {
+	return async (dispatch) => {
+	try {
+	  const { data } = await axios.delete(`${endPoint}/users/${id}`) //definir las rutas del back
+ 	  return dispatch({ 
+			type: DELETE_USER,
+	 		payload: data 
+		})
+	} catch (error) {
+	  alert(error.message)
+	}
+  }
+}
+
+export const getAllUser = (userData) => {
+    return async (dispatch) => {
+        try {
+            const { data } = await axios.post(`${endPoint}/users`, userData)
+            return dispatch({
+                type: CREATE_USER,
+                payload: data,
+            })
+        } catch(error){
             alert(error.message)
         }
     }
