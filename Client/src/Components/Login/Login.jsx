@@ -31,7 +31,7 @@ const Login = () => {
         <div className={style.forminformationchilds}>
           <h2>Crear una Cuenta</h2>
           <div className={style.icons}>
-           <i class='bx bxl-google'></i>
+         
            <GoogleLogin
             clientId={clientID}
             buttonText="Iniciar sesión con Google"
@@ -55,7 +55,7 @@ const Login = () => {
             <input type="password" placeholder="Contraseña"></input>
             </label>
             <Link to={`/home`}>
-            <input type="submit">Registrarse</input>
+            <input type="submit" value="Registrarme"></input>
             </Link>
            </form>
         </div>
