@@ -14,10 +14,13 @@ import {
     AVERAGE,
     AVERAGE_RATING,
     PAYMENT,
-    ORDERBY,
+    ORDER_BY,
     ORDER,
     PAGE,
-    PAGESIZE
+    PAGE_SIZE,
+    CREATE_POST,
+    CREATE_PAYMENT,
+
 } from './actionsType'
 
 const endPoint='http://localhost:3001'  //definir rutas del back
@@ -67,10 +70,10 @@ export const createProduct = (formData)=>{
     }
 }
 
-export const getAllFav = () => {
+export const getAllFav = (id) => {
     return async dispatch => {
         try {
-            const { data } = await axios(endPoint) //definir despues como pusieron la ruta en el back
+            const { data } = await axios(`${endPoint}/get-favorites/${id}`) //definir despues como pusieron la ruta en el back
             return dispatch({
                 type: GET_ALL_FAV,
                 payload: data
@@ -156,10 +159,136 @@ export const createPayment = (pay) => {
         try {
             const { data } = await axios.post(`${endPoint}/create-payment`, pay)
             return dispatch({
-                type: CREATE_POST,
+                type: CREATE_PAYMENT,
                 payload: data
             })
         }catch(error) {
+            alert(error.message)
+        }
+    }
+}
+
+export const createPost = (post) => {
+    return async(dispatch) => {
+        try{
+            const { data } = await axios.post(`${endPoint}/post`, post)
+            return dispatch({
+                type: CREATE_POST,
+                payload: data
+            })
+        } catch (error){
+            alert(error.message)
+        }
+    }
+}
+
+export const categoriesFilter = () => {
+    return async(dispatch) => {
+        try{
+            const { data } = await axios.get(`${endPoint}/categories`)
+            return dispatch({
+                type: CATEGORIES,
+                payload: data
+            })
+        }catch(error) {
+            alert(error.message)
+        }
+    }
+}
+
+export const addressFilter = () => {
+    return async(dispatch) => {
+        try{
+            const { data } = await axios.get(`${endPoint}/adress`)
+            return dispatch({
+                type: ADDRESS,
+                payload: data
+            })
+        } catch(error) {
+            alert(error.message)
+        }
+    }
+}
+
+export const averageRating = () => {
+    return async(dispatch) => {
+        try{
+            const { data } = await axios.get(`${endPoint}/average_rating`)
+            return dispatch({
+                type: AVERAGE_RATING,
+                payload: data
+            })
+        } catch(error) {
+            alert(error.message)
+        }
+    }
+}
+
+export const paymentMethods = () => {
+    return async(dispatch) => {
+        try{
+            const { data } = await axios.get(`${endPoint}/products/payment`)
+            return dispatch({
+                type: PAYMENT,
+                payload: data
+            })
+        } catch(error) {
+            alert (error.message)
+        }
+    }
+}
+export const orderBy = () => {
+    return async(dispatch) => {
+        try{
+            const { data } = await axios.get(`${endPoint}/products/orderBy`)
+            return dispatch ({
+                type: ORDER_BY,
+                payload: data
+            })
+        } catch (error) {
+            alert(error.message)
+        }
+    }
+
+}
+
+export const orderUpDown = () => {
+    return async(dispatch) => {
+        try{
+            const { data } = await axios.get(`${endPoint}/products/order`)
+            return dispatch({
+                type: ORDER,
+                payload: data
+            })
+         } catch (error) {
+            alert(error.message)
+         }
+    }
+}
+
+export const currentPage = () => {
+    return async(dispatch)=>{
+        try {
+            const { data } = await axios.get(`${endPoint}/products/page`)
+            return dispatch({
+                type: PAGE,
+                payload: data
+            })
+        } catch(error) {
+            alert (error.message)
+        }
+    }
+}
+
+export const pageSize = () => {
+    return async (dispatch) => {
+        try {
+            const { data } = await axios.get(`${endPoint}/products/pageSize`)
+            return dispatch ({
+                type: PAGE_SIZE,
+                payload: data
+            })
+        } catch (error) {
             alert(error.message)
         }
     }
