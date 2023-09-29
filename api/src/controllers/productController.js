@@ -10,100 +10,84 @@ const paginate = ({ page, pageSize }) => {
 };
 
 // Obtener todos los productos paginados y filtrados por nombre segun se requieran x query
-const getAllProducts = async ( page, pageSize, name) => {
+const getAllProducts = async ( categories, adress, average_rating, payment, order, orderBy, page, pageSize, name ) => {
   try {
-    if (name) {
-      if (!page || !pageSize) {
-        console.log(1);
-        const findByName = await Product.findAll({
-          where: {
-            name: { [Op.iLike]: `%${name}%` },
-          },
-          include: [
-            {
-              model: Seller,
-            },
-          ],
-        });
-        return findByName;
-      } else {
-        console.log(2);
-        const pageByName = await Product.findAll(
-            {
-              where: {
-                name: { [Op.iLike]: `%${name}%` },
-              },
-              include: [
-                {
-                  model: Seller,
-                },
-              ],
-            },
-            ...paginate({ page, pageSize })
-        );
-        return pageByName;
-      }
-    } else if (!name && (!page || !pageSize)) {
-      console.log(3);
-      const findAll = await Product.findAll({
-        include: [
-          {
-            model: Seller,
+    // if (name) {
+    //   if (!page || !pageSize) {
+    //     console.log(1);
+    //     const findByName = await Product.findAll({
+    //       where: {
+    //         name: { [Op.iLike]: `%${name}%` },
+    //       },
+    //       include: [
+    //         {
+    //           model: Seller,
+    //         },
+    //       ],
+    //     });
+    //     return findByName;
+    //   } else {
+    //     console.log(2);
+    //     const pageByName = await Product.findAll(
+    //         {
+    //           where: {
+    //             name: { [Op.iLike]: `%${name}%` },
+    //           },
+    //           include: [
+    //             {
+    //               model: Seller,
+    //             },
+    //           ],
+    //         },
+    //         ...paginate({ page, pageSize })
+    //     );
+    //     return pageByName;
+    //   }
+    // } else if (!name && (!page || !pageSize)) {
+    //   console.log(3);
+    //   const findAll = await Product.findAll({
+    //     include: [
+    //       {
+    //         model: Seller,
 
-          },
-        ],
-      });
-      return findAll;
-    }else {
-      console.log(4);
-      const findAll = await Product.findAll(
-          {
-            ...paginate({ page, pageSize }),
-            include: [
-              {
-                model: Seller,
+    //       },
+    //     ],
+    //   });
+    //   return findAll;
+    // }else {
+    //   console.log(4);
+    //   const findAll = await Product.findAll(
+    //       {
+    //         ...paginate({ page, pageSize }),
+    //         include: [
+    //           {
+    //             model: Seller,
                
-              },
-            ],
-          },
+    //           },
+    //         ],
+    //       },
         
-      );
-      return findAll;
-    }
-  } catch (error) {
-    console.error(error);
-    throw new Error(error.message);
-  }
-};
+    //   );
+    // }
+    //return findAll;
 
-// Obtener un producto por ID
-const getProductById = async (product_ID) => {
-  try {
-    const product = await Product.findByPk(product_ID, {include: [
-      {
-        model: Seller,
-      },
-    ],});
-    if (product) {
-      return product;
-    } else {
-      throw new Error("Producto no encontrado.");
-    }
-  } catch (error) {
-   throw new Error("Error al obtener el producto.");
-  }
-};
-
-// Controlador para obtener productos con filtros combinados
-const getFilteredProducts = async (categories, adress, average_rating, payment) => {
-  try {
-
-    // Construye un objeto de condiciones de filtro basado en los parámetros proporcionados
+    // Filtra por categoría exacta en la tabla 'products'
     const filterConditions = {};
-
     if (categories) {
-      filterConditions.categories = categories; // Filtra por categoría exacta en la tabla 'products'
+      filterConditions.categories = categories; 
     }
+    //Filtra por nombre 
+    if (name) {
+      filterConditions.name = { [Op.iLike]: `%${name}%` }; 
+    }
+
+    //Ordenamiento 
+    const ordenamiento = []
+    if (orderBy) {
+      ordenamiento.push(orderBy)
+      ordenamiento.push(order)
+    }
+
 
     // Condiciones de filtro para la tabla 'sellers'
     const sellerFilterConditions = {};
@@ -124,20 +108,99 @@ const getFilteredProducts = async (categories, adress, average_rating, payment) 
       sellerFilterConditions.payment = payment;
     }
 
-    // Consulta de Sequelize que aplica las condiciones de filtro
-    const filteredProducts = await Product.findAll({
-      include: [
-        {
-          model: Seller,
-          where: sellerFilterConditions,
-        },
-      ],
-      where: filterConditions,
-    });
+    // hace la peticion teniendo en cuenta los query q se envian
+    if (page || pageSize) {
+      const filteredProducts = await Product.findAll({
+        include: [
+          {
+            model: Seller,
+            where: sellerFilterConditions,
+          },
+        ],
+        where: filterConditions,
+      }, ...paginate({ page, pageSize }));
+      return (filteredProducts)
+    } else {
+      const filteredProducts = await Product.findAll({
+        order: ordenamiento,
+        include: [
+          {
+            model: Seller,
+            where: sellerFilterConditions,
+          },
+        ],
+        where: filterConditions,
+      });
+      return (filteredProducts)
+    }
 
-   return filteredProducts;
+
+
   } catch (error) {
-    throw new Error("Error al obtener productos filtrados.");
+    throw new Error(error.message);
+  }
+};
+
+// // Controlador para obtener productos con filtros combinados
+// const getFilteredProducts = async (categories, adress, average_rating, payment) => {
+//   try {
+//     // Construye un objeto de condiciones de filtro basado en los parámetros proporcionados
+//     const filterConditions = {};
+//     if (categories) {
+//       filterConditions.categories = categories; // Filtra por categoría exacta en la tabla 'products'
+//     }
+
+//     // Condiciones de filtro para la tabla 'sellers'
+//     const sellerFilterConditions = {};
+
+//     if (adress) {
+//       sellerFilterConditions.adress = {
+//         [Op.iLike]: adress,
+//       };
+//     }
+
+//     if (average_rating) {
+//       sellerFilterConditions.average_rating = {
+//         [Op.gte]: average_rating,
+//       };
+//     }
+
+//     if (payment) {
+//       sellerFilterConditions.payment = payment;
+//     }
+
+//     // Consulta de Sequelize que aplica las condiciones de filtro
+//     const filteredProducts = await Product.findAll({
+//       include: [
+//         {
+//           model: Seller,
+//           where: sellerFilterConditions,
+//         },
+//       ],
+//       where: filterConditions,
+//     });
+    
+//    return filteredProducts;
+//   } catch (error) {
+//     throw new Error("Error al obtener productos filtrados.");
+//   }
+// };
+
+// Obtener un producto por ID
+const getProductById = async (product_ID) => {
+  try {
+    const product = await Product.findByPk(product_ID, {include: [
+      {
+        model: Seller,
+      },
+    ],});
+    if (product) {
+      return product;
+    } else {
+      throw new Error("Producto no encontrado.");
+    }
+  } catch (error) {
+   throw new Error("Error al obtener el producto.");
   }
 };
 
@@ -173,7 +236,7 @@ const deleteProduct = async (id)=>{
 module.exports = {
   getAllProducts,
   getProductById,
-  getFilteredProducts,
+  // getFilteredProducts,
   createProduct,
   deleteProduct
 };
