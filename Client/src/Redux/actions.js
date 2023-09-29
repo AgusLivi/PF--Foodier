@@ -5,11 +5,19 @@ import {
  	SEARCH_BY_ID,
  	CREATE_PRODUCT,
  	GET_ALL_FAV,
-    GET_FILTER,
     DELETE_PRODUCT,
     POST_FAVORITES,
     CREATE_USER,
-    GET_SELLER_FAV
+    GET_SELLER_FAV,
+    CATEGORIES,
+    ADDRESS,
+    AVERAGE,
+    AVERAGE_RATING,
+    PAYMENT,
+    ORDERBY,
+    ORDER,
+    PAGE,
+    PAGESIZE
 } from './actionsType'
 
 const endPoint='http://localhost:3001'  //definir rutas del back
@@ -17,7 +25,7 @@ const endPoint='http://localhost:3001'  //definir rutas del back
 export const getAllProducts= () => {
     return async dispatch => {
         try {
-            const { data } = await axios(endPoint)
+            const { data } = await axios(`${endPoint}/products/`)
             return dispatch({
                 type: GET_ALL_PRODUCTS,
                 payload: data
@@ -31,7 +39,7 @@ export const getAllProducts= () => {
 export const getProductByName = search => {
     return async dispatch => {
         try {
-            const { data } = await axios(`${endPoint}?name=${search}`) //en name tengo que cambiar por la ruta del back
+            const { data } = await axios(`${endPoint}/products/?name=${search}`) //en name tengo que cambiar por la ruta del back
          
             return dispatch({
                 type: SEARCH_BY_NAME,
@@ -39,7 +47,7 @@ export const getProductByName = search => {
             })
 
         } catch (error){
-            alert('No se encontraron razas con ese nombre')
+            alert(error.message)
         }
     }
 }
@@ -53,7 +61,7 @@ export const createProduct = (formData)=>{
                 payload: data
             })
         }catch (error){
-            console.error('Error al crear raza de perro')
+            console.error(error.message)
         }
        
     }
@@ -76,23 +84,9 @@ export const getAllFav = () => {
 export const getById = (id) => {
 	return async (dispatch) => {
 	try {
-	  const { data } = await axios.get(`${endPoint}/${id}`) //definir las rutas del back
+	  const { data } = await axios.get(`${endPoint}/products/${id}`) //definir las rutas del back
  	  return dispatch({ 
 			type: SEARCH_BY_ID,
-	 		payload: data 
-		})
-	} catch (error) {
-	  alert(error.message)
-	}
-  }
-}
-
-export const getFilter= () => {
-	return async (dispatch) => {
-	try {
-	  const { data } = await axios.get(`${endPoint}/filter`) //definir las rutas del back
- 	  return dispatch({ 
-			type: GET_FILTER,
 	 		payload: data 
 		})
 	} catch (error) {
@@ -104,7 +98,7 @@ export const getFilter= () => {
 export const deleteProduct = (id) => {
 	return async (dispatch) => {
 	try {
-	  const { data } = await axios.delete(`${endPoint}/${id}`) //definir las rutas del back
+	  const { data } = await axios.delete(`${endPoint}/products/${id}`) //definir las rutas del back
  	  return dispatch({ 
 			type: DELETE_PRODUCT,
 	 		payload: data 
