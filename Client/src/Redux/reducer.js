@@ -1,9 +1,11 @@
 import {
     GET_ALL_PRODUCTS,
     SEARCH_BY_NAME,
-    SEARCH_SELLER_BY_ID,
+    SEARCH_BY_ID,
     CREATE_PRODUCT,
     GET_ALL_FAV,
+    GET_FILTER,
+    DELETE_PRODUCT
 } from './actionsType'
 
 const initialState = { 
@@ -12,6 +14,7 @@ const initialState = {
     createdProduct: [],
     sellersFav:[],
     productsByName: [],
+    filtereds: []
 }
 
 const reducer = (state = initialState, {type, payload}) => {
@@ -48,6 +51,17 @@ const reducer = (state = initialState, {type, payload}) => {
                 return {
                     ...state,
                     sellersFav: payload,
+                }
+            case GET_FILTER:
+                return {
+                    ...state,
+                    filtereds: payload
+                }
+            case DELETE_PRODUCT: 
+                return {
+                    ...state,
+                    products: payload,
+                    productsCopy: payload
                 }
             default:
                 return state;
