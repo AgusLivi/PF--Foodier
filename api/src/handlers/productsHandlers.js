@@ -38,25 +38,14 @@ const getProductsHandlerById = async (req, res) => {
   }
 };
 
-// const getProductsFilteredHandler = async (req,res) => {
-//     const { categories, adress, average_rating, payment } = req.query;
-
-//     try {
-//         const response = await getFilteredProducts(categories, adress, average_rating, payment);
-//         return res.status(201).json(response)
-//     } catch (error) {
-//         res.status(400).json({error: error.message})
-//     }
-// }
-
 const createProductsHandler = async (req, res) => {
   const { name, date, description, price, categories, image, amount } =
     req.body;
-  const seller_ID = req.params.seller_ID; // sacamos el ID del vendedor con params
+  const {seller_id} = req.params; // sacamos el ID del vendedor con params
 
   try {
     const response = await createProduct(
-      seller_ID,
+      seller_id,
       name,
       date,
       description,
@@ -72,10 +61,10 @@ const createProductsHandler = async (req, res) => {
 };
 
 const deleteProductHandler = async (req, res) => {
-  const { id } = req.params;
+  const { product_ID } = req.params;
   try {
-    await deleteProduct(id); // importar
-    res.status(200).send(`producto ${id} eliminado correctamente`);
+    await deleteProduct(product_ID); // importar
+    res.status(200).send(`producto ${product_ID} eliminado correctamente`);
   } catch (error) {
     res.status(400).json({ error: error.message });
   }
