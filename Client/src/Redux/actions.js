@@ -20,7 +20,13 @@ import {
     PAGE_SIZE,
     CREATE_POST,
     CREATE_PAYMENT,
-
+    GET_USER_BY_ID,
+    GET_SELLER_BY_ID,
+    GET_ALL_SELLERS,
+    DELETE_SELLER,
+    UPDATE_SELLER,
+    CREATE_SELLER,
+    GET_ALL_USER
 } from './actionsType'
 
 const endPoint='http://localhost:3001'  //definir rutas del back
@@ -115,7 +121,7 @@ export const deleteProduct = (id) => {
 export const postFav = (dataForm) => {
     return async (dispatch) => {
     try {
-        const { data } = await axios.post(`${endPoint}/add-favorites`, dataForm)
+        const { data } = await axios.post(`${endPoint}/favorites`, dataForm)
         return dispatch({
             type: POST_FAVORITES,
             payload: data
@@ -143,7 +149,7 @@ export const createUser = (userData) => {
 export const getSellerFav = (id) => {
     return async(dispatch) => {
         try {
-            const { data } = await axios.post(`${endPoint}/get-favorites/${id}`)
+            const { data } = await axios.post(`${endPoint}/favorites/${id}`)
             return dispatch({
                 type: GET_SELLER_FAV,
                 payload: data
@@ -157,7 +163,7 @@ export const getSellerFav = (id) => {
 export const createPayment = (pay) => {
     return async(dispatch) => {
         try {
-            const { data } = await axios.post(`${endPoint}/create-payment`, pay)
+            const { data } = await axios.post(`${endPoint}/payments`, pay)
             return dispatch({
                 type: CREATE_PAYMENT,
                 payload: data
@@ -349,12 +355,96 @@ export const deleteUser = (id) => {
   }
 }
 
-export const getAllUser = (userData) => {
+export const getAllUser = () => {
     return async (dispatch) => {
         try {
-            const { data } = await axios.post(`${endPoint}/users`, userData)
+            const { data } = await axios.get(`${endPoint}/users`)
             return dispatch({
-                type: CREATE_USER,
+                type: GET_ALL_USER,
+                payload: data,
+            })
+        } catch(error){
+            alert(error.message)
+        }
+    }
+}
+
+export const getUserById = (id) => {
+    return async (dispatch) => {
+        try {
+            const { data } = await axios.get(`${endPoint}/users/${id}`)
+            return dispatch({
+                type: GET_USER_BY_ID,
+                payload: data,
+            })
+        } catch(error){
+            alert(error.message)
+        }
+    }
+}
+
+export const createSeller = (sellerData) => {
+    return async (dispatch) => {
+        try {
+            const { data } = await axios.post(`${endPoint}/sellers`, sellerData)
+            return dispatch({
+                type: CREATE_SELLER,
+                payload: data
+            })
+        }catch(error) {
+            alert(error.message)
+        }
+    }
+}
+
+export const updateSeller = (id, updatedSellerData) => {
+    return async (dispatch) => {
+        try {
+            const { data } = await axios.put(`/sellers/${id}`, updatedSellerData);
+            return dispatch({
+                type: UPDATE_SELLER,
+                payload: data 
+            });
+        } catch (error) {
+            alert(error.message);
+        }
+    }
+}
+
+export const deleteSeller = (id) => {
+	return async (dispatch) => {
+	try {
+	  const { data } = await axios.delete(`${endPoint}/sellers/${id}`) //definir las rutas del back
+ 	  return dispatch({ 
+			type: DELETE_SELLER,
+	 		payload: data 
+		})
+	} catch (error) {
+	  alert(error.message)
+	}
+  }
+}
+
+export const getAllSeller = () => {
+    return async (dispatch) => {
+        try {
+            const { data } = await axios.get(`${endPoint}/sellers`)
+            return dispatch({
+                type: GET_ALL_SELLERS,
+                payload: data,
+            })
+        } catch(error){
+            alert(error.message)
+        }
+    }
+}
+
+export const getSellerById = (id) => {
+    return async (dispatch) => {
+        try {
+            const { data } = await axios.get(`${endPoint}/sellers/${id}`)
+            return dispatch({
+                type: GET_SELLER_BY_ID,
                 payload: data,
             })
         } catch(error){
