@@ -5,7 +5,32 @@ import {
     CREATE_PRODUCT,
     GET_ALL_FAV,
     GET_FILTER,
-    DELETE_PRODUCT
+    DELETE_PRODUCT,
+    POST_FAVORITES,
+    CREATE_USER,
+    GET_SELLER_FAV,
+    CATEGORIES,
+    ADDRESS,
+    AVERAGE,
+    AVERAGE_RATING,
+    PAYMENT,
+    ORDER_BY,
+    ORDER,
+    PAGE,
+    PAGE_SIZE,
+    CREATE_POST,
+    CREATE_PAYMENT,
+    GET_USER_BY_ID,
+    GET_SELLER_BY_ID,
+    GET_ALL_SELLERS,
+    DELETE_SELLER,
+    UPDATE_SELLER,
+    CREATE_SELLER,
+    GET_ALL_USER,
+    DELETE_USER,
+    UPDATE_USER,
+    GET_POST_BY_ID,
+    GET_POST
 } from './actionsType'
 
 const initialState = { 
