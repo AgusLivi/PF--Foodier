@@ -1,5 +1,5 @@
 const {  User, Seller, Product, Post  } = require("../db.js");
-const { Op } = require("sequelize");
+const { Op, json } = require("sequelize");
 
 const paginate = ({ page, pageSize }) => {
   const offset = ( page - 1) * pageSize;
@@ -25,7 +25,7 @@ const getAllProducts = async ( page, pageSize, name) => {
             },
           ],
         });
-        res.json(findByName);
+        return (findByName);
       } else {
         console.log(2);
         const pageByName = await Product.findAll(
@@ -41,7 +41,7 @@ const getAllProducts = async ( page, pageSize, name) => {
             },
             ...paginate({ page, pageSize })
         );
-        res.json(pageByName);
+        return (pageByName);
       }
     } else if (!name && (!page || !pageSize)) {
       console.log(3);
@@ -53,7 +53,7 @@ const getAllProducts = async ( page, pageSize, name) => {
           },
         ],
       });
-      res.json(findAll);
+      return (findAll);
     }else {
       console.log(4);
       const findAll = await Product.findAll(
@@ -68,7 +68,7 @@ const getAllProducts = async ( page, pageSize, name) => {
           },
         
       );
-      res.json(findAll);
+      return (findAll);
     }
   } catch (error) {
     console.error(error);
@@ -85,7 +85,7 @@ const getProductById = async (product_ID) => {
       },
     ],});
     if (product) {
-      res.json(product);
+      return (product);
     } else {
       res.status(404).json({ error: "Producto no encontrado." });
     }
@@ -98,7 +98,6 @@ const getProductById = async (product_ID) => {
 // Controlador para obtener productos con filtros combinados
 const getFilteredProducts = async (categories, adress, average_rating, payment) => {
   try {
-
     // Construye un objeto de condiciones de filtro basado en los parámetros proporcionados
     const filterConditions = {};
 
@@ -111,7 +110,7 @@ const getFilteredProducts = async (categories, adress, average_rating, payment) 
 
     if (adress) {
       sellerFilterConditions.adress = {
-        [Op.iLike]: adress,
+        [Op.iLike]: `%${adress}%`,
       };
     }
 
@@ -136,30 +135,32 @@ const getFilteredProducts = async (categories, adress, average_rating, payment) 
       where: filterConditions,
     });
 
-    res.json(filteredProducts);
+    return (filteredProducts);
   } catch (error) {
-    res.status(500).json({ error: "Error al obtener productos filtrados." });
+    return json({ error: "Error al obtener productos filtrados." });
   }
 };
 
 // Post de productos
-const createProduct = async (name, date, description, price, categories, image, amount) => {
+const createProduct = async (req, res) => {
   try {
+    const { nombre, fecha, descripcion, precio, categoria, imagen, cantidad } =
+      req.body;
 
-    const seller_ID = req.params.seller_ID; // sacamos el ID del vendedor con params
+    const sellerId = req.params.sellerId; // sacamos el ID del vendedor con params
 
     const newProduct = await Product.create({
       // creamos el nuevo producto en la base de datos
-      name,
-      date,
-      description,
-      price,
-      categories,
-      image,
-      amount,
+      nombre,
+      fecha,
+      descripcion,
+      precio,
+      categoria,
+      imagen,
+      cantidad,
     });
 
-    await newProduct.setSeller(seller_ID); // agregamos la relación entre el producto y el vendedor
+    await newProduct.setSeller(sellerId); // agregamos la relación entre el producto y el vendedor
 
     res.status(201).json(newProduct);
   } catch (error) {
@@ -168,9 +169,6 @@ const createProduct = async (name, date, description, price, categories, image, 
   }
 };
 
-const deleteProduct = async (id)=>{
-  await Product.destroy({where: {id}})
-}
 // ... otros metodos para crear, actualizar y eliminar productos
 
 module.exports = {
@@ -178,5 +176,4 @@ module.exports = {
   getProductById,
   getFilteredProducts,
   createProduct,
-  deleteProduct
 };

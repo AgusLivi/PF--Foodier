@@ -5,6 +5,7 @@ const paymentController = require('../controllers/paymentController');
 const favController = require('../controllers/favController');
 const productRouters = require('./productRoutes');
 const userController = require('../controllers/userController');
+const {createPost} = require('../controllers/postController')
 
 
 // define las rutas
@@ -15,7 +16,7 @@ router.post('/create-payment', paymentController.createPayment);
 router.post('/add-favorites', favController.addFavorites);
 router.post('/login', userController.createUser);
 
-router.post
+
 
 // Ruta para obtener la lista de vendedores favoritos de un usuario
 router.get('/get-favorites/:user_ID', favController.getFavorites);
