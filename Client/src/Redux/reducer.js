@@ -21,7 +21,6 @@ const reducer = (state = initialState, {type, payload}) => {
    let filteredProducts = []
 
     switch(type){
-        case GET_ALL_PRODUCTS:
             case GET_ALL_PRODUCTS:
                 return {
                     ...state,
@@ -34,7 +33,6 @@ const reducer = (state = initialState, {type, payload}) => {
                 return {
                     ...state,
                     products: filteredProducts,
-                    productsCopy
                     productsByName: filteredProducts,
                 }
 
@@ -43,7 +41,7 @@ const reducer = (state = initialState, {type, payload}) => {
                     ...state,
                     createdProduct: [...state.createdProduct, payload]
                 }
-            case SEARCH_SELLER_BY_ID:
+            case SEARCH_BY_ID:
                 return {
                     ...state,
                     products: payload,
