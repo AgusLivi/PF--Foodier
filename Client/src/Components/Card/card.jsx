@@ -27,6 +27,8 @@ const Card = ({
             <div>
                 <p>Descripción: {description}</p>
                 <p>Precio: {price} USD</p>
+                <p>Precio Antiguo: {old_price} USD</p>
+
                 <p>Fecha: {date}</p>
                 <p>Cantidad disponible: {amount}</p>
                 <p>Categoría: {categories}</p>
