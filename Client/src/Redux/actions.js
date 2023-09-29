@@ -6,10 +6,13 @@ import {
  	CREATE_PRODUCT,
  	GET_ALL_FAV,
     GET_FILTER,
-    DELETE_PRODUCT
+    DELETE_PRODUCT,
+    POST_FAVORITES,
+    CREATE_USER,
+    GET_SELLER_FAV
 } from './actionsType'
 
-const endPoint='http://localhost:3001/products'  //definir rutas del back
+const endPoint='http://localhost:3001'  //definir rutas del back
 
 export const getAllProducts= () => {
     return async dispatch => {
@@ -112,5 +115,58 @@ export const deleteProduct = (id) => {
   }
 }
 
+export const postFav = (dataForm) => {
+    return async (dispatch) => {
+    try {
+        const { data } = await axios.post(`${endPoint}/add-favorites`, dataForm)
+        return dispatch({
+            type: POST_FAVORITES,
+            payload: data
+        })
+    } catch (error) {
+        alert(error.message)
+    }
+    }
+}
 
+export const createUser = (userData) => {
+    return async (dispatch) => {
+        try {
+            const { data } = await axios.post(`${endPoint}/login`, userData)
+            return dispatch({
+                type: CREATE_USER,
+                payload: data,
+            })
+        } catch(error){
+            alert(error.message)
+        }
+    }
+}
 
+export const getSellerFav = (id) => {
+    return async(dispatch) => {
+        try {
+            const { data } = await axios.post(`${endPoint}/get-favorites/${id}`)
+            return dispatch({
+                type: GET_SELLER_FAV,
+                payload: data
+            })
+        } catch(error) {
+            alert(error.message)
+        }
+    }
+}
+
+export const createPayment = (pay) => {
+    return async(dispatch) => {
+        try {
+            const { data } = await axios.post(`${endPoint}/create-payment`, pay)
+            return dispatch({
+                type: CREATE_POST,
+                payload: data
+            })
+        }catch(error) {
+            alert(error.message)
+        }
+    }
+}
