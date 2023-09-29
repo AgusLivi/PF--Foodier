@@ -26,7 +26,12 @@ import {
     DELETE_SELLER,
     UPDATE_SELLER,
     CREATE_SELLER,
-    GET_ALL_USER
+    GET_ALL_USER,
+    DELETE_USER,
+    UPDATE_USER,
+    GET_POST_BY_ID,
+    GET_POST
+    
 } from './actionsType'
 
 const endPoint='http://localhost:3001'  //definir rutas del back
@@ -61,7 +66,7 @@ export const getProductByName = search => {
     }
 }
 
-export const createProduct = (formData)=>{
+export const createProduct = (formData, id)=>{
     return async (dispatch)=>{
         try{
             const { data } = await axios.post(`http://localhost:3001/products/${id}`, formData); // despues de la barra tengo que poner la ruta que definieron en el back
