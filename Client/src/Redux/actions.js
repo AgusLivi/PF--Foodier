@@ -103,7 +103,7 @@ export const deleteProduct = (id) => {
 	try {
 	  const { data } = await axios.delete(`${endPoint}/${id}`) //definir las rutas del back
  	  return dispatch({ 
-			type: GET_FILTER,
+			type: DELETE_PRODUCT,
 	 		payload: data 
 		})
 	} catch (error) {
