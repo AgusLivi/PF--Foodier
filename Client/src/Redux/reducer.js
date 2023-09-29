@@ -34,6 +34,7 @@ const reducer = (state = initialState, {type, payload}) => {
                 return {
                     ...state,
                     products: filteredProducts,
+                    productsCopy
                     productsByName: filteredProducts,
                 }
 
