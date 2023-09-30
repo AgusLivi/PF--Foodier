@@ -46,7 +46,7 @@ const Home = () => {
       
       const handlerCategories = (value) => {
         setSelectedCat(value)
-        dispatch(selectedCategories())
+        dispatch(selectedCategories(value))
       }
 
     // useEffect(()=>{
@@ -83,7 +83,7 @@ const Home = () => {
                 value={selectedCat}
             >
                 <option value="">Selecciona una categoria</option>
-                {getAllProductss.map((categories) => (
+                {selectedCategoriess.map((categories) => (
                 <option key={categories} value={categories}>
                 {categories}
                 </option>
