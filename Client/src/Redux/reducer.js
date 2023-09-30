@@ -11,7 +11,6 @@ import {
     GET_SELLER_FAV,
     CATEGORIES,
     ADDRESS,
-    AVERAGE,
     AVERAGE_RATING,
     PAYMENT,
     ORDER_BY,
@@ -52,14 +51,18 @@ import {
         averageRating: [],
         address: [],
         users: [],
+        getUserById: [],
         sellers: [],
+        getSellerById: [],
         categories: [],
+        paymentMethods: [],
         
         //tengo q agregar mas
     };
 
     const reducer = (state = initialState, { type, payload }) => {
         let filteredProducts = []
+        let orderBy = []
 
     switch(type){
 
@@ -122,16 +125,63 @@ import {
             case SELECTED_CATEGORIES:
                 return {
                     ...state,
-                    products: filteredProducts
+                    products: filteredProducts,
+                    productsByName: filteredProducts
+
                 }
 
             case ADDRESS:
                 return {
                     ...state,
-                    address: []
+                    address: payload,
                 }
-
-                
+            case AVERAGE_RATING:
+                return {
+                    ...state,
+                    averageRating: payload,
+                }
+            case PAYMENT: 
+                return {
+                    ...state,
+                    paymentMethods: payload
+                }
+            case ORDER_BY:
+                return{
+                    ...state,
+                    products: orderBy,
+                    productsByName: orderBy,
+                    productsCopy: orderBy,
+                    selectedOrderBy: payload.length
+					? [{ value: payload, label: payload }]
+					: [],
+                }
+            case ORDER: 
+                return {
+                    ...state,
+                    selectedOrder: payload,
+                    products: filteredProducts,
+                    productsByName: filteredProducts
+                }
+            case CREATE_POST:
+                return {
+                    ...state,
+                    createdPost: [...state.createdPost, payload]
+                }
+            case CREATE_PAYMENT: 
+                return {
+                    ...state,
+                    createPayment:[...state.createPayment, payload]
+                }
+            case GET_USER_BY_ID:
+                return {
+                    ...state,
+                    getUserById: payload
+                }
+            case GET_SELLER_BY_ID:
+                return {
+                    ...state,
+                    getSellerById: payload
+                }
 
 
             default:
