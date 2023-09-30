@@ -82,7 +82,21 @@ const Home = () => {
                 <option value="Asc">Asc</option>
                 <option value="desc">Desc</option>
        
-      </select>
+            </select>
+
+            <select
+                className="select"
+                onChange={(e) => handleTemperamentChange(e.target.value)}
+                value={selectedCat}
+            >
+                <option value="">Selecciona una categoria</option>
+                {selectedCategoriess.map((categories) => (
+                <option key={categories} value={categories}>
+                {categories}
+                </option>
+                ))}
+
+            </select>
             {/*
                 <label htmlFor="sortOrder">Ordenar por:</label>
                  <select id="sortOrder" value={sortOrder} onChange={handleSortOrderChange}>
