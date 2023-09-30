@@ -1,5 +1,5 @@
 import React from 'react';
-import Card from '../Card/card'; 
+import Card from '../Card/Card'; 
 //PRIMERA LETRA DE COMPONENTES EN MAYUSCULA
 const CardContainer = ({ CardContainer, onAddToCart }) => {
     return (
