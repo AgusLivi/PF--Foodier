@@ -5,7 +5,6 @@ import {
     SEARCH_BY_ID,
     CREATE_PRODUCT,
     GET_ALL_FAV,
-    GET_FILTER,
     DELETE_PRODUCT,
     POST_FAVORITES,
     CREATE_USER,
@@ -31,7 +30,8 @@ import {
     DELETE_USER,
     UPDATE_USER,
     GET_POST_BY_ID,
-    GET_POST
+    GET_POST,
+    SELECTED_CATEGORIES,
 } from './actionsType'
 
 
@@ -53,12 +53,13 @@ import {
         address: [],
         users: [],
         sellers: [],
+        categories: [],
         
         //tengo q agregar mas
     };
 
     const reducer = (state = initialState, { type, payload }) => {
-
+        let filteredProducts = []
 
     switch(type){
 
@@ -74,7 +75,6 @@ import {
             case SEARCH_BY_NAME:
                 return {
                     ...state,
-
                     products: filteredProducts,
                     productsByName: filteredProducts,
                 }
@@ -83,7 +83,6 @@ import {
             case CREATE_PRODUCT:
                 return {
                     ...state,
-
                     createdProduct: [...state.createdProduct, payload]
                 }
 
@@ -93,14 +92,6 @@ import {
                     ...state,
                     products: payload,
                 };
-
-            case GET_ALL_FAV:
-
-                return {
-                    ...state,
-                    sellersFav: payload,
-                };
-
             case DELETE_PRODUCT:
                 return {
                     ...state,
@@ -115,7 +106,7 @@ import {
             case CREATE_USER: 
                 return {
                     ...state,
-                    createdUser: payload,
+                    createdUser: [...state.createdUser, payload]
                 }
 
             case GET_SELLER_FAV: 
@@ -126,7 +117,12 @@ import {
             case CATEGORIES:
                 return {
                     ...state,
-                    selectedCategories: []
+                    categories: []
+                }
+            case SELECTED_CATEGORIES:
+                return {
+                    ...state,
+                    products: filteredProducts
                 }
 
             case ADDRESS:
