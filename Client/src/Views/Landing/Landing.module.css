@@ -79,7 +79,11 @@ nav {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: flex-start;
+  align-items: center;
+  text-align: center;
+}
+.link{
+  text-decoration: none;
 }
 .primaryheading {
   font-size: clamp(2rem, 5vw, 4rem);
