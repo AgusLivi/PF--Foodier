@@ -1,25 +1,16 @@
-import React from 'react';
-import Card from '../Card/Card'; 
-//PRIMERA LETRA DE COMPONENTES EN MAYUSCULA
-const CardContainer = ({ CardContainer, onAddToCart }) => {
-    return (
-        <div>
-            {CardContainer.map((card) => (
-                <card
-                    key={card.product_ID}
-                    Product_ID={card.product_ID}
-                    Fecha={card.date}
-                    Nombre={card.name}
-                    Descripcion={card.description}
-                    Precio={card.price}
-                    Imagen={card.image}
-                    Cantidad={card.amount}
-                    Categoria={card.categories}
-                    onAddToCart={onAddToCart}
-                />
-            ))}
-        </div>
-    );
+import React, {useState} from 'react'
+import {useSelector} from 'react-redux';
+
+const CardContainer = () => {
+const allProducts = useSelector((state) => state.products);
+  return (
+    <div>
+    {allProducts.map((product) => (
+        <Card/>
+    ))}
+
+    </div>
+  )
 }
 
-export default CardContainer;
+export default CardContainer
