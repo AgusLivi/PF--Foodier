@@ -34,20 +34,32 @@ import {
     GET_POST
 } from './actionsType'
 
+
+
     const initialState = { 
         products: [],
         productsCopy: [],
         createdProduct: [],
         sellersFav: [],
         productsByName: [],
-        filtereds: [],
+        postedFiltereds: [],
+        createdUser: [],
+        selectedCategories: [],
+        selectedOrderBy: [],
+        selectedOrder: [],
+        createdPost: [],
+        createPayment: [],
+        averageRating: [],
+        address: [],
         //tengo q agregar mas
     };
 
     const reducer = (state = initialState, { type, payload }) => {
-        let filteredProducts = [];
 
-        switch (type) {
+
+    switch(type){
+
+
             case GET_ALL_PRODUCTS:
                 return {
                     ...state,
@@ -59,14 +71,19 @@ import {
             case SEARCH_BY_NAME:
                 return {
                     ...state,
-                    productsByName: payload, // Actualizar solo la propiedad productsByName
-                };
+
+                    products: filteredProducts,
+                    productsByName: filteredProducts,
+                }
+
 
             case CREATE_PRODUCT:
                 return {
                     ...state,
-                    createdProduct: [...state.createdProduct, payload],
-                };
+
+                    createdProduct: [...state.createdProduct, payload]
+                }
+
 
             case SEARCH_BY_ID:
                 return {
@@ -75,6 +92,7 @@ import {
                 };
 
             case GET_ALL_FAV:
+
                 return {
                     ...state,
                     sellersFav: payload,
@@ -86,8 +104,36 @@ import {
                     products: payload,
                     productsCopy: payload,
                 };
+            case POST_FAVORITES:
+                return {
+                    ...state,
+                    sellersFav: payload,
+                }
+            case CREATE_USER: 
+                return {
+                    ...state,
+                    createdUser: payload,
+                }
+
+            case GET_SELLER_FAV: 
+                return {
+                    ...state,
+                    sellersFav: payload
+                }
+            case CATEGORIES:
+                return {
+                    ...state,
+
+
+                }
+
+            case ADDRESS:
+                return {
+                    ...state
+                }
 
                 
+
 
             default:
                 return state;
