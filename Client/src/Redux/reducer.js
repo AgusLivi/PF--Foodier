@@ -119,13 +119,15 @@ import {
             case CATEGORIES:
                 return {
                     ...state,
+                    selectedCategories,
 
 
                 }
 
             case ADDRESS:
                 return {
-                    ...state
+                    ...state,
+                    address: []
                 }
 
                 
