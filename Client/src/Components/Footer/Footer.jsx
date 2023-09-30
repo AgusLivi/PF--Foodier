@@ -1,13 +1,15 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
 import Style from './Footer.module.css'
+import { Link } from 'react-router-dom'
+
 const Footer = () => {
   return (
     <div className={Style.container}>
-        <div><i className="fa-solid fa-house"></i><Link to={`/home`}><button>Inicio</button></Link></div>
-        <div><i className="fa-solid fa-magnifying-glass"></i><Link to={`/search`}><button>Buscar</button></Link></div>
-        <div><i className="fa-solid fa-heart"></i><Link to={`/favoritos`}><button>Favoritos</button></Link></div>
-        <div><i className="fa-solid fa-user"></i><Link to={`/profile`}><button>Perfil</button></Link></div>
+        <div><box-icon name='home-alt-2'></box-icon><Link><button className={Style.button2}>Inicio</button></Link></div>
+        <div><box-icon name='search-alt-2'></box-icon><Link><button className={Style.button2}>Buscar</button></Link></div>
+        <div><box-icon name='user'></box-icon><Link><button className={Style.button2}>Perfil</button></Link></div>
+        <div><box-icon name='heart' ></box-icon><Link><button className={Style.button2}>Favoritos</button></Link></div>
+        <div><box-icon name='log-out' ></box-icon><Link><button className={Style.button2}>Cerrar Sesión</button></Link></div>
     </div>
   )
 }
