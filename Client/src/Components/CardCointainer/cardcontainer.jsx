@@ -1,6 +1,6 @@
 import React from 'react';
 import Card from '../Card/card'; 
-
+//PRIMERA LETRA DE COMPONENTES EN MAYUSCULA
 const CardContainer = ({ CardContainer, onAddToCart }) => {
     return (
         <div>
