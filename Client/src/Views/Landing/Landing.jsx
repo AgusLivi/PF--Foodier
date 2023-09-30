@@ -1,15 +1,15 @@
 import React from "react";
-import BannerBackground from "../Assets/home-banner-background.png";
-import BannerImage from "../Assets/home-banner-image.png";
-import PickMeals from "../Assets/pick-meals-image.png";
-import ChooseMeals from "../Assets/choose-image.png";
-import DeliveryMeals from "../Assets/delivery-image.png";
+import BannerBackground from "../../assets/home-banner-background.png";
+import BannerImage from "../../assets/home-banner-image.png";
+import PickMeals from "../../assets/pick-meals-image.png";
+import ChooseMeals from "../../assets/choose-image.png";
+import DeliveryMeals from "../../assets/delivery-image.png";
 import { FiArrowRight } from "react-icons/fi";
 import { BsTwitter } from "react-icons/bs";
 import { SiLinkedin } from "react-icons/si";
 import { BsYoutube } from "react-icons/bs";
 import { FaFacebookF } from "react-icons/fa";
-import Logo from "../Assets/Logo.png";
+import Logo from "../../assets/Logo.png";
 import style from './Landing.module.css'
 
 const Home = () => {
