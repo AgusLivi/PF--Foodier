@@ -54,7 +54,7 @@ const Home = () => {
 
     useEffect(()=>{
         dispatch(selectedCategories())
-        setFilterAddress(addressFilter())
+        // setFilterAddress(addressFilter())
     }, [categoriesError])
 
     useEffect(()=>{
@@ -66,7 +66,7 @@ const Home = () => {
         <div>
             <h1>Productos</h1>
             <h1>Aca se renderiza el componente cards</h1>
-            <CardContainer/>
+            
 
             <select 
                 onChange={(e) => handleOrderUpDownClick(e.target.value)}
@@ -106,6 +106,7 @@ const Home = () => {
               </li>
                  ))}
              </ul> */}
+             <CardContainer/>
         </div>
     )
 }
