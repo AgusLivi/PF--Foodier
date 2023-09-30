@@ -86,7 +86,7 @@ const Home = () => {
       </div>
     </div>
 
- {/*Contact Section*/}
+ {/*Contact Sections*/}
     <div className={style.contactpagewrapper}>
       <h1 className={style.primaryheading}>Tienes alguna pregunta?</h1>
       <h1 className={style.primaryheading}>Contáctanos!</h1>
