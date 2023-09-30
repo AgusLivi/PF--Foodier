@@ -10,6 +10,7 @@ import { BiLogoInstagram } from "react-icons/bi";
 import { FaFacebookF } from "react-icons/fa";
 import Logo from "../../assets/Logo.png";
 import style from './Landing.module.css'
+import { Link } from 'react-router-dom'
 
 
 const Home = () => {
