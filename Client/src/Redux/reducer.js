@@ -56,7 +56,8 @@ import {
         getSellerById: [],
         categories: [],
         paymentMethods: [],
-        
+        post: [],
+        allFavoritesSeller: [],
         //tengo q agregar mas
     };
 
@@ -182,7 +183,67 @@ import {
                     ...state,
                     getSellerById: payload
                 }
-
+            case GET_ALL_SELLERS: 
+                return {
+                    ...state,
+                    sellers: payload
+                }
+            case GET_ALL_USER:
+                return {
+                    ...state,
+                    users: payload
+                }
+            case DELETE_USER:
+                return {
+                    ...state,
+                    createdUsers: payload
+                }
+            case DELETE_SELLER:
+                return {
+                    ...state,
+                    createdSellers: payload
+                }
+            case UPDATE_SELLER: 
+                return {
+                    ...state,
+                    createdSellers: payload
+                }
+            case UPDATE_USER: 
+                return {
+                    ...state,
+                    createUser: payload
+                }
+            case CREATE_SELLER: 
+                return {
+                    ...state,
+                    createdSellers: payload
+                }
+            case GET_POST:
+                return {
+                    ...state,
+                    post: payload
+                }
+            case GET_POST_BY_ID:
+                return {
+                    ...state,
+                    post: payload
+                }
+            case GET_ALL_FAV:
+                return {
+                    ...state,
+                    allFavoritesSeller: payload,
+                }
+            case PAGE:
+                return {
+                    ...state,
+                    currentPage: payload,
+                };
+                  
+            case PAGE_SIZE:
+                return {
+                    ...state,
+                    pageSize: payload,
+                };
 
             default:
                 return state;

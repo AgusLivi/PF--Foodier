@@ -50,21 +50,21 @@ export const getAllProducts= () => {
     }
 }
 
-export const getProductByName = search => {
-    return async dispatch => {
-        try {
-            const { data } = await axios(`${endPoint}/products/?name=${search}`) //en name tengo que cambiar por la ruta del back
-         
-            return dispatch({
-                type: SEARCH_BY_NAME,
-                payload: data,
-            })
+    export const getProductByName = search => {
+        return async dispatch => {
+            try {
+                const { data } = await axios(`${endPoint}/products/?name=${search}`) //en name tengo que cambiar por la ruta del back
+            
+                return dispatch({
+                    type: SEARCH_BY_NAME,
+                    payload: data,
+                })
 
-        } catch (error){
-            alert(error.message)
+            } catch (error){
+                alert(error.message)
+            }
         }
     }
-}
 
 export const createProduct = (formData, id)=>{
     return async (dispatch)=>{
