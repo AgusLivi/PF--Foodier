@@ -2,11 +2,8 @@ import { useSelector, useDispatch } from 'react-redux'
 import { useState, useEffect } from 'react'
 import CardContainer from '../../Components/CardContainer/CardContainer.jsx'
 import {
-    getAllProducts,
-    postFav,
     categoriesFilter,
-    addressFilter,
-    averageRating,
+    // addressFilter,
     orderBy,
     orderUpDown,
     selectedCategories
@@ -17,14 +14,13 @@ const Home = () => {
     const selectedCategoriess = useSelector(state => state.selectedCategories)
     const orderByy = useSelector(state => state.orderBy)
     const orderUp = useSelector (state => state.selectedOrder)
-    const addressFilter= useSelector(state => state.address)
+    // const addressFilterr= useSelector(state => state.address)
     const getAllProductss = useSelector(state => state.products)
     const postFav = useSelector(state => state.sellersFav)
 
         // //local state
-    const [productsAll, setProductsAll] = useState([])
-    const [favPost, setFavPost] = useState([])
-    const [filterAddress, setFilterAddress] = useState ([])
+  
+
     const [selectedOrder, setSelectedOrder] = useState([])
     const [selectedCat, setSelectedCat] = useState([])
     const [categoriesError, setCategoriesError] = useState(false)
@@ -32,15 +28,15 @@ const Home = () => {
     const [reset, setReset] = useState([])
     const dispatch = useDispatch()
 
-    const handleOrderByClick = async () => {
-        try {
-          // Llama a la acción 'orderBy' utilizando 'dispatch'
-          await dispatch(orderBy());
-        } catch (error) {
-          // Maneja cualquier error que pueda ocurrir en la acción
-          alert(error.message);
-        }
-      }
+    // const handleOrderByClick = async () => {
+    //     try {
+    //       // Llama a la acción 'orderBy' utilizando 'dispatch'
+    //       await dispatch(orderBy());
+    //     } catch (error) {
+    //       // Maneja cualquier error que pueda ocurrir en la acción
+    //       alert(error.message);
+    //     }
+    //   }
 
       const handleOrderUpDownClick = (value) => {
         setSelectedOrder(value); // Actualiza el estado local del selector
@@ -48,18 +44,17 @@ const Home = () => {
      // Despacha una acción para aplicar el filtro en el estado de Redux
       }
       
-      const handlerCategories = async () => {
-        try {
-            await dispatch(selectedCategories())
-        } catch (error) {
-            alert(error.message)
-        }
-      }
+    //   const handlerCategories = async () => {
+    //     try {
+    //         await dispatch(selectedCategories())
+    //     } catch (error) {
+    //         alert(error.message)
+    //     }
+    //   }
 
     useEffect(()=>{
         dispatch(selectedCategories())
-        setFilterAddress(addressFilter)
-        dispatch(getAllProducts())
+        setFilterAddress(addressFilter())
     }, [categoriesError])
 
     useEffect(()=>{
