@@ -35,6 +35,7 @@ import {
 } from './actionsType'
 
 
+
     const initialState = { 
         products: [],
         productsCopy: [],
@@ -57,6 +58,7 @@ import {
 
 
     switch(type){
+
 
             case GET_ALL_PRODUCTS:
                 return {
@@ -82,6 +84,7 @@ import {
                     createdProduct: [...state.createdProduct, payload]
                 }
 
+
             case SEARCH_BY_ID:
                 return {
                     ...state,
@@ -89,6 +92,7 @@ import {
                 };
 
             case GET_ALL_FAV:
+
                 return {
                     ...state,
                     sellersFav: payload,
@@ -129,6 +133,7 @@ import {
                 }
 
                 
+
 
             default:
                 return state;
