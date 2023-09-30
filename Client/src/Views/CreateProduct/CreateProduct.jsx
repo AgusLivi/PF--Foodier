@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Container, FormGroup, Input } from 'reactstrap';
 
-import uploadImage from '../../helperCloudinary/helperCloudinary.js';
+import uploadImage from '../../helperCloudinary/helperCloudinary';
 
 const Cloudinary = (props) => {
 
