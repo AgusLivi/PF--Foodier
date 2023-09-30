@@ -11,7 +11,7 @@ import {
 
 const Home = () => {
    // global state 
-    const selectedCategoriess = useSelector(state => state.selectedCategories)
+    const selectedCategoriess = useSelector(state => state.categories)
     const orderByy = useSelector(state => state.orderBy)
     const orderUp = useSelector (state => state.selectedOrder)
     // const addressFilterr= useSelector(state => state.address)
@@ -44,18 +44,15 @@ const Home = () => {
      // Despacha una acción para aplicar el filtro en el estado de Redux
       }
       
-    //   const handlerCategories = async () => {
-    //     try {
-    //         await dispatch(selectedCategories())
-    //     } catch (error) {
-    //         alert(error.message)
-    //     }
-    //   }
-
-    useEffect(()=>{
+      const handlerCategories = (value) => {
+        setSelectedCat(value)
         dispatch(selectedCategories())
-        // setFilterAddress(addressFilter())
-    }, [categoriesError])
+      }
+
+    // useEffect(()=>{
+    //     dispatch(selectedCategories())
+    //     // setFilterAddress(addressFilter())
+    // }, [categoriesError])
 
     useEffect(()=>{
         setReset(false)
@@ -86,7 +83,7 @@ const Home = () => {
                 value={selectedCat}
             >
                 <option value="">Selecciona una categoria</option>
-                {selectedCategoriess.map((categories) => (
+                {getAllProductss.map((categories) => (
                 <option key={categories} value={categories}>
                 {categories}
                 </option>
