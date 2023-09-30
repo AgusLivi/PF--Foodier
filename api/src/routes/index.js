@@ -4,14 +4,18 @@ const router = express.Router();
 // Importo los controladores
 const paymentController = require('../controllers/paymentController');
 const favController = require('../controllers/favController');
-const productRouters = require('./productRoutes');
 const userController = require('../controllers/userController');
 const loginController = require('../controllers/loginController')
 const postController = require('../controllers/postController');
 const sellerController = require('../controllers/sellerController');
+const productController = require('../controllers/productController')
 
 // Rutas relacionadas con los productos
-router.use('/products', productRouters);
+router.get("/products/:id", productController.getProductById);
+router.post("/products/:seller_id", productController.createProduct);
+router.put("/products/:productId", productController.updateProduct)
+router.delete("/products/:product_ID", productController.deleteProduct);
+router.get("/products/", productController.getAllProducts);
 
 // Rutas para gestionar publicaciones
 router.post('/posts', postController.createPost);
