@@ -58,6 +58,8 @@ import {
         paymentMethods: [],
         post: [],
         allFavoritesSeller: [],
+        createdUser: [],
+        createdSellers: [],
         //tengo q agregar mas
     };
 
