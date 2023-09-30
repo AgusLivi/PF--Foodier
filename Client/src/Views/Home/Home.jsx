@@ -1,15 +1,16 @@
 import { useSelector, useDispatch } from 'react-redux'
 import { useState, useEffect } from 'react'
+import CardContainer from '/../Components/CardCointainer/cardcontainer.jsx'
 import {
     getAllProducts,
     postFav,
     categoriesFilter,
     addressFilter,
-    average_rating,
+    averageRating,
     orderBy,
     orderUpDown,
     selectedCategories
-} from '../Redux/actions'
+} from '../../Redux/actions'
 
 const Home = () => {
    // global state 
@@ -23,7 +24,7 @@ const Home = () => {
         // //local state
     const [productsAll, setProductsAll] = useState([])
     const [favPost, setFavPost] = useState([])
-    const [filterAddress, setFilterAddress] = useState
+    const [filterAddress, setFilterAddress] = useState ([])
     const [selectedOrder, setSelectedOrder] = useState([])
     const [selectedCat, setSelectedCat] = useState([])
     const [categoriesError, setCategoriesError] = useState(false)
@@ -72,7 +73,7 @@ const Home = () => {
             <h1>Aca se renderiza el componente cards</h1>
             <CardContainer/>
 
-            <select className='select'
+            <select 
                 onChange={(e) => handleOrderUpDownClick(e.target.value)}
                 value={selectedOrder}
             >
@@ -85,8 +86,8 @@ const Home = () => {
             </select>
 
             <select
-                className="select"
-                onChange={(e) => handleTemperamentChange(e.target.value)}
+              
+                onChange={(e) => handlerCategories(e.target.value)}
                 value={selectedCat}
             >
                 <option value="">Selecciona una categoria</option>
