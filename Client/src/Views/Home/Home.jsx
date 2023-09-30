@@ -1,6 +1,6 @@
 import { useSelector, useDispatch } from 'react-redux'
 import { useState, useEffect } from 'react'
-import CardContainer from '/../Components/CardCointainer/cardcontainer.jsx'
+import CardContainer from '../../Components/CardContainer/CardContainer.jsx'
 import {
     getAllProducts,
     postFav,
