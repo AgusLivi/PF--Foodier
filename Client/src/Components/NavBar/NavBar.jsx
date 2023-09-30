@@ -1,20 +1,42 @@
-import React from 'react'
-import { Link } from 'react-router-dom';
-import logo from '../../assets/logoFoodier.png'; // Asegúrate de que la ruta sea correcta
-import Style from './NavBar.module.css'
-const NavBar = () => {
+import React, { useRef } from "react";
+import { FaBars, FaTimes } from "react-icons/fa";
+import styles from "./NavBar.module.css"; 
+import Logo from '../../assets/Logo.png'
+import { Link } from 'react-routerdom'
+
+function Navbar() {
+  const navRef = useRef();
+
+  const showNavbar = () => {
+    navRef.current.classList.toggle(styles.responsive_nav); 
+  };
+
   return (
-    <div className={Style.container}>
-        
-        <div><Link to="/Ubicacion"><i className="fa-solid fa-location-dot"></i> </Link></div>
-        <div>
-          <img src={logo} alt='logo' className={Style.logo}/>
-        </div>
-        <div><Link to="/Shops"><i className="fa-solid fa-cart-shopping"></i></Link></div>
-       
-      
-    </div>
-  )
+    <header>
+      <img src={Logo}></img>
+      <nav ref={navRef} className={styles.nav}> 
+      <Link to={`/home`}>
+        <a>Comprar</a>
+      </Link>
+      <Link to={`/ubicacion`}>
+        <a>Ubicación</a>
+      </Link>
+      <Link to={`/create`}>
+        <a>Vender</a>
+      </Link>
+    
+        <button
+          className={`${styles["nav-btn"]} ${styles["nav-close-btn"]}`} 
+          onClick={showNavbar}
+        >
+          <FaTimes />
+        </button>
+      </nav>
+      <button className={styles["nav-btn"]} onClick={showNavbar}> 
+        <FaBars />
+      </button>
+    </header>
+  );
 }
 
-export default NavBar
+export default Navbar;
