@@ -4,8 +4,8 @@ const { createProductsHandler, deleteProductHandler } = require("../handlers/pro
 const productRouters = Router();
 
 productRouters.get("/:id", getProductsHandlerById);
-productRouters.post("/:id", createProductsHandler);
-productRouters.delete("/:id", deleteProductHandler);
+productRouters.post("/:seller_id", createProductsHandler);
+productRouters.delete("/:product_ID", deleteProductHandler);
 productRouters.get("/", getProductsHandler);
 
 module.exports = productRouters;
