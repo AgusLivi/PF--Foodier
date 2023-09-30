@@ -7,22 +7,28 @@ import FormUser from "./Components/FormUser/FormUser";
 import PerfilNegocio from "./Views/PerfilNegocio/PerfilNegocio";
 import Footer from "./Components/Footer/Footer";
 import Home from "./Views/Home/Home"
+import Favoritos from "./Views/Favoritos/Favoritos";
+import FormComercio from './Components/FormComercio/FormComercio'
+import SearchBar from './Components/SearchBar/SearchBar'
 
 
 const App = () => {
   const location = useLocation();
   return (
     <div>
-      {location.pathname !== "/" && <NavBar />}
+      {location.pathname !== "/" && location.pathname !== "/login"  && <NavBar />}
       <Routes>
         <Route path='/' element={<Landing />} />
         <Route path='/profile' element={<PerfilUsuario />} /> //esta vacio
         <Route path="/home" element={<Home />} />
         <Route path='/login' element={<Login />} />
+        <Route path='/search' element={<SearchBar />} />
         <Route path='/business' element={<PerfilNegocio />} /> //vacio
+        <Route path='/formcomercio' element={<FormComercio />} />
         <Route path='/formuser' element={<FormUser />} />
+        <Route path='/favoritos' element={<Favoritos />} />
       </Routes>
-      {location.pathname !== "/" && <Footer />}
+      {location.pathname !== "/"  && location.pathname !== "/login" && <Footer />}
 
     </div>
   )

@@ -10,9 +10,7 @@ module.exports = (sequelize) => {
         defaultValue: DataTypes.UUIDV4,
         primaryKey: true,
       },
-
       name: {
-
         type: DataTypes.STRING,
         allowNull: false,
       },
@@ -24,17 +22,16 @@ module.exports = (sequelize) => {
           isEmail: true,
         },
       },
-
       password: {
         type:DataTypes.STRING,
         allowNull: false
       },
-      adress: {
+      address: {
         type: DataTypes.STRING,
         allowNull: false,
       },
       time: {
-        type: DataTypes.STRING,
+        type: DataTypes.DATEONLY,
       },
       average_rating: {
         type: DataTypes.FLOAT,
@@ -51,7 +48,6 @@ module.exports = (sequelize) => {
         type: DataTypes.ENUM("Efectivo", "Pago Online/Tarjeta"), //agregar array
       },
       image: {
-
         type: DataTypes.STRING,
       },
     },
@@ -60,8 +56,8 @@ module.exports = (sequelize) => {
       hooks: {
         afterSave: (seller, option) => {
           let total = 0;
-          seller.valoraciones.forEach((star) => (total = total + star));
-          let promedio = total / seller.valoraciones.length || 0
+          seller.rating.forEach((star) => (total = total + star));
+          let promedio = total / seller.rating.length || 0
           seller.setDataValue("valoracionPromedio", promedio)
         },
       },

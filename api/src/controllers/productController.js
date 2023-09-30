@@ -1,119 +1,159 @@
-const Product = require('../models/Product');
+const { User, Seller, Product, Post } = require("../db.js");
+const { Op } = require("sequelize");
 
-  // Obtener todos los productos
- const getAllProducts = async (req, res) => {
-    try {
-      const products = await Product.findAll();
-      res.json(products);
-    } catch (error) {
-      console.error(error);
-      res.status(500).json({ error: 'Error al obtener los productos.' });
+const paginate = (query, { page, pageSize }) => {
+  const offset = (page - 1) * pageSize;
+  const limit = pageSize;
+
+  return { query, offset, limit };
+};
+
+// Obtener todos los productos paginados y filtrados por nombre segun se requieran x query
+const getAllProducts = async (
+  categories,
+  address,
+  average_rating,
+  payment,
+  order,
+  orderBy,
+  page,
+  pageSize,
+  name
+) => {
+  try {
+    // Filtra por categoría exacta en la tabla 'products'
+    let filterConditions = {};
+    if (categories != null && categories != "") {
+      filterConditions.categories = { [Op.contains]: [categories] };
     }
-  };
-
-  // Obtener un producto por ID
-  const getProductById = async (req, res) => {
-    const { Product_ID } = req.params;
-    try {
-      const product = await Product.findByPk(Product_ID);
-      if (product) {
-        res.json(product);
-      } else {
-        res.status(404).json({ error: 'Producto no encontrado.' });
-      }
-    } catch (error) {
-      console.error(error);
-      res.status(500).json({ error: 'Error al obtener el producto.' });
+    //Filtra por nombre
+    if (name != null && name != "") {
+      filterConditions.name = { [Op.iLike]: `%${name}%` };
     }
-  };
 
-    // Controlador para obtener productos con filtros combinados
-  const getFilteredProducts = async (req, res) => {
-    try {
-      const { categoria, pais, provincia, ciudad, valoracion, tipoDePago } = req.query;
+    //Ordenamiento
+    const ordenamiento = [];
+    if (orderBy != null && orderBy != "") {
+      ordenamiento.push([orderBy, order]);
+    }
 
-      // Construye un objeto de condiciones de filtro basado en los parámetros proporcionados
-      const filterConditions = {};
+    // Condiciones de filtro para la tabla 'sellers'
+    const sellerFilterConditions = {};
 
-      if (categoria) {
-        filterConditions.categoria = categoria; // Filtra por categoría exacta en la tabla 'products'
-      }
+    if (address != null && address != "") {
+      sellerFilterConditions.address = {
+        [Op.iLike]: address,
+      };
+    }
 
-      // Condiciones de filtro para la tabla 'sellers'
-      const sellerFilterConditions = {};
+    if (average_rating != null && average_rating != "") {
+      let limit = Number(average_rating) + 0.9;
+      sellerFilterConditions.average_rating = {
+        [Op.between]: [average_rating, String(limit)],
+      };
+    }
 
-      if (pais && provincia && ciudad) {
-        sellerFilterConditions.direccion = {
-          [Op.iLike]: `%${pais},${provincia},${ciudad}%`
-        };
-      }
+    if (payment != null && payment != "") {
+      sellerFilterConditions.payment = payment;
+    }
 
-      if (valoracion) {
-        sellerFilterConditions.ValoracionPromedio = {
-          [Op.gte]: valoracion
-        };
-      }
-
-      if (tipoDePago) {
-        sellerFilterConditions.TipoDePago = tipoDePago;
-      }
-
-      // Consulta de Sequelize que aplica las condiciones de filtro
+    // hace la peticion teniendo en cuenta los query q se envian
+    if (page || pageSize) {
+      const filteredProducts = await Product.findAll(
+        paginate(
+          {
+            order: ordenamiento,
+            include: [
+              {
+                model: Seller,
+                where: sellerFilterConditions,
+              },
+            ],
+            where: filterConditions,
+          },
+          { page, pageSize }
+        )
+      );
+      return filteredProducts;
+    } else {
       const filteredProducts = await Product.findAll({
+        order: ordenamiento,
         include: [
           {
             model: Seller,
-            where: sellerFilterConditions
-          }
+            where: sellerFilterConditions,
+          },
         ],
-        where: filterConditions
+        where: filterConditions,
       });
-
-      res.json(filteredProducts);
-    } catch (error) {
-      res.status(500).json({ error: 'Error al obtener productos filtrados.' });
+      return filteredProducts;
     }
-  };
+  } catch (error) {
+    throw new Error(error.message);
+  }
+};
 
-  // Post de productos
-  const createProduct = async (req, res) => {
-    try {
-      const {
-        nombre,
-        fecha,
-        descripcion,
-        precio,
-        categoria,
-        imagen,
-        cantidad
-      } = req.body;
-      
-      const sellerId = req.params.sellerId; // sacamos el ID del vendedor con params
-
-      const newProduct = await Product.create({ // creamos el nuevo producto en la base de datos
-        nombre,
-        fecha,
-        descripcion,
-        precio,
-        categoria,
-        imagen,
-        cantidad,
-      });
-
-      await newProduct.setSeller(sellerId); // agregamos la relación entre el producto y el vendedor
-
-      res.status(201).json(newProduct);
-    } catch (error) {
-      console.error(error);
-      res.status(500).json({ error: 'Error al crear el producto.' });
+// Obtener un producto por ID
+const getProductById = async (product_ID) => {
+  try {
+    const product = await Product.findByPk(product_ID, {
+      include: [
+        {
+          model: Seller,
+        },
+      ],
+    });
+    if (product) {
+      return product;
+    } else {
+      throw new Error("Producto no encontrado.");
     }
-  };
+  } catch (error) {
+    throw new Error("Error al obtener el producto.");
+  }
+};
 
-  // ... otros metodos para crear, actualizar y eliminar productos
+// Post de productos
+const createProduct = async (
+  seller_id,
+  name,
+  date,
+  description,
+  price,
+  categories,
+  image,
+  amount
+) => {
+  try {
+    const newProduct = await Product.create({
+      // creamos el nuevo producto en la base de datos
+      name,
+      date,
+      description,
+      price,
+      categories,
+      image,
+      amount,
+    });
+
+    const seller = await Seller.findByPk(seller_id); // agregamos la relación entre el producto y el vendedor
+    await seller.addProduct(newProduct)
+    return newProduct;
+  } catch (error) {
+    console.error(error);
+    throw new Error("Error al crear el producto.");
+  }
+};
+
+const deleteProduct = async (product_ID) => {
+  await Product.destroy({ where: { product_ID } });
+};
+// ... otros metodos para crear, actualizar y eliminar productos
 
 module.exports = {
   getAllProducts,
   getProductById,
-  getFilteredProducts,
-  createProduct
+  // getFilteredProducts,
+  createProduct,
+  deleteProduct,
 };

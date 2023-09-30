@@ -14,9 +14,9 @@ const bcrypt = require('bcrypt');    // npm install bcrypt
 
   // Obtener un usuario por ID
   const getUserById = async (req, res) => {
-    const { User_ID } = req.params;
+    const { user_ID } = req.params;
     try {
-      const user = await User.findByPk(User_ID);
+      const user = await User.findByPk(user_ID);
       if (user) {
         res.json(user);
       } else {
@@ -31,16 +31,16 @@ const bcrypt = require('bcrypt');    // npm install bcrypt
   // Controlador para crear un nuevo usuario
   const createUser = async (req, res) => {
     try {
-      const { nombre, email, contraseña, ubicacion } = req.body;
+      const { name, email, password, location } = req.body;
 
       // Genera un hash seguro de la contraseña
-      const hashedPassword = await bcrypt.hash(contraseña, 10); // 10 es el costo (número de rondas de hashing)
+      const hashedPassword = await bcrypt.hash(password, 10); // 10 es el costo (número de rondas de hashing)
 
       const newUser = await User.create({
-        nombre,
+        name,
         email,
-        contraseña: hashedPassword, // Almacena el hash en lugar de la contraseña en texto claro
-        ubicacion
+        password: hashedPassword, // Almacena el hash en lugar de la contraseña en texto claro
+        location
       });
 
       res.status(201).json(newUser);
@@ -56,23 +56,23 @@ const bcrypt = require('bcrypt');    // npm install bcrypt
 
   const updateUser = async (req, res) => {
     try {
-      const { userId } = req.params;
+      const { user_ID } = req.params;
       const updatedData = req.body;
   
-      const user = await User.findByPk(userId); // Busca el usuario por su ID
+      const user = await User.findByPk(user_ID); // Busca el usuario por su ID
   
       if (user) {
         // Actualiza los datos del usuario con los nuevos datos proporcionados
-        if (updatedData.nombre) {
-          user.nombre = updatedData.nombre;
+        if (updatedData.name) {
+          user.name = updatedData.name;
         }
-        if (updatedData.ubicacion) {
-          user.ubicacion = updatedData.ubicacion;
+        if (updatedData.location) {
+          user.location = updatedData.location;
         }
-        if (updatedData.contraseña) {
+        if (updatedData.password) {
           // Si se proporciona una nueva contraseña, hashearla antes de almacenarla
-          const hashedPassword = await bcrypt.hash(updatedData.contraseña, 10);
-          user.contraseña = hashedPassword;
+          const hashedPassword = await bcrypt.hash(updatedData.password, 10);
+          user.password = hashedPassword;
         }
   
         await user.save(); // Guarda los cambios en la base de datos
@@ -87,6 +87,10 @@ const bcrypt = require('bcrypt');    // npm install bcrypt
     }
   };
 
+  const deleteUser = async (user_ID)=>{
+    await User.destroy({where: {user_ID}})
+  }
+
   
   // ... otros métodos para crear, actualizar y eliminar usuarios
 
@@ -95,5 +99,6 @@ module.exports = {
   getAllUsers,
   getUserById,
   createUser,
-  updateUser
+  updateUser,
+  deleteUser
 };

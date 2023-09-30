@@ -13,9 +13,9 @@ const getAllPost = async (req, res) => {
 
 // Obtener un posteo por ID
 const getPostById = async (req, res) => {
-  const { Post_ID } = req.params;
+  const { post_ID } = req.params;
   try {
-    const post = await Post.findByPk(Post_ID);
+    const post = await Post.findByPk(post_ID);
     if (post) {
       res.json(post);
     } else {

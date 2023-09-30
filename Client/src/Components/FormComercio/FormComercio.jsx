@@ -1,8 +1,10 @@
 import { useFormik } from 'formik';
 import React from 'react';
 import { Link } from 'react-router-dom';
+//import style from './FormComercio.module.css'
 
-const FormLogin = () => {
+
+const FormComercio = () => {
   const submitForm = (values) => {
     // Aquí puedes realizar la lógica de envío del formulario, como enviar una solicitud a un servidor.
     console.log(values);
@@ -13,7 +15,9 @@ const FormLogin = () => {
       nombre: '',
       usuario: '',
       email: '',
-      password: '',
+      adress: '',
+      phonenumber: '',
+      password: ''
     },
     onSubmit: submitForm,
     // Puedes agregar validaciones aquí utilizando la propiedad "validate" si es necesario.
@@ -41,8 +45,24 @@ const FormLogin = () => {
 
         <input
           type='email'
-          placeholder='Correo'
+          placeholder='Email'
           name='email'
+          onChange={formik.handleChange}
+          value={formik.values.email}
+        />
+
+         <input
+          type='text'
+          placeholder='Dirección'
+          name='adress'
+          onChange={formik.handleChange}
+          value={formik.values.email}
+        />
+
+         <input
+          type='email'
+          placeholder='Teléfono'
+          name='phonenumber'
           onChange={formik.handleChange}
           value={formik.values.email}
         />
@@ -53,12 +73,13 @@ const FormLogin = () => {
           onChange={formik.handleChange}
           value={formik.values.password}
         />
-        <Link to={`/home`}>
+       
+       <Link to={`/home`}>
         <button type='submit'>Registrarse</button>
-        </Link>
+        </Link>    
       </form>
     </div>
   );
 };
 
-export default FormLogin;
+export default FormComercio;
