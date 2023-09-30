@@ -5,12 +5,12 @@ import PickMeals from "../../assets/pick-meals-image.png";
 import ChooseMeals from "../../assets/choose-image.png";
 import DeliveryMeals from "../../assets/delivery-image.png";
 import { FiArrowRight } from "react-icons/fi";
-import { BsTwitter } from "react-icons/bs";
 import { SiLinkedin } from "react-icons/si";
-import { BsYoutube } from "react-icons/bs";
+import { BiLogoInstagram } from "react-icons/bi";
 import { FaFacebookF } from "react-icons/fa";
 import Logo from "../../assets/Logo.png";
 import style from './Landing.module.css'
+
 
 const Home = () => {
   const workInfoData = [
@@ -54,9 +54,11 @@ const Home = () => {
           <p className={style.primarytext}>
           Con Foodier podrás salvar el excedente de tus negocios favoritos y darle un buen final.
           </p>
+          <Link to={`/login`}>
           <button className={style.secondarybutton}>
             Entrar <FiArrowRight />{" "}
           </button>
+          </Link>
         </div>
         <div className={style.homeimagesection}>
           <img src={BannerImage} alt="" />
@@ -103,18 +105,24 @@ const Home = () => {
           <img src={Logo} alt="" />
         </div>
         <div className={style.footericons}>
-          <BsTwitter />
-          <SiLinkedin />
-          <BsYoutube />
+          <a>
+           <SiLinkedin />
+          </a>
+          <a href="https://www.instagram.com/foodierapp/">
+          <BiLogoInstagram/>
+          </a>
+          <a href="https://www.facebook.com/foodierx/">
           <FaFacebookF />
+          </a>
         </div>
       </div>
+
       <div className={style.footersectiontwo}>
        
         <div className={style.footersectioncolumns}>
-          <span>244-5333-7783</span>
+          <span>1136183553</span>
           
-          <span>foodier@gmail.com</span>
+          <span>helpfoodier@gmail.com</span>
         </div>
         <div className={style.footersectioncolumns}>
           <span>Términos y Condiciones</span>
