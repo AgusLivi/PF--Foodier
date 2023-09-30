@@ -55,7 +55,7 @@ const Home = () => {
           <p className={style.primarytext}>
           Con Foodier podrás salvar el excedente de tus negocios favoritos y darle un buen final.
           </p>
-          <Link to={`/login`}>
+          <Link className={style.link} to={`/login`}>
           <button className={style.secondarybutton}>
             Entrar <FiArrowRight />{" "}
           </button>
