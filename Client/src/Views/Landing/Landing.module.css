@@ -428,4 +428,22 @@ nav {
     display: none;
   }
 }
-/* Estilos para el contenido del modal */
+/* Estilos para el contenedor del modal */
+.modalContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  background-color: rgba(0, 0, 0, 0.3); /* Fondo semitransparente detrás del modal */
+  position: relative;
+}
+
+/* Estilos para el contenedor del texto */
+.modalTextContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  height: 100%; /* Asegura que el contenedor ocupe toda la altura del modal */
+}
