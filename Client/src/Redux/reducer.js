@@ -50,6 +50,9 @@ import {
         createPayment: [],
         averageRating: [],
         address: [],
+        users: [],
+        sellers: [],
+        
         //tengo q agregar mas
     };
 
@@ -119,9 +122,7 @@ import {
             case CATEGORIES:
                 return {
                     ...state,
-                    selectedCategories,
-
-
+                    selectedCategories: []
                 }
 
             case ADDRESS:
