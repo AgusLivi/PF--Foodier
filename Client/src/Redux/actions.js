@@ -210,7 +210,7 @@ export const categoriesFilter = () => {
 export const addressFilter = () => {
     return async(dispatch) => {
         try{
-            const { data } = await axios.get(`${endPoint}/products/adress`)
+            const { data } = await axios.get(`${endPoint}/products/address`)
             return dispatch({
                 type: ADDRESS,
                 payload: data
