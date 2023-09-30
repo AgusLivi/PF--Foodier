@@ -140,16 +140,21 @@ const Home = () => {
       </div>
 
       <Modal
-        isOpen={modalIsOpen}
-        onRequestClose={closeModal}
-        contentLabel="Ejemplo de Modal"
-      >
-        <h2>Sabias estos datos?</h2>
-      <p>El desperdicio de alimentos es responsable del 10% de las emisiones de gases de efecto invernadero.</p>
-      <p>Desperdiciamos 2500 millones de toneladas de comida mientras 828 millones de personas pasan hambre.</p>
-      <p>Este desperdicio nos cuesta 1,2 billones de dolares por año.</p>
-        <button onClick={closeModal}>Cerrar Modal</button>
-      </Modal>
+  isOpen={modalIsOpen}
+  onRequestClose={closeModal}
+  contentLabel="Ejemplo de Modal"
+  className={style.modalContent} // Agrega la clase para el estilo del modal
+  overlayClassName={style.modalOverlay} // Agrega la clase para el estilo del fondo semitransparente
+>
+  <div className={style.modalTextContainer}> {/* Contenedor del texto */}
+    <h2 className={style.primaryheading}>Sabías estos datos?</h2>
+    <p className={style.primarytext}>El desperdicio de alimentos es responsable del 10% de las emisiones de gases de efecto invernadero.</p>
+    <p className={style.primarytext}>Desperdiciamos 2500 millones de toneladas de comida mientras 828 millones de personas pasan hambre.</p>
+    <p className={style.primarytext}>Este desperdicio nos cuesta 1,2 billones de dólares por año.</p>
+    <button className={style.secondarybutton} onClick={closeModal}>Cerrar</button>
+  </div>
+</Modal>
+
     </>
   );
 };
