@@ -1,3 +1,4 @@
+
 import {
     GET_ALL_PRODUCTS,
     SEARCH_BY_NAME,
@@ -33,66 +34,64 @@ import {
     GET_POST
 } from './actionsType'
 
-const initialState = { 
-    products: [],
-    productsCopy: [],
-    createdProduct: [],
-    sellersFav:[],
-    productsByName: [],
-    filtereds: []
-}
+    const initialState = { 
+        products: [],
+        productsCopy: [],
+        createdProduct: [],
+        sellersFav: [],
+        productsByName: [],
+        filtereds: [],
+        //tengo q agregar mas
+    };
 
-const reducer = (state = initialState, {type, payload}) => {
-   let filteredProducts = []
+    const reducer = (state = initialState, { type, payload }) => {
+        let filteredProducts = [];
 
-    switch(type){
+        switch (type) {
             case GET_ALL_PRODUCTS:
                 return {
                     ...state,
                     products: payload,
                     productsCopy: payload,
-                    productsByName: payload
-                }
+                    productsByName: payload,
+                };
 
             case SEARCH_BY_NAME:
                 return {
                     ...state,
-                    products: filteredProducts,
-                    productsByName: filteredProducts,
-                }
+                    productsByName: payload, // Actualizar solo la propiedad productsByName
+                };
 
-            case CREATE_PRODUCT: 
+            case CREATE_PRODUCT:
                 return {
                     ...state,
-                    createdProduct: [...state.createdProduct, payload]
-                }
+                    createdProduct: [...state.createdProduct, payload],
+                };
+
             case SEARCH_BY_ID:
                 return {
                     ...state,
                     products: payload,
-                }
-            case GET_ALL_FAV: 
+                };
+
+            case GET_ALL_FAV:
                 return {
                     ...state,
                     sellersFav: payload,
-                }
-            case GET_FILTER:
-                return {
-                    ...state,
-                    filtereds: payload
-                }
-            case DELETE_PRODUCT: 
+                };
+
+            case DELETE_PRODUCT:
                 return {
                     ...state,
                     products: payload,
-                    productsCopy: payload
-                }
+                    productsCopy: payload,
+                };
+
+                
+
             default:
                 return state;
-    }
+        }
+    };
 
-
-
-
-
-}
+    export default reducer;
