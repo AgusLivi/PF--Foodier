@@ -30,8 +30,8 @@ import {
     DELETE_USER,
     UPDATE_USER,
     GET_POST_BY_ID,
-    GET_POST
-    
+    GET_POST,
+    SELECTED_CATEGORIES
 } from './actionsType'
 
 const endPoint='http://localhost:3001'  //definir rutas del back
@@ -457,3 +457,12 @@ export const getSellerById = (id) => {
         }
     }
 }
+
+export const selectedCategories = categories => {
+    return dispatch => {
+        return dispatch ({
+            type: SELECTED_CATEGORIES,
+            payload: categories
+        })
+    }
+} 
