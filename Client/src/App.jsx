@@ -15,7 +15,7 @@ import SearchBar from './Components/SearchBar/SearchBar'
 const App = () => {
   const location = useLocation();
   return (
-    <div>
+    <div className="App">
       {location.pathname !== "/" && location.pathname !== "/login"  && <NavBar />}
       <Routes>
         <Route path='/' element={<Landing />} />
