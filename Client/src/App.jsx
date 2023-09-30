@@ -10,6 +10,7 @@ import Home from "./Views/Home/Home"
 import Favoritos from "./Views/Favoritos/Favoritos";
 import FormComercio from './Components/FormComercio/FormComercio'
 import SearchBar from './Components/SearchBar/SearchBar'
+import CreateProduct from './Views/CreateProduct/CreateProduct'
 
 
 const App = () => {
@@ -27,6 +28,7 @@ const App = () => {
         <Route path='/formcomercio' element={<FormComercio />} />
         <Route path='/formuser' element={<FormUser />} />
         <Route path='/favoritos' element={<Favoritos />} />
+        <Route path='/create' element={<CreateProduct />} />
       </Routes>
       {location.pathname !== "/"  && location.pathname !== "/login" && <Footer />}
 
