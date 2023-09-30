@@ -33,7 +33,7 @@ const Home = () => {
 
   return (
     <>
-     {/*NavBar section*/}
+     {/*NavBar sectionn*/}
      <nav>
       <div className={style.navlogocontainer}>
         <img src={Logo} alt="" />
