@@ -5,14 +5,12 @@ import {
     SEARCH_BY_ID,
     CREATE_PRODUCT,
     GET_ALL_FAV,
-    GET_FILTER,
     DELETE_PRODUCT,
     POST_FAVORITES,
     CREATE_USER,
     GET_SELLER_FAV,
     CATEGORIES,
     ADDRESS,
-    AVERAGE,
     AVERAGE_RATING,
     PAYMENT,
     ORDER_BY,
@@ -31,7 +29,8 @@ import {
     DELETE_USER,
     UPDATE_USER,
     GET_POST_BY_ID,
-    GET_POST
+    GET_POST,
+    SELECTED_CATEGORIES,
 } from './actionsType'
 
 
@@ -51,11 +50,20 @@ import {
         createPayment: [],
         averageRating: [],
         address: [],
+        users: [],
+        getUserById: [],
+        sellers: [],
+        getSellerById: [],
+        categories: [],
+        paymentMethods: [],
+        post: [],
+        allFavoritesSeller: [],
         //tengo q agregar mas
     };
 
     const reducer = (state = initialState, { type, payload }) => {
-
+        let filteredProducts = []
+        let orderBy = []
 
     switch(type){
 
@@ -71,7 +79,6 @@ import {
             case SEARCH_BY_NAME:
                 return {
                     ...state,
-
                     products: filteredProducts,
                     productsByName: filteredProducts,
                 }
@@ -80,7 +87,6 @@ import {
             case CREATE_PRODUCT:
                 return {
                     ...state,
-
                     createdProduct: [...state.createdProduct, payload]
                 }
 
@@ -90,14 +96,6 @@ import {
                     ...state,
                     products: payload,
                 };
-
-            case GET_ALL_FAV:
-
-                return {
-                    ...state,
-                    sellersFav: payload,
-                };
-
             case DELETE_PRODUCT:
                 return {
                     ...state,
@@ -112,7 +110,7 @@ import {
             case CREATE_USER: 
                 return {
                     ...state,
-                    createdUser: payload,
+                    createdUser: [...state.createdUser, payload]
                 }
 
             case GET_SELLER_FAV: 
@@ -123,17 +121,129 @@ import {
             case CATEGORIES:
                 return {
                     ...state,
-
+                    categories: []
+                }
+            case SELECTED_CATEGORIES:
+                return {
+                    ...state,
+                    products: filteredProducts,
+                    productsByName: filteredProducts
 
                 }
 
             case ADDRESS:
                 return {
-                    ...state
+                    ...state,
+                    address: payload,
                 }
-
-                
-
+            case AVERAGE_RATING:
+                return {
+                    ...state,
+                    averageRating: payload,
+                }
+            case PAYMENT: 
+                return {
+                    ...state,
+                    paymentMethods: payload
+                }
+            case ORDER_BY:
+                return{
+                    ...state,
+                    products: orderBy,
+                    productsByName: orderBy,
+                    productsCopy: orderBy,
+                    selectedOrderBy: payload.length
+					? [{ value: payload, label: payload }]
+					: [],
+                }
+            case ORDER: 
+                return {
+                    ...state,
+                    selectedOrder: payload,
+                    products: filteredProducts,
+                    productsByName: filteredProducts
+                }
+            case CREATE_POST:
+                return {
+                    ...state,
+                    createdPost: [...state.createdPost, payload]
+                }
+            case CREATE_PAYMENT: 
+                return {
+                    ...state,
+                    createPayment:[...state.createPayment, payload]
+                }
+            case GET_USER_BY_ID:
+                return {
+                    ...state,
+                    getUserById: payload
+                }
+            case GET_SELLER_BY_ID:
+                return {
+                    ...state,
+                    getSellerById: payload
+                }
+            case GET_ALL_SELLERS: 
+                return {
+                    ...state,
+                    sellers: payload
+                }
+            case GET_ALL_USER:
+                return {
+                    ...state,
+                    users: payload
+                }
+            case DELETE_USER:
+                return {
+                    ...state,
+                    createdUsers: payload
+                }
+            case DELETE_SELLER:
+                return {
+                    ...state,
+                    createdSellers: payload
+                }
+            case UPDATE_SELLER: 
+                return {
+                    ...state,
+                    createdSellers: payload
+                }
+            case UPDATE_USER: 
+                return {
+                    ...state,
+                    createUser: payload
+                }
+            case CREATE_SELLER: 
+                return {
+                    ...state,
+                    createdSellers: payload
+                }
+            case GET_POST:
+                return {
+                    ...state,
+                    post: payload
+                }
+            case GET_POST_BY_ID:
+                return {
+                    ...state,
+                    post: payload
+                }
+            case GET_ALL_FAV:
+                return {
+                    ...state,
+                    allFavoritesSeller: payload,
+                }
+            case PAGE:
+                return {
+                    ...state,
+                    currentPage: payload,
+                };
+                  
+            case PAGE_SIZE:
+                return {
+                    ...state,
+                    pageSize: payload,
+                };
 
             default:
                 return state;
