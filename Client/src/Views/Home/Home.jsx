@@ -13,11 +13,11 @@ import {
 
 const Home = () => {
    // global state 
-    const selectedCategories = useSelector(state => state.selectedCategories)
-    const orderBy = useSelector(state => state.orderBy)
-    const orderUpDown = useSelector (state => state.selectedOrder)
+    const selectedCategoriess = useSelector(state => state.selectedCategories)
+    const orderByy = useSelector(state => state.orderBy)
+    const orderUp = useSelector (state => state.selectedOrder)
     const addressFilter= useSelector(state => state.address)
-    const getAllProducts = useSelector(state => state.products)
+    const getAllProductss = useSelector(state => state.products)
     const postFav = useSelector(state => state.sellersFav)
 
         // //local state
@@ -41,17 +41,24 @@ const Home = () => {
         }
       }
 
-      const handleOrderUpDownClick = async () => {
+      const handleOrderUpDownClick = (value) => {
+        setSelectedOrder(value); // Actualiza el estado local del selector
+        dispatch(orderUpDown(value));
+     // Despacha una acción para aplicar el filtro en el estado de Redux
+      }
+      
+      const handlerCategories = async () => {
         try {
-          await dispatch(orderUpDown());
+            await dispatch(selectedCategories())
         } catch (error) {
-          alert(error.message);
+            alert(error.message)
         }
       }
 
     useEffect(()=>{
-        setSelectedCat(selectedCategories)
+        dispatch(selectedCategories())
         setFilterAddress(addressFilter)
+        dispatch(getAllProducts())
     }, [categoriesError])
 
     useEffect(()=>{
@@ -63,6 +70,19 @@ const Home = () => {
         <div>
             <h1>Productos</h1>
             <h1>Aca se renderiza el componente cards</h1>
+            <CardContainer/>
+
+            <select className='select'
+                onChange={(e) => handleOrderUpDownClick(e.target.value)}
+                value={selectedOrder}
+            >
+                <option value="">Selecciona un orden</option>
+                <option value="ini">ini</option>
+                <option value="fin">fin</option>
+                <option value="Asc">Asc</option>
+                <option value="desc">Desc</option>
+       
+      </select>
             {/*
                 <label htmlFor="sortOrder">Ordenar por:</label>
                  <select id="sortOrder" value={sortOrder} onChange={handleSortOrderChange}>
