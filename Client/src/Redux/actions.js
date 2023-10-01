@@ -460,11 +460,13 @@ export const getSellerById = (id) => {
     }
 }
 
-export const selectedCategories = categories => {
-    return dispatch => {
+export const selectedCategories = (categories) => {
+    return async dispatch => {
+        const { data } = await axios.get(`${endPoint}/products?${categories}`)
+        console.log('ACTION!!!', data)
         return dispatch ({
             type: SELECTED_CATEGORIES,
-            payload: categories
+            payload: data
         })
     }
 }
