@@ -50,21 +50,19 @@ export const getAllProducts= () => {
     }
 }
 
-    export const getProductByName = search => {
-        return async dispatch => {
-            try {
-                const { data } = await axios(`${endPoint}/products/?name=${search}`) //en name tengo que cambiar por la ruta del back
-            
-                return dispatch({
-                    type: SEARCH_BY_NAME,
-                    payload: data,
-                })
-
-            } catch (error){
-                alert(error.message)
-            }
+export const getProductByName = (formData) => {
+    return async (dispatch) => {
+        try {
+            const { data } = await axios.get(`${endPoint}/products?name=${formData.name}`);
+            return dispatch({
+                type: SEARCH_BY_NAME,
+                payload: data,
+            });
+        } catch (error) {
+            alert(error.message);
         }
-    }
+    };
+};
 
 export const createProduct = (formData, id)=>{
     return async (dispatch)=>{
@@ -194,18 +192,18 @@ export const createPost = (post) => {
 }
 
 export const categoriesFilter = () => {
-    return async(dispatch) => {
-        try{
-            const { data } = await axios.get(`${endPoint}/products/categories`)
+    return async (dispatch) => {
+        try {
+            const { data } = await axios.get(`${endPoint}/products/categories`);
             return dispatch({
                 type: CATEGORIES,
-                payload: data
-            })
-        }catch(error) {
-            alert(error.message)
+                payload: data,
+            });
+        } catch (error) {
+            alert(error.message);
         }
-    }
-}
+    };
+};
 
 export const addressFilter = () => {
     return async(dispatch) => {
@@ -248,62 +246,61 @@ export const paymentMethods = () => {
         }
     }
 }
-export const orderBy = () => {
-    return async(dispatch) => {
-        try{
-            const { data } = await axios.get(`${endPoint}/products/orderBy`)
-            return dispatch ({
+export const orderBy = (formData) => {
+    return async (dispatch) => {
+        try {
+            const { data } = await axios.get(`${endPoint}/products?orderBy=${formData.orderBy}&order=${formData.order}`);
+            return dispatch({
                 type: ORDER_BY,
-                payload: data
-            })
+                payload: data,
+            });
         } catch (error) {
-            alert(error.message)
+            alert(error.message);
         }
-    }
+    };
+};
 
-}
-
-export const orderUpDown = () => {
-    return async(dispatch) => {
-        try{
-            const { data } = await axios.get(`${endPoint}/products/order`)
+export const orderUpDown = (formData) => {
+    return async (dispatch) => {
+        try {
+            const { data } = await axios.get(`${endPoint}/products?orderBy=${formData.orderBy}&order=${formData.order}`);
             return dispatch({
                 type: ORDER,
-                payload: data
-            })
-         } catch (error) {
-            alert(error.message)
-         }
-    }
-}
+                payload: data,
+            });
+        } catch (error) {
+            alert(error.message);
+        }
+    };
+};
 
 export const currentPage = () => {
-    return async(dispatch)=>{
+    return async (dispatch) => {
         try {
-            const { data } = await axios.get(`${endPoint}/products/page`)
+            const { data } = await axios.get(`${endPoint}/products?page=${formData.page}&pageSize=${formData.pageSize}`);
             return dispatch({
                 type: PAGE,
-                payload: data
-            })
-        } catch(error) {
-            alert (error.message)
+                payload: data,
+            });
+        } catch (error) {
+            alert(error.message);
         }
-    }
-}
+    };
+};
 
 export const pageSize = () => {
     return async (dispatch) => {
         try {
-            const { data } = await axios.get(`${endPoint}/products/pageSize`)
-            return dispatch ({
+            const { data } = await axios.get(`${endPoint}/products?page=${formData.page}&pageSize=${formData.pageSize}`);
+            return dispatch({
                 type: PAGE_SIZE,
-                payload: data
-            })
+                payload: data,
+            });
         } catch (error) {
-            alert(error.message)
+            alert(error.message);
         }
-    }
-}
+    };
+};
 export const getAllPost = () => {
     return async(dispatch) => {
         try{
