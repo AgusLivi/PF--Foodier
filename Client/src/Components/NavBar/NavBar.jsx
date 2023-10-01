@@ -1,7 +1,7 @@
 import React, { useRef } from "react";
 import { FaBars, FaTimes } from "react-icons/fa";
 import styles from "./NavBar.module.css"; 
-import Logo from '../../assets/LogoFinal.png'
+import Logo from '../../assets/Logo.png'
 import { Link } from 'react-router-dom'
 
 function Navbar() {
@@ -13,7 +13,7 @@ function Navbar() {
 
   return (
     <header>
-      <img src={Logo}></img>
+      <img src={Logo}alt="logo"></img>
       <nav ref={navRef} className={styles.nav}> 
       <Link to={`/home`}>
         <a>Comprar</a>
