@@ -128,8 +128,7 @@ import {
             case SELECTED_CATEGORIES:
                 return {
                     ...state,
-                    products: filteredProducts,
-                    selectedCategories: filteredProducts
+                    products: payload,
 
                 }
 

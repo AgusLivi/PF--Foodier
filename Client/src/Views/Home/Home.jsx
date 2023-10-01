@@ -54,25 +54,22 @@ const Home = () => {
 
     const handleSubmit = (event) => {
         event.preventDefault();
-        const { categories, address, average_rating, payment, orderBy, order } = formData;
+        const { name, categories, address, average_rating, payment, orderBy, order } = formData;
     
         // generamos la cadena de consulta
         const queryParams = new URLSearchParams({
-            name: productName, // Usa productName en lugar de formData.name
+            name, // Usa productName en lugar de formData.name
             categories: categories.join(','),
             address,
             average_rating,
             payment,
-            orderBy: orderByy,
-            order: orderr
+            orderBy,
+            order,
         }).toString();
         console.log(queryParams);
     
         // hacer dispatch con la cadena de consulta
         dispatch(selectedCategories(queryParams));
-        dispatch(getProductByName({ name: productName })); // Usa productName en lugar de formData.name
-        dispatch(orderByp({orderBy: orderByy}))
-        dispatch(orderUpDown({order: orderr}))
     };
 
 
@@ -84,7 +81,7 @@ const Home = () => {
                     type="text"
                     name="name"
                     placeholder="Nombre del producto"
-                    value={productName}
+                    value={formData.name}
                     onChange={(e) => setProductName(e.target.value)}
                 />
         
@@ -136,7 +133,7 @@ const Home = () => {
                         <label>Ordenar por:</label>
                         <select
                             name="orderBy"
-                            value={orderByy}
+                            value={formData.orderBy}
                             onChange={(e) => setOrderByy(e.target.value)}
                         >
                             <option value="name">Nombre</option>
@@ -148,7 +145,7 @@ const Home = () => {
                             <label>Orden:</label>
                             <select
                                 name="order"
-                                value={orderr}
+                                value={formData.order}
                                 onChange={(e) => setOrderr(e.target.value)}
                             >
                                 <option value="asc">Ascendente</option>
