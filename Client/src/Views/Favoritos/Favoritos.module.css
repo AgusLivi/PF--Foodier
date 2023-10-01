@@ -1,0 +1,42 @@
+
+*{
+    margin: 0px;
+    padding: 0;
+}
+
+.container{
+
+    display: flex;
+    width: 90%;
+    height: 100vh;
+    flex-wrap: wrap;
+    margin: 0 auto;
+
+    
+}
+
+.fav{
+
+    background: #f5f5f5;
+    border: 3px solid #fe9e0d;
+    text-align: center;
+    font-size: 24px;
+    width: 300px;
+    height: 400px;
+    transition: 0.3s all;
+    margin: 30px auto;
+
+}
+
+.fav img{
+    width: 300px;
+  
+    height: 300px;
+}
+.fav:hover {
+    transition: 0.5s all;
+    background: #fe9e0d;
+    scale: 1.5;
+
+
+}
