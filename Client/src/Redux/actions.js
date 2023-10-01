@@ -248,6 +248,9 @@ export const paymentMethods = () => {
     }
 }
 export const orderBy = (formData) => {
+
+   console.log(formData)
+
     return async (dispatch) => {
         try {
             const { data } = await axios.get(`${endPoint}/products?${formData.orderBy}${formData.order}`);

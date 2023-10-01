@@ -5,12 +5,14 @@ import {
     categoriesFilter,
     selectedCategories,
     getProductByName,
-
+    orderBy,
+    orderUpDown,
 } from '../../Redux/actions'
 
 const Home = () => {
    // global state 
     const categories = useSelector(state => state.categories)
+
    
     const [productName, setProductName] = useState('');
     const dispatch = useDispatch()
@@ -65,6 +67,8 @@ const Home = () => {
         // hacer dispatch con la cadena de consulta
         dispatch(selectedCategories(queryParams));
         dispatch(getProductByName({ name: productName })); // Usa productName en lugar de formData.name
+        dispatch(orderBy(queryParams))
+        dispatch(orderUpDown(queryParams))
     };
 
 
