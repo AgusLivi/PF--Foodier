@@ -1,45 +1,72 @@
-.container{
-    background: #fe9e0d;
+/* Estilos para el contenedor principal */
+.container {
+    background: #fe9e0d; /* Fondo del contenedor */
     width: 100%;
-    height: 90vh;
+    height: 90vh; /* Altura del contenedor */
     display: flex;
     flex-direction: column;
     align-items: center;
 }
-.containerChild{
+
+/* Estilos para el contenedor secundario */
+.containerChild {
     display: flex;
+    overflow: hidden;
     flex-direction: column;
-    border: 1px solid #333;
+    border: 1px solid #333; /* Borde del contenedor secundario */
     height: 80%;
     width: 80%;
-    margin: 50px auto;
-    background: #f3e2c8;
-    border-radius: 20px;
+    margin: 50px auto; /* Margen superior e inferior y centrado horizontalmente */
+    background: #f5f5f5; /* Fondo del contenedor secundario */
+    border-radius: 20px; /* Borde redondeado */
 }
-.containerChildProfile{
 
+/* Estilos para el contenedor del perfil */
+.containerChildProfile {
+    background: #f3e2c8; /* Fondo del contenedor del perfil */
+    height: 70%;
     display: flex;
     justify-content: space-around;
     align-items: center;
 }
-.profile{
+
+/* Estilos para la imagen de perfil */
+.profile {
     width: 150px;
     height: 150px;
-    border-radius: 150px;
-    background: #000;
+    border-radius: 150px; /* Borde redondeado para la imagen de perfil */
+    background: #000; /* Color de fondo de la imagen de perfil */
     margin: 10px;
 }
-.profileName{
+
+/* Estilos para el nombre de perfil */
+.profileName {
     width: 50%;
     font-size: large;
     text-align: center;
 }
 
-.profileInfo{
+/* Estilos para la información del perfil */
+.profileInfo {
     width: 90%;
-    border: 2px solid red;
     margin: 10px auto;
     height: 100%;
     display: flex;
     flex-direction: column;
+}
+
+/* Estilos para la información en la columna */
+.info {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    width: 100%;
+    height: 100%;
+    font-size: 24px; /* Tamaño de fuente para la información */
+}
+
+/* Estilos para las etiquetas de información */
+.info label {
+    color: #555; /* Color del texto de la etiqueta */
+    font-weight: 800; /* Peso de fuente de la etiqueta */
 }
