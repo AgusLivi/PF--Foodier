@@ -12,12 +12,15 @@ const paginate = (query, { page, pageSize }) => {
 const getAllProducts = async (req,res) => {
   
   const {categories, address, average_rating, payment, order, orderBy, page, pageSize, name} = req.query;
-  
+  console.log('CATEGORIES:',categories)
   try {
     // Filtra por categoría exacta en la tabla 'products'
     let filterConditions = {};
     if (categories != null && categories != "") {
-      filterConditions.categories = { [Op.contains]: [categories] };
+      const categoriesArray = categories.split(",");
+      filterConditions.categories ={
+        [Op.overlap]: categoriesArray,
+      };
     }
     //Filtra por nombre
     if (name != null && name != "") {
