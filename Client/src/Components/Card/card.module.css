@@ -1,0 +1,46 @@
+.card {
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    margin: 10px;
+    text-align: center;
+    background-color: #fff;
+  }
+  
+  .card h2 {
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+    color: #333;
+  }
+  
+  .card p {
+    font-size: 1rem;
+    color: #666;
+    margin-bottom: 10px;
+  }
+  
+  .card .price {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: #ff9900; 
+  }
+  
+  .card .old_price {
+    text-decoration: line-through;
+    font-size: 1rem;
+    color: #999;
+  }
+  
+  .card img {
+    max-width: 100%;
+    height: auto;
+    margin-top: 10px;
+    border-radius: 4px;
+  }
+  
+  .card .amount {
+    font-size: 1rem;
+    color: #555;
+  }
+  

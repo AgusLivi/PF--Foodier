@@ -11,6 +11,7 @@ const sellerController = require('../controllers/sellerController');
 const productController = require('../controllers/productController')
 
 // Rutas relacionadas con los productos
+router.get('/products/categories', productController.getAllCategories) // sacar las categorias para renderizar
 router.get("/products/:id", productController.getProductById); //busqueda por id
 router.post("/products/:seller_id", productController.createProduct); // crear productos
 router.put("/products/:productId", productController.updateProduct) // editar productos

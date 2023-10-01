@@ -43,7 +43,7 @@ import {
         productsByName: [],
         postedFiltereds: [],
         createdUser: [],
-        selectedCategories: [],
+        s: [],
         selectedOrderBy: [],
         selectedOrder: [],
         createdPost: [],
@@ -123,13 +123,13 @@ import {
             case CATEGORIES:
                 return {
                     ...state,
-                    categories: []
+                    categories: payload
                 }
             case SELECTED_CATEGORIES:
                 return {
                     ...state,
                     products: filteredProducts,
-                    productsByName: filteredProducts
+                    selectedCategories: filteredProducts
 
                 }
 
