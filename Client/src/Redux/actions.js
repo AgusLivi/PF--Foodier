@@ -51,9 +51,10 @@ export const getAllProducts= () => {
 }
 
 export const getProductByName = (formData) => {
+    console.log(formData)
     return async (dispatch) => {
         try {
-            const { data } = await axios.get(`${endPoint}/products?name=${formData.name}`);
+            const { data } = await axios.get(`${endPoint}/products?${formData.name}`);
             return dispatch({
                 type: SEARCH_BY_NAME,
                 payload: data,
@@ -64,10 +65,10 @@ export const getProductByName = (formData) => {
     };
 };
 
-export const createProduct = (formData, id)=>{
+export const createProduct = (formmData, id)=>{
     return async (dispatch)=>{
         try{
-            const { data } = await axios.post(`http://localhost:3001/products/${id}`, formData); // despues de la barra tengo que poner la ruta que definieron en el back
+            const { data } = await axios.post(`http://localhost:3001/products/${id}`, formmData); // despues de la barra tengo que poner la ruta que definieron en el back
             return dispatch({
                 type: CREATE_PRODUCT,
                 payload: data
@@ -249,7 +250,7 @@ export const paymentMethods = () => {
 export const orderBy = (formData) => {
     return async (dispatch) => {
         try {
-            const { data } = await axios.get(`${endPoint}/products?orderBy=${formData.orderBy}&order=${formData.order}`);
+            const { data } = await axios.get(`${endPoint}/products?${formData.orderBy}${formData.order}`);
             return dispatch({
                 type: ORDER_BY,
                 payload: data,
@@ -263,7 +264,7 @@ export const orderBy = (formData) => {
 export const orderUpDown = (formData) => {
     return async (dispatch) => {
         try {
-            const { data } = await axios.get(`${endPoint}/products?orderBy=${formData.orderBy}&order=${formData.order}`);
+            const { data } = await axios.get(`${endPoint}/products?${formData.orderBy}${formData.order}`);
             return dispatch({
                 type: ORDER,
                 payload: data,
@@ -274,10 +275,10 @@ export const orderUpDown = (formData) => {
     };
 };
 
-export const currentPage = () => {
+export const currentPage = (formData) => {
     return async (dispatch) => {
         try {
-            const { data } = await axios.get(`${endPoint}/products?page=${formData.page}&pageSize=${formData.pageSize}`);
+            const { data } = await axios.get(`${endPoint}/products?${formData.page}${formData.pageSize}`);
             return dispatch({
                 type: PAGE,
                 payload: data,
@@ -288,10 +289,11 @@ export const currentPage = () => {
     };
 };
 
-export const pageSize = () => {
+export const pageSize = (formData) => {
+    console.log(formData)
     return async (dispatch) => {
         try {
-            const { data } = await axios.get(`${endPoint}/products?page=${formData.page}&pageSize=${formData.pageSize}`);
+            const { data } = await axios.get(`${endPoint}/products?${formData.page}${formData.pageSize}`);
             return dispatch({
                 type: PAGE_SIZE,
                 payload: data,
