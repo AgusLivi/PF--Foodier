@@ -5,7 +5,7 @@ import {
     categoriesFilter,
     selectedCategories,
     getProductByName,
-    orderBy,
+    orderByp,
     orderUpDown,
 } from '../../Redux/actions'
 
@@ -69,7 +69,7 @@ const Home = () => {
         // hacer dispatch con la cadena de consulta
         dispatch(selectedCategories(queryParams));
         dispatch(getProductByName({ name: productName })); // Usa productName en lugar de formData.name
-        dispatch(orderBy({orderBy: orderByy}))
+        dispatch(orderByp({orderBy: orderByy}))
         dispatch(orderUpDown({order: orderr}))
     };
 
@@ -146,7 +146,7 @@ const Home = () => {
                             <label>Orden:</label>
                             <select
                                 name="order"
-                                value={orderByy}
+                                value={orderr}
                                 onChange={(e) => setOrderr(e.target.value)}
                             >
                                 <option value="asc">Ascendente</option>
