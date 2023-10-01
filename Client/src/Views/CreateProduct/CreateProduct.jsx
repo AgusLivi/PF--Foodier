@@ -43,15 +43,13 @@ const Cloudinary = (props) => {
             <div className={Style.containerChild}>
                 <div className={Style.containerChildText}>
                     <div>
-                        <h1>Formulario post producto</h1>
-                        <h3>Los campos con '*' son obligatorios</h3>
                         <Container>
                             <FormGroup>
                                 <Input
                                     className={Style.exclude}
                                     type="file"
                                     name="file"
-                                    placeholder="sube la foto pa"
+                                    placeholder="carga tu imagen"
                                     onChange={handlerCloudinary}
                                 />
                                 {loading ? (
