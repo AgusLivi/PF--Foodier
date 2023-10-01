@@ -22,7 +22,7 @@ const Home = () => {
     useEffect(()=>{
         dispatch(categoriesFilter())
     }, [reset])
-    console.log(cat)
+    console.log(categories)
 
 
     const [formData, setFormData] = useState({
