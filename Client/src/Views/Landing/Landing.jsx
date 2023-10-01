@@ -50,14 +50,10 @@ const Home = () => {
 
   return (
     <>
-      <nav>
-        <div className={style.navlogocontainer}>
-          <img src={Logo} alt="" />
-        </div>     
-      </nav>
-
+   
       <div className={style.homecontainer}>
         <div className={style.homebannercontainer}>
+          <h1 className={style.logo}>Foodier</h1>
           <div className={style.homebannerimagecontainer}>
             <img src={BannerBackground} alt="" />
           </div>
