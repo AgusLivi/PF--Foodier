@@ -64,19 +64,14 @@ const Home = () => {
 
     return (
         <div>
-            <h1>Productos</h1>
-            <h1>Aca se renderiza el componente cards</h1>
-            
-
+    
             <select 
                 onChange={(e) => handleOrderUpDownClick(e.target.value)}
                 value={selectedOrder}
             >
                 <option value="">Selecciona un orden</option>
-                <option value="ini">ini</option>
-                <option value="fin">fin</option>
-                <option value="Asc">Asc</option>
-                <option value="desc">Desc</option>
+                <option value="Asc">Ascendente</option>
+                <option value="desc">Descendente</option>
        
             </select>
 
