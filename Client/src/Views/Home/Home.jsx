@@ -17,6 +17,7 @@ const Home = () => {
     // const addressFilterr= useSelector(state => state.address)
     const getAllProductss = useSelector(state => state.products)
     const postFav = useSelector(state => state.sellersFav)
+    console.log(selectedCategoriess)
 
         // //local state
   
@@ -46,7 +47,8 @@ const Home = () => {
       
       const handlerCategories = (value) => {
         setSelectedCat(value)
-        dispatch(selectedCategories(value))
+        dispatch(categoriesFilter(value))
+        console.log(value)
       }
 
     // useEffect(()=>{
@@ -56,6 +58,7 @@ const Home = () => {
 
     useEffect(()=>{
         setReset(false)
+        dispatch(categoriesFilter())
     }, [reset])
 
 
