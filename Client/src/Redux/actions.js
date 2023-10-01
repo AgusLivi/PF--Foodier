@@ -464,4 +464,4 @@ export const selectedCategories = categories => {
             payload: categories
         })
     }
-} 
+}
