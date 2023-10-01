@@ -9,7 +9,6 @@ import Footer from "./Components/Footer/Footer";
 import Home from "./Views/Home/Home"
 import Favoritos from "./Views/Favoritos/Favoritos";
 import FormComercio from './Components/FormComercio/FormComercio'
-import SearchBar from './Components/SearchBar/SearchBar'
 import CreateProduct from './Views/CreateProduct/CreateProduct'
 
 
@@ -23,7 +22,6 @@ const App = () => {
         <Route path='/profile' element={<PerfilUsuario />} /> //esta vacio
         <Route path="/home" element={<Home />} />
         <Route path='/login' element={<Login />} />
-        <Route path='/search' element={<SearchBar />} />
         <Route path='/business' element={<PerfilNegocio />} /> //vacio
         <Route path='/formcomercio' element={<FormComercio />} />
         <Route path='/formuser' element={<FormUser />} />
