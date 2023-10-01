@@ -17,12 +17,14 @@ img {
 body {
   max-width: 100%;
   overflow-x: hidden;
-}
-
-body {
   background-color: #f6f6f6;
 }
-
+.logo{
+  color: #fe9e0d;
+  font-family: Georgia, 'Times New Roman', Times, serif;
+  font-size: 5em;
+  margin-left:2em;
+}
 nav {
   display: flex;
   align-items: center;
