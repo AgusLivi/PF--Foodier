@@ -30,7 +30,6 @@ const SearchBar = () => {
         />
   
         <button className={styles["btn-search"]} onClick={handleOnClick}>
-          <FontAwesomeIcon icon={faSearch} />
         </button>
   
         <CardContainer />
