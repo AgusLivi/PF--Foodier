@@ -9,7 +9,7 @@ import { FiArrowRight } from "react-icons/fi";
 import { SiLinkedin } from "react-icons/si";
 import { BiLogoInstagram } from "react-icons/bi";
 import { FaFacebookF } from "react-icons/fa";
-import Logo from "../../assets/LogoFinal.png";
+import Logo from "../../assets/Logo.png";
 import style from './Landing.module.css'
 import { Link } from 'react-router-dom'
 
@@ -52,8 +52,9 @@ const Home = () => {
     <>
    
       <div className={style.homecontainer}>
+        <img src={Logo}></img>
         <div className={style.homebannercontainer}>
-          <h1 className={style.logo}>Foodier</h1>
+     
           <div className={style.homebannerimagecontainer}>
             <img src={BannerBackground} alt="" />
           </div>
