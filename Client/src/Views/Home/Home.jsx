@@ -12,6 +12,7 @@ import {
 const Home = () => {
    // global state 
     const categories = useSelector(state => state.categories)
+    const products = useSelector(state => state.products)
     const [reset, useReset] = useState(false)
    
     const [productName, setProductName] = useState('');
@@ -158,7 +159,7 @@ const Home = () => {
                 <button type="submit">Filtrar</button>
             </form>
 
-             <CardContainer/>
+             <CardContainer products={products}/>
         </div>
     )
 }
