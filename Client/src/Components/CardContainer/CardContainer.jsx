@@ -4,7 +4,7 @@ import { getAllProducts } from '../../Redux/actions';
 import Card from '../Card/card';
 import styles from './CardContainer.module.css';
 
-const CardContainer = ({ products }) => {
+const CardContainer = () => {
     const dispatch = useDispatch();
     const products = useSelector(state => state.products);
     useEffect(() => {
