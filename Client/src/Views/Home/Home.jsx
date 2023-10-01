@@ -15,6 +15,8 @@ const Home = () => {
 
    
     const [productName, setProductName] = useState('');
+    const [orderByy, setOrderByy] = useState('')
+    const [orderr, setOrderr] = useState('')
     const dispatch = useDispatch()
 
     useEffect(()=>{
@@ -59,16 +61,16 @@ const Home = () => {
             address,
             average_rating,
             payment,
-            orderBy,
-            order,
+            orderBy: orderByy,
+            order: orderr
         }).toString();
         console.log(queryParams);
     
         // hacer dispatch con la cadena de consulta
         dispatch(selectedCategories(queryParams));
         dispatch(getProductByName({ name: productName })); // Usa productName en lugar de formData.name
-        dispatch(orderBy(queryParams))
-        dispatch(orderUpDown(queryParams))
+        dispatch(orderBy({orderBy: orderByy}))
+        dispatch(orderUpDown({order: orderr}))
     };
 
 
@@ -132,8 +134,8 @@ const Home = () => {
                         <label>Ordenar por:</label>
                         <select
                             name="orderBy"
-                            value={formData.orderBy}
-                            onChange={handleInputChange}
+                            value={orderByy}
+                            onChange={(e) => setOrderByy(e.target.value)}
                         >
                             <option value="name">Nombre</option>
                             <option value="price">Precio</option>
@@ -144,8 +146,8 @@ const Home = () => {
                             <label>Orden:</label>
                             <select
                                 name="order"
-                                value={formData.order}
-                                onChange={handleInputChange}
+                                value={orderByy}
+                                onChange={(e) => setOrderr(e.target.value)}
                             >
                                 <option value="asc">Ascendente</option>
                                 <option value="desc">Descendente</option>
