@@ -11,8 +11,7 @@
     align-items: center;
     justify-content: center;
     height: 100vh;
-    background-image: url(https://th.bing.com/th/id/OIP.6E4ZieSTbziUhNGw9NneiQAAAA?pid=ImgDet&rs=1);
-    background-size: cover;
+    background-color: #f3e2c8;
 }
 
 .containerform {
@@ -31,7 +30,7 @@
     display: flex;
     align-items: center;
     text-align: center;
-    background-color: #c7eef3;
+    background-color: #f8c880;
     border-top-left-radius: 20px;
     border-bottom-left-radius: 20px;
 
@@ -49,22 +48,22 @@
 
 .infochilds p {
     margin: 15px 0;
-    color: #555;
+    color: #3f3e3e;
 }
 
 .infochilds input {
     background-color: transparent;
     outline: none;
-    border: solid 2px #9191bd;
+    border: solid 2px #fe9e0d;
     border-radius: 20px;
     padding: 10px 20px;
-    color: #9191bd;
+    color: #3f3e3e;
     cursor: pointer;
     transition: background-color .3s ease;
 }
 
 .infochilds input:hover {
-background-color: #9191bd;
+background-color: #fe9e0d;;
 border: none;
 color: #fff;
 box-shadow: 0 2px 5px rgba(0, 0, 0, .1)
@@ -104,13 +103,13 @@ box-shadow: 0 2px 5px rgba(0, 0, 0, .1)
     cursor: pointer;
     margin: 0 10px;
     color: #9191bd;
-    border: solid thin #9191bd;
+    border: solid thin #fe9e0d;
     transition: background-color 0.3s ease;
     box-shadow: 0 2px 5px rgba(0, 0, 0, .1)
 }
 
 .icons i:hover {
-    background-color: #c7c7f3;
+    background-color: #fe9e0d;
     color: #fff;
 }
 
@@ -143,7 +142,7 @@ box-shadow: 0 2px 5px rgba(0, 0, 0, .1)
 }
 
 .form input[type="submit"] {
-    background-color: #9191bd;
+    background-color: #fe9e0d;
     color: #fff;
     border-radius: 20px;
     border: none;
@@ -155,7 +154,7 @@ box-shadow: 0 2px 5px rgba(0, 0, 0, .1)
 }
 
 .form input[type="submit"]:hover{
-    background-color: #7a7a9a;
+    background-color: #e2bb80;
 }
 
 /*Responsive Form */

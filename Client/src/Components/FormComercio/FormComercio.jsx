@@ -3,7 +3,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { useFormik } from 'formik';
 import style from './FormComercio.module.css';
-import logo from '../../assets/logoFoodier.png';
+import Logo from '../../assets/logodos.png';
 
 const FormComercio = () => {
   // Función para manejar el envío del formulario
@@ -32,16 +32,16 @@ const FormComercio = () => {
         <div className={style.information}>
           <div className={style.infochilds}>
          <div>
-           <img src={logo} ></img>
+           <img src={Logo} ></img>
          
            
             <h2>Registrate</h2>
             <p>Unete a nuestra comunidad</p>
            </div>
            <div className={style.iconContant}>
-           <i className="fa-brands fa-github"></i>
-           <i className="fa-brands fa-meta"></i>
-           <i className="fa-brands fa-instagram"></i>
+           <box-icon name='meta' type='logo' ></box-icon>
+           <box-icon name='github' type='logo' ></box-icon>
+           <box-icon type='logo' name='instagram'></box-icon>
            </div>
           </div>
         </div>
