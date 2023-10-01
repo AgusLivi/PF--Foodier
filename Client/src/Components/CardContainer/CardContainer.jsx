@@ -1,17 +1,19 @@
 import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { getAllProducts } from '../../Redux/actions';
-import Card from '../Card/card'; 
+import Card from '../Card/card';
+import styles from './CardContainer.module.css'; // Importa los estilos de módulo CSS
 
-const Cards = () => {
+const CardContainer = () => {
   const dispatch = useDispatch();
-  const products = useSelector(state => state.products); 
+  const products = useSelector(state => state.products);
+  
   useEffect(() => {
     dispatch(getAllProducts());
   }, [dispatch]);
 
   return (
-    <div>
+    <div className={styles.cardContainer}>
       {products.map((product, index) => (
         <Card
           key={index}
@@ -27,4 +29,4 @@ const Cards = () => {
   );
 };
 
-export default Cards;
+export default CardContainer;
