@@ -50,26 +50,25 @@ export const getAllProducts= () => {
     }
 }
 
-    export const getProductByName = search => {
-        return async dispatch => {
-            try {
-                const { data } = await axios(`${endPoint}/products/?name=${search}`) //en name tengo que cambiar por la ruta del back
-            
-                return dispatch({
-                    type: SEARCH_BY_NAME,
-                    payload: data,
-                })
-
-            } catch (error){
-                alert(error.message)
-            }
+export const getProductByName = (formData) => {
+    console.log(formData)
+    return async (dispatch) => {
+        try {
+            const { data } = await axios.get(`${endPoint}/products?${formData.name}`);
+            return dispatch({
+                type: SEARCH_BY_NAME,
+                payload: data,
+            });
+        } catch (error) {
+            alert(error.message);
         }
-    }
+    };
+};
 
-export const createProduct = (formData, id)=>{
+export const createProduct = (formmData, id)=>{
     return async (dispatch)=>{
         try{
-            const { data } = await axios.post(`http://localhost:3001/products/${id}`, formData); // despues de la barra tengo que poner la ruta que definieron en el back
+            const { data } = await axios.post(`http://localhost:3001/products/${id}`, formmData); // despues de la barra tengo que poner la ruta que definieron en el back
             return dispatch({
                 type: CREATE_PRODUCT,
                 payload: data
@@ -194,18 +193,18 @@ export const createPost = (post) => {
 }
 
 export const categoriesFilter = () => {
-    return async(dispatch) => {
-        try{
-            const { data } = await axios.get(`${endPoint}/products/categories`)
+    return async (dispatch) => {
+        try {
+            const { data } = await axios.get(`${endPoint}/products/categories`);
             return dispatch({
                 type: CATEGORIES,
-                payload: data
-            })
-        }catch(error) {
-            alert(error.message)
+                payload: data,
+            });
+        } catch (error) {
+            alert(error.message);
         }
-    }
-}
+    };
+};
 
 export const addressFilter = () => {
     return async(dispatch) => {
@@ -248,62 +247,62 @@ export const paymentMethods = () => {
         }
     }
 }
-export const orderBy = () => {
-    return async(dispatch) => {
-        try{
-            const { data } = await axios.get(`${endPoint}/products/orderBy`)
-            return dispatch ({
-                type: ORDER_BY,
-                payload: data
-            })
-        } catch (error) {
-            alert(error.message)
-        }
-    }
-
-}
-
-export const orderUpDown = () => {
-    return async(dispatch) => {
-        try{
-            const { data } = await axios.get(`${endPoint}/products/order`)
-            return dispatch({
-                type: ORDER,
-                payload: data
-            })
-         } catch (error) {
-            alert(error.message)
-         }
-    }
-}
-
-export const currentPage = () => {
-    return async(dispatch)=>{
-        try {
-            const { data } = await axios.get(`${endPoint}/products/page`)
-            return dispatch({
-                type: PAGE,
-                payload: data
-            })
-        } catch(error) {
-            alert (error.message)
-        }
-    }
-}
-
-export const pageSize = () => {
+export const orderBy = (formData) => {
     return async (dispatch) => {
         try {
-            const { data } = await axios.get(`${endPoint}/products/pageSize`)
-            return dispatch ({
-                type: PAGE_SIZE,
-                payload: data
-            })
+            const { data } = await axios.get(`${endPoint}/products?${formData.orderBy}${formData.order}`);
+            return dispatch({
+                type: ORDER_BY,
+                payload: data,
+            });
         } catch (error) {
-            alert(error.message)
+            alert(error.message);
         }
-    }
-}
+    };
+};
+
+export const orderUpDown = (formData) => {
+    return async (dispatch) => {
+        try {
+            const { data } = await axios.get(`${endPoint}/products?${formData.orderBy}${formData.order}`);
+            return dispatch({
+                type: ORDER,
+                payload: data,
+            });
+        } catch (error) {
+            alert(error.message);
+        }
+    };
+};
+
+export const currentPage = (formData) => {
+    return async (dispatch) => {
+        try {
+            const { data } = await axios.get(`${endPoint}/products?${formData.page}${formData.pageSize}`);
+            return dispatch({
+                type: PAGE,
+                payload: data,
+            });
+        } catch (error) {
+            alert(error.message);
+        }
+    };
+};
+
+export const pageSize = (formData) => {
+    console.log(formData)
+    return async (dispatch) => {
+        try {
+            const { data } = await axios.get(`${endPoint}/products?${formData.page}${formData.pageSize}`);
+            return dispatch({
+                type: PAGE_SIZE,
+                payload: data,
+            });
+        } catch (error) {
+            alert(error.message);
+        }
+    };
+};
 export const getAllPost = () => {
     return async(dispatch) => {
         try{
@@ -465,4 +464,4 @@ export const selectedCategories = categories => {
             payload: categories
         })
     }
-} 
+}
