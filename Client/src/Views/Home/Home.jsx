@@ -12,7 +12,7 @@ import {
 const Home = () => {
    // global state 
     const categories = useSelector(state => state.categories)
-
+    const [reset, useReset] = useState(false)
    
     const [productName, setProductName] = useState('');
     const [orderByy, setOrderByy] = useState('')
@@ -21,7 +21,8 @@ const Home = () => {
 
     useEffect(()=>{
         dispatch(categoriesFilter())
-    }, )
+    }, [reset])
+    console.log(cat)
 
 
     const [formData, setFormData] = useState({
@@ -91,11 +92,11 @@ const Home = () => {
                     <label>
                     <input
                         type="checkbox"
-                        name={categoryItem.name}
-                        checked={formData.categories.includes(categoryItem.name)}
+                        name={categoryItem}
+                        checked={formData.categories.includes(categoryItem)}
                         onChange={handleCategoryChange}
-                        value={categoryItem.name}
-                    /> {categoryItem.name}
+                        value={categoryItem}
+                    /> {categoryItem}
                     </label>
                 ))}
         
