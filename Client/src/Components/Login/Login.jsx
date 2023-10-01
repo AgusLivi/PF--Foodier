@@ -1,26 +1,13 @@
 import React, { useState } from "react";
-import GoogleLogin from "react-google-login";
 import { Link } from "react-router-dom";
 import style from "./Login.module.css";
 import FacebookLogin from 'react-facebook-login';
 
 const Login = () => {
-  const [user, setUser] = useState({});
-  const clientID =
-    "213587509979-9539rfrnm5e9bf8m8r1mj5tl15rhjej0.apps.googleusercontent.com";
-  const FacebookID = "4122510341306106";
 
-  const onSuccess = (response) => {
-    setUser(response.profileObj);
-  };
 
   const onFailure = (error) => {
     console.error("Inicio de sesión fallido:", error);
-  };
-
-  const responseFacebook = (response) => {
-    console.log(response);
-    setUser(response);
   };
 
   return (
@@ -39,22 +26,6 @@ const Login = () => {
           <div className={style.forminformationchilds}>
             <h2>Crear una Cuenta</h2>
             <div className={style.icons}>
-              <GoogleLogin
-                clientId={clientID}
-                buttonText="Iniciar sesión con Google"
-                onSuccess={onSuccess}
-                onFailure={onFailure}
-                cookiePolicy={'single_host_origin'}
-              />
-              
-          
-              <FacebookLogin
-                appId={FacebookID}
-                autoLoad={false}
-                fields="name,email,picture"
-                callback={responseFacebook}
-                cssClass={style.facebookButton} 
-              />
             </div>
             <p>O usa tu email para registrarte como usuario</p>
             <form className={style.form}>

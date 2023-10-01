@@ -1,112 +1,45 @@
-
 .container{
-   display: flex;
-   /*posicionamiento*/
-   margin: 0 auto;
-   /*direccion*/
+    background: #fe9e0d;
+    width: 100%;
+    height: 90vh;
+    display: flex;
     flex-direction: column;
     align-items: center;
-    
-   /*tamaño*/
-   width: 95%;
-    height: 120vh;
-    background: #f5f5f5;
 }
-.perfil{
-    margin-top: 1.5em;
-    display: flex;
-    justify-content: space-between;
-
-    /*tamaño*/
-    width: 100%;
-    justify-content: center;
-}
-.logo{
-    text-align: center;
-    width: 5em;
-    height: 5em;
-    border-radius: 100px;
-    border: 10px solid #333;
-    margin-right: 10px;
-}
-.containerNombreEmail{
-    text-align: start;
-}
-
-.nombreUsuario{
-    font-size: 24px;
-    font-weight: 800;
-}
-.containerItem{
-    width: 100%;
-    display: flex;
-    margin: 2em auto;
-    height: 7em;
-    justify-content: space-between;
-    align-items: center;
-}
-.containerItem div{
-    width: 23%;
-    height: 100%;
-    background: #D9D9D9;
+.containerChild{
     display: flex;
     flex-direction: column;
+    border: 1px solid #333;
+    height: 80%;
+    width: 80%;
+    margin: 50px auto;
+    background: #f3e2c8;
+    border-radius: 20px;
+}
+.containerChildProfile{
+
+    display: flex;
     justify-content: space-around;
     align-items: center;
-    margin: 2em auto;
 }
-.containerItem div p{
+.profile{
+    width: 150px;
+    height: 150px;
+    border-radius: 150px;
+    background: #000;
+    margin: 10px;
+}
+.profileName{
+    width: 50%;
+    font-size: large;
     text-align: center;
-    font-size: 1em;
-    
 }
-.containerItem div i{
-    font-size: 2em;
-    
-}
-.form{
-   
+
+.profileInfo{
+    width: 90%;
+    border: 2px solid red;
+    margin: 10px auto;
+    height: 100%;
     display: flex;
     flex-direction: column;
-    width: 100%;
-   
-}
-.containerDetail{
-    border-top: 2px solid #333;
-   
-    width: 90%;
-    margin: 0 auto;
-    display: flex;
-    align-items: center;
-}
-.form div p{
-    margin-left: 1em;
-}
-.form label{
-    width: 90%;
-    margin: 3px auto;
-    font-size: 2em;
-    font-weight: 700;
-}
-.ultp{
-    border-bottom: 2px solid #333;
-}
-.icon{
-    width: 1em;
-    height: 1em;
-    background: #000;
-
-}
-
-
-.ntf{
-    display: flex;
-    background: red;
-    border-radius: 100px;
-    font-size: 1em;
-    width: 1.1em;
-    height: auto;
-    font-weight: 700;
-    border: 1px solid #333
-    
 }
