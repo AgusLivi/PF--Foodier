@@ -71,8 +71,7 @@ const Cloudinary = (props) => {
             old_price: Number(productPost.old_price),
             amount: Number(productPost.amount)
         }
-        console.log('copia: ', copyProduct);
-        const id = 'a46e9aa1-f978-480f-ad97-842d28928413';
+        const id = 'e5de2f23-6b98-40d6-944d-503d880ef773';
         await dispatch(createProduct(copyProduct, id));
         setProductPost({
             name: '',
