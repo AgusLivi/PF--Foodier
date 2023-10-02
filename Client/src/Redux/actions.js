@@ -66,6 +66,7 @@ export const getProductByName = (formData) => {
 };
 
 export const createProduct = (formmData, id)=>{
+    console.log('form data: ', formmData);
     return async (dispatch)=>{
         try{
             const { data } = await axios.post(`http://localhost:3001/products/${id}`, formmData); // despues de la barra tengo que poner la ruta que definieron en el back
