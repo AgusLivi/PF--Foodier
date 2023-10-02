@@ -87,18 +87,17 @@ const Home = () => {
                 />
         
                 {/* mapeo categorías en checkboxes */}
-                {categories.map((categoryItem) => (
-                    <label>
-                    <input
-                        type="checkbox"
-                        name={categoryItem}
-                        checked={formData.categories.includes(categoryItem)}
-                        onChange={handleCategoryChange}
-                        value={categoryItem}
-                    /> {categoryItem}
-                    </label>
-                ))}
-        
+              
+        <select name='categoriess' onChange={handleCategoryChange}>
+                                {categories
+                                    .map((categoryItem) => {
+                                        return (
+                                            <option key={categoryItem} value={categoryItem}>
+                                                {categoryItem}
+                                            </option>
+                                        )
+                                    })}
+                            </select>
                 <input
                     type="text"
                     name="address"
