@@ -114,7 +114,7 @@ const Home = () => {
           onChange={handleInputChange}
         />
     {/* Botón para mostrar/ocultar el modal */}
-    <button onClick={toggleModal} className={Style.categoria}>Categorias</button>
+    <button onClick={toggleModal} className={Style.categoria}>Categorias </button>
 
         <select name="average_rating" value={formData.average_rating} onChange={handleInputChange}>
           <option value="">Todos</option>
