@@ -1,6 +1,7 @@
 import { useSelector, useDispatch } from 'react-redux'
 import { useState, useEffect } from 'react'
 import CardContainer from '../../Components/CardContainer/CardContainer.jsx'
+import Style from "./Home.module.css"
 import {
     categoriesFilter,
     selectedCategories,
@@ -129,7 +130,7 @@ const Home = () => {
                         <option value="Pago Online/Tarjeta">Pago Online/Tarjeta</option>
                     </select>
         
-                    <div>
+                    <div className={Style.filtro}>
                         <label>Ordenar por:</label>
                         <select
                             name="orderBy"
