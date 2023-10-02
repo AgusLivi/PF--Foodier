@@ -70,6 +70,7 @@ const getAllProducts = async (req,res) => {
           { page, pageSize }
         )
       );
+      console.log(filteredProducts)
       return res.status(200).json(filteredProducts);
     } else {
       const filteredProducts = await Product.findAll({
@@ -114,13 +115,14 @@ const getProductById = async (req,res) => {
 
 // Post de productos
 const createProduct = async (req,res) => {
-  const { name, date, description, price, old_price, categories, image, amount } = req.body;
+  const { name, description, price, old_price, categories, image, amount } = req.body;
   const {seller_id} = req.params; // sacamos el ID del vendedor con params
+  console.log(req.body)
+  console.log(seller_id)
   try {
     const newProduct = await Product.create({
       // creamos el nuevo producto en la base de datos
       name,
-      date,
       description,
       price,
       old_price,
