@@ -72,11 +72,33 @@ const Home = () => {
         // hacer dispatch con la cadena de consulta
         dispatch(selectedCategories(queryParams));
     };
+    const [isModalVisible, setIsModalVisible] = useState(false);
 
+    // Función para mostrar u ocultar el modal
+    const toggleModal = () => {
+      setIsModalVisible(!isModalVisible);
+    };
 
     return (
         <div>
-    
+      <div className={`${Style.checkbox} ${isModalVisible ? Style.modalVisible : ''}`}>
+        <button name="categoria" id="showHideButton" onClick={toggleModal}>
+          X
+        </button>
+        {categories.map((categoryItem) => (
+          <label>
+            <input
+              type="checkbox"
+              name={categoryItem}
+              checked={formData.categories.includes(categoryItem)}
+              onChange={handleCategoryChange}
+              value={categoryItem}
+            />{' '}
+            {categoryItem}
+          </label>
+        ))}
+
+            </div>
     <form onSubmit={handleSubmit}>
                 <input
                     type="text"
@@ -86,19 +108,8 @@ const Home = () => {
                     onChange={(e) => setProductName(e.target.value)}
                 />
         
-                {/* mapeo categorías en checkboxes */}
-                {categories.map((categoryItem) => (
-                    <label>
-                    <input
-                        type="checkbox"
-                        name={categoryItem}
-                        checked={formData.categories.includes(categoryItem)}
-                        onChange={handleCategoryChange}
-                        value={categoryItem}
-                    /> {categoryItem}
-                    </label>
-                ))}
-        
+          {/* Modal */}
+    
                 <input
                     type="text"
                     name="address"
@@ -106,7 +117,7 @@ const Home = () => {
                     value={formData.address}
                     onChange={handleInputChange}
                 />
-        
+            <button onClick={toggleModal} className={Style.categoria}>Categorias </button>
                     <select
                         name="average_rating"
                         value={formData.average_rating}
