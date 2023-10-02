@@ -167,8 +167,9 @@ const Home = () => {
         
                 <button type="submit">Filtrar</button>
             </form>
-
-             <CardContainer products={products}/>
+            <div className={Style.containerPost}>
+                <CardContainer products={products}/>
+            </div>
         </div>
     )
 }
