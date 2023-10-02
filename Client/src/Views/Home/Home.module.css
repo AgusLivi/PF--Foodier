@@ -38,4 +38,9 @@ form {
     background: #f5f5f5;
 }
   /* Otros estilos que puedes agregar según tus necesidades */
-  
+.containerPost{
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+    margin: 0 auto;
+}
