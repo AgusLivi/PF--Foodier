@@ -115,9 +115,17 @@ box-shadow: 0 2px 5px rgba(0, 0, 0, .1)
 
 .form {
     margin: 30px 0 0 0;
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    width: 100%;
+    height: auto;
+    background: none;
+    
 }
 
 .form label {
+    width: 100%;
     display: flex;
     align-items: center;
     margin-bottom: 15px;
