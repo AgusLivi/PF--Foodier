@@ -140,7 +140,7 @@ const createProduct = async (req,res) => {
 };
 
 const updateProduct = async (req, res) => {
-  const { name, date, description, price, old_price, categories, image, amount } = req.body;
+  const { name, description, price, old_price, categories, image, amount } = req.body;
   const { productId } = req.params; // id del producto por params
 
   try {
@@ -153,7 +153,7 @@ const updateProduct = async (req, res) => {
 
     // actualizamos los campos del producto con los nuevos valores
     product.name = name;
-    product.date = date;
+    // product.date = date;
     product.description = description;
     product.price = price;
     product.old_price = old_price;

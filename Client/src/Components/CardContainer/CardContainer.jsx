@@ -22,6 +22,9 @@ const CardContainer = () => {
                     old_price={product.old_price}
                     image={product.image}
                     amount={product.amount}
+
+                    date={product.createdAt}
+
                 />
             ))}
         </div>

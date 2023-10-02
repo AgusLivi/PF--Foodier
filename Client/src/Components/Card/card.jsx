@@ -1,7 +1,7 @@
 import React from 'react';
 import styles from "./card.module.css";
 
-const Card = ({ name, description, price, old_price, image, amount }) => {
+const Card = ({ name, description, price, old_price, image, amount, date }) => {
   return (
     <div className={styles.card}> 
       <h2>{name}</h2>
@@ -10,6 +10,8 @@ const Card = ({ name, description, price, old_price, image, amount }) => {
       <p className={styles.old_price}>Old Price: {old_price}</p>
       <img src={image} alt={name} />
       <p className={styles.amount}>Amount: {amount}</p>
+      <p className={styles.amount}>Fecha de posteo: {date}</p>
+
     </div>
   );
 };
