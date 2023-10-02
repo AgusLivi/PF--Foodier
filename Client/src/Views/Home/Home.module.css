@@ -5,3 +5,12 @@
 #000000 negro  */
 /*h1 = arial black / resaltar texto =sanz serif
 parrafos = tenon */
+
+form{
+    display: flex;
+    justify-content: space-around;
+    background: #f3e2c8;
+    height: 3em;
+    align-items: center;
+
+}

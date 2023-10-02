@@ -1,38 +1,60 @@
-import React from 'react'
-import Style from './PerfilUsuario.module.css'
+import React from 'react';
+import Style from './PerfilUsuario.module.css';
+
+// Definición de variables de usuario
+const name = "Matias";
+const lastName = "Vincent";
+const email = "matiasvincent2002@gmail.com";
+const phone = "1138323553";
+const direction = "calle falsa 123";
 
 const PerfilUsuario = () => {
   return (
-    <div>
-        <div className={Style.container}>{/*flex colunm es container*/}
-            <div className={Style.perfil}>
-              <div className={Style.logo}> <p>Foto de perfil</p></div>
-              
-              <div className={Style.containerNombreEmail}>
-                <p className={Style.nombreUsuario}>Nombre de usuario</p>
-                <p className={Style.emailUsuario}>example@gmail.com</p>
-                </div>
-            
+    <div className={Style.container}>
+        <div className={Style.containerChild}>
+          {/* Perfil del usuario */}
+          <div className={Style.containerChildProfile}>
+            <div className={Style.profile}>
+              {/* Aquí podrías agregar una imagen de perfil */}
             </div>
-            <div className={Style.containerItem}>{/*caja de item*/}
-                <div><i className="fa-solid fa-user"></i><p>Datos Personales</p></div>
-                <div><i className="fa-regular fa-address-card"></i><p>Historial de compras</p></div>
-                <div><i className="fa-solid fa-headphones"></i><p>Ayuda en linea</p></div>
-                <div><i className="fa-solid fa-wallet"></i><p>Metodos de pago</p></div>
+            <div className={Style.profileName}>
+              <h1>{name} {lastName}</h1>
             </div>
-            <div className={Style.form}>
-              <label>Mi perfil</label>
-              <div className={Style.containerDetail}><i className="fa-solid fa-location-dot"></i><p>Direccion</p></div>
-              <div className={Style.containerDetail}><i className="fa-regular fa-bell"></i><p>Notificaciones</p><p className={Style.ntf}>10</p>{/*numero variante*/}</div>
-              <div className={Style.containerDetail}><i className="fa-solid fa-hand-holding-dollar"></i><p>Donaciones</p></div>
-              <div className={Style.containerDetail}><i className="fa-solid fa-store"></i><p>Registra tu negocio</p></div>
-              <div className={Style.containerDetail}><i className="fa-solid fa-users"></i><p>Invita amigos</p></div>
-              <div className={Style.containerDetail }><i class="fa-solid fa-right-from-bracket"></i><p>Cerrar sesion</p></div>
+          </div>
+          <hr />
+          {/* Información del perfil */}
+          <div className={Style.profileInfo}>
+            <div className={Style.info}>
+              {/* Email */}
+              <div>
+                <label>Email</label>
+                <p>{email}</p>
+              </div>
+              {/* Teléfono */}
+              <div>
+                <label>Phone</label>
+                <p>{phone}</p>
+              </div>
+              {/* Dirección */}
+              <div>
+                <label>Direction</label>
+                <p>{direction}</p>
+              </div>
+              <div>
+                <label>ayuda</label>
+                <p><a href="#">foodierAyuda.com</a></p>
+              </div>
             </div>
+            {/*
+              Datos necesarios adicionales:
+              - Historial
+              - Ayuda
+              - Configuración
+              */}
+          </div>
         </div>
-
     </div>
-  )
+  );
 }
 
-export default PerfilUsuario
+export default PerfilUsuario;

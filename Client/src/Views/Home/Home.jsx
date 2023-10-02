@@ -1,6 +1,7 @@
 import { useSelector, useDispatch } from 'react-redux'
 import { useState, useEffect } from 'react'
 import CardContainer from '../../Components/CardContainer/CardContainer.jsx'
+import Style from "./Home.module.css"
 import {
     categoriesFilter,
     selectedCategories,
@@ -12,6 +13,7 @@ import {
 const Home = () => {
    // global state 
     const categories = useSelector(state => state.categories)
+    const products = useSelector(state => state.products)
     const [reset, useReset] = useState(false)
    
     const [productName, setProductName] = useState('');
@@ -53,25 +55,22 @@ const Home = () => {
 
     const handleSubmit = (event) => {
         event.preventDefault();
-        const { categories, address, average_rating, payment, orderBy, order } = formData;
+        const { name, categories, address, average_rating, payment, orderBy, order } = formData;
     
         // generamos la cadena de consulta
         const queryParams = new URLSearchParams({
-            name: productName, // Usa productName en lugar de formData.name
+            name, // Usa productName en lugar de formData.name
             categories: categories.join(','),
             address,
             average_rating,
             payment,
-            orderBy: orderByy,
-            order: orderr
+            orderBy,
+            order,
         }).toString();
         console.log(queryParams);
     
         // hacer dispatch con la cadena de consulta
         dispatch(selectedCategories(queryParams));
-        dispatch(getProductByName({ name: productName })); // Usa productName en lugar de formData.name
-        dispatch(orderByp({orderBy: orderByy}))
-        dispatch(orderUpDown({order: orderr}))
     };
 
 
@@ -83,7 +82,7 @@ const Home = () => {
                     type="text"
                     name="name"
                     placeholder="Nombre del producto"
-                    value={productName}
+                    value={formData.name}
                     onChange={(e) => setProductName(e.target.value)}
                 />
         
@@ -131,11 +130,11 @@ const Home = () => {
                         <option value="Pago Online/Tarjeta">Pago Online/Tarjeta</option>
                     </select>
         
-                    <div>
+                    <div className={Style.filtro}>
                         <label>Ordenar por:</label>
                         <select
                             name="orderBy"
-                            value={orderByy}
+                            value={formData.orderBy}
                             onChange={(e) => setOrderByy(e.target.value)}
                         >
                             <option value="name">Nombre</option>
@@ -147,7 +146,7 @@ const Home = () => {
                             <label>Orden:</label>
                             <select
                                 name="order"
-                                value={orderr}
+                                value={formData.order}
                                 onChange={(e) => setOrderr(e.target.value)}
                             >
                                 <option value="asc">Ascendente</option>
@@ -158,7 +157,7 @@ const Home = () => {
                 <button type="submit">Filtrar</button>
             </form>
 
-             <CardContainer/>
+             <CardContainer products={products}/>
         </div>
     )
 }
