@@ -207,10 +207,10 @@ export const categoriesFilter = () => {
     };
 };
 
-export const addressFilter = () => {
+export const addressFilter = (formData) => {
     return async(dispatch) => {
         try{
-            const { data } = await axios.get(`${endPoint}/products/address`)
+            const { data } = await axios.get(`${endPoint}/products${formData.address}`)
             return dispatch({
                 type: ADDRESS,
                 payload: data
