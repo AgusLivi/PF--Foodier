@@ -38,7 +38,7 @@ const getAllProducts = async (req,res) => {
 
     if (address != null && address != "") {
       sellerFilterConditions.address = {
-        [Op.iLike]: address,
+        [Op.iLike]: `%${address}%`
       };
     }
 
