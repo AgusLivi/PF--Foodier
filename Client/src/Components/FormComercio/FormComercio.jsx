@@ -1,67 +1,67 @@
 import React from 'react';
-// import { useNavigate } from 'react-router-dom';
-// import { useFormik } from 'formik';
+import { useNavigate } from 'react-router-dom';
+import { useFormik } from 'formik';
 
 const FormComercio = () => {
-  // const navigate = useNavigate(); 
+  const navigate = useNavigate(); 
 
-  // const submitForm = (values) => {
-  //   console.log(values);
-  //   navigate('/home'); 
-  // };
+  const submitForm = (values) => {
+    console.log(values);
+    navigate('/home'); 
+  };
 
-  // const validateForm = (values) => {
-  //   const errors = {};
+  const validateForm = (values) => {
+    const errors = {};
 
-  //   // Validación para el campo usuario
-  //   if (!values.usuario) {
-  //     errors.usuario = 'El usuario es obligatorio';
-  //   }
+    // Validación para el campo usuario
+    if (!values.usuario) {
+      errors.usuario = 'El usuario es obligatorio';
+    }
 
-  //   // Validación para el campo email
-  //   if (!values.email) {
-  //     errors.email = 'El correo es obligatorio';
-  //   } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(values.email)) {
-  //     errors.email = 'Formato de correo electrónico inválido';
-  //   }
+    // Validación para el campo email
+    if (!values.email) {
+      errors.email = 'El correo es obligatorio';
+    } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(values.email)) {
+      errors.email = 'Formato de correo electrónico inválido';
+    }
 
-  //   // Validación para el campo dirección
-  //   if (!values.adress) {
-  //     errors.adress = 'La dirección es obligatoria';
-  //   }
+    // Validación para el campo dirección
+    if (!values.adress) {
+      errors.adress = 'La dirección es obligatoria';
+    }
 
-  //   // Validación para el campo teléfono
-  //   if (!values.phonenumber) {
-  //     errors.phonenumber = 'El teléfono es obligatorio';
-  //   }
+    // Validación para el campo teléfono
+    if (!values.phonenumber) {
+      errors.phonenumber = 'El teléfono es obligatorio';
+    }
 
-  //   // Validación para el campo contraseña
-  //   if (!values.password) {
-  //     errors.password = 'La contraseña es obligatoria';
-  //   } else if (!/(?=.*[A-Z])(?=.*\d)/.test(values.password)) {
-  //     errors.password = 'La contraseña debe contener al menos una mayúscula y un número';
-  //   }
+    // Validación para el campo contraseña
+    if (!values.password) {
+      errors.password = 'La contraseña es obligatoria';
+    } else if (!/(?=.*[A-Z])(?=.*\d)/.test(values.password)) {
+      errors.password = 'La contraseña debe contener al menos una mayúscula y un número';
+    }
 
-  //   return errors;
-  // };
+    return errors;
+  };
 
-  // const formik = useFormik({
-  //   initialValues: {
-  //     nombre: '',
-  //     usuario: '',
-  //     email: '',
-  //     adress: '',
-  //     phonenumber: '',
-  //     password: '',
-  //   },
-  //   onSubmit: submitForm,
-  //   validate: validateForm, 
-  // });
+  const formik = useFormik({
+    initialValues: {
+      nombre: '',
+      usuario: '',
+      email: '',
+      adress: '',
+      phonenumber: '',
+      password: '',
+    },
+    onSubmit: submitForm,
+    validate: validateForm, 
+  });
 
   return (
     <div>
-      {/* <form onSubmit={formik.handleSubmit}> */}
-        {/* <label>
+      <form onSubmit={formik.handleSubmit}>
+        <label>
           Usuario:
           <input
             type='text'
@@ -129,10 +129,10 @@ const FormComercio = () => {
           {formik.touched.password && formik.errors.password && (
             <div className='error'>{formik.errors.password}</div>
           )}
-        </label> */}
+        </label>
 
         <button type='submit'>Registrarse</button>
-      {/* </form> */}
+      </form>
     </div>
   );
 };
