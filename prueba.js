@@ -57,7 +57,7 @@ module.exports = [
       "price": 350,
       "old_price": 400,
       "categories": ["Pizzas", "Italiana"],
-      "image": null,
+      "image": 'https://resizer.glanacion.com/resizer/v2/la-pizza-margarita-lleva-los-colores-de-la-M7NX62ONAJGRHMGZQKL3UMOIG4.jpeg?auth=95a4f0c18b4249f8a85c43e89ed95fc56dbfa22ac852945962285bb3c2638680&width=768&height=512&quality=70&smart=true',
       "amount": 3
     },
     {
@@ -67,7 +67,7 @@ module.exports = [
       "price": 280,
       "old_price": 320,
       "categories": ["Hamburguesas", "Parrilla"],
-      "image": null,
+      "image": 'https://okdiario.com/img/2016/01/19/hamburguesa-de-pollo-crujiente-con-salsa-ligera-de-ajo.jpg',
       "amount": 10
     },
     {
@@ -77,7 +77,7 @@ module.exports = [
       "price": 180,
       "old_price": 200,
       "categories": ["Tartas", "Postres", "Frutas y Verduras"],
-      "image": null,
+      "image": 'https://imag.bonviveur.com/tarta-de-manzana.jpg',
       "amount": 8
     },
     {
@@ -127,7 +127,7 @@ module.exports = [
       "price": 450,
       "old_price": 500,
       "categories": ["Parrilla", "Carnes"],
-      "image": null,
+      "image": 'https://www.lanacion.com.ar/resizer/v2/parrillada-completa-BCMNCK4U35CBNHAHVLKS3S2R5Y.jpg?auth=9a156e897b2f058181cf11dcf105762dc445b59640712d42824718870f2f897f&width=420&height=280&quality=70&smart=true',
       "amount": 4
     },
     {
