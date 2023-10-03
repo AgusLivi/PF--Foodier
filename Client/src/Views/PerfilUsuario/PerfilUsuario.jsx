@@ -1,58 +1,68 @@
-import React from 'react';
-import Style from './PerfilUsuario.module.css';
-
-// Definición de variables de usuario
-const name = "Matias";
-const lastName = "Vincent";
-const email = "matiasvincent2002@gmail.com";
-const phone = "1138323553";
-const direction = "calle falsa 123";
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
+import styles from './PerfilUsuario.module.css'; // Importa los estilos CSS
 
 const PerfilUsuario = () => {
+  const [userData, setUserData] = useState(null); // Estado para almacenar los datos del usuario
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get('http://localhost:3001/sellers/d6bd684b-8554-42ef-8d08-329f41ed8c98'); // Asegúrate de usar el protocolo 'http://'
+        // Actualiza el estado con los datos recibidos de la base de datos
+        console.log(response.data);
+        setUserData(response.data);
+      } catch (error) {
+        console.error('Error al obtener los datos del usuario:', error);
+      }
+    };
+
+    // Llama a la función fetchData al montar el componente
+    fetchData();
+  }, []); // El segundo argumento vacío [] asegura que esta solicitud se realice solo una vez al montar el componente
   return (
-    <div className={Style.container}>
-        <div className={Style.containerChild}>
-          {/* Perfil del usuario */}
-          <div className={Style.containerChildProfile}>
-            <div className={Style.profile}>
-              {/* Aquí podrías agregar una imagen de perfil */}
-            </div>
-            <div className={Style.profileName}>
-              <h1>{name} {lastName}</h1>
-            </div>
+    <div className={styles.container}>
+      {userData ? (
+        <div className={styles.containerChild}>
+          <div className={styles.containerChildProfile}>
+            <div className={styles.profile}></div>
+            <div className={styles.profileName}>{userData.name}</div>
           </div>
-          <hr />
-          {/* Información del perfil */}
-          <div className={Style.profileInfo}>
-            <div className={Style.info}>
-              {/* Email */}
-              <div>
-                <label>Email</label>
-                <p>{email}</p>
-              </div>
-              {/* Teléfono */}
-              <div>
-                <label>Phone</label>
-                <p>{phone}</p>
-              </div>
-              {/* Dirección */}
-              <div>
-                <label>Direction</label>
-                <p>{direction}</p>
-              </div>
-              <div>
-                <label>ayuda</label>
-                <p><a href="#">foodierAyuda.com</a></p>
-              </div>
+          <div className={styles.profileInfo}>
+            <div className={styles.info}>
+              <label>Correo Electrónico:</label>
+              <p>{userData.email}</p>
             </div>
-            {/*
-              Datos necesarios adicionales:
-              - Historial
-              - Ayuda
-              - Configuración
-              */}
+            <div className={styles.info}>
+              <label>Dirección:</label>
+              <p>{userData.address}</p>
+            </div>
+            <div className={styles.info}>
+              <label>Teléfono:</label>
+              <p>{userData.contact}</p>
+            </div>
+            <div className={styles.info}>
+              <label>Rating Promedio:</label>
+              <p>{userData.average_rating}</p>
+            </div>
+            <div className={styles.info}>
+              <label>Contraseña:</label>
+              <p>{userData.password}</p>
+            </div>
+            <div className={styles.info}>
+              <label>Método de Pago:</label>
+              <p>{userData.payment}</p>
+            </div>
+         
+            <div className={styles.info}>
+              <label>Rating:</label>
+              <p>{userData.rating}</p>
+            </div>
           </div>
         </div>
+      ) : (
+        <p>Cargando datos del usuario...</p>
+      )}
     </div>
   );
 }
