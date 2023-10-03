@@ -1,11 +1,11 @@
 import React, {useEffect} from 'react';
-import { useParams, useHistory } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { getProductById } from '../../Redux/actions';
 
 const Detalle = () => {
   const { id } = useParams();
-  const history = useHistory();
+  const history = useNavigate();
   const dispatch = useDispatch();
   const product = useSelector((state) => state.product);
 
