@@ -7,7 +7,7 @@ const Card = ({ name, description, price, old_price, image, amount, date, produc
   const dateOk = dateSplit[0]
   return (
 
-    <div key={id} className={styles.card}> 
+    <div key={product_ID} className={styles.card}> 
     <Link to={`/detail/${product_ID}`}>
       <h2>{name}</h2>
       <p>{description}</p>
