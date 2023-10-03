@@ -137,7 +137,7 @@ module.exports = [
       "price": 380,
       "old_price": 420,
       "categories": ["Sushi", "Japonesa"],
-      "image": null,
+      "image": 'https://i.blogs.es/8cb70e/sushi/450_1000.jpg',
       "amount": 9
     },
     {
@@ -147,7 +147,7 @@ module.exports = [
       "price": 120,
       "old_price": 150,
       "categories": ["Papas Fritas", "Acompañamientos"],
-      "image": null,
+      "image": 'https://phantom-marca.unidadeditorial.es/813d16708dc72860fd3cf319c9a245b5/resize/828/f/jpg/assets/multimedia/imagenes/2023/08/04/16911461030527.jpg',
       "amount": 20
     },
     {
