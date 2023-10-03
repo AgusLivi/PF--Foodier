@@ -7,7 +7,7 @@ const Detalle = () => {
   const { id } = useParams();
   const history = useNavigate();
   const dispatch = useDispatch();
-  const product = useSelector((state) => state.product);
+  const products = useSelector((state) => state.products);
 
   useEffect(() => {
     dispatch(getProductById(id));
@@ -19,25 +19,25 @@ const Detalle = () => {
     
   return (
     <div>
-      {product ? (
+      {products ? (
       <div>
-        <h2>{product.name}</h2>
-        <p>{product.rating}</p>
+        <h2>{products.name}</h2>
+        <p>{products.rating}</p>
         <button>Añadir a favoritos</button> {/*Editar la funcionalidad*/}
         <h1>Descripcion:</h1>
-        <p>{product.description}</p>
-        <p>{product.date}</p>
-        {product.categories.length ? (
-          <p>{product.categories.join(', ')}</p>
+        <p>{products.description}</p>
+        <p>{products.date}</p>
+        {products.categories.length ? (
+          <p>{products.categories.join(', ')}</p>
         ) : (
           <p>Sin categoría</p>
         )}
-        <p>Precio viejo: {product.old_price}</p>
-        <p>Precio: {product.price}</p>
+        <p>Precio viejo: {products.old_price}</p>
+        <p>Precio: {products.price}</p>
         <button>-</button>
-        <p>{product.amount}</p>
+        <p>{products.amount}</p>
         <button>+</button>
-        <img src={product.image} alt={product.name}/>
+        <img src={products.image} alt={products.name}/>
         <button>Añadir al carrito</button> {/*Editar la funcionalidad*/}
         <button>Pagar</button> {/*Editar la funcionalidad*/}
         <button onClick={handleClose}>Cerrar</button>
