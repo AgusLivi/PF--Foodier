@@ -8,25 +8,33 @@ import {
     getProductByName,
     orderByp,
     orderUpDown,
+    locationProvincia,
+    locationMunicipio,
+    locationLocalidad
 } from '../../Redux/actions'
 
 const Home = () => {
    // global state 
     const categories = useSelector(state => state.categories)
+    const provincias = useSelector(state => state.provincias)
+    const municipios = useSelector(state => state.municipios)
+    const localidades = useSelector(state => state.localidades)
     const products = useSelector(state => state.products)
-    const [reset, useReset] = useState(false)
    
+    const [selectedProvincia, setSelectedProvincia] = useState('');
+    const [selectedMunicipio, setSelectedMunicipio] = useState('');
+    const [selectedLocalidad, setSelectedLocalidad] = useState('');
     const [productName, setProductName] = useState('');
     const [orderByy, setOrderByy] = useState('')
     const [orderr, setOrderr] = useState('')
     const dispatch = useDispatch()
-
+    
     useEffect(()=>{
         dispatch(categoriesFilter())
-    }, [reset])
-    console.log(categories)
-
-
+        dispatch(locationProvincia())
+    }, [])
+    
+    
     const [formData, setFormData] = useState({
         name: '',
         categories: [],
@@ -36,6 +44,11 @@ const Home = () => {
         orderBy: 'name',
         order: 'asc'
     });
+    
+    useEffect(() => {
+        const addressString = `${selectedProvincia}, ${selectedMunicipio}, ${selectedLocalidad}`;
+        setFormData({ ...formData, address: addressString });
+    }, [selectedProvincia, selectedMunicipio, selectedLocalidad]);
     
     const handleInputChange = (event) => {
         const { name, value } = event.target;
@@ -79,6 +92,20 @@ const Home = () => {
       setIsModalVisible(!isModalVisible);
     };
 
+    const handleProvinciaChange = (event) => {
+        setSelectedProvincia(event.target.options[event.target.selectedIndex].getAttribute("name"));
+        dispatch(locationMunicipio(event.target.value));
+      };
+    
+    const handleMuniChange = (event) => {
+        console.log(event.target)
+        setSelectedMunicipio(event.target.options[event.target.selectedIndex].getAttribute("name"));
+        dispatch(locationLocalidad(event.target.value));
+      };
+
+    const handleLocalChange = (event) => {
+        setSelectedLocalidad(event.target.options[event.target.selectedIndex].getAttribute("name"));
+    }
     return (
         <div>
       <div className={`${Style.checkbox} ${isModalVisible ? Style.modalVisible : ''}`}>
@@ -108,15 +135,42 @@ const Home = () => {
                     onChange={(e) => setProductName(e.target.value)}
                 />
         
-          {/* Modal */}
+        {/* Modal */}
     
-                <input
+        <select name="" id="" onChange={handleProvinciaChange}>
+            {provincias.length ? (
+                provincias.map(prov => (
+                <option name={prov.nombre} key={prov.id} value={prov.id}>{prov.nombre}</option>
+                ))
+            ) : (
+                <option>Selecciona una provincia</option>
+            )}
+        </select>
+        <select name="" id="" onChange={handleMuniChange}>
+            {municipios.length ? (
+                municipios.map(muni => (
+                <option name={muni.nombre} key={muni.id} value={muni.id}>{muni.nombre}</option>
+                ))
+            ) : (
+                <option>Selecciona un municipio</option>
+            )}
+        </select>
+        <select name="" id="" onChange={handleLocalChange}>
+            {localidades.length ? (
+                localidades.map(local => (
+                <option name={local.nombre} key={local.id} value={local.id}>{local.nombre}</option>
+                ))
+            ) : (
+                <option>Selecciona una localidad</option>
+            )}
+        </select>
+                {/* <input
                     type="text"
                     name="address"
                     placeholder="Ubicación"
                     value={formData.address}
                     onChange={handleInputChange}
-                />
+                /> */}
             <button onClick={toggleModal} className={Style.categoria}>Categorias </button>
                     <select
                         name="average_rating"

@@ -31,6 +31,9 @@ import {
     GET_POST_BY_ID,
     GET_POST,
     SELECTED_CATEGORIES,
+    PROVINCIAS,
+    MUNICIPIOS,
+    LOCALIDADES,
 } from './actionsType'
 
 
@@ -60,6 +63,9 @@ import {
         allFavoritesSeller: [],
         createdUser: [],
         createdSellers: [],
+        provincias: [],
+        municipios: [],
+        localidades: []
         //tengo q agregar mas
     };
 
@@ -245,6 +251,24 @@ import {
                     ...state,
                     pageSize: payload,
                 };
+            
+            case PROVINCIAS:
+                return {
+                    ...state,
+                    provincias: payload
+                }
+
+            case MUNICIPIOS:
+                return {
+                    ...state,
+                    municipios: payload
+                }
+
+            case LOCALIDADES:
+                return {
+                    ...state,
+                    localidades: payload
+                }
 
             default:
                 return state;
