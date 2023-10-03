@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import style from "./Login.module.css";
-import SignInGoogle from "../../Auths/AuthGoogle/SignInGoogle.jsx";
-import SignInFacebook from "../../Auths/AuthFacebook/SignInFacebook.jsx";
+import SignInGoogle from "../../Auths/AuthGoogle/SignInGoogle";
+import SignInFacebook from "../../Auths/AuthFacebook/SignInFacebook";
 
 const Login = () => {
 
@@ -26,29 +26,29 @@ const Login = () => {
             <p>O usa tu email para registrarte como usuario</p>
             <form className={style.form}>
               <label>
-                <i class='bx bx-user'></i>
+                <i className='bx bx-user'></i>
                 <input type="text" placeholder="Nombre Completo"></input>
               </label>
               <label>
-                <i class='bx bx-envelope'></i>
+                <i className='bx bx-envelope'></i>
                 <input type="email" placeholder="Correo Electrónico"></input>
               </label>
               <label>
-                <i class='bx bx-lock-alt'></i>
+                <i className='bx bx-lock-alt'></i>
                 <input type="password" placeholder="Contraseña"></input>
               </label>
-              <div >
-                <div>
-                  <SignInFacebook />
-                </div>
-                <div>
-                  <SignInGoogle />
-                </div>
-              </div>
               <Link to={`/home`}>
                 <input type="submit" value="Registrarme"></input>
               </Link>
             </form>
+            <div >
+              <div>
+                <SignInFacebook />
+              </div>
+              <div>
+                <SignInGoogle />
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -57,3 +57,4 @@ const Login = () => {
 };
 
 export default Login;
+
