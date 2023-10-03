@@ -2,13 +2,13 @@ import React from 'react';
 import styles from "./card.module.css";
 import { Link } from "react-router-dom"
 
-const Card = ({ name, description, price, old_price, image, amount, date, id }) => {
+const Card = ({ name, description, price, old_price, image, amount, date, product_ID }) => {
   const dateSplit = date.split("T")
   const dateOk = dateSplit[0]
   return (
 
     <div key={id} className={styles.card}> 
-    <Link to={`/detail/${id}`}>
+    <Link to={`/detail/${product_ID}`}>
       <h2>{name}</h2>
       <p>{description}</p>
       <p className={styles.price}>Price: {price}</p>
