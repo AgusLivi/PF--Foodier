@@ -1,11 +1,16 @@
-import { useFormik } from 'formik';
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
+import { useFormik } from 'formik';
 
 const FormLogin = () => {
+  const navigate = useNavigate(); 
   const submitForm = (values) => {
-
     console.log(values);
+    
+
+    if (Object.keys(formik.errors).length === 0) {
+      navigate('/home');
+    }
   };
 
   const validateForm = (values) => {
@@ -46,51 +51,62 @@ const FormLogin = () => {
       password: '',
     },
     onSubmit: submitForm,
-    validate: validateForm, // Agregamos la función de validación aquí
+    validate: validateForm, 
   });
 
   return (
     <div>
       <form onSubmit={formik.handleSubmit}>
+      
         <input
           type='text'
           placeholder='Nombre'
           name='nombre'
           onChange={formik.handleChange}
+          onBlur={formik.handleBlur}
           value={formik.values.nombre}
         />
-        {formik.errors.nombre && <div className='error'>{formik.errors.nombre}</div>}
+        {formik.touched.nombre && formik.errors.nombre && (
+          <div className='error'>{formik.errors.nombre}</div>
+        )}
 
         <input
           type='text'
           placeholder='Usuario'
           name='usuario'
           onChange={formik.handleChange}
+          onBlur={formik.handleBlur}
           value={formik.values.usuario}
         />
-        {formik.errors.usuario && <div className='error'>{formik.errors.usuario}</div>}
+        {formik.touched.usuario && formik.errors.usuario && (
+          <div className='error'>{formik.errors.usuario}</div>
+        )}
 
         <input
           type='email'
           placeholder='Correo'
           name='email'
           onChange={formik.handleChange}
+          onBlur={formik.handleBlur}
           value={formik.values.email}
         />
-        {formik.errors.email && <div className='error'>{formik.errors.email}</div>}
+        {formik.touched.email && formik.errors.email && (
+          <div className='error'>{formik.errors.email}</div>
+        )}
 
         <input
           type='password'
           placeholder='Contraseña'
           name='password'
           onChange={formik.handleChange}
+          onBlur={formik.handleBlur}
           value={formik.values.password}
         />
-        {formik.errors.password && <div className='error'>{formik.errors.password}</div>}
+        {formik.touched.password && formik.errors.password && (
+          <div className='error'>{formik.errors.password}</div>
+        )}
 
-        <Link to={`/home`}>
-          <button type='submit'>Registrarse</button>
-        </Link>
+        <button type='submit'>Registrarse</button>
       </form>
     </div>
   );
