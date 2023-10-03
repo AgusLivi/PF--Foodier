@@ -10,11 +10,11 @@ const Detalle = ({ name, description, price, old_price, image, amount, date, pro
       <h1>Descripcion:</h1>
       <p>{description}</p>
       <p>{date}</p>
-      {categories.length ? (
+      {/* {categories.length ? (
         <p>{categories.join(', ')}</p>
       ) : (
         <p>Sin categoría</p>
-      )}
+      )} */}
       <p>Old Price: {old_price}</p>
       <p>Price : {price}</p>
       <button>-</button>
