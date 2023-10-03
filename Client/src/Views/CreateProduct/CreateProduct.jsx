@@ -101,7 +101,7 @@ const Cloudinary = (props) => {
                 </div>
                 <div className={Style.containerChildInput}>
 
-                    <form onSubmit={(event) => handlerCreateProduct(event)}>
+                    <form onSubmit={(event) => handlerCreateProduct(event)} className={Style.form}>
                         <button type='submit'>ENVIAR</button>
 
                         {/* SUBIR IMAGEN*/}
