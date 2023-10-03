@@ -1,7 +1,7 @@
 import axios from 'axios';
 import {
- 	CREATE_PRODUCT,
- 	GET_ALL_FAV,
+    CREATE_PRODUCT,
+    GET_ALL_FAV,
     DELETE_PRODUCT,
     POST_FAVORITES,
     CREATE_USER,
@@ -21,15 +21,21 @@ import {
     GET_POST_BY_ID,
     GET_POST,
     GET_PRODUCTS,
+
     GET_PRODUCT_BY_ID,
     MUNICIPIOS,
     PROVINCIAS,
     LOCALIDADES
 
+   
+    SEARCH_BY_ID,
+    CLEAN_DETAIL
+
+
     //
 } from './actionsType'
 
-const endPoint='http://localhost:3001'  //definir rutas del back
+const endPoint = 'http://localhost:3001'  //definir rutas del back
 
 export const getAllFav = (id) => {
     return async dispatch => {
@@ -39,52 +45,52 @@ export const getAllFav = (id) => {
                 type: GET_ALL_FAV,
                 payload: data
             })
-        } catch (error){
+        } catch (error) {
             alert(error.message)
         }
     }
 }
 
-export const getById = (id) => {
-	return async (dispatch) => {
-	try {
-	  const { data } = await axios.get(`${endPoint}/products/${id}`) //definir las rutas del back
- 	  return dispatch({ 
-			type: SEARCH_BY_ID,
-            payload: data 
-		})
-	} catch (error) {
-        alert(error.message)
-	}
-  }
-}
+/*export const getById = (id) => {
+    return async (dispatch) => {
+        try {
+            const { data } = await axios.get(`${endPoint}/products/${id}`) //definir las rutas del back
+            return dispatch({
+                type: SEARCH_BY_ID,
+                payload: data
+            })
+        } catch (error) {
+            alert(error.message)
+        }
+    }
+} YA HAY RUTA DE TRAER POR ID*/
 
 export const deleteProduct = (id) => {
-	return async (dispatch) => {
-	try {
-	  const { data } = await axios.delete(`${endPoint}/products/${id}`) //definir las rutas del back
- 	  return dispatch({ 
-			type: DELETE_PRODUCT,
-            payload: data 
-		})
-	} catch (error) {
-        alert(error.message)
-	}
-}
+    return async (dispatch) => {
+        try {
+            const { data } = await axios.delete(`${endPoint}/products/${id}`) //definir las rutas del back
+            return dispatch({
+                type: DELETE_PRODUCT,
+                payload: data
+            })
+        } catch (error) {
+            alert(error.message)
+        }
+    }
 }
 
 export const postFav = (dataForm) => {
     return async (dispatch) => {
         try {
             const { data } = await axios.post(`${endPoint}/favorites`, dataForm)
-        return dispatch({
-            type: POST_FAVORITES,
-            payload: data
-        })
-    } catch (error) {
-        alert(error.message)
+            return dispatch({
+                type: POST_FAVORITES,
+                payload: data
+            })
+        } catch (error) {
+            alert(error.message)
+        }
     }
-}
 }
 
 export const createUser = (userData) => {
@@ -95,49 +101,49 @@ export const createUser = (userData) => {
                 type: CREATE_USER,
                 payload: data,
             })
-        } catch(error){
+        } catch (error) {
             alert(error.message)
         }
     }
 }
 
 export const getSellerFav = (id) => {
-    return async(dispatch) => {
+    return async (dispatch) => {
         try {
             const { data } = await axios.post(`${endPoint}/favorites/${id}`)
             return dispatch({
                 type: GET_SELLER_FAV,
                 payload: data
             })
-        } catch(error) {
+        } catch (error) {
             alert(error.message)
         }
     }
 }
 
 export const createPayment = (pay) => {
-    return async(dispatch) => {
+    return async (dispatch) => {
         try {
             const { data } = await axios.post(`${endPoint}/payments`, pay)
             return dispatch({
                 type: CREATE_PAYMENT,
                 payload: data
             })
-        }catch(error) {
+        } catch (error) {
             alert(error.message)
         }
     }
 }
 
 export const createPost = (post) => {
-    return async(dispatch) => {
-        try{
+    return async (dispatch) => {
+        try {
             const { data } = await axios.post(`${endPoint}/posts`, post)
             return dispatch({
                 type: CREATE_POST,
                 payload: data
             })
-        } catch (error){
+        } catch (error) {
             alert(error.message)
         }
     }
@@ -158,28 +164,28 @@ export const getCategories = () => {
 };
 
 export const getAllPost = () => {
-    return async(dispatch) => {
-        try{
+    return async (dispatch) => {
+        try {
             const { data } = await axios.get(`${endPoint}/posts`)
             return dispatch({
                 type: GET_POST,
                 payload: data
             })
-        } catch (error){
+        } catch (error) {
             alert(error.message)
         }
     }
 }
 
 export const getPostById = (id) => {
-    return async(dispatch) => {
-        try{
+    return async (dispatch) => {
+        try {
             const { data } = await axios.get(`${endPoint}/posts/${id}`)
             return dispatch({
                 type: GET_POST_BY_ID,
                 payload: data
             })
-        } catch (error){
+        } catch (error) {
             alert(error.message)
         }
     }
@@ -191,7 +197,7 @@ export const updateUser = (id, updatedUserData) => {
             const { data } = await axios.put(`/users/${id}`, updatedUserData);
             return dispatch({
                 type: UPDATE_USER,
-                payload: data 
+                payload: data
             });
         } catch (error) {
             alert(error.message);
@@ -200,17 +206,17 @@ export const updateUser = (id, updatedUserData) => {
 }
 
 export const deleteUser = (id) => {
-	return async (dispatch) => {
+    return async (dispatch) => {
         try {
             const { data } = await axios.delete(`${endPoint}/users/${id}`) //definir las rutas del back
-            return dispatch({ 
+            return dispatch({
                 type: DELETE_USER,
-                payload: data 
+                payload: data
             })
         } catch (error) {
             alert(error.message)
         }
-  }
+    }
 }
 
 export const getAllUser = () => {
@@ -221,7 +227,7 @@ export const getAllUser = () => {
                 type: GET_ALL_USER,
                 payload: data,
             })
-        } catch(error){
+        } catch (error) {
             alert(error.message)
         }
     }
@@ -235,7 +241,7 @@ export const getUserById = (id) => {
                 type: GET_USER_BY_ID,
                 payload: data,
             })
-        } catch(error){
+        } catch (error) {
             alert(error.message)
         }
     }
@@ -249,7 +255,7 @@ export const createSeller = (sellerData) => {
                 type: CREATE_SELLER,
                 payload: data
             })
-        }catch(error) {
+        } catch (error) {
             alert(error.message)
         }
     }
@@ -261,7 +267,7 @@ export const updateSeller = (id, updatedSellerData) => {
             const { data } = await axios.put(`/sellers/${id}`, updatedSellerData);
             return dispatch({
                 type: UPDATE_SELLER,
-                payload: data 
+                payload: data
             });
         } catch (error) {
             alert(error.message);
@@ -273,9 +279,9 @@ export const deleteSeller = (id) => {
     return async (dispatch) => {
         try {
             const { data } = await axios.delete(`${endPoint}/sellers/${id}`) //definir las rutas del back
-            return dispatch({ 
+            return dispatch({
                 type: DELETE_SELLER,
-                payload: data 
+                payload: data
             })
         } catch (error) {
             alert(error.message)
@@ -291,7 +297,7 @@ export const getAllSeller = () => {
                 type: GET_ALL_SELLERS,
                 payload: data,
             })
-        } catch(error){
+        } catch (error) {
             alert(error.message)
         }
     }
@@ -305,7 +311,7 @@ export const getSellerById = (id) => {
                 type: GET_SELLER_BY_ID,
                 payload: data,
             })
-        } catch(error){
+        } catch (error) {
             alert(error.message)
         }
     }
@@ -317,37 +323,40 @@ export const getProducts = (querys) => {
     return async dispatch => {
         const { data } = await axios.get(`${endPoint}/products/?${querys}`)
         console.log('ACTION!!!', data)
-        return dispatch ({
+        return dispatch({
             type: GET_PRODUCTS,
             payload: data
         })
     }
 }
 
-export const getProductById = (id) => (dispatch) => {
-    console.log('Fetching product by ID:', id);
-    fetch(`${endPoint}/products/${id}`)
-      .then((data) => {
-        dispatch({
-          type: GET_PRODUCT_BY_ID,
-          payload: data,
-        });
-      })
-      .catch((error) => {
-        console.error('Error fetching product details:', error);
-      });
-  };
+export const getProductById = (product_ID) => {
+    return async function (dispatch) {
+        console.log('Fetching product by ID:', product_ID);
+        const productById = await axios(`${endPoint}/products/${product_ID}`)
+        return dispatch({
+            type: SEARCH_BY_ID,
+            payload: productById.data
+        })
+    }
+};
 
-export const createProduct = (formmData, id)=>{
+export const cleanDetail = () => {
+    return {
+        type: CLEAN_DETAIL,
+    }
+}
+
+export const createProduct = (formmData, id) => {
     console.log('form data: ', formmData);
-    return async (dispatch)=>{
-        try{
+    return async (dispatch) => {
+        try {
             const { data } = await axios.post(`${endPoint}/products/${id}`, formmData); // despues de la barra tengo que poner la ruta que definieron en el back
             return dispatch({
                 type: CREATE_PRODUCT,
                 payload: data
             })
-        }catch (error){
+        } catch (error) {
             console.error(error.message)
         }
     }

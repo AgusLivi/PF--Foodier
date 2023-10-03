@@ -22,10 +22,16 @@ import {
     GET_PRODUCTS,
     GET_PRODUCT_BY_ID,
     GET_CATEGORIES,
+
     PROVINCIAS,
     MUNICIPIOS,
     LOCALIDADES,
+
+    SEARCH_BY_ID,
+    CLEAN_DETAIL
+
 } from './actionsType'
+
 
 
 
@@ -201,9 +207,23 @@ import {
                     localidades: payload
                 }
 
-            default:
-                return state;
-        }
-    };
 
-    export default reducer;
+        case SEARCH_BY_ID:
+            return {
+                ...state,
+                productDetail: payload
+            }
+
+        case CLEAN_DETAIL:
+            return {
+                ...state,
+                productDetail: {}
+            }
+
+        default:
+            return state;
+    }
+};
+
+export default reducer;
+
