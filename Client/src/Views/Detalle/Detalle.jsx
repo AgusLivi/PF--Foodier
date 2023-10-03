@@ -1,5 +1,6 @@
 import React from 'react'
 
+
 const Detalle = ({ name, description, price, old_price, image, amount, date, product_ID, rating, categories }) => {
   return (
     <div key={product_ID}>
@@ -18,6 +19,9 @@ const Detalle = ({ name, description, price, old_price, image, amount, date, pro
       <button>Añadir al carrito</button>
       <button>Pagar</button>
     </div>
+
+
+
   )
 }
 
