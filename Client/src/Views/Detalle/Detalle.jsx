@@ -1,33 +1,52 @@
-import React from 'react'
+import React, {useEffect} from 'react';
+import { useParams, useHistory } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { getProductById } from '../../Redux/actions';
 
+const Detalle = () => {
+  const { id } = useParams();
+  const history = useHistory();
+  const dispatch = useDispatch();
+  const product = useSelector((state) => state.product);
 
-const Detalle = ({ name, description, price, old_price, image, amount, date, product_ID, rating, categories }) => {
+  useEffect(() => {
+    dispatch(getProductById(id));
+  }, [dispatch, id]);
+
+  const handleClose = () => {
+    history.push('/home');
+  };
     
   return (
-    <div key={product_ID}>
-      <h2>{name}</h2>
-      <p>{rating}</p>
-      <h1>Descripcion:</h1>
-      <p>{description}</p>
-      <p>{date}</p>
-      {/* {categories.length ? (
-        <p>{categories.join(', ')}</p>
-      ) : (
-        <p>Sin categoría</p>
-      )} */}
-      <p>Old Price: {old_price}</p>
-      <p>Price : {price}</p>
-      <button>-</button>
-      <p>{amount}</p>
-      <button>+</button>
-      <img src={image} alt={name}/>
-      <button>Añadir al carrito</button>
-      <button>Pagar</button>
+    <div>
+      {product ? (
+      <div>
+        <h2>{product.name}</h2>
+        <p>{product.rating}</p>
+        <button>Añadir a favoritos</button> {/*Editar la funcionalidad*/}
+        <h1>Descripcion:</h1>
+        <p>{product.description}</p>
+        <p>{product.date}</p>
+        {product.categories.length ? (
+          <p>{product.categories.join(', ')}</p>
+        ) : (
+          <p>Sin categoría</p>
+        )}
+        <p>Precio viejo: {product.old_price}</p>
+        <p>Precio: {product.price}</p>
+        <button>-</button>
+        <p>{product.amount}</p>
+        <button>+</button>
+        <img src={product.image} alt={product.name}/>
+        <button>Añadir al carrito</button> {/*Editar la funcionalidad*/}
+        <button>Pagar</button> {/*Editar la funcionalidad*/}
+        <button onClick={handleClose}>Cerrar</button>
     </div>
+      ) : (
+        <p>Cargando...</p>
+      )}
+    </div>
+  );
+};
 
-
-
-  )
-}
-
-export default Detalle
+export default Detalle;

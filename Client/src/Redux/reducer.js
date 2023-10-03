@@ -20,6 +20,7 @@ import {
     GET_POST_BY_ID,
     GET_POST,
     GET_PRODUCTS,
+    GET_PRODUCT_BY_ID,
     GET_CATEGORIES
 } from './actionsType'
 
@@ -63,6 +64,12 @@ import {
                     ...state,
                     products: payload,
                     productsCopy: payload,
+                };
+
+            case GET_PRODUCT_BY_ID:
+                return {
+                    ...state,
+                    products: payload,
                 };
 
             case CREATE_PRODUCT:
