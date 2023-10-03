@@ -20,7 +20,8 @@ import {
     UPDATE_USER,
     GET_POST_BY_ID,
     GET_POST,
-    GET_PRODUCTS
+    GET_PRODUCTS,
+    GET_PRODUCT_BY_ID
 
     //
 } from './actionsType'
@@ -319,6 +320,20 @@ export const getProducts = (querys) => {
         })
     }
 }
+
+export const getProductById = (id) => (dispatch) => {
+    console.log('Fetching product by ID:', id);
+    fetch(`${endPoint}/products/${id}`)
+      .then((data) => {
+        dispatch({
+          type: GET_PRODUCT_BY_ID,
+          payload: data,
+        });
+      })
+      .catch((error) => {
+        console.error('Error fetching product details:', error);
+      });
+  };
 
 export const createProduct = (formmData, id)=>{
     console.log('form data: ', formmData);
