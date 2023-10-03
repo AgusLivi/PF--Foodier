@@ -157,7 +157,7 @@ module.exports = [
       "price": 200,
       "old_price": 230,
       "categories": ["Postres", "Italiana"],
-      "image": null,
+      "image": 'https://i.blogs.es/740b08/1366_2000/1366_2000.jpg',
       "amount": 7
     },
     {
