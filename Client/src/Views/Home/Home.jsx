@@ -25,8 +25,12 @@ const Home = () => {
   }, []);
 
   useEffect(() => {
-    const addressString = `${selectedProvincia}, ${selectedMunicipio}, ${selectedLocalidad}`;
-    setFormData({ ...formData, address: addressString });
+    if (selectedProvincia || selectedMunicipio || selectedLocalidad) {
+      const addressString = `${selectedProvincia}, ${selectedMunicipio}, ${selectedLocalidad}`;
+      setFormData({ ...formData, address: addressString });
+    } else {
+      setFormData({ ...formData, address: "" }); // si no se selecciona nada, establece address como una cadena vacía
+    }
   }, [selectedProvincia, selectedMunicipio, selectedLocalidad]);
 
 
