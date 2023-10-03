@@ -1,14 +1,18 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React, { useState } from 'react';
+import { Link, useHistory } from 'react-router-dom';
 import { useFormik } from 'formik';
 import style from './FormComercio.module.css';
 import Logo from '../../assets/logodos.png';
 
 const FormComercio = () => {
+  const history = useHistory();
+  const [formSubmitted, setFormSubmitted] = useState(false);
+
   // Función para manejar el envío del formulario
   const submitForm = (values) => {
-    // Aquí puedes realizar la lógica de envío del formulario, como enviar una solicitud a un servidor.
     console.log(values);
+    setFormSubmitted(true);
+    history.push('/home');
   };
 
   // Configuración de Formik
@@ -22,7 +26,7 @@ const FormComercio = () => {
       password: '',
     },
     onSubmit: submitForm,
-    // Puedes agregar validaciones aquí utilizando la propiedad "validate" si es necesario.
+  
     validate: (values) => {
       const errors = {};
 
@@ -54,6 +58,17 @@ const FormComercio = () => {
     },
   });
 
+  const handleLinkClick = (e) => {
+    e.preventDefault();
+    const errors = formik.validateForm(formik.values);
+    formik.setErrors(errors);
+    
+    if (Object.keys(errors).length === 0) {
+      // No hay errores, puedes redirigir al usuario
+      history.push('/home');
+    }
+  };
+
   return (
     <div className={style.body}>
       <div className={style.containerform}>
@@ -83,7 +98,7 @@ const FormComercio = () => {
                   onChange={formik.handleChange}
                   value={formik.values.usuario}
                 />
-                {formik.errors.usuario && <div className='error'>{formik.errors.usuario}</div>}
+                {formik.errors.usuario && formSubmitted && <div className='error'>{formik.errors.usuario}</div>}
               </label>
               <label>
                 <i className='bx bx-envelope'></i>
@@ -94,7 +109,7 @@ const FormComercio = () => {
                   onChange={formik.handleChange}
                   value={formik.values.email}
                 />
-                {formik.errors.email && <div className='error'>{formik.errors.email}</div>}
+                {formik.errors.email && formSubmitted && <div className='error'>{formik.errors.email}</div>}
               </label>
               <label>
                 <i className='bx bx-lock-alt'></i>
@@ -105,7 +120,7 @@ const FormComercio = () => {
                   onChange={formik.handleChange}
                   value={formik.values.adress}
                 />
-                {formik.errors.adress && <div className='error'>{formik.errors.adress}</div>}
+                {formik.errors.adress && formSubmitted && <div className='error'>{formik.errors.adress}</div>}
               </label>
               <label>
                 <i className='bx bx-lock-alt'></i>
@@ -116,7 +131,7 @@ const FormComercio = () => {
                   onChange={formik.handleChange}
                   value={formik.values.phonenumber}
                 />
-                {formik.errors.phonenumber && <div className='error'>{formik.errors.phonenumber}</div>}
+                {formik.errors.phonenumber && formSubmitted && <div className='error'>{formik.errors.phonenumber}</div>}
               </label>
               <label>
                 <i className='bx bx-lock-alt'></i>
@@ -127,11 +142,9 @@ const FormComercio = () => {
                   onChange={formik.handleChange}
                   value={formik.values.password}
                 />
-                {formik.errors.password && <div className='error'>{formik.errors.password}</div>}
+                {formik.errors.password && formSubmitted && <div className='error'>{formik.errors.password}</div>}
               </label>
-              <Link to={`/home`}>
-                <input type='submit' value='Registrarme' />
-              </Link>
+              <button onClick={handleLinkClick}>Registrarme</button>
             </form>
           </div>
         </div>
