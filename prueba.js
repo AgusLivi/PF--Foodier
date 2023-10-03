@@ -47,7 +47,7 @@ module.exports = [
       "price": 250,
       "old_price": 300,
       "categories": ["Panaderia", "Desayunos/Meriendas", "Chocolates"],
-      "image": null,
+      "image": 'https://www.infobae.com/new-resizer/qsL1H5sQ1TIG44otgrM6Sadmhhw=/arc-anglerfish-arc2-prod-infobae/public/D3KOPXLOUNBE3AOEMEHR75YJOY.jpg',
       "amount": 5
     },
     {
