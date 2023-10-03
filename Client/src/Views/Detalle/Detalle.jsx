@@ -1,9 +1,9 @@
 import React from 'react'
 
 
-const Detalle = ({ name, description, price, old_price, image, amount, date, product_ID, rating, categories }) => {
+const Detalle = ({ name, description, price, old_price, image, amount, date, id, rating, categories }) => {
   return (
-    <div key={product_ID}>
+    <div key={id}>
       <h2>{name}</h2>
       <p>{rating}</p>
       <h1>Descripcion:</h1>
