@@ -8,7 +8,7 @@ const Card = ({ name, description, price, old_price, image, amount, date, produc
   return (
 
     <div key={product_ID} className={styles.card}> 
-    <Link to={`/detail/${product_ID}`}>
+    <Link to={`/products/${product_ID}`}>
       <h2>{name}</h2>
       <p>{description}</p>
       <p className={styles.price}>Price: {price}</p>
