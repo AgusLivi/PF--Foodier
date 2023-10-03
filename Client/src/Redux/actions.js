@@ -25,7 +25,7 @@ import {
     GET_PRODUCT_BY_ID,
     MUNICIPIOS,
     PROVINCIAS,
-    LOCALIDADES
+    LOCALIDADES,
 
    
     SEARCH_BY_ID,
