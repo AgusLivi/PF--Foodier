@@ -1,14 +1,10 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import style from "./Login.module.css";
-import FacebookLogin from 'react-facebook-login';
+import SignInGoogle from "../../Auths/AuthGoogle/SignInGoogle.jsx";
+import SignInFacebook from "../../Auths/AuthFacebook/SignInFacebook.jsx";
 
 const Login = () => {
-
-
-  const onFailure = (error) => {
-    console.error("Inicio de sesión fallido:", error);
-  };
 
   return (
     <div className={style.body}>
@@ -41,6 +37,14 @@ const Login = () => {
                 <i class='bx bx-lock-alt'></i>
                 <input type="password" placeholder="Contraseña"></input>
               </label>
+              <div >
+                <div>
+                  <SignInFacebook />
+                </div>
+                <div>
+                  <SignInGoogle />
+                </div>
+              </div>
               <Link to={`/home`}>
                 <input type="submit" value="Registrarme"></input>
               </Link>

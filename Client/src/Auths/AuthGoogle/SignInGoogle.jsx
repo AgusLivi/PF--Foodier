@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { auth, provider } from './config';
 import { signInWithPopup } from 'firebase/auth';
-import Home from "./Home";
+//import Home from '../../Views/Home/Home.jsx'
 
 const SignInGoogle = () => {
 
     const [value, setValue] = useState('');
-    
+
     const handleClick = () => {
         signInWithPopup(auth, provider).then((data) => {
             setValue(data.user.email)
@@ -20,9 +20,7 @@ const SignInGoogle = () => {
 
     return (
         <div>
-            {value ? <Home/> :
-                <button onClick={handleClick}>Signin with Google</button>
-            }
+            <button onClick={handleClick}>Signin with Google</button>
         </div>
     );
 }

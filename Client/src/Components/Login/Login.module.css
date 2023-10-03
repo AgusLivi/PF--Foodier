@@ -1,12 +1,12 @@
-*{
- padding: 0;
- margin: 0;
- box-sizing: border-box;
- font-family: 'Montserrat', sans-serif;
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: 'Montserrat', sans-serif;
 
 }
 
-.body{
+.body {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -15,13 +15,13 @@
 }
 
 .containerform {
- display: flex;
- border-radius: 20px;
- box-shadow: 0 5px 7px rgba(0, 0, 0, .1);
- height: 500px;
- max-width: 900px;
- transition: all 1s ease;
- margin: 10px;
+    display: flex;
+    border-radius: 20px;
+    box-shadow: 0 5px 7px rgba(0, 0, 0, .1);
+    height: 500px;
+    max-width: 900px;
+    transition: all 1s ease;
+    margin: 10px;
 
 }
 
@@ -41,9 +41,9 @@
     padding: 0 30px;
 }
 
-.infochilds h2{
- font-size: 2.5rem;
- color: #333;
+.infochilds h2 {
+    font-size: 2.5rem;
+    color: #333;
 }
 
 .infochilds p {
@@ -63,10 +63,11 @@
 }
 
 .infochilds input:hover {
-background-color: #fe9e0d;;
-border: none;
-color: #fff;
-box-shadow: 0 2px 5px rgba(0, 0, 0, .1)
+    background-color: #fe9e0d;
+    ;
+    border: none;
+    color: #fff;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, .1)
 }
 
 .forminformation {
@@ -84,6 +85,7 @@ box-shadow: 0 2px 5px rgba(0, 0, 0, .1)
     padding: 0 30px;
 
 }
+
 .forminformationchilds h2 {
     color: #333;
     font-size: 2rem;
@@ -121,7 +123,7 @@ box-shadow: 0 2px 5px rgba(0, 0, 0, .1)
     width: 100%;
     height: auto;
     background: none;
-    
+
 }
 
 .form label {
@@ -161,7 +163,7 @@ box-shadow: 0 2px 5px rgba(0, 0, 0, .1)
 
 }
 
-.form input[type="submit"]:hover{
+.form input[type="submit"]:hover {
     background-color: #e2bb80;
 }
 
@@ -178,7 +180,7 @@ box-shadow: 0 2px 5px rgba(0, 0, 0, .1)
         font-size: 10px;
     }
 
-    .containerform{
+    .containerform {
         height: auto;
         flex-direction: column;
     }
@@ -192,7 +194,7 @@ box-shadow: 0 2px 5px rgba(0, 0, 0, .1)
         border-bottom-right-radius: 0px;
     }
 
-    .forminformation{
+    .forminformation {
         width: 100%;
         padding: 20px;
         border-bottom-left-radius: 20px;
