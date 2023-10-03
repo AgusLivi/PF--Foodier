@@ -15,7 +15,7 @@ const Detalle = ({ name, description, price, old_price, image, amount, date, pro
         )).join(', ') : 'Sin categoria'}
       </p>
       <p>Old Price: {old_price}</p>
-      <p>Price: {price}</p>
+      <p>Price : {price}</p>
       <button>-</button>
       <p>{amount}</p>
       <button>+</button>
