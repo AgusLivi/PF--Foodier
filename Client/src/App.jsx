@@ -28,7 +28,7 @@ const App = () => {
         <Route path='/formuser' element={<FormUser />} />
         <Route path='/favoritos' element={<Favoritos />} />
         <Route path='/create' element={<CreateProduct />} />
-        <Route path='/detail/:product_ID' element={<Detalle/>} />
+        <Route path='/products/:product_ID' element={<Detalle/>} />
       </Routes>
       {location.pathname !== "/"  && location.pathname !== "/login" && location.pathname !== "/formcomercio" && <Footer />}
 
