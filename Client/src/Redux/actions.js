@@ -31,7 +31,9 @@ import {
     UPDATE_USER,
     GET_POST_BY_ID,
     GET_POST,
-    SELECTED_CATEGORIES
+    GET_PRODUCTS
+
+    //
 } from './actionsType'
 
 const endPoint='http://localhost:3001'  //definir rutas del back
@@ -193,7 +195,7 @@ export const createPost = (post) => {
     }
 }
 
-export const categoriesFilter = () => {
+export const getCategories = () => {
     return async (dispatch) => {
         try {
             const { data } = await axios.get(`${endPoint}/products/categories`);
@@ -461,12 +463,12 @@ export const getSellerById = (id) => {
     }
 }
 
-export const selectedCategories = (categories) => {
+export const getProducts = (querys) => {
     return async dispatch => {
-        const { data } = await axios.get(`${endPoint}/products?${categories}`)
+        const { data } = await axios.get(`${endPoint}/products?${querys}`)
         console.log('ACTION!!!', data)
         return dispatch ({
-            type: SELECTED_CATEGORIES,
+            type: GET_PRODUCTS,
             payload: data
         })
     }

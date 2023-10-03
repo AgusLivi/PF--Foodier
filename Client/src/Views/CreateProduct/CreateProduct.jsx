@@ -4,7 +4,7 @@ import Style from "./CreateProduct.module.css"
 import uploadImage from '../../helperCloudinary/helperCloudinary';
 import { useDispatch, useSelector } from 'react-redux';
 import {
-    categoriesFilter, createProduct,
+    getCategories, createProduct,
 } from '../../Redux/actions';
 
 const Cloudinary = (props) => {
