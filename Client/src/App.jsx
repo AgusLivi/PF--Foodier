@@ -8,8 +8,9 @@ import PerfilNegocio from "./Views/PerfilNegocio/PerfilNegocio";
 import Footer from "./Components/Footer/Footer";
 import Home from "./Views/Home/Home"
 import Favoritos from "./Views/Favoritos/Favoritos";
-import FormComercio from './Components/FormComercio/FormComercio'
-import CreateProduct from './Views/CreateProduct/CreateProduct'
+import FormComercio from './Components/FormComercio/FormComercio';
+import CreateProduct from './Views/CreateProduct/CreateProduct';
+import Detalle from './Views/Detalle/Detalle';
 
 
 const App = () => {
@@ -27,6 +28,7 @@ const App = () => {
         <Route path='/formuser' element={<FormUser />} />
         <Route path='/favoritos' element={<Favoritos />} />
         <Route path='/create' element={<CreateProduct />} />
+        <Route path='/detail/:product_ID' element={<Detalle/>} />
       </Routes>
       {location.pathname !== "/"  && location.pathname !== "/login" && location.pathname !== "/formcomercio" && <Footer />}
 
