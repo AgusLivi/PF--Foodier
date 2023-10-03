@@ -1,11 +1,14 @@
 import React from 'react';
 import styles from "./card.module.css";
+import { Link } from "react-router-dom"
 
-const Card = ({ name, description, price, old_price, image, amount, date }) => {
+const Card = ({ name, description, price, old_price, image, amount, date, product_ID }) => {
   const dateSplit = date.split("T")
   const dateOk = dateSplit[0]
   return (
-    <div className={styles.card}> 
+
+    <div key={product_ID} className={styles.card}> 
+    <Link to={`/detail/${product_ID}`}>
       <h2>{name}</h2>
       <p>{description}</p>
       <p className={styles.price}>Price: {price}</p>
@@ -13,7 +16,7 @@ const Card = ({ name, description, price, old_price, image, amount, date }) => {
       <img src='https://static.vecteezy.com/system/resources/thumbnails/007/126/723/small/chef-hat-line-art-icon-free-vector.jpg' alt={name} />
       <p className={styles.amount}>Amount: {amount}</p>
       <p className={styles.amount}>Fecha de posteo: {dateOk}</p>
-
+    </Link>
     </div>
   );
 };
