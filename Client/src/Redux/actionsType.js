@@ -21,3 +21,5 @@ export const GET_POST_BY_ID = 'GET_POST_BY_ID'
 export const GET_POST = 'GET_POST'
 export const GET_PRODUCTS = 'GET_PRODUCTS'
 export const GET_PRODUCT_BY_ID = 'GET_PRODUCT_BY_ID'
+export const SEARCH_BY_ID = 'SEARCH_BY_ID';
+export const CLEAN_DETAIL = 'CLEAN_DETAIL';
