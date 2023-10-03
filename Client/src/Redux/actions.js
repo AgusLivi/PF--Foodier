@@ -1,23 +1,12 @@
 import axios from 'axios';
 import {
-	GET_ALL_PRODUCTS,
- 	SEARCH_BY_NAME,
- 	SEARCH_BY_ID,
  	CREATE_PRODUCT,
  	GET_ALL_FAV,
     DELETE_PRODUCT,
     POST_FAVORITES,
     CREATE_USER,
     GET_SELLER_FAV,
-    CATEGORIES,
-    ADDRESS,
-    AVERAGE,
-    AVERAGE_RATING,
-    PAYMENT,
-    ORDER_BY,
-    ORDER,
-    PAGE,
-    PAGE_SIZE,
+    GET_CATEGORIES,
     CREATE_POST,
     CREATE_PAYMENT,
     GET_USER_BY_ID,
@@ -37,51 +26,6 @@ import {
 } from './actionsType'
 
 const endPoint='http://localhost:3001'  //definir rutas del back
-
-export const getAllProducts= () => {
-    return async dispatch => {
-        try {
-            const { data } = await axios(`${endPoint}/products/`)
-            return dispatch({
-                type: GET_ALL_PRODUCTS,
-                payload: data
-            })	
-        } catch (error){
-            alert(error.message)
-        }
-    }
-}
-
-export const getProductByName = (formData) => {
-    console.log(formData)
-    return async (dispatch) => {
-        try {
-            const { data } = await axios.get(`${endPoint}/products?${formData.name}`);
-            return dispatch({
-                type: SEARCH_BY_NAME,
-                payload: data,
-            });
-        } catch (error) {
-            alert(error.message);
-        }
-    };
-};
-
-export const createProduct = (formmData, id)=>{
-    console.log('form data: ', formmData);
-    return async (dispatch)=>{
-        try{
-            const { data } = await axios.post(`http://localhost:3001/products/${id}`, formmData); // despues de la barra tengo que poner la ruta que definieron en el back
-            return dispatch({
-                type: CREATE_PRODUCT,
-                payload: data
-            })
-        }catch (error){
-            console.error(error.message)
-        }
-       
-    }
-}
 
 export const getAllFav = (id) => {
     return async dispatch => {
@@ -103,10 +47,10 @@ export const getById = (id) => {
 	  const { data } = await axios.get(`${endPoint}/products/${id}`) //definir las rutas del back
  	  return dispatch({ 
 			type: SEARCH_BY_ID,
-	 		payload: data 
+            payload: data 
 		})
 	} catch (error) {
-	  alert(error.message)
+        alert(error.message)
 	}
   }
 }
@@ -117,18 +61,18 @@ export const deleteProduct = (id) => {
 	  const { data } = await axios.delete(`${endPoint}/products/${id}`) //definir las rutas del back
  	  return dispatch({ 
 			type: DELETE_PRODUCT,
-	 		payload: data 
+            payload: data 
 		})
 	} catch (error) {
-	  alert(error.message)
+        alert(error.message)
 	}
-  }
+}
 }
 
 export const postFav = (dataForm) => {
     return async (dispatch) => {
-    try {
-        const { data } = await axios.post(`${endPoint}/favorites`, dataForm)
+        try {
+            const { data } = await axios.post(`${endPoint}/favorites`, dataForm)
         return dispatch({
             type: POST_FAVORITES,
             payload: data
@@ -136,7 +80,7 @@ export const postFav = (dataForm) => {
     } catch (error) {
         alert(error.message)
     }
-    }
+}
 }
 
 export const createUser = (userData) => {
@@ -200,7 +144,7 @@ export const getCategories = () => {
         try {
             const { data } = await axios.get(`${endPoint}/products/categories`);
             return dispatch({
-                type: CATEGORIES,
+                type: GET_CATEGORIES,
                 payload: data,
             });
         } catch (error) {
@@ -209,106 +153,6 @@ export const getCategories = () => {
     };
 };
 
-export const addressFilter = (formData) => {
-    return async(dispatch) => {
-        try{
-            const { data } = await axios.get(`${endPoint}/products${formData.address}`)
-            return dispatch({
-                type: ADDRESS,
-                payload: data
-            })
-        } catch(error) {
-            alert(error.message)
-        }
-    }
-}
-
-export const averageRating = () => {
-    return async(dispatch) => {
-        try{
-            const { data } = await axios.get(`${endPoint}/products/average_rating`)
-            return dispatch({
-                type: AVERAGE_RATING,
-                payload: data
-            })
-        } catch(error) {
-            alert(error.message)
-        }
-    }
-}
-
-export const paymentMethods = () => {
-    return async(dispatch) => {
-        try{
-            const { data } = await axios.get(`${endPoint}/products/payment`)
-            return dispatch({
-                type: PAYMENT,
-                payload: data
-            })
-        } catch(error) {
-            alert (error.message)
-        }
-    }
-}
-export const orderByp = (formData) => {
-
-   console.log(formData)
-
-    return async (dispatch) => {
-        try {
-            const { data } = await axios.get(`${endPoint}/products?${formData.orderBy}${formData.order}`);
-            return dispatch({
-                type: ORDER_BY,
-                payload: data,
-            });
-        } catch (error) {
-            alert(error.message);
-        }
-    };
-};
-
-export const orderUpDown = (formData) => {
-    return async (dispatch) => {
-        try {
-            const { data } = await axios.get(`${endPoint}/products?${formData.orderBy}${formData.order}`);
-            return dispatch({
-                type: ORDER,
-                payload: data,
-            });
-        } catch (error) {
-            alert(error.message);
-        }
-    };
-};
-
-export const currentPage = (formData) => {
-    return async (dispatch) => {
-        try {
-            const { data } = await axios.get(`${endPoint}/products?${formData.page}${formData.pageSize}`);
-            return dispatch({
-                type: PAGE,
-                payload: data,
-            });
-        } catch (error) {
-            alert(error.message);
-        }
-    };
-};
-
-export const pageSize = (formData) => {
-    console.log(formData)
-    return async (dispatch) => {
-        try {
-            const { data } = await axios.get(`${endPoint}/products?${formData.page}${formData.pageSize}`);
-            return dispatch({
-                type: PAGE_SIZE,
-                payload: data,
-            });
-        } catch (error) {
-            alert(error.message);
-        }
-    };
-};
 export const getAllPost = () => {
     return async(dispatch) => {
         try{
@@ -353,15 +197,15 @@ export const updateUser = (id, updatedUserData) => {
 
 export const deleteUser = (id) => {
 	return async (dispatch) => {
-	try {
-	  const { data } = await axios.delete(`${endPoint}/users/${id}`) //definir las rutas del back
- 	  return dispatch({ 
-			type: DELETE_USER,
-	 		payload: data 
-		})
-	} catch (error) {
-	  alert(error.message)
-	}
+        try {
+            const { data } = await axios.delete(`${endPoint}/users/${id}`) //definir las rutas del back
+            return dispatch({ 
+                type: DELETE_USER,
+                payload: data 
+            })
+        } catch (error) {
+            alert(error.message)
+        }
   }
 }
 
@@ -422,17 +266,17 @@ export const updateSeller = (id, updatedSellerData) => {
 }
 
 export const deleteSeller = (id) => {
-	return async (dispatch) => {
-	try {
-	  const { data } = await axios.delete(`${endPoint}/sellers/${id}`) //definir las rutas del back
- 	  return dispatch({ 
-			type: DELETE_SELLER,
-	 		payload: data 
-		})
-	} catch (error) {
-	  alert(error.message)
-	}
-  }
+    return async (dispatch) => {
+        try {
+            const { data } = await axios.delete(`${endPoint}/sellers/${id}`) //definir las rutas del back
+            return dispatch({ 
+                type: DELETE_SELLER,
+                payload: data 
+            })
+        } catch (error) {
+            alert(error.message)
+        }
+    }
 }
 
 export const getAllSeller = () => {
@@ -463,13 +307,30 @@ export const getSellerById = (id) => {
     }
 }
 
+//Products acctions
+
 export const getProducts = (querys) => {
     return async dispatch => {
-        const { data } = await axios.get(`${endPoint}/products?${querys}`)
+        const { data } = await axios.get(`${endPoint}/products/?${querys}`)
         console.log('ACTION!!!', data)
         return dispatch ({
             type: GET_PRODUCTS,
             payload: data
         })
+    }
+}
+
+export const createProduct = (formmData, id)=>{
+    console.log('form data: ', formmData);
+    return async (dispatch)=>{
+        try{
+            const { data } = await axios.post(`${endPoint}/products/${id}`, formmData); // despues de la barra tengo que poner la ruta que definieron en el back
+            return dispatch({
+                type: CREATE_PRODUCT,
+                payload: data
+            })
+        }catch (error){
+            console.error(error.message)
+        }
     }
 }

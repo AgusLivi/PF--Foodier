@@ -6,8 +6,6 @@ import {
     POST_FAVORITES,
     CREATE_USER,
     GET_SELLER_FAV,
-    PAGE,
-    PAGE_SIZE,
     CREATE_POST,
     CREATE_PAYMENT,
     GET_USER_BY_ID,
@@ -22,7 +20,7 @@ import {
     GET_POST_BY_ID,
     GET_POST,
     GET_PRODUCTS,
-    CATEGORIES
+    GET_CATEGORIES
 } from './actionsType'
 
 
@@ -95,7 +93,7 @@ import {
                     ...state,
                     sellersFav: payload
                 }
-            case CATEGORIES:
+            case GET_CATEGORIES:
                 return {
                     ...state,
                     categories: payload
@@ -172,17 +170,7 @@ import {
                     ...state,
                     allFavoritesSeller: payload,
                 }
-            case PAGE:
-                return {
-                    ...state,
-                    currentPage: payload,
-                };
-                  
-            case PAGE_SIZE:
-                return {
-                    ...state,
-                    pageSize: payload,
-                };
+                  ;
 
             default:
                 return state;
