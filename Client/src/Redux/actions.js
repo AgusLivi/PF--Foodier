@@ -21,9 +21,16 @@ import {
     GET_POST_BY_ID,
     GET_POST,
     GET_PRODUCTS,
-    //GET_PRODUCT_BY_ID,
+
+    GET_PRODUCT_BY_ID,
+    MUNICIPIOS,
+    PROVINCIAS,
+    LOCALIDADES
+
+   
     SEARCH_BY_ID,
     CLEAN_DETAIL
+
 
     //
 } from './actionsType'
@@ -354,3 +361,45 @@ export const createProduct = (formmData, id) => {
         }
     }
 }
+
+export const locationProvincia = () => {
+    return async (dispatch) => {
+        try {
+            const { data } = await axios.get(`https://apis.datos.gob.ar/georef/api/provincias`);
+            return dispatch({
+                type: PROVINCIAS,
+                payload: data.provincias,
+            });
+        } catch (error) {
+            alert(error.message);
+        }
+    };
+};
+
+export const locationMunicipio = (provId) => {
+    return async (dispatch) => {
+        try {
+            const { data } = await axios.get(`https://apis.datos.gob.ar/georef/api/municipios?provincia=${provId}&campos=id,nombre&max=100`);
+            return dispatch({
+                type: MUNICIPIOS,
+                payload: data.municipios,
+            });
+        } catch (error) {
+            alert(error.message);
+        }
+    };
+};
+
+export const locationLocalidad = (muniId) => {
+    return async (dispatch) => {
+        try {
+            const { data } = await axios.get(`https://apis.datos.gob.ar/georef/api/localidades?municipio=${muniId}&campos=id,nombre&max=100`);
+            return dispatch({
+                type: LOCALIDADES,
+                payload: data.localidades,
+            });
+        } catch (error) {
+            alert(error.message);
+        }
+    };
+};
