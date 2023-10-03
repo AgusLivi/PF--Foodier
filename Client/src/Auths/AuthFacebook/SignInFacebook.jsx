@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { signInWithPopup } from 'firebase/auth';
 import { auth, provider } from "./configFace";
-import Home from "../googleSingIn/Home";
+//import Home from '../../Views/Home/Home.jsx'
 
 const FacebookSignIn = () => {
 
@@ -20,9 +20,7 @@ const FacebookSignIn = () => {
 
     return (
         <div>
-            {value ? <Home /> :
-                <button onClick={handleClick}>Signin With Facebook</button>
-            }
+            <button onClick={handleClick}>Signin With Facebook</button>
         </div>
     );
 }
