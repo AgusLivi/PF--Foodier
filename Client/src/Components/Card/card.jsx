@@ -15,7 +15,7 @@ const Card = ({ name, description, price, old_price, image, amount, date, id }) 
       <p className={styles.old_price}>Old Price: {old_price}</p>
       <img src={image} alt={name} />
       <p className={styles.amount}>Amount: {amount}</p>
-      <p className={styles.amount}>Fecha de posteo: {dateOk}</p>
+      <p className={styles.amount}>Fecha de posteo {dateOk}</p>
     </Link>
     </div>
   );
