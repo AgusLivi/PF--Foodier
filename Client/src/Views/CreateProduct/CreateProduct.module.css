@@ -85,3 +85,10 @@
 .exclude {
     font-size: 14px; /* Tamaño de fuente para elementos excluidos */
 }
+.form {
+    display: flex;
+    height: auto;
+    width: 100%;
+    flex-direction: column;
+    background: none;
+}
