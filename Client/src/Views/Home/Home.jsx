@@ -14,16 +14,15 @@ const Home = () => {
    // global state 
     const categories = useSelector(state => state.categories)
     const products = useSelector(state => state.products)
-    const [reset, useReset] = useState(false)
-   
-    const [productName, setProductName] = useState('');
+
     const [orderByy, setOrderByy] = useState('')
     const [orderr, setOrderr] = useState('')
     const dispatch = useDispatch()
 
     useEffect(()=>{
         dispatch(categoriesFilter())
-    }, [reset])
+        return
+    }, [])
     console.log(categories)
 
 
@@ -59,7 +58,7 @@ const Home = () => {
     
         // generamos la cadena de consulta
         const queryParams = new URLSearchParams({
-            name, // Usa productName en lugar de formData.name
+            name, 
             categories: categories.join(','),
             address,
             average_rating,
@@ -105,7 +104,7 @@ const Home = () => {
                     name="name"
                     placeholder="Nombre del producto"
                     value={formData.name}
-                    onChange={(e) => setProductName(e.target.value)}
+                    onChange={handleInputChange}
                 />
         
           {/* Modal */}
@@ -146,7 +145,7 @@ const Home = () => {
                         <select
                             name="orderBy"
                             value={formData.orderBy}
-                            onChange={(e) => setOrderByy(e.target.value)}
+                            onChange={handleInputChange}
                         >
                             <option value="name">Nombre</option>
                             <option value="price">Precio</option>
@@ -158,7 +157,7 @@ const Home = () => {
                             <select
                                 name="order"
                                 value={formData.order}
-                                onChange={(e) => setOrderr(e.target.value)}
+                                onChange={handleInputChange}
                             >
                                 <option value="asc">Ascendente</option>
                                 <option value="desc">Descendente</option>

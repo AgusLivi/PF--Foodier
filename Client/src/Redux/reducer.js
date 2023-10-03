@@ -43,7 +43,7 @@ import {
         productsByName: [],
         postedFiltereds: [],
         createdUser: [],
-        s: [],
+        orderBy: [],
         selectedOrderBy: [],
         selectedOrder: [],
         createdPost: [],
@@ -64,8 +64,6 @@ import {
     };
 
     const reducer = (state = initialState, { type, payload }) => {
-        let filteredProducts = []
-        let orderBy = []
 
     switch(type){
 
