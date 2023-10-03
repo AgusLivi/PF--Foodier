@@ -10,12 +10,14 @@ const FacebookSignIn = () => {
     const handleClick = () => {
         signInWithPopup(auth, provider).then((data) => {
             setValue(data.user.email)
+            console.log('data:',data);
             localStorage.setItem("email", data.user.email)
         })
     };
 
     useEffect(() => {
         setValue(localStorage.getItem("email"))
+        console.log('value: ', value);
     });
 
     return (
