@@ -13,7 +13,7 @@ const Card = ({ name, description, price, old_price, image, amount, date, id }) 
       <p>{description}</p>
       <p className={styles.price}>Price: {price}</p>
       <p className={styles.old_price}>Old Price: {old_price}</p>
-      <img src='https://static.vecteezy.com/system/resources/thumbnails/007/126/723/small/chef-hat-line-art-icon-free-vector.jpg' alt={name} />
+      <img src={image} alt={name} />
       <p className={styles.amount}>Amount: {amount}</p>
       <p className={styles.amount}>Fecha de posteo: {dateOk}</p>
     </Link>

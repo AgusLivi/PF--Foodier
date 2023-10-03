@@ -3,11 +3,8 @@ import { useState, useEffect } from 'react'
 import CardContainer from '../../Components/CardContainer/CardContainer.jsx'
 import Style from "./Home.module.css"
 import {
-    categoriesFilter,
-    selectedCategories,
-    getProductByName,
-    orderByp,
-    orderUpDown,
+    getCategories,
+    getProducts,
 } from '../../Redux/actions'
 
 const Home = () => {
@@ -15,20 +12,21 @@ const Home = () => {
     const categories = useSelector(state => state.categories)
     const products = useSelector(state => state.products)
 
-    const [orderByy, setOrderByy] = useState('')
-    const [orderr, setOrderr] = useState('')
-    const dispatch = useDispatch()
 
+    const dispatch = useDispatch()
     useEffect(()=>{
-        dispatch(categoriesFilter())
+        dispatch(getCategories())
+        dispatch(getProducts( new URLSearchParams(formData).toString()))
         return
     }, [])
     console.log(categories)
 
 
     const [formData, setFormData] = useState({
+        page: 1,
+        pageSize: 8,
         name: '',
-        categories: [],
+        categories: [].join(','),
         address: '',
         average_rating: '',
         payment: '',
@@ -69,7 +67,7 @@ const Home = () => {
         console.log(queryParams);
     
         // hacer dispatch con la cadena de consulta
-        dispatch(selectedCategories(queryParams));
+        dispatch(selectedCategories(queryParams)); // hay q cambiar el funcionamiento de hahandleSubmit a un onChange
     };
     const [isModalVisible, setIsModalVisible] = useState(false);
 
