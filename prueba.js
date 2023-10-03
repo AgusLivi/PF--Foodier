@@ -117,7 +117,7 @@ module.exports = [
       "price": 150,
       "old_price": 180,
       "categories": ["Bebidas", "Cafeterias", "Saludable"],
-      "image": null,
+      "image": 'https://s1.abcstatics.com/media/bienestar/2022/05/21/te-verde-k0sG--620x349@abc.jpg',
       "amount": 15
     },
     {
