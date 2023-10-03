@@ -2,24 +2,39 @@ import { useSelector, useDispatch } from "react-redux";
 import { useState, useEffect } from "react";
 import CardContainer from "../../Components/CardContainer/CardContainer.jsx";
 import Style from "./Home.module.css";
-import { getCategories, getProducts } from "../../Redux/actions";
+import { getCategories, getProducts, locationProvincia, locationMunicipio, locationLocalidad } from "../../Redux/actions";
 
 const Home = () => {
   // global state
   const categories = useSelector((state) => state.categories);
+  const provincias = useSelector(state => state.provincias)
+  const municipios = useSelector(state => state.municipios)
+  const localidades = useSelector(state => state.localidades)
 
+  const [selectedProvincia, setSelectedProvincia] = useState('');
+  const [selectedMunicipio, setSelectedMunicipio] = useState('');
+  const [selectedLocalidad, setSelectedLocalidad] = useState('');
+  
   const dispatch = useDispatch();
+
   useEffect(() => {
     dispatch(getCategories());
     dispatch(getProducts(new URLSearchParams(formData).toString()));
+    dispatch(locationProvincia())
     return;
   }, []);
+
+  useEffect(() => {
+    const addressString = `${selectedProvincia}, ${selectedMunicipio}, ${selectedLocalidad}`;
+    setFormData({ ...formData, address: addressString });
+  }, [selectedProvincia, selectedMunicipio, selectedLocalidad]);
+
 
   const [formData, setFormData] = useState({
     page: 1,
     pageSize: 8,
     name: "",
-    categories: [].join(","),
+    categories: [],
     address: "",
     average_rating: "",
     payment: "",
@@ -71,7 +86,7 @@ const Home = () => {
     console.log(queryParams);
 
     // hacer dispatch con la cadena de consulta
-    dispatch(selectedCategories(queryParams)); // hay q cambiar el funcionamiento de hahandleSubmit a un onChange
+    dispatch(getProducts(queryParams)); // hay q cambiar el funcionamiento de hahandleSubmit a un onChange
   };
   const [isModalVisible, setIsModalVisible] = useState(false);
 
@@ -79,6 +94,21 @@ const Home = () => {
   const toggleModal = () => {
     setIsModalVisible(!isModalVisible);
   };
+
+  const handleProvinciaChange = (event) => {
+    setSelectedProvincia(event.target.options[event.target.selectedIndex].getAttribute("name"));
+    dispatch(locationMunicipio(event.target.value));
+  };
+
+  const handleMuniChange = (event) => {
+      console.log(event.target)
+      setSelectedMunicipio(event.target.options[event.target.selectedIndex].getAttribute("name"));
+      dispatch(locationLocalidad(event.target.value));
+    };
+
+  const handleLocalChange = (event) => {
+      setSelectedLocalidad(event.target.options[event.target.selectedIndex].getAttribute("name"));
+  }
 
   return (
     <div>
@@ -114,13 +144,38 @@ const Home = () => {
 
         {/* Modal */}
 
-        <input
-          type="text"
-          name="address"
-          placeholder="Ubicación"
-          value={formData.address}
-          onChange={handleInputChange}
-        />
+        <div>
+          <select name="" id="" onChange={handleProvinciaChange}>
+              <option value="" disabled selected>Selecciona una provincia</option>
+              {provincias.length ? (
+                  provincias.map(prov => (
+                  <option name={prov.nombre} key={prov.id} value={prov.id}>{prov.nombre}</option>
+                  ))
+              ) : (
+                  <option>Selecciona una provincia</option>
+              )}
+          </select>
+          <select name="" id="" onChange={handleMuniChange}>
+            <option value="" disabled selected>Selecciona un municipio</option>
+              {municipios.length ? (
+                  municipios.map(muni => (
+                  <option name={muni.nombre} key={muni.id} value={muni.id}>{muni.nombre}</option>
+                  ))
+              ) : (
+                  <option>Selecciona un municipio</option>
+              )}
+          </select>
+          <select name="" id="" onChange={handleLocalChange}>
+            <option value="" disabled selected>Selecciona una localidad</option>
+              {localidades.length ? (
+                  localidades.map(local => (
+                  <option name={local.nombre} key={local.id} value={local.id}>{local.nombre}</option>
+                  ))
+              ) : (
+                  <option>Selecciona una localidad</option>
+              )}
+          </select>
+        </div>
         <button onClick={toggleModal} className={Style.categoria}>
           Categorias{" "}
         </button>

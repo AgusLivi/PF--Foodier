@@ -21,7 +21,10 @@ import {
     GET_POST,
     GET_PRODUCTS,
     GET_PRODUCT_BY_ID,
-    GET_CATEGORIES
+    GET_CATEGORIES,
+    PROVINCIAS,
+    MUNICIPIOS,
+    LOCALIDADES,
 } from './actionsType'
 
 
@@ -51,6 +54,9 @@ import {
         allFavoritesSeller: [],
         createdUser: [],
         createdSellers: [],
+        provincias: [],
+        municipios: [],
+        localidades: []
         //tengo q agregar mas
     };
 
@@ -177,7 +183,23 @@ import {
                     ...state,
                     allFavoritesSeller: payload,
                 }
-                  ;
+            case PROVINCIAS:
+                return {
+                    ...state,
+                    provincias: payload
+                }
+
+            case MUNICIPIOS:
+                return {
+                    ...state,
+                    municipios: payload
+                }
+
+            case LOCALIDADES:
+                return {
+                    ...state,
+                    localidades: payload
+                }
 
             default:
                 return state;
