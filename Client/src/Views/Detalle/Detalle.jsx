@@ -9,9 +9,13 @@ const Detalle = ({ name, description, price, old_price, image, amount, date, pro
       <h1>Descripcion:</h1>
       <p>{description}</p>
       <p>{date}</p>
-      <p>{categories.length ? categories.map((item) => item).join(', ') : 'Sin categoria'}</p>
-      <p className={styles.old_price}>Old Price: {old_price}</p>
-      <p className={styles.price}>Price: {price}</p>
+      <p>
+        {categories.length ? categories.map((item, index) => (
+          <span key={index}>{item}</span>
+        )).join(', ') : 'Sin categoria'}
+      </p>
+      <p>Old Price: {old_price}</p>
+      <p>Price : {price}</p>
       <button>-</button>
       <p>{amount}</p>
       <button>+</button>
