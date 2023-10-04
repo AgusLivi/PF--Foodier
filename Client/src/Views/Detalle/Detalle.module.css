@@ -16,6 +16,7 @@
     margin-right: 80px;
     border-radius: 10px;
     transition: transform 0.3s ease;
+    margin-top: 80px;
 }
 
 .detailImg:hover {
@@ -27,6 +28,13 @@
     display: flex;
     flex-direction: column;
     margin-top: 10px;
+}
+
+.detailContent h2,
+.detailContent div,
+.detailContent h1,
+.detailContent p {
+  margin-bottom: 10px; /* Agrega un margen inferior de 20px entre estas secciones */
 }
 
 /* Estilo para los botones */
@@ -69,14 +77,17 @@ button:hover {
 /* Estilo para los botones de cantidad */
 .quantityButton {
     font-size: 20px;
-    display: flex;
-    align-items: center;
     background-color: #fe9e0d;
     color: #fff;
-    width: 5px;
-    height: 5px;
+    max-height: fit-content; /* Ajusta el alto de los botones según tus preferencias */
     cursor: pointer;
-}
+    border-radius: 50%;
+    justify-content: center;
+    margin-top: 10px;
+    margin-bottom: 20px;
+    margin-left: 20px;
+    margin-right: 20px;
+  }
 
 /* Estilo para el botón de cerrar */
 .closeButton {
@@ -85,4 +96,9 @@ button:hover {
 
 .closeButton:hover {
     background-color: #c0392b;
+}
+
+.oldPrice {
+    text-decoration: line-through !important;
+    color:#4e4e4e
 }

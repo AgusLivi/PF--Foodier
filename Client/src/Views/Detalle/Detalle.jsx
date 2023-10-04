@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import { useEffect } from 'react';
 import { useParams, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { cleanDetail, getProductById } from '../../Redux/actions';
@@ -36,25 +36,25 @@ return (
                           <div
                               onClick={handleFavorite}
                           >
-                              {productDetail.favorite ? '❤️' : '🤍'}
-                        <p>{productDetail.rating}</p></div>
-                        <h1>Descripcion:</h1>
+                              {productDetail.favorite ? '❤️' : '🤍'} {/*Agregar funcionalidad*/}
+                        <p>{productDetail.average_rating}</p></div>
+                        <h2>Descripción:</h2>
                         <p>{productDetail.description}</p>
-                        <p>{productDetail.date}</p>
+                        <p>Hora de publicación: {productDetail.date}</p>
                         {productDetail.categories ? (
                             <p>{productDetail.categories.join(', ')}</p>
                         ) : (
                             <p className={styles.noCategory}>Sin categoría</p>
                         )}
-                        <p>Precio viejo: {productDetail.old_price}</p>
+                        <p className={styles.oldPrice}>Precio viejo: {productDetail.old_price}</p>
                         <p>Precio: {productDetail.price}</p>
-                        <div>
+                        <div className={styles.quantityContainer}>
                             <button className={styles.quantityButton}>-</button>
                             <p>{productDetail.amount}</p>
                             <button className={styles.quantityButton}>+</button>
                         </div>
-                        <button className={styles.addButton}>Añadir al carrito</button>
-                        <button className={styles.addButton}>Pagar</button>
+                        <button className={styles.addButton}>Añadir al carrito</button> {/*Agregar funcionalidad*/}
+                        <button className={styles.addButton}>Pagar</button> {/*Agregar funcionalidad*/}
                         <button className={styles.closeButton} onClick={handleClose}>Cerrar</button>
                     </div>
                 ) : (
