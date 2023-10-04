@@ -48,7 +48,7 @@ const SignUp = () => {
             <Link to={`/home`}>
                 <input type="submit" 
                 value="Iniciar sesión"
-                // onClick={handleSumbit}
+                // onClick={handleSumbit} // comentado por q tnego que crear el controlador del back 
                 ></input>
             </Link>
         </div>
