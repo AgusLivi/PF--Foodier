@@ -1,12 +1,42 @@
-import React, { useState } from "react";
-import { Link } from "react-router-dom";
-import style from "./Login.module.css";
-import SignInGoogle from "../../Auths/AuthGoogle/SignInGoogle";
-import SignInFacebook from "../../Auths/AuthFacebook/SignInFacebook";
+  import React, { useState, useEffect } from "react";
+  import { Link } from "react-router-dom";
+  import style from "./Login.module.css";
+  import SignInGoogle from "../../Auths/AuthGoogle/SignInGoogle";
+  import SignInFacebook from "../../Auths/AuthFacebook/SignInFacebook";
+  import { createUser } from "../../Redux/actions";
+  import { useDispatch, useSelector } from "react-redux";  
+  
+  const Login = () => {
+  const dispatch = useDispatch();
+  const [userDate, setUserData] = useState({
+    name: "",
+    email: "",
+    password:"",
+    location:"",
+  })/*Creo el estado local y le paso los parametros que va a recibir */
+  
+  const handleInputChange = (event) => {
+    const { name, value } = event.target;
+    setUserData({ ...userDate, [name]: value });
+  };
+  
+  const handleSumbit = (event) =>{
+    event.preventDefault();
+    const formDataToSend ={
+      name: userDate.name,
+      email: userDate.email,
+      password: userDate.password,
+      location: userDate.location
+    }
+    dispatch(createUser(formDataToSend))
+  }
 
-const Login = () => {
-
+  const user = useSelector((state)=>{
+    state.createdUser
+  })
+  
   return (
+    <>
     <div className={style.body}>
       <div className={style.containerform}>
         <div className={style.information}>
@@ -27,18 +57,18 @@ const Login = () => {
             <form className={style.form}>
               <label>
                 <i className='bx bx-user'></i>
-                <input type="text" placeholder="Nombre Completo"></input>
+                <input type="text" placeholder="Nombre Completo" name="name"  value={userDate.name} onChange={handleInputChange}></input>
               </label>
               <label>
                 <i className='bx bx-envelope'></i>
-                <input type="email" placeholder="Correo Electrónico"></input>
+                <input type="email" placeholder="Correo Electrónico" name="email" value={userDate.email} onChange={handleInputChange}></input>
               </label>
               <label>
                 <i className='bx bx-lock-alt'></i>
-                <input type="password" placeholder="Contraseña"></input>
+                <input type="password" placeholder="Contraseña" name="password" value={userDate.password} onChange={handleInputChange}></input>
               </label>
               <Link to={`/home`}>
-                <input type="submit" value="Registrarme"></input>
+                <input type="submit" value="Registrarme" onClick={handleSumbit} ></input>
               </Link>
             </form>
             <div >
@@ -53,6 +83,7 @@ const Login = () => {
         </div>
       </div>
     </div>
+    </>
   );
 };
 

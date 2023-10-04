@@ -21,29 +21,36 @@ const PerfilUsuario = () => {
               <h1>{name} {lastName}</h1>
             </div>
           </div>
-          <hr />
-          {/* Información del perfil */}
-          <div className={Style.profileInfo}>
-            <div className={Style.info}>
-              {/* Email */}
-              <div>
-                <label>Email</label>
-                <p>{email}</p>
-              </div>
-              {/* Teléfono */}
-              <div>
-                <label>Phone</label>
-                <p>{phone}</p>
-              </div>
-              {/* Dirección */}
-              <div>
-                <label>Direction</label>
-                <p>{direction}</p>
-              </div>
-              <div>
-                <label>ayuda</label>
-                <p><a href="#">foodierAyuda.com</a></p>
-              </div>
+
+          <div className={styles.profileInfo}>
+            <div className={styles.info}>
+              <label>Correo Electrónico:</label>
+              <p>{userData.email}</p>
+            </div>
+            <div className={styles.info}>
+              <label>Dirección:</label>
+              <p>{userData.address}</p>
+            </div>
+            <div className={styles.info}>
+              <label>Teléfono:</label>
+              <p>{userData.contact}</p>
+            </div>
+            <div className={styles.info}>
+              <label>Rating Promedio:</label>
+              <p>{userData.average_rating}</p>
+            </div>
+            <div className={styles.info}>
+              <label>Contraseña:</label>
+              <p>{userData.password}</p>
+            </div>
+            <div className={styles.info}>
+              <label>Método de Pago:</label>
+              <p>{userData.payment}</p>
+            </div>
+         
+            <div className={styles.info}>
+              <label>Rating:</label>
+              <p>{userData.rating}</p>
             </div>
             {/*
               Datos necesarios adicionales:
