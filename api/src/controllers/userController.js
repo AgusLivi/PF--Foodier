@@ -91,14 +91,35 @@ const bcrypt = require('bcrypt');    // npm install bcrypt
     await User.destroy({where: {user_ID}})
   }
 
-  
-  // ... otros métodos para crear, actualizar y eliminar usuarios
+  const signUp = async (req, res) => {
+    const { email, password } = req.body; 
 
+    try {
+      const user = await User.findOne({ where: {email} })
+ 
+      if(!user) {
+        return res.status(401).json({ error: 'Usuario no encontrado'})
+      }
+
+      if(user.password != password) {
+        return res.status(401).json({ error: 'Contraseña incorrecta'})
+      }
+
+      res.json({ message: 'Inicio de sesión' })
+
+    } catch (error) {
+      console.error(error);
+      res.status(500).json({ error: 'Error en el servidor' });
+    }
+  }
+
+  // ... otros métodos para crear, actualizar y eliminar usuarios
 
 module.exports = {
   getAllUsers,
   getUserById,
   createUser,
   updateUser,
-  deleteUser
+  deleteUser,
+  signUp
 };
