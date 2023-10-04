@@ -1,0 +1,88 @@
+/* Estilo para el contenedor principal */
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+    flex-wrap: wrap;
+}
+
+/* Estilo para la imagen */
+img {
+    max-width: 250px;
+    height: auto;
+    margin-right: 80px;
+    border-radius: 10px;
+    transition: transform 0.3s ease;
+}
+
+img:hover {
+    transform: scale(1.1);
+}
+
+/* Estilo para el contenido */
+.content {
+    display: flex;
+    flex-direction: column;
+    margin-top: 10px;
+}
+
+/* Estilo para los botones */
+button {
+    padding: 10px 20px;
+    background-color: #ff8c00;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    margin: 10px 10px 0 0; /* Margin-bottom agregado */
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: 0px 0px 5px rgba(255, 140, 0, 0);
+}
+
+button:hover {
+    background-color: #ff6b00;
+    box-shadow: 0px 0px 10px rgba(255, 140, 0, 0.5);
+}
+
+/* Estilo para el texto "Cargando..." */
+.loading {
+    font-size: 20px;
+    color: #777;
+    margin-bottom: 20px;
+}
+
+/* Estilo para el texto "Sin categoría" */
+.noCategory {
+    font-style: italic;
+    margin-bottom: 20px;
+}
+
+.quantityContainer {
+    display: flex;
+    align-items: center;
+}
+
+/* Estilo para los botones de cantidad */
+.quantityButton {
+    font-size: 20px;
+    display: flex;
+    align-items: center;
+    background-color: #fe9e0d;
+    color: #fff;
+    width: 5px;
+    height: 5px;
+    cursor: pointer;
+}
+
+/* Estilo para el botón de cerrar */
+.closeButton {
+    background-color: #e74c3c;
+}
+
+.closeButton:hover {
+    background-color: #c0392b;
+}

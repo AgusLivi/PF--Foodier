@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import { useParams, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { cleanDetail, getProductById } from '../../Redux/actions';
+import styles from './Detalle.module.css';
 
 const Detalle = () => {
   const { product_ID } = useParams();
@@ -19,36 +20,49 @@ const Detalle = () => {
     history.push('/home');
   };
 
-  return (
-    <div>
-      {productDetail ? (
-        <div>
-          <h2>{productDetail.name}</h2>
-          <p>{productDetail.rating}</p>
-          <button>Añadir a favoritos</button> {/*Editar la funcionalidad*/}
-          <h1>Descripcion:</h1>
-          <p>{productDetail.description}</p>
-          <p>{productDetail.date}</p>
-          {/*products.categories.length ? (
-          <p>{products.categories.join(', ')}</p>
-        ) : (
-          <p>Sin categoría</p>
-        )*/}
-          <p>Precio viejo: {productDetail.old_price}</p>
-          <p>Precio: {productDetail.price}</p>
-          <button>-</button>
-          <p>{productDetail.amount}</p>
-          <button>+</button>
-          <img src={productDetail.image} alt={productDetail.name} />
-          <button>Añadir al carrito</button> {/*Editar la funcionalidad*/}
-          <button>Pagar</button> {/*Editar la funcionalidad*/}
-          <button onClick={handleClose}>Cerrar</button>
+  const handleFavorite = () => {
+    // Dejo esto para implementar el estado de favoritos
+  };
+
+return (
+        <div className={styles.container}>
+            <img src={productDetail.image} alt={productDetail.name} />
+            <div className={styles.content}>
+                {productDetail ? (
+                    <div>
+                        <h2>
+                            {productDetail.name}
+                            </h2>
+                          <div
+                              onClick={handleFavorite}
+                          >
+                              {productDetail.favorite ? '❤️' : '🤍'}
+                        <p>{productDetail.rating}</p></div>
+                        <h1>Descripcion:</h1>
+                        <p>{productDetail.description}</p>
+                        <p>{productDetail.date}</p>
+                        {productDetail.categories ? (
+                            <p>{productDetail.categories.join(', ')}</p>
+                        ) : (
+                            <p className={styles.noCategory}>Sin categoría</p>
+                        )}
+                        <p>Precio viejo: {productDetail.old_price}</p>
+                        <p>Precio: {productDetail.price}</p>
+                        <div>
+                            <button className={styles.quantityButton}>-</button>
+                            <p>{productDetail.amount}</p>
+                            <button className={styles.quantityButton}>+</button>
+                        </div>
+                        <button className={styles.addButton}>Añadir al carrito</button>
+                        <button className={styles.addButton}>Pagar</button>
+                        <button className={styles.closeButton} onClick={handleClose}>Cerrar</button>
+                    </div>
+                ) : (
+                    <p className={styles.loading}>Cargando...</p>
+                )}
+            </div>
         </div>
-      ) : (
-        <p>Cargando...</p>
-      )}
-    </div>
-  );
+    );
 };
 
 export default Detalle;
