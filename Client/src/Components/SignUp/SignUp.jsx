@@ -1,5 +1,5 @@
     import React, { useState, useEffect } from "react";
-    import { Link } from "react-router-dom";
+    import { Link, useRouteLoaderData } from "react-router-dom";
     import { createUser } from "../../Redux/actions";
     import { useDispatch, useSelector } from "react-redux";
 
@@ -34,6 +34,17 @@ const SignUp = () => {
     return(
         <div>
             <h3>Inicia sesión</h3>
+            <p>Correo electrónico de la cuenta: </p>
+            <input type='text' placeholder="email" 
+            name="email" 
+            value={userData.email} 
+            onChange={}
+            />
+            <p>Contraseña: </p>
+            <input type="password" placeholder="password"
+            name="password"
+            
+            />
 
 
 
