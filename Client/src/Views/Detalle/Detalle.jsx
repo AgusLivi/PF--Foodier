@@ -6,7 +6,7 @@ import styles from './Detalle.module.css';
 
 const Detalle = () => {
   const { product_ID } = useParams();
-  const history = useNavigate();
+  const navigate = useNavigate();
   const dispatch = useDispatch();
   const productDetail = useSelector((state) => state.productDetail);
   console.log('pDetail:', productDetail);
@@ -17,7 +17,7 @@ const Detalle = () => {
   }, [dispatch, product_ID]);
 
   const handleClose = () => {
-    history.push('/home');
+    navigate('/home');
   };
 
   const handleFavorite = () => {
@@ -25,9 +25,9 @@ const Detalle = () => {
   };
 
 return (
-        <div className={styles.container}>
-            <img src={productDetail.image} alt={productDetail.name} />
-            <div className={styles.content}>
+        <div className={styles.detailContainer}>
+            <img src={productDetail.image} alt={productDetail.name} className={styles.detailImg}/>
+            <div className={styles.detailContent}>
                 {productDetail ? (
                     <div>
                         <h2>
@@ -58,7 +58,7 @@ return (
                         <button className={styles.closeButton} onClick={handleClose}>Cerrar</button>
                     </div>
                 ) : (
-                    <p className={styles.loading}>Cargando...</p>
+                    <p className={styles.detailLoading}>Cargando...</p>
                 )}
             </div>
         </div>
