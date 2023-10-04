@@ -1,5 +1,5 @@
 /* Estilo para el contenedor principal */
-.container {
+.detailContainer {
     max-width: 800px;
     margin: 0 auto;
     padding: 20px;
@@ -10,7 +10,7 @@
 }
 
 /* Estilo para la imagen */
-img {
+.detailImg {
     max-width: 250px;
     height: auto;
     margin-right: 80px;
@@ -18,12 +18,12 @@ img {
     transition: transform 0.3s ease;
 }
 
-img:hover {
+.detailImg:hover {
     transform: scale(1.1);
 }
 
 /* Estilo para el contenido */
-.content {
+.detailContent {
     display: flex;
     flex-direction: column;
     margin-top: 10px;
@@ -49,7 +49,7 @@ button:hover {
 }
 
 /* Estilo para el texto "Cargando..." */
-.loading {
+.detailLoading {
     font-size: 20px;
     color: #777;
     margin-bottom: 20px;
