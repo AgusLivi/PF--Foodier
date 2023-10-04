@@ -37,6 +37,7 @@ const PerfilUsuario = () => {
               <label>Dirección:</label>
               <p>{userData.address}</p>
             </div>
+
             <div className={styles.info}>
               <label>Teléfono:</label>
               <p>{userData.contact}</p>
