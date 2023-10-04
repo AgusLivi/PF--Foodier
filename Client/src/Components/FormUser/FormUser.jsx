@@ -3,11 +3,13 @@ import { useNavigate } from 'react-router-dom';
 import { useFormik } from 'formik';
 
 const FormLogin = () => {
-  const navigate = useNavigate(); 
+  const navigate = useNavigate(); // Obtiene la función navigate
+
   const submitForm = (values) => {
+    // Aquí puedes realizar la lógica de envío del formulario, como enviar una solicitud a un servidor.
     console.log(values);
     
-
+    // Utiliza navigate para redirigir al usuario solo si no hay errores
     if (Object.keys(formik.errors).length === 0) {
       navigate('/home');
     }
@@ -51,13 +53,13 @@ const FormLogin = () => {
       password: '',
     },
     onSubmit: submitForm,
-    validate: validateForm, 
+    validate: validateForm, // Agregamos la función de validación aquí
   });
 
   return (
     <div>
       <form onSubmit={formik.handleSubmit}>
-      
+        {/* Campos de entrada y mensajes de error */}
         <input
           type='text'
           placeholder='Nombre'

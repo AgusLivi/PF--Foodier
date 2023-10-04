@@ -5,10 +5,11 @@ import { Link } from "react-router-dom"
 const Card = ({ name, description, price, old_price, image, amount, date, product_ID }) => {
   const dateSplit = date.split("T")
   const dateOk = dateSplit[0]
+  console.log('idP:', product_ID );
   return (
 
     <div key={product_ID} className={styles.card}> 
-    <Link to={`/detail/${product_ID}`}>
+    <Link to={`/products/${product_ID}`}>
       <h2>{name}</h2>
       <p>{description}</p>
       <p className={styles.price}>Price: {price}</p>

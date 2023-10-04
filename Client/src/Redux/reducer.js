@@ -20,8 +20,18 @@ import {
     GET_POST_BY_ID,
     GET_POST,
     GET_PRODUCTS,
-    GET_CATEGORIES
+    GET_PRODUCT_BY_ID,
+    GET_CATEGORIES,
+
+    PROVINCIAS,
+    MUNICIPIOS,
+    LOCALIDADES,
+
+    SEARCH_BY_ID,
+    CLEAN_DETAIL
+
 } from './actionsType'
+
 
 
 
@@ -50,6 +60,9 @@ import {
         allFavoritesSeller: [],
         createdUser: [],
         createdSellers: [],
+        provincias: [],
+        municipios: [],
+        localidades: []
         //tengo q agregar mas
     };
 
@@ -63,6 +76,12 @@ import {
                     ...state,
                     products: payload,
                     productsCopy: payload,
+                };
+
+            case GET_PRODUCT_BY_ID:
+                return {
+                    ...state,
+                    products: payload,
                 };
 
             case CREATE_PRODUCT:
@@ -170,11 +189,41 @@ import {
                     ...state,
                     allFavoritesSeller: payload,
                 }
-                  ;
+            case PROVINCIAS:
+                return {
+                    ...state,
+                    provincias: payload
+                }
 
-            default:
-                return state;
-        }
-    };
+            case MUNICIPIOS:
+                return {
+                    ...state,
+                    municipios: payload
+                }
 
-    export default reducer;
+            case LOCALIDADES:
+                return {
+                    ...state,
+                    localidades: payload
+                }
+
+
+        case SEARCH_BY_ID:
+            return {
+                ...state,
+                productDetail: payload
+            }
+
+        case CLEAN_DETAIL:
+            return {
+                ...state,
+                productDetail: {}
+            }
+
+        default:
+            return state;
+    }
+};
+
+export default reducer;
+
