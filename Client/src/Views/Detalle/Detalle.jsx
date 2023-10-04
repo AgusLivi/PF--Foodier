@@ -33,10 +33,8 @@ return (
                         <h2>
                             {productDetail.name}
                             </h2>
-                          <div
-                              onClick={handleFavorite}
-                          >
-                              {productDetail.favorite ? '❤️' : '🤍'} {/*Agregar funcionalidad*/}
+                          <div onClick={handleFavorite} className={styles.detailFav}>
+                            {productDetail.favorite ? '❤️' : '🤍'} {/*Agregar funcionalidad*/}
                         <p>{productDetail.average_rating}</p></div>
                         <h2>Descripción:</h2>
                         <p>{productDetail.description}</p>
@@ -53,8 +51,8 @@ return (
                             <p>{productDetail.amount}</p>
                             <button className={styles.quantityButton}>+</button>
                         </div>
-                        <button className={styles.addButton}>Añadir al carrito</button> {/*Agregar funcionalidad*/}
-                        <button className={styles.addButton}>Pagar</button> {/*Agregar funcionalidad*/}
+                        <button className={styles.paymentButton}>Añadir al carrito</button> {/*Agregar funcionalidad*/}
+                        <button className={styles.paymentButton}>Pagar</button> {/*Agregar funcionalidad*/}
                         <button className={styles.closeButton} onClick={handleClose}>Cerrar</button>
                     </div>
                 ) : (
