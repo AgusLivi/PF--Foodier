@@ -1,10 +1,10 @@
     import React, { useState, useEffect } from "react";
     import { Link, useRouteLoaderData } from "react-router-dom";
-    import { createUser } from "../../Redux/actions";
     import { useDispatch, useSelector } from "react-redux";
 
 const SignUp = () => {
-    const [userDate, setUserData] = useState({
+
+    const [userData, setUserData] = useState({
         name: "",
         email: "",
         password:"",
@@ -13,41 +13,46 @@ const SignUp = () => {
 
     const handleInputChange = (event) => {  
         const { name, value } = event.target;
-        setUserData({ ...userDate, [name]: value });
+        setUserData({ ...userData, [name]: value });
         };
 
     const handleSumbit = (event) =>{
         event.preventDefault();
         const formDataToSend ={
-            name: userDate.name,
-            email: userDate.email,
-            password: userDate.password,
-            location: userDate.location
+            name: userData.name,
+            email: userData.email,
+            password: userData.password,
+            location: userData.location
         }
         dispatch(createUser(formDataToSend))
     }
-    const user = useSelector((state)=>{
-        state.createdUser
-      })
-
-
     return(
         <div>
             <h3>Inicia sesión</h3>
+
+
             <p>Correo electrónico de la cuenta: </p>
             <input type='text' placeholder="email" 
             name="email" 
             value={userData.email} 
-            onChange={}
+            onChange={handleInputChange}
             />
+
             <p>Contraseña: </p>
             <input type="password" placeholder="password"
             name="password"
-            
+            value={userData.password}
+            onChange={handleInputChange}
             />
 
-
-
+            <Link to={`/home`}>
+                <input type="submit" 
+                value="Iniciar sesión"
+                // onClick={handleSumbit}
+                ></input>
+            </Link>
         </div>
     )
 }
+
+export default SignUp
