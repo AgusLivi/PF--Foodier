@@ -9,7 +9,8 @@ const PerfilUsuario = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get('http://localhost:3001/sellers/60eb0162-df01-4668-84cd-4ad3e9ce4570');
+        const response = await axios.get('http://localhost:3001/sellers/3094d19a-bd8b-4a54-b991-50eb811f5f45');
+        console.log(response)
         setUserData(response.data);
       } catch (error) {
         console.error('Error al obtener los datos del usuario:', error);
@@ -26,7 +27,7 @@ const PerfilUsuario = () => {
           <div className={styles.profileBackGround}>
           <div className={styles.containerChildProfile}>
               <div className={styles.profile}></div>
-              <div className={styles.profileName}><h1>{userData.name}</h1></div>
+              <div className={styles.profileName}>{userData.name}</div>
               <RatingStars average={userData.average_rating} />
             </div>
               </div>
