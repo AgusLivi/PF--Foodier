@@ -11,7 +11,7 @@ const cargarPruevas = async () =>{
 
     const allUsers = await User.bulkCreate(bulkUsers)
 
-
+ 
     //crea vendedores y productos en la DV
   
     const allProducts = await Product.bulkCreate(bulkProducts)
