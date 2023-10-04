@@ -1,4 +1,3 @@
-/* Estilo para el contenedor principal */
 .detailContainer {
     max-width: 800px;
     margin: 0 auto;
@@ -9,9 +8,8 @@
     flex-wrap: wrap;
 }
 
-/* Estilo para la imagen */
 .detailImg {
-    max-width: 250px;
+    max-width: 270px;
     height: auto;
     margin-right: 80px;
     border-radius: 10px;
@@ -23,7 +21,6 @@
     transform: scale(1.1);
 }
 
-/* Estilo para el contenido */
 .detailContent {
     display: flex;
     flex-direction: column;
@@ -34,36 +31,31 @@
 .detailContent div,
 .detailContent h1,
 .detailContent p {
-  margin-bottom: 10px; /* Agrega un margen inferior de 20px entre estas secciones */
+  margin-bottom: 10px;
 }
 
-/* Estilo para los botones */
-button {
-    padding: 10px 20px;
+.paymentButton {
+    padding: 10px 15px;
     background-color: #ff8c00;
     color: #fff;
     border: none;
     border-radius: 5px;
     font-size: 16px;
     cursor: pointer;
-    margin: 10px 10px 0 0; /* Margin-bottom agregado */
     transition: background-color 0.3s ease, box-shadow 0.3s ease;
-    box-shadow: 0px 0px 5px rgba(255, 140, 0, 0);
 }
 
-button:hover {
+.paymentButton:hover {
     background-color: #ff6b00;
     box-shadow: 0px 0px 10px rgba(255, 140, 0, 0.5);
 }
 
-/* Estilo para el texto "Cargando..." */
 .detailLoading {
     font-size: 20px;
     color: #777;
     margin-bottom: 20px;
 }
 
-/* Estilo para el texto "Sin categoría" */
 .noCategory {
     font-style: italic;
     margin-bottom: 20px;
@@ -74,14 +66,16 @@ button:hover {
     align-items: center;
 }
 
-/* Estilo para los botones de cantidad */
 .quantityButton {
     font-size: 20px;
     background-color: #fe9e0d;
     color: #fff;
-    max-height: fit-content; /* Ajusta el alto de los botones según tus preferencias */
-    cursor: pointer;
+    width: 30px;
+    height: 30px;
     border-radius: 50%;
+    border: none;
+    cursor: pointer;
+    align-items: center;
     justify-content: center;
     margin-top: 10px;
     margin-bottom: 20px;
@@ -89,16 +83,29 @@ button:hover {
     margin-right: 20px;
   }
 
-/* Estilo para el botón de cerrar */
 .closeButton {
     background-color: #e74c3c;
+    padding: 10px 15px;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
 }
 
 .closeButton:hover {
     background-color: #c0392b;
+    box-shadow: 0px 0px 10px rgb(253, 52, 52);
 }
 
 .oldPrice {
     text-decoration: line-through !important;
     color:#4e4e4e
+}
+
+.detailFav {
+    cursor: pointer;
+    margin-top: -35px;
+    margin-left: 350px;
 }
