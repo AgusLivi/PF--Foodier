@@ -9,7 +9,6 @@ import {
     //user actionTypes:
     GET_USER_BY_ID,
     GET_ALL_USER,
-
     
     //post actionTypes:
     GET_POST_BY_ID,
@@ -22,12 +21,16 @@ import {
     GET_SELLER_BY_ID,
     POST_FAVORITES,
     GET_ALL_FAV,
-    CREATE_PAYMENT,
     
     //location actionTypes:
     MUNICIPIOS,
     PROVINCIAS,
     LOCALIDADES,
+
+    //payment actionTypes:
+    CREATE_PAYMENT_REQUEST,
+    CREATE_PAYMENT_SUCCESS,
+    CREATE_PAYMENT_FAILURE,
 
     
     GET_CATEGORIES,
@@ -369,3 +372,33 @@ export const createUser = (userData) => {
     }
 }
 
+//payment actions
+export const createPaymentRequest = (paymentData) => async (dispatch) => {
+    try {
+        dispatch({ 
+            type: CREATE_PAYMENT_REQUEST 
+        });
+        
+        // opciones de CORS para la solicitud
+        const axiosConfig = {
+            withCredentials: true, // Habilita el envio de cookies 🍪
+            headers: {
+                'Content-Type': 'application/json',
+            },
+        };
+
+        const response = await axios.post(`${endPoint}/payments`, paymentData, axiosConfig);
+
+        console.log('Respuesta de la solicitud de pago:', response);
+        
+        dispatch({ 
+            type: CREATE_PAYMENT_SUCCESS, 
+            payload: response.data.url_pago 
+        });
+    } catch (error) {
+        console.error('Error en la solicitud de pago:', error);
+        dispatch({ 
+            type: CREATE_PAYMENT_FAILURE, 
+            payload: error.message });
+    }
+};

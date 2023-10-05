@@ -19,12 +19,16 @@ import {
     GET_SELLER_BY_ID,
     
     GET_ALL_FAV,
-    CREATE_PAYMENT,
     
     //location actionTypes:
     MUNICIPIOS,
     PROVINCIAS,
     LOCALIDADES,
+
+    //payment actionTypes:
+    CREATE_PAYMENT_REQUEST,
+    CREATE_PAYMENT_SUCCESS,
+    CREATE_PAYMENT_FAILURE,
 
     
     GET_CATEGORIES,
@@ -46,6 +50,9 @@ const initialState = {
   provincias: [],
   municipios: [],
   localidades: [],
+  loading: false,
+  paymentUrl: null,
+  error: null,
   //tengo q agregar mas
 };
 
@@ -137,6 +144,23 @@ const reducer = (state = initialState, { type, payload }) => {
         ...state,
         productDetail: {},
       };
+
+    case CREATE_PAYMENT_REQUEST:
+      return { 
+        ...state, 
+        loading: true, 
+        error: null };
+
+    case CREATE_PAYMENT_SUCCESS:
+      return { 
+        ...state, 
+        loading: false, 
+        paymentUrl: payload };
+
+    case CREATE_PAYMENT_FAILURE:
+      return { ...state, 
+        loading: false, 
+        error: payload };
 
     default:
       return state;
