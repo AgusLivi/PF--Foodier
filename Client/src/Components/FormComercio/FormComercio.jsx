@@ -7,9 +7,14 @@ const FormComercio = () => {
   const navigate = useNavigate(); 
 
   const submitForm = async (values) => {
-  try{
-    await createSeller(values)
-    navigate('/home'); 
+  try{ 
+
+    const sellerData = {
+      name: values.nombre,
+      email: values.email,
+      address: values.address
+    }
+
   } catch(error) {
     console.error(error)
   }
@@ -31,8 +36,8 @@ const FormComercio = () => {
     }
 
     // Validación para el campo dirección
-    if (!values.adress) {
-      errors.adress = 'La dirección es obligatoria';
+    if (!values.address) {
+      errors.address = 'La dirección es obligatoria';
     }
 
     // Validación para el campo teléfono
@@ -55,7 +60,7 @@ const FormComercio = () => {
       nombre: '',
       usuario: '',
       email: '',
-      adress: '',
+      address: '',
       phonenumber: '',
       password: '',
     },
@@ -101,10 +106,10 @@ const FormComercio = () => {
             name='adress'
             onChange={formik.handleChange}
             onBlur={formik.handleBlur}
-            value={formik.values.adress}
+            value={formik.values.address}
           />
-          {formik.touched.adress && formik.errors.adress && (
-            <div className='error'>{formik.errors.adress}</div>
+          {formik.touched.address && formik.errors.address && (
+            <div className='error'>{formik.errors.address}</div>
           )}
         </label>
 
