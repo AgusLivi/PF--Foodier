@@ -1,51 +1,112 @@
 .card {
-
-  background: #f5f5f5;
+  border: 1px solid #ddd;
+  display: flex;
+  background-color: #fff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  width: 800px;
+  height: 600px;
   border: 3px solid #fe9e0d;
+  border-radius: 20px;
+  overflow: hidden;
+  margin: 30px auto;
+}
+
+
+
+.containerInfo{
+  
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  text-align: center;
+  width: 100%;
+}
+.containerInfoChild{
+  background: #fff;
+  width: 100%;
+  height: 40%;
+  display: flex;
+  flex-direction: column;
+}
+.info {
+  background: #fff;
+  width: 100%;
+  height: 100%;
+  margin-top: 30px;
+  padding: 16px;
+  justify-content: space-between;
+  display: flex;
+  flex-direction: row;
+}
+.info h2{
+  color: #222;
+  font-size: 30px;
+  font-weight: 700;
+
+}
+.info p{
+  color: #333;
+  font-size: 20px;
+  font-weight: 500;
+}
+.nameDescription {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  height: 100%;
+  flex-wrap: wrap;
+  text-align: left;
+}
+.prices{
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
   text-align: center;
   
-  width: 300px;
-  height: 400px;
-  
-  margin: 30px auto;
+}
+.oldPrice{
+  font-size: 18px;
+  color: #888;
+  text-decoration: line-through;
+}
+.prices .price{
+  font-size: 24px;
+  color: #fe9e0d;
+  font-weight: 600;
+}
+.lineProfile{
+  width: 100%;
+  height: 1px;
+  background: #000;
+  border-radius: 150px;
+  position: relative;
   }
-  .card:hover{
-    transition: 0.5s all;
-  
-    scale: 1.1;
+.profileImg{
+  width: 4em;
+  height: 4em;
+  border-radius: 150px;
+ border: 3px solid #333;
+ background: #fff;
+  position: absolute;
+  top:  -2em;
+  left: 2em;
+}
 
-  }
-  .card h2 {
-    font-size: 1.5rem;
-    margin-bottom: 10px;
-    color: #333;
-  }
-  
-  .card p {
-    font-size: 1rem;
-    color: #666;
-    margin-bottom: 10px;
-  }
-  
-  .card .price {
-    font-size: 1.25rem;
-    font-weight: 600;
-    color: #ff9900; 
-  }
-  
-  .card .old_price {
-    text-decoration: line-through;
-    font-size: 1rem;
-    color: #999;
-  }
-  
-  .card img {
-      width: 300px;
-      height: 300px;
-  }
-  
-  .card .amount {
-    font-size: 1rem;
-    color: #555;
-  }
-  
+.name {
+  font-size: 1.25rem;
+  margin: 0;  
+}
+.description {
+  font-size: 1rem;
+  margin: 8px 0;
+}
+.price, .old_price, .amount, .date {
+  font-size: 0.875rem;
+  margin: 4px 0;
+}
+
+.date {
+  color: #888;
+}
