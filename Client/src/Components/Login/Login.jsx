@@ -15,7 +15,7 @@ const Login = () => {
 
   return (
     <>
-    <header>
+    <div className={style.containerNav}>
     <nav className={style.nav}> 
     <Link className={style.links} to={`/`}>
       <a className={style.navtext}><BiArrowBack/> Volver </a>
@@ -23,7 +23,7 @@ const Login = () => {
 
     <img src={Logo}alt="logo"></img>
    </nav>
-    </header>
+    </div>
     
     <div className={style.body}>
       <div className={style.containerform}>
