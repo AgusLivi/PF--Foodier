@@ -5,20 +5,16 @@
     font-family: 'Montserrat', sans-serif;
 
 }
-
-header {
-	display: flex;
-	align-items: center;
-	justify-content: space-between;
-	height: 80px;
-	padding: 0 2rem;
-	background-color: #f3e2c8;
-	
+.containerNav{
+    background: #f3e2c8;
 }
 
+
+
 nav img{
-    position: absolute;
-    left: 80%;
+  	display: flex;
+	align-items: center;
+	justify-content: space-between;
    }
 
 
