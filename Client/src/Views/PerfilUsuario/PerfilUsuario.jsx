@@ -9,7 +9,7 @@ const PerfilUsuario = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get('http://localhost:3001/sellers/3094d19a-bd8b-4a54-b991-50eb811f5f45');
+        const response = await axios.get('http://localhost:3001/sellers/3094d19a-bd8b-4a54-b991-50eb811f5f45');//poner id
         console.log(response)
         setUserData(response.data);
       } catch (error) {
@@ -59,11 +59,12 @@ const PerfilUsuario = () => {
                 <p>{userData.payment}</p>
               </div>
               <hr />
+              <div>
+                <input type='submit'>Historial</input>
+              </div>
             </div>
           </div>
-          <div className={styles.containerChildOtherProduct}>
-            {/* Aquí puedes agregar el carrusel u otros elementos */}
-          </div>
+         
         </div>
       ) : (
         <p>Cargando datos del usuario...</p>
