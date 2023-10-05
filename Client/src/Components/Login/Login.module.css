@@ -107,19 +107,39 @@ nav img{
     margin-bottom: 15px;
     border-radius: 20px;
     padding: 0 10px;
-    background-color: #fff;
     box-shadow: 0 2px 5px rgba(0, 0, 0, .1);
+    background-color: #fff;
 
 }
 
 .form label input {
     width: 100%;
     padding: 10px;
-    background-color: #fff;
     border: none;
     outline: none;
     border-radius: 20px;
     color: #333;
+    background-color: #fff;
+}
+
+.labelone{
+   
+}
+
+.labeltwo{
+
+}
+
+.labelthree{
+
+}
+
+.labelfour{
+   
+}
+
+.labelfive{
+ 
 }
 
 
