@@ -1,20 +1,20 @@
 import React, { useEffect, useState } from 'react';
 
-function ItemCart({ item, removeFromCart, setPrices, prices }) {
+function ItemCart({ item, removeFromCart, prices, setPrices }) {
   const [quantity, setQuantity] = useState(item.quantity || 1);
 
   useEffect(() => {
-    // Copia el estado actual de prices
-    const updatedPrices = { ...prices };
-
-    // Actualiza el valor para item.id
-    updatedPrices[item.id] = quantity * item.price;
-
-    // Usa la función setPrices para actualizar el estado
-    setPrices(updatedPrices);
-  }, [quantity, item.price, item.id, setPrices]);
+    // Actualiza el precio en el componente ShoppingCart cada vez que cambia la cantidad
+    setPrices((prevPrices) => {
+      const updatedPrices = { ...prevPrices };
+      updatedPrices[item.product_ID] = item.price * quantity;
+      return updatedPrices;
+    });
+    console.log(item)
+  }, [quantity, item.product_ID, item.price, setPrices]);
 
   const increaseQuantity = () => {
+    if(quantity < item.amount)
     setQuantity(quantity + 1);
   };
 
@@ -24,8 +24,13 @@ function ItemCart({ item, removeFromCart, setPrices, prices }) {
     }
   };
 
+  const removeHandler = () => {
+    removeFromCart(item.product_ID, item.price);
+  };
+
   return (
     <div>
+      <button onClick={removeHandler}>x</button>
       <h3>{item.name}</h3>
       <h3>{item.price.toFixed(2)}</h3>
       <h3>
@@ -34,7 +39,6 @@ function ItemCart({ item, removeFromCart, setPrices, prices }) {
         {quantity}
         <button onClick={increaseQuantity}>+</button>
       </h3>
-      <button onClick={() => removeFromCart(item.id)}>Eliminar</button>
     </div>
   );
 }
