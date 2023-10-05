@@ -69,7 +69,6 @@ const getAllProducts = async (req,res) => {
           { page, pageSize }
         )
       );
-      console.log(filteredProducts)
       return res.status(200).json(filteredProducts);
     } else {
       const filteredProducts = await Product.findAll({
@@ -116,8 +115,6 @@ const getProductById = async (req,res) => {
 const createProduct = async (req,res) => {
   const { name, description, price, old_price, categories, image, amount } = req.body;
   const {seller_id} = req.params; // sacamos el ID del vendedor con params
-  console.log(req.body)
-  console.log(seller_id)
   try {
     const newProduct = await Product.create({
       // creamos el nuevo producto en la base de datos
@@ -135,7 +132,6 @@ const createProduct = async (req,res) => {
 
     return res.status(201).json(newProduct);
   } catch (error) {
-    console.error(error);
     res.status(400).json("Error al crear el producto.");
   }
 };
@@ -193,7 +189,6 @@ const getAllCategories = async (req, res)=>{
 
     res.json( categorias );
   } catch (error) {
-    console.error('Error al obtener las categorías:', error);
     res.status(500).json({ mensaje: 'Error interno del servidor' });
   }
 }

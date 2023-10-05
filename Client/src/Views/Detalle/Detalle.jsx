@@ -27,6 +27,13 @@ const Detalle = () => {
     navigate('/home');
   };
 
+  const handlePayment = () => {
+    const monto = productDetail.price;
+    const descripcion = productDetail.name;
+    navigate(`/payments/${monto}/${descripcion}`);
+  };
+
+
   const handleFavorite = () => {
     // Dejo esto para implementar el estado de favoritos
   };
@@ -66,8 +73,11 @@ return (
                             <p>{productDetail.amount}</p>
                             <button className={styles.quantityButton}>+</button>
                         </div>
+
                         <button className={styles.paymentButton} onClick={addCartHandler}>Añadir al carrito</button> {/*Agregar funcionalidad*/}
-                        <button className={styles.paymentButton}>Pagar</button> {/*Agregar funcionalidad*/}
+                        <button className={styles.paymentButton}>Reservar</button> {/*Editar pop up y tiempo de espera*/}
+                        <button className={styles.paymentButton} onClick={handlePayment}>Pagar</button>
+
                         <button className={styles.closeButton} onClick={handleClose}>Cerrar</button>
                     </div>
                 ) : (

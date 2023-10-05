@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { auth, provider } from './config';
 import { signInWithPopup } from 'firebase/auth';
 import Home from '../../Views/Home/Home.jsx'
+import style from './SignInGoogle.module.css'
 
 const SignInGoogle = () => {
 
@@ -21,8 +22,10 @@ const SignInGoogle = () => {
     })
 
     return (
-        <div>
-            <button onClick={handleClick}>Signin with Google</button>
+        <div class={style.socialsignin}>
+        <button class={style.inputgoogle}>
+             <p>Sign In with Google</p>
+        </button>
         </div>
     );
 }

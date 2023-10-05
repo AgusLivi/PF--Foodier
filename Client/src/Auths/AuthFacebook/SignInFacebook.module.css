@@ -1,0 +1,22 @@
+.socialsignin{
+    display: flex;
+    gap: 15px;
+}
+
+.inputfacebook{
+    width: 100%;
+    height: 40px;
+    padding: 0 30px;
+    background: #FFF;
+    border: none;
+    text-align: center;
+    background-color: #4677d8;
+}
+
+.inputfacebook p{
+    font-family: 'Poppins', sans-serif;
+    font-size: 13px;
+    width: 90%;
+    text-align: center;
+    color: #ffffff;
+}

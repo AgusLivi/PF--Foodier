@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { signInWithPopup } from 'firebase/auth';
 import { auth, provider } from "./configFace";
 //import Home from '../../Views/Home/Home.jsx'
+import style from './SignInFacebook.module.css'
 
 const FacebookSignIn = () => {
 
@@ -21,8 +22,10 @@ const FacebookSignIn = () => {
     });
 
     return (
-        <div>
-            <button onClick={handleClick}>Signin With Facebook</button>
+        <div className={style.socialsignin}>
+        <button onClick={handleClick} className={style.inputfacebook}>
+             <p>Sign In with Facebook</p>
+        </button>
         </div>
     );
 }

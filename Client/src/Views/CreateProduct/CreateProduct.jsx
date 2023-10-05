@@ -85,7 +85,7 @@ const Cloudinary = (props) => {
     };
 
     useEffect(() => {
-        dispatch(categoriesFilter())
+        dispatch(getCategories())
     }, [reset])
 
     //console.log(productPost);
