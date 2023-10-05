@@ -95,10 +95,6 @@ nav img{
     align-items: start;
     width: 100%;
     height: auto;
- 
-
-
-
 }
 
 .form label {
@@ -129,19 +125,11 @@ nav img{
 }
 
 .labeltwo{
-background-color: #4267B2;
-}
-
-.labelthree{
-
-}
-
-.labelfour{
-   
+background-color: #4677d8;
 }
 
 .labelfive{
- 
+ border-color: #f3b353;
 }
 
 
