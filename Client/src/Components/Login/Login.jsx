@@ -5,11 +5,11 @@ import SignInFacebook from "../../Auths/AuthFacebook/SignInFacebook";
 import Logo from '../../assets/Logo.svg'
 import { BiArrowBack } from "react-icons/bi";
 import { FcGoogle } from "react-icons/fc"
-import { RiFacebookCircleFill } from "react-icons/ri"
 import { BiUser } from "react-icons/bi"
 import { BsShop } from "react-icons/bs"
 import { FiUserCheck } from "react-icons/fi"
 import { Link } from "react-router-dom"
+import { SiFacebook } from "react-icons/si"
 
 const Login = () => {
 
@@ -27,18 +27,18 @@ const Login = () => {
     
     <div className={style.body}>
       <div className={style.containerform}>
-       
+
         <div className={style.forminformation}>
           <div className={style.forminformationchilds}>
             <h2>Registrate o ingresá para continuar</h2>
           
             <div className={style.form}>
               <label className={style.labelone}>
-                <FcGoogle/> 
+                <FcGoogle size={'2rem'} /> 
                 <SignInGoogle />
               </label>
               <label className={style.labeltwo}>
-              <RiFacebookCircleFill/> 
+              <SiFacebook size={'2rem'}/>
                 <SignInFacebook />
               </label>
 

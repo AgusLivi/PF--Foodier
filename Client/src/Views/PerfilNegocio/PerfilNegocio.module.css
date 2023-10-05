@@ -1,0 +1,148 @@
+/* PerfilNegocio.module.css */
+
+.container {
+    height: 100vh;
+    margin: 0 auto;
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+    position: relative;
+    background: #dfdfdf;
+  }
+  
+  .containerChild {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: max-content;
+    max-width: 800px;
+    margin: 50px auto;
+    height: 80%;
+    box-shadow: 0 0 10px #999;
+    background-color: #fff;
+    border: 3px solid #fe9e0d;
+    border-radius: 20px;
+  }
+  
+  .containerChildAll {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 20px;
+    height: 80%;
+    justify-content: space-around;
+  }
+  
+  .profileBackGround {
+    width: 100%;
+    height: 26%;
+    background: #fe9e0d;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    border-radius: 0px 0px 150px 150px;
+  }
+  
+  .containerChildProfile {
+    top: -40%;
+    margin: 0 auto;
+    max-width: 70%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: absolute;
+    margin-bottom: 20px;
+  }
+  
+  .profile {
+    width: 150px;
+    height: 150px;
+    background-color: #f0f0f0;
+    border-radius: 50%;
+    /* Puedes agregar estilos para la imagen de perfil aquí */
+  }
+  
+  .profileName {
+    margin: 20px auto;
+    font-size: 24px;
+    font-weight: bold;
+  }
+  
+  .profileInfo {
+    width: 70%;
+    min-width: max-content;
+    display: flex;
+    flex-direction: column;
+    margin: 30px auto;
+  }
+  
+  .info {
+    display: flex;
+    flex-direction: row;
+    margin: 10px 0px;
+    justify-content: start;
+    align-items: center;
+    background-color: #f3e2c8;
+    padding: 10px;
+    border-radius: 0px 20px 20px 0px;
+  }
+  
+  label {
+    font-weight: bold;
+    margin-bottom: 5px;
+    font-size: 1.3em;
+  }
+  
+  i {
+    font-size: 24px;
+    padding: 10px;
+  }
+  
+  p {
+    margin: 10px;
+    font-size: 14px;
+  }
+  
+  a {
+    color: #007BFF;
+    text-decoration: none;
+  }
+  
+  a:hover {
+    text-decoration: underline;
+  }
+  
+  i:not(.info i) {
+    color: #fe9e0d;
+  }
+  
+  /* Estilos específicos para PerfilNegocio */
+  
+  /* Estilo base para los labels y los inputs */
+  .label-input-container {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+  }
+  
+  /* Estilo para los labels */
+  .label-input-container label {
+    width: 200px;
+    font-weight: bold;
+  }
+  
+  /* Estilo para los inputs */
+  .label-input-container input {
+    flex: 1;
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+  
+  /* Estilo para las líneas separadoras */
+  .hr-line {
+    margin: 10px 0;
+    border: 0;
+    border-top: 1px solid #ccc;
+  }
+  

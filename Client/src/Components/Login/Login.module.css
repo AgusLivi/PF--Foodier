@@ -95,7 +95,8 @@ nav img{
     align-items: start;
     width: 100%;
     height: auto;
-    background: none;
+ 
+
 
 
 }
@@ -108,7 +109,7 @@ nav img{
     border-radius: 20px;
     padding: 0 10px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, .1);
-    background-color: #fff;
+   
 
 }
 
@@ -119,15 +120,16 @@ nav img{
     outline: none;
     border-radius: 20px;
     color: #333;
-    background-color: #fff;
-}
-
-.labelone{
+    background-color: transparent;
    
 }
 
-.labeltwo{
+.labelone{
+    background-color: #fff;
+}
 
+.labeltwo{
+background-color: #4267B2;
 }
 
 .labelthree{
