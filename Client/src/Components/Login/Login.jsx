@@ -61,8 +61,8 @@ const Login = () => {
               <Link to={`/userlogin`}>
               <input className={style.input} type="button" value="Ya tengo cuenta"></input>
               </Link>
-              </label>
-              
+              </label> <div className=""></div>
+
             </div>
           </div>
         </div>
