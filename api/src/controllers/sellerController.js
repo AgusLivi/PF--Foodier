@@ -31,7 +31,7 @@ const bcrypt = require('bcrypt');    // npm install bcrypt
     // Crear un nuevo comercio
   const createSeller = async (req, res) => {
   try {
-    const { name, email, address, time, contact, payment, image } = req.body;
+    const { name, email, address, time, contact, payment, image, password } = req.body;
 
     const hashedPassword = await bcrypt.hash(password, 10);
 
@@ -52,7 +52,7 @@ const bcrypt = require('bcrypt');    // npm install bcrypt
       res.status(400).json({ error: 'El email ya está registrado.' });
     } else {
       console.error(error);
-      res.status(500).json({ error: 'Error al crear el vendedor.' });
+      res.status(500).json({ error: 'Error al crear el vendedor.', errorMessage: error.message });
     }
   }
 };

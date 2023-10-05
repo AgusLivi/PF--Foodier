@@ -35,7 +35,7 @@ const FormComercio = () => {
     const errors = {};
 
     // Validación para el campo usuario
-    if (!values.usuario) {
+    if (!values.name) {
       errors.usuario = 'El usuario es obligatorio';
     }
 
@@ -68,7 +68,7 @@ const FormComercio = () => {
 
   const formik = useFormik({
     initialValues: {
-      nombre: '',
+      name: '',
       usuario: '',
       email: '',
       address: '',
@@ -86,13 +86,13 @@ const FormComercio = () => {
           Usuario:
           <input
             type='text'
-            name='usuario'
+            name='name'
             onChange={formik.handleChange}
             onBlur={formik.handleBlur}
-            value={formik.values.usuario}
+            value={formik.values.name}
           />
-          {formik.touched.usuario && formik.errors.usuario && (
-            <div className='error'>{formik.errors.usuario}</div>
+          {formik.touched.name && formik.errors.name && (
+            <div className='error'>{formik.errors.name}</div>
           )}
         </label>
 
