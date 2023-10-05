@@ -1,13 +1,18 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useFormik } from 'formik';
+import {createSeller } from '../../Redux/actions'
 
 const FormComercio = () => {
   const navigate = useNavigate(); 
 
-  const submitForm = (values) => {
-    console.log(values);
+  const submitForm = async (values) => {
+  try{
+    await createSeller(values)
     navigate('/home'); 
+  } catch(error) {
+    console.error(error)
+  }
   };
 
   const validateForm = (values) => {
