@@ -1,31 +1,48 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useFormik } from 'formik';
+import { useDispatch } from 'react-redux'
+import { createUser } from '../../Redux/actions'
+
 
 const FormLogin = () => {
   const navigate = useNavigate(); // Obtiene la función navigate
+  const dispatch = useDispatch();
 
-  const submitForm = (values) => {
-    // Aquí puedes realizar la lógica de envío del formulario, como enviar una solicitud a un servidor.
-    console.log(values);
-    
-    // Utiliza navigate para redirigir al usuario solo si no hay errores
-    if (Object.keys(formik.errors).length === 0) {
-      navigate('/home');
+  const submitForm = async (values) => {
+
+    try {
+      const userData = {
+        name: values.name,
+        email: values.email,
+        password: values.password,
+        location: values.location
+      }
+
+      await dispatch(createUser(userData))
+
+      if (Object.keys(formik.errors).length === 0) {
+      }
+      navigate('/home')
+
+    } catch(error) {
+      console.error(error)
     }
-  };
+    }
+
+    
+  
+    
+    
+
+  
 
   const validateForm = (values) => {
     const errors = {};
 
     // Validación para el campo nombre
-    if (!values.nombre) {
-      errors.nombre = 'El nombre es obligatorio';
-    }
-
-    // Validación para el campo usuario
-    if (!values.usuario) {
-      errors.usuario = 'El usuario es obligatorio';
+    if (!values.name) {
+      errors.name = 'El nombre es obligatorio';
     }
 
     // Validación para el campo email
@@ -47,8 +64,7 @@ const FormLogin = () => {
 
   const formik = useFormik({
     initialValues: {
-      nombre: '',
-      usuario: '',
+      name: '',
       email: '',
       password: '',
     },
@@ -63,23 +79,15 @@ const FormLogin = () => {
         <input
           type='text'
           placeholder='Nombre'
-          name='nombre'
+          name='name'
           onChange={formik.handleChange}
           onBlur={formik.handleBlur}
-          value={formik.values.nombre}
+          value={formik.values.name}
         />
         {formik.touched.nombre && formik.errors.nombre && (
           <div className='error'>{formik.errors.nombre}</div>
         )}
 
-        <input
-          type='text'
-          placeholder='Usuario'
-          name='usuario'
-          onChange={formik.handleChange}
-          onBlur={formik.handleBlur}
-          value={formik.values.usuario}
-        />
         {formik.touched.usuario && formik.errors.usuario && (
           <div className='error'>{formik.errors.usuario}</div>
         )}
@@ -107,6 +115,15 @@ const FormLogin = () => {
         {formik.touched.password && formik.errors.password && (
           <div className='error'>{formik.errors.password}</div>
         )}
+
+        <input
+          type='text'
+          placeholder='Localidad'
+          name='location'
+          onChange={formik.handleChange}
+          onBlur={formik.handleBlur}
+          value={formik.values.location}
+        />
 
         <button type='submit'>Registrarse</button>
       </form>
