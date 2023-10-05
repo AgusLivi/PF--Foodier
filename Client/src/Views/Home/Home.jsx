@@ -111,18 +111,22 @@ const Home = () => {
   };
 
   return (
-    <div>
-      <div className={Style.containerChild}>
-        <form onSubmit={handleSubmit} className={Style.containerChildFilter}>
-          <div className={Style.itemForm}>
-            <input
+    <div className={Style.containerChilds}>
+      <div className={Style.searchBar}>
+<label><input
               type="text"
               name="name"
               placeholder="Nombre del producto"
               value={formData.name}
               onChange={handleInputChange}
-            />
-          </div>
+            /><i className='bx bx-search'></i></label>
+      </div>
+      <hr/>
+      
+      <div className={Style.containerChild}>
+        
+        <form onSubmit={handleSubmit} className={Style.containerChildFilter}>
+          
           {/* Modal */}
           <div className={Style.itemForm}>
             <div>
@@ -137,7 +141,7 @@ const Home = () => {
                 )}
               </select>
             </div>
-          </div>
+          </div>  <hr/>
           <div className={Style.itemForm}>
             <select name="" id="" onChange={handleMuniChange}>
               <option value="" disabled selected>Selecciona un municipio</option>
@@ -149,7 +153,7 @@ const Home = () => {
                 <option>Selecciona un municipio</option>
               )}
             </select>
-          </div>
+          </div>  <hr/>
           <div className={Style.itemForm}>
             <select name="" id="" onChange={handleLocalChange}>
               <option value="" disabled selected>Selecciona una localidad</option>
@@ -251,6 +255,7 @@ const Home = () => {
         <CardContainer />
       </div>
     </div>
+
   );
 };
 
