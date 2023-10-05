@@ -1,0 +1,36 @@
+.paymentContainer {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    flex-direction: column;
+    text-align: center;
+}
+
+.paymentImg {
+    background-image: url('../../assets/logoMercadoPago.png');
+    width: 300px;
+    height: 300px;
+    background-repeat: no-repeat;
+    background-size: contain;
+    margin-bottom: -200px;
+}
+
+.paymentButton {
+    padding: 10px 15px;
+    background-color: #216fff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.paymentButton:hover {
+    background-color: #2079ff;
+    box-shadow: 0px 0px 10px rgba(0, 153, 255, 0.5);
+}
