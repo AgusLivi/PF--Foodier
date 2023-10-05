@@ -2,18 +2,26 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useFormik } from 'formik';
 import {createSeller } from '../../Redux/actions'
+import { useDispatch } from 'react-redux'
 
 const FormComercio = () => {
   const navigate = useNavigate(); 
+  const dispatch = useDispatch();
 
   const submitForm = async (values) => {
+
   try{ 
 
     const sellerData = {
       name: values.nombre,
       email: values.email,
-      address: values.address
-    }
+      address: values.address,
+      phonenumber: values.phonenumber,
+      password: values.password,
+    } 
+    
+    await dispatch(createSeller(sellerData)); 
+    navigate('/home'); 
 
   } catch(error) {
     console.error(error)
@@ -103,7 +111,7 @@ const FormComercio = () => {
           Dirección:
           <input
             type='text'
-            name='adress'
+            name='address'
             onChange={formik.handleChange}
             onBlur={formik.handleBlur}
             value={formik.values.address}
