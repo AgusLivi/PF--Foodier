@@ -2,7 +2,7 @@ import React from "react";
 import style from "./Login.module.css";
 import SignInGoogle from "../../Auths/AuthGoogle/SignInGoogle";
 import SignInFacebook from "../../Auths/AuthFacebook/SignInFacebook";
-import Logo from '../../assets/Logo.png'
+import Logo from '../../assets/Logo.svg'
 import { BiArrowBack } from "react-icons/bi";
 import { FcGoogle } from "react-icons/fc"
 import { RiFacebookCircleFill } from "react-icons/ri"
