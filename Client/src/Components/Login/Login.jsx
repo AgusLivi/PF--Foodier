@@ -27,7 +27,7 @@ const Login = () => {
     
     <div className={style.body}>
       <div className={style.containerform}>
-       
+
         <div className={style.forminformation}>
           <div className={style.forminformationchilds}>
             <h2>Registrate o ingresá para continuar</h2>
