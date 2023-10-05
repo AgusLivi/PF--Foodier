@@ -1,38 +1,76 @@
-import React from 'react'
-import Style from './PerfilUsuario.module.css'
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
+import styles from './PerfilUsuario.module.css';
+import RatingStars from './RatingStars';
 
 const PerfilUsuario = () => {
-  return (
-    <div>
-        <div className={Style.container}>{/*flex colunm es container*/}
-            <div className={Style.perfil}>
-              <div className={Style.logo}> <p>Foto de perfil</p></div>
-              
-              <div className={Style.containerNombreEmail}>
-                <p className={Style.nombreUsuario}>Nombre de usuario</p>
-                <p className={Style.emailUsuario}>example@gmail.com</p>
-                </div>
-            
-            </div>
-            <div className={Style.containerItem}>{/*caja de item*/}
-                <div><i className="fa-solid fa-user"></i><p>Datos Personales</p></div>
-                <div><i className="fa-regular fa-address-card"></i><p>Historial de compras</p></div>
-                <div><i className="fa-solid fa-headphones"></i><p>Ayuda en linea</p></div>
-                <div><i className="fa-solid fa-wallet"></i><p>Metodos de pago</p></div>
-            </div>
-            <div className={Style.form}>
-              <label>Mi perfil</label>
-              <div className={Style.containerDetail}><i className="fa-solid fa-location-dot"></i><p>Direccion</p></div>
-              <div className={Style.containerDetail}><i className="fa-regular fa-bell"></i><p>Notificaciones</p><p className={Style.ntf}>10</p>{/*numero variante*/}</div>
-              <div className={Style.containerDetail}><i className="fa-solid fa-hand-holding-dollar"></i><p>Donaciones</p></div>
-              <div className={Style.containerDetail}><i className="fa-solid fa-store"></i><p>Registra tu negocio</p></div>
-              <div className={Style.containerDetail}><i className="fa-solid fa-users"></i><p>Invita amigos</p></div>
-              <div className={Style.containerDetail }><i class="fa-solid fa-right-from-bracket"></i><p>Cerrar sesion</p></div>
-            </div>
-        </div>
+  const [userData, setUserData] = useState(null);
 
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get('http://localhost:3001/sellers/3094d19a-bd8b-4a54-b991-50eb811f5f45');//poner id
+        console.log(response)
+        setUserData(response.data);
+      } catch (error) {
+        console.error('Error al obtener los datos del usuario:', error);
+      }
+    };
+
+    fetchData();
+  }, []);
+
+  return (
+    <div className={styles.container}>
+      {userData ? (
+        <div className={styles.containerChild}>
+          <div className={styles.profileBackGround}>
+          <div className={styles.containerChildProfile}>
+              <div className={styles.profile}></div>
+              <div className={styles.profileName}>{userData.name}</div>
+              <RatingStars average={userData.average_rating} />
+            </div>
+              </div>
+          <div className={styles.containerChildAll}>
+            
+           
+            
+            <div className={styles.profileInfo}>
+            <h2>Información</h2>
+              <hr />
+       
+              <div className={styles.info}>
+               <strong><i className='bx bx-envelope'></i> <label>Email:</label></strong>
+                <p>{userData.email}</p>
+                <hr />
+              </div>
+              <div className={styles.info}>
+                <strong><i className='bx bxs-home'></i><label>Vive en:</label></strong>
+                <p>{userData.address}</p>
+                <hr />
+              </div>
+              <div className={styles.info}>
+                <strong><i className='bx bx-phone'></i><label>Teléfono:</label></strong>
+                <p>{userData.contact}</p>
+                <hr />
+              </div>
+              <div className={styles.info}>
+               <strong><i className='bx bxs-credit-card'></i>  <label>Método de Pago:</label></strong>
+                <p>{userData.payment}</p>
+              </div>
+              <hr />
+              <div>
+                <input type='submit'>Historial</input>
+              </div>
+            </div>
+          </div>
+         
+        </div>
+      ) : (
+        <p>Cargando datos del usuario...</p>
+      )}
     </div>
-  )
+  );
 }
 
-export default PerfilUsuario
+export default PerfilUsuario;

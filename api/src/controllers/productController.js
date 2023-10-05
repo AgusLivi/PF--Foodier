@@ -12,12 +12,14 @@ const paginate = (query, { page, pageSize }) => {
 const getAllProducts = async (req,res) => {
   
   const {categories, address, average_rating, payment, order, orderBy, page, pageSize, name} = req.query;
-  
   try {
     // Filtra por categoría exacta en la tabla 'products'
     let filterConditions = {};
     if (categories != null && categories != "") {
-      filterConditions.categories = { [Op.contains]: [categories] };
+      const categoriesArray = categories.split(",");
+      filterConditions.categories ={
+        [Op.overlap]: categoriesArray,
+      };
     }
     //Filtra por nombre
     if (name != null && name != "") {
@@ -35,7 +37,7 @@ const getAllProducts = async (req,res) => {
 
     if (address != null && address != "") {
       sellerFilterConditions.address = {
-        [Op.iLike]: address,
+        [Op.iLike]: `%${address}%`
       };
     }
 
@@ -111,13 +113,12 @@ const getProductById = async (req,res) => {
 
 // Post de productos
 const createProduct = async (req,res) => {
-  const { name, date, description, price, old_price, categories, image, amount } = req.body;
+  const { name, description, price, old_price, categories, image, amount } = req.body;
   const {seller_id} = req.params; // sacamos el ID del vendedor con params
   try {
     const newProduct = await Product.create({
       // creamos el nuevo producto en la base de datos
       name,
-      date,
       description,
       price,
       old_price,
@@ -131,13 +132,12 @@ const createProduct = async (req,res) => {
 
     return res.status(201).json(newProduct);
   } catch (error) {
-    console.error(error);
     res.status(400).json("Error al crear el producto.");
   }
 };
 
 const updateProduct = async (req, res) => {
-  const { name, date, description, price, old_price, categories, image, amount } = req.body;
+  const { name, description, price, old_price, categories, image, amount } = req.body;
   const { productId } = req.params; // id del producto por params
 
   try {
@@ -150,7 +150,7 @@ const updateProduct = async (req, res) => {
 
     // actualizamos los campos del producto con los nuevos valores
     product.name = name;
-    product.date = date;
+    // product.date = date;
     product.description = description;
     product.price = price;
     product.old_price = old_price;
@@ -189,7 +189,6 @@ const getAllCategories = async (req, res)=>{
 
     res.json( categorias );
   } catch (error) {
-    console.error('Error al obtener las categorías:', error);
     res.status(500).json({ mensaje: 'Error interno del servidor' });
   }
 }

@@ -1,55 +1,76 @@
-import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import React from "react";
 import style from "./Login.module.css";
-import FacebookLogin from 'react-facebook-login';
+import SignInGoogle from "../../Auths/AuthGoogle/SignInGoogle";
+import SignInFacebook from "../../Auths/AuthFacebook/SignInFacebook";
+import Logo from '../../assets/Logo.svg'
+import { BiArrowBack } from "react-icons/bi";
+import { FcGoogle } from "react-icons/fc"
+import { RiFacebookCircleFill } from "react-icons/ri"
+import { BiUser } from "react-icons/bi"
+import { BsShop } from "react-icons/bs"
+import { FiUserCheck } from "react-icons/fi"
+import { Link } from "react-router-dom"
 
 const Login = () => {
 
-
-  const onFailure = (error) => {
-    console.error("Inicio de sesión fallido:", error);
-  };
-
   return (
+    <>
+    <header>
+    <nav className={style.nav}> 
+    <Link className={style.links} to={`/`}>
+      <a className={style.navtext}><BiArrowBack/> Volver </a>
+    </Link>
+
+    <img src={Logo}alt="logo"></img>
+   </nav>
+    </header>
+    
     <div className={style.body}>
       <div className={style.containerform}>
-        <div className={style.information}>
-          <div className={style.infochilds}>
-            <h2>Bienvenido</h2>
-            <p>Para registrarte como empresa haz click debajo</p>
-            <Link to={`/formcomercio`}>
-              <input type="button" value="Registrarme"></input>
-            </Link>
-          </div>
-        </div>
+       
         <div className={style.forminformation}>
           <div className={style.forminformationchilds}>
-            <h2>Crear una Cuenta</h2>
-            <div className={style.icons}>
-            </div>
-            <p>O usa tu email para registrarte como usuario</p>
-            <form className={style.form}>
+            <h2>Registrate o ingresá para continuar</h2>
+          
+            <div className={style.form}>
               <label>
-                <i class='bx bx-user'></i>
-                <input type="text" placeholder="Nombre Completo"></input>
+                <FcGoogle/> 
+                <SignInGoogle />
               </label>
               <label>
-                <i class='bx bx-envelope'></i>
-                <input type="email" placeholder="Correo Electrónico"></input>
+              <RiFacebookCircleFill/> 
+                <SignInFacebook />
               </label>
+
               <label>
-                <i class='bx bx-lock-alt'></i>
-                <input type="password" placeholder="Contraseña"></input>
-              </label>
-              <Link to={`/home`}>
-                <input type="submit" value="Registrarme"></input>
+              <BsShop/> 
+              <Link to={`/formcomercio`}>
+               <input className={style.input} type="button" value="Soy Vendedor"></input>
               </Link>
-            </form>
+              </label>
+
+              <label>
+             <BiUser/> 
+             <Link to={`/formuser`}>
+              <input className={style.input} type="button" value="Crea tu usuario"></input>
+             </Link>
+              </label>
+              
+              <label>
+              <FiUserCheck/>
+              <Link to={`/userlogin`}>
+              <input className={style.input} type="button" value="Ya tengo cuenta"></input>
+              </Link>
+              </label>
+            </div>
           </div>
         </div>
       </div>
     </div>
+    </>
   );
 };
 
 export default Login;
+
+

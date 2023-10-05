@@ -1,0 +1,111 @@
+.detailContainer {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+    flex-wrap: wrap;
+}
+
+.detailImg {
+    max-width: 270px;
+    height: auto;
+    margin-right: 80px;
+    border-radius: 10px;
+    transition: transform 0.3s ease;
+    margin-top: 80px;
+}
+
+.detailImg:hover {
+    transform: scale(1.1);
+}
+
+.detailContent {
+    display: flex;
+    flex-direction: column;
+    margin-top: 10px;
+}
+
+.detailContent h2,
+.detailContent div,
+.detailContent h1,
+.detailContent p {
+  margin-bottom: 10px;
+}
+
+.paymentButton {
+    padding: 10px 15px;
+    background-color: #ff8c00;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.paymentButton:hover {
+    background-color: #ff6b00;
+    box-shadow: 0px 0px 10px rgba(255, 140, 0, 0.5);
+}
+
+.detailLoading {
+    font-size: 20px;
+    color: #777;
+    margin-bottom: 20px;
+}
+
+.noCategory {
+    font-style: italic;
+    margin-bottom: 20px;
+}
+
+.quantityContainer {
+    display: flex;
+    align-items: center;
+}
+
+.quantityButton {
+    font-size: 20px;
+    background-color: #fe9e0d;
+    color: #fff;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    border: none;
+    cursor: pointer;
+    align-items: center;
+    justify-content: center;
+    margin-top: 10px;
+    margin-bottom: 20px;
+    margin-left: 20px;
+    margin-right: 20px;
+  }
+
+.closeButton {
+    background-color: #e74c3c;
+    padding: 10px 15px;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.closeButton:hover {
+    background-color: #c0392b;
+    box-shadow: 0px 0px 10px rgb(253, 52, 52);
+}
+
+.oldPrice {
+    text-decoration: line-through !important;
+    color:#4e4e4e
+}
+
+.detailFav {
+    cursor: pointer;
+    margin-top: -35px;
+    margin-left: 350px;
+}

@@ -1,7 +1,46 @@
-/* #51DDF5 turquesa
-#91FFB8 verde agua 
-#B3E675 verde pasto
-#DBCC44 amarillo marroncito
-#000000 negro  */
-/*h1 = arial black / resaltar texto =sanz serif
-parrafos = tenon */
+/* Estilos generales para el formulario y botón de mostrar/ocultar modal */
+form {
+    display: flex;
+    justify-content: space-around;
+    background: #f3e2c8;
+    height: 3em;
+    align-items: center;
+  }
+  
+  form select {
+    width: min-content;
+  }
+  
+  /* Estilos para el modal */
+  .checkbox {
+    border: 1px solid #333;
+    background: #f5f5f5;
+    overflow: hidden;
+    max-height: 0;
+    transition: max-height 0.3s ease-in-out;
+  }
+  
+  /* Estilos para los elementos dentro del modal */
+  .checkbox label {
+    margin: 2px auto;
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: space-between;
+    width: 90%;
+  }
+  
+  /* Estilos para el modal cuando está visible */
+  .checkbox.modalVisible {
+    max-height: 500px; /* Cambia 1000px por la altura máxima deseada cuando el modal está visible */
+    overflow: scroll;
+}
+.categoria{
+    background: #f5f5f5;
+}
+  /* Otros estilos que puedes agregar según tus necesidades */
+.containerPost{
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+    margin: 0 auto;
+}
