@@ -5,11 +5,12 @@
 
 .inputfacebook{
     width: 100%;
-    height: 50px;
+    height: 40px;
     padding: 0 30px;
     background: #FFF;
     border: none;
     text-align: center;
+    background-color: #4267B2;
 }
 
 .inputfacebook p{
@@ -17,5 +18,5 @@
     font-size: 13px;
     width: 90%;
     text-align: center;
-    color: #333;
+    color: #111010;
 }
