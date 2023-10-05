@@ -33,35 +33,36 @@ const Login = () => {
             <h2>Registrate o ingresá para continuar</h2>
           
             <div className={style.form}>
-              <label>
+              <label className={style.labelone}>
                 <FcGoogle/> 
                 <SignInGoogle />
               </label>
-              <label>
+              <label className={style.labeltwo}>
               <RiFacebookCircleFill/> 
                 <SignInFacebook />
               </label>
 
-              <label>
+              <label className={style.labelthree}>
               <BsShop/> 
               <Link to={`/formcomercio`}>
                <input className={style.input} type="button" value="Soy Vendedor"></input>
               </Link>
               </label>
 
-              <label>
+              <label className={style.labelfour}>
              <BiUser/> 
              <Link to={`/formuser`}>
               <input className={style.input} type="button" value="Crea tu usuario"></input>
              </Link>
               </label>
               
-              <label>
+              <label className={style.labelfive}>
               <FiUserCheck/>
               <Link to={`/userlogin`}>
               <input className={style.input} type="button" value="Ya tengo cuenta"></input>
               </Link>
-              </label>
+              </label> <div className=""></div>
+
             </div>
           </div>
         </div>
