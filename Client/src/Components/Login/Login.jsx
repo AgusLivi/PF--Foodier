@@ -9,7 +9,7 @@ import { BiUser } from "react-icons/bi"
 import { BsShop } from "react-icons/bs"
 import { FiUserCheck } from "react-icons/fi"
 import { Link } from "react-router-dom"
-import { SiFacebook } from "react-icons/si"
+import { LiaFacebookSquare } from "react-icons/lia"
 
 const Login = () => {
 
@@ -38,7 +38,7 @@ const Login = () => {
                 <SignInGoogle />
               </label>
               <label className={style.labeltwo}>
-              <SiFacebook size={'2rem'}/>
+              <LiaFacebookSquare size={'2rem'}/>
                 <SignInFacebook />
               </label>
 
