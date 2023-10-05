@@ -13,7 +13,7 @@ const FormComercio = () => {
   try{ 
 
     const sellerData = {
-      name: values.nombre,
+      name: values.name,
       email: values.email,
       address: values.address,
       password: values.password,
