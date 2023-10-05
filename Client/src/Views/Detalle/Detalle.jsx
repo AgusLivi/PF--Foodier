@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useParams, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { cleanDetail, getProductById } from '../../Redux/actions';
@@ -9,12 +9,19 @@ const Detalle = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const productDetail = useSelector((state) => state.productDetail);
+  const [cartItems, setCartItems] = useState([]);
   console.log('pDetail:', productDetail);
 
   useEffect(() => {
     dispatch(getProductById(product_ID));
     return () => dispatch(cleanDetail())
   }, [dispatch, product_ID]);
+
+  useEffect(() => {
+    const cartItemsFromLocalStorage = JSON.parse(localStorage.getItem('cartItems')) || [];
+    setCartItems(cartItemsFromLocalStorage);
+  }, []);
+
 
   const handleClose = () => {
     navigate('/home');
@@ -31,9 +38,17 @@ const Detalle = () => {
     // Dejo esto para implementar el estado de favoritos
   };
 
+  const addCartHandler = () => {
+    // Agregar el producto al estado local del carrito
+    setCartItems([...cartItems, productDetail]);
+
+    // Actualizar el Local Storage con los ítems actuales del carrito
+    localStorage.setItem('cartItems', JSON.stringify([...cartItems, productDetail]));
+  }
+
 return (
         <div className={styles.detailContainer}>
-            <img src={productDetail.image} alt={productDetail.name} className={styles.detailImg}/>
+            {/* <img src={productDetail.image} alt={productDetail.name} className={styles.detailImg}/> */}
             <div className={styles.detailContent}>
                 {productDetail ? (
                     <div>
@@ -58,9 +73,11 @@ return (
                             <p>{productDetail.amount}</p>
                             <button className={styles.quantityButton}>+</button>
                         </div>
-                        <button className={styles.paymentButton}>Añadir al carrito</button> {/*Agregar funcionalidad*/}
+
+                        <button className={styles.paymentButton} onClick={addCartHandler}>Añadir al carrito</button> {/*Agregar funcionalidad*/}
                         <button className={styles.paymentButton}>Reservar</button> {/*Editar pop up y tiempo de espera*/}
                         <button className={styles.paymentButton} onClick={handlePayment}>Pagar</button>
+
                         <button className={styles.closeButton} onClick={handleClose}>Cerrar</button>
                     </div>
                 ) : (
