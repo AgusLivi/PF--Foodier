@@ -32,10 +32,10 @@ const Detalle = () => {
   };
 
   const addCartHandler = () => {
-    // Agregar el producto al estado local del carrito
+    // agregar el producto al estado local del carrito
     setCartItems([...cartItems, productDetail]);
 
-    // Actualizar el Local Storage con los ítems actuales del carrito
+    // actualizar el Local Storage con los ítems actuales del carrito
     localStorage.setItem('cartItems', JSON.stringify([...cartItems, productDetail]));
   }
 
