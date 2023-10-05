@@ -197,6 +197,7 @@ export const getUserById = (id) => {
 }
 
 export const createSeller = (sellerData) => {
+    console.log(sellerData)
     return async () => {
         try {
             const { data } = await axios.post(`${endPoint}/sellers`, sellerData)

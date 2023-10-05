@@ -1,20 +1,41 @@
 import React from 'react';
-import { useNavigate } from 'react-router-dom';
+import { createRoutesFromChildren, useNavigate } from 'react-router-dom';
 import { useFormik } from 'formik';
+import {createSeller } from '../../Redux/actions'
+import { useDispatch } from 'react-redux'
 
 const FormComercio = () => {
   const navigate = useNavigate(); 
+  const dispatch = useDispatch();
 
-  const submitForm = (values) => {
-    console.log(values);
+  const submitForm = async (values) => {
+
+  try{ 
+
+    const sellerData = {
+      name: values.name,
+      email: values.email,
+      address: values.address,
+      password: values.password,
+      time: values.time,
+      contact: values.contact, 
+      payment: values.payment, 
+      image: values.image, 
+    } 
+    
+    await dispatch(createSeller(sellerData)); 
     navigate('/home'); 
+
+  } catch(error) {
+    console.error(error)
+  }
   };
 
   const validateForm = (values) => {
     const errors = {};
 
     // Validación para el campo usuario
-    if (!values.usuario) {
+    if (!values.name) {
       errors.usuario = 'El usuario es obligatorio';
     }
 
@@ -26,13 +47,13 @@ const FormComercio = () => {
     }
 
     // Validación para el campo dirección
-    if (!values.adress) {
-      errors.adress = 'La dirección es obligatoria';
+    if (!values.address) {
+      errors.address = 'La dirección es obligatoria';
     }
 
     // Validación para el campo teléfono
-    if (!values.phonenumber) {
-      errors.phonenumber = 'El teléfono es obligatorio';
+    if (!values.contact) {
+      errors.contact = 'El teléfono es obligatorio';
     }
 
     // Validación para el campo contraseña
@@ -47,11 +68,11 @@ const FormComercio = () => {
 
   const formik = useFormik({
     initialValues: {
-      nombre: '',
+      name: '',
       usuario: '',
       email: '',
-      adress: '',
-      phonenumber: '',
+      address: '',
+      contact: '',
       password: '',
     },
     onSubmit: submitForm,
@@ -65,13 +86,13 @@ const FormComercio = () => {
           Usuario:
           <input
             type='text'
-            name='usuario'
+            name='name'
             onChange={formik.handleChange}
             onBlur={formik.handleBlur}
-            value={formik.values.usuario}
+            value={formik.values.name}
           />
-          {formik.touched.usuario && formik.errors.usuario && (
-            <div className='error'>{formik.errors.usuario}</div>
+          {formik.touched.name && formik.errors.name && (
+            <div className='error'>{formik.errors.name}</div>
           )}
         </label>
 
@@ -93,13 +114,13 @@ const FormComercio = () => {
           Dirección:
           <input
             type='text'
-            name='adress'
+            name='address'
             onChange={formik.handleChange}
             onBlur={formik.handleBlur}
-            value={formik.values.adress}
+            value={formik.values.address}
           />
-          {formik.touched.adress && formik.errors.adress && (
-            <div className='error'>{formik.errors.adress}</div>
+          {formik.touched.address && formik.errors.address && (
+            <div className='error'>{formik.errors.address}</div>
           )}
         </label>
 
@@ -107,15 +128,40 @@ const FormComercio = () => {
           Teléfono:
           <input
             type='text'
-            name='phonenumber'
+            name='contact'
             onChange={formik.handleChange}
             onBlur={formik.handleBlur}
-            value={formik.values.phonenumber}
+            value={formik.values.contact}
           />
           {formik.touched.phonenumber && formik.errors.phonenumber && (
             <div className='error'>{formik.errors.phonenumber}</div>
           )}
         </label>
+
+        <label>
+          Horario:
+          <input
+            type='text'
+            name='time'
+            onChange={formik.handleChange}
+            onBlur={formik.handleBlur}
+            value={formik.values.time}
+          />
+        </label>
+
+
+        <label>
+          Métodos de pago:
+          <input
+          type='texr'
+          name='payment'
+          onChange={formik.handleChange}
+          onBlur={formik.handleBlur}
+          value={formik.values.payment}
+          />
+        </label>
+
+
 
         <label>
           Contraseña:
@@ -129,6 +175,17 @@ const FormComercio = () => {
           {formik.touched.password && formik.errors.password && (
             <div className='error'>{formik.errors.password}</div>
           )}
+        </label>
+
+        <label>
+          Imagen:
+          <input
+            type='text'
+            name='image'
+            onChange={formik.handleChange}
+            onBlur={formik.handleBlur}
+            value={formik.values.image}
+          />
         </label>
 
         <button type='submit'>Registrarse</button>
