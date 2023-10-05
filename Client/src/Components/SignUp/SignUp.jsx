@@ -2,7 +2,9 @@
     import { Link, useRouteLoaderData } from "react-router-dom";
     import { useDispatch, useSelector } from "react-redux";
     import styles from "./SignUp.module.css"
-const SignUp = () => {
+    import wave from "../../assets/wave.svg"
+
+   const SignUp = () => {
 
     const [userData, setUserData] = useState({
         name: "",
@@ -28,35 +30,33 @@ const SignUp = () => {
     }
     return(
         <div>
-        <img className={styles.wave} src="img/wave.png" alt="Wave" />
+        <img className={styles.wave} src={wave} alt="Wave" />
         <div className={styles.container}>
-          <div className={styles.img}>
-            <img src="img/bg.svg" alt="Background" />
-          </div>
+          <div className={styles.img}></div>
           <div className={styles['login-content']}>
             <form action="index.html">
-              <img src="img/avatar.svg" alt="Avatar" />
-              <h2 className={styles.title}>Welcome</h2>
+              <h2 className={styles.title}>Sign In</h2>
               <div className={styles['input-div'] + ' ' + styles.one}>
                 <div className={styles.i}>
-                  <i className="fas fa-user"></i>
                 </div>
                 <div className={styles.div}>
-                  <h5>Username</h5>
-                  <input type="text" className={styles.input} />
+                  <h5>Correo</h5>
+                  <input name="email" type="text" className={styles.input} value={userData.email} 
+                   onChange={handleInputChange} />
                 </div>
               </div>
               <div className={styles['input-div'] + ' ' + styles.pass}>
                 <div className={styles.i}>
-                  <i className="fas fa-lock"></i>
                 </div>
                 <div className={styles.div}>
-                  <h5>Password</h5>
-                  <input type="password" className={styles.input} />
+                  <h5>Contraseña</h5>
+                  <input name="password" type="password" className={styles.input} value={userData.password}  onChange={handleInputChange} />
                 </div>
               </div>
-              <a href="#">Forgot Password?</a>
+              <a href="#">Olvidaste tu contraseña?</a>
+              <Link className={styles.link} to={`/home`}>
               <input type="submit" className={styles.btn} value="Login" />
+              </Link>
             </form>
           </div>
         </div>

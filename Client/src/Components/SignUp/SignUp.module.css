@@ -6,7 +6,7 @@
 
 body{
     font-family: 'Poppins', sans-serif;
-    overflow: hidden;
+    overflow: auto;
 }
 
 .wave{
@@ -146,6 +146,10 @@ form{
     margin-bottom: 4px;
 }
 
+.link{
+    text-decoration: none;
+}
+
 a{
     display: block;
     text-align: right;
@@ -164,7 +168,7 @@ a{
 }
 
 a:hover{
-    color: #38d39f;
+    color: #dd8e18;
 }
 
 .btn{
@@ -174,7 +178,7 @@ a:hover{
     border-radius: 25px;
     outline: none;
     border: none;
-    background-image: linear-gradient(to right, #32be8f, #38d39f, #32be8f);
+    background-color: #dd8e18;
     background-size: 200%;
     font-size: 1.2rem;
     color: #fff;
@@ -186,6 +190,7 @@ a:hover{
 }
 .btn:hover{
     background-position: right;
+    background-color: #f8ba5e;;
 }
 
 
