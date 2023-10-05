@@ -1,15 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import Modal from 'react-modal';
-import BannerBackground from "../../assets/home-banner-background.png";
-import BannerImage from "../../assets/home-banner-image.png";
-import PickMeals from "../../assets/pick-meals-image.png";
-import ChooseMeals from "../../assets/choose-image.png";
-import DeliveryMeals from "../../assets/delivery-image.png";
+import BannerBackground from "../../assets/home-banner-background.svg";
+import BannerImage from "../../assets/home-banner-image.svg";
+import PickMeals from "../../assets/pick-meals-image.svg";
+import ChooseMeals from "../../assets/choose-image.svg";
+import DeliveryMeals from "../../assets/delivery-image.svg";
 import { FiArrowRight } from "react-icons/fi";
 import { SiLinkedin } from "react-icons/si";
 import { BiLogoInstagram } from "react-icons/bi";
 import { FaFacebookF } from "react-icons/fa";
-import Logo from "../../assets/Logo.png";
+import Logo from "../../assets/Logo.svg";
 import style from './Landing.module.css'
 import { Link } from 'react-router-dom'
 
