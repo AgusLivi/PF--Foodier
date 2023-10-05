@@ -3,6 +3,8 @@ import { useNavigate } from 'react-router-dom';
 import { useFormik } from 'formik';
 import { useDispatch } from 'react-redux'
 import { createUser } from '../../Redux/actions'
+import style from './FormUser.module.css'
+import wave from '../../assets/wave.svg'
 
 
 const FormLogin = () => {
@@ -30,12 +32,6 @@ const FormLogin = () => {
     }
     }
 
-    
-  
-    
-    
-
-  
 
   const validateForm = (values) => {
     const errors = {};
@@ -74,60 +70,82 @@ const FormLogin = () => {
 
   return (
     <div>
-      <form onSubmit={formik.handleSubmit}>
-        {/* Campos de entrada y mensajes de error */}
-        <input
-          type='text'
-          placeholder='Nombre'
-          name='name'
-          onChange={formik.handleChange}
-          onBlur={formik.handleBlur}
-          value={formik.values.name}
-        />
-        {formik.touched.nombre && formik.errors.nombre && (
+    <img className={style.wave} src={wave} alt="Wave" />
+    <div className={style.container}>
+      <div className={style.img}></div>
+      <div className={style['login-content']}>
+
+        <form onSubmit={formik.handleSubmit} action="index.html">
+          <h2 className={style.title}>Sign Up</h2>
+          <div className={style['input-div'] + ' ' + style.one}>
+
+            <div className={style.i}></div>
+            <div className={style.div}>
+              <h5>Nombre</h5>
+              <input type="text" className={style.input}
+              name='name'
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
+              value={formik.values.name} />
+            </div>
+          </div>
+          {formik.touched.nombre && formik.errors.nombre && (
           <div className='error'>{formik.errors.nombre}</div>
-        )}
+           )}
 
-        {formik.touched.usuario && formik.errors.usuario && (
-          <div className='error'>{formik.errors.usuario}</div>
-        )}
+          <div className={style['input-div'] + ' ' + style.one}>
+            <div className={style.i}></div>
+            <div className={style.div}>
+              <h5>Email</h5>
+              <input type="email" className={style.input}
+              name='email'
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
+              value={formik.values.email}
+               />
+            </div>
+          </div>
 
-        <input
-          type='email'
-          placeholder='Correo'
-          name='email'
-          onChange={formik.handleChange}
-          onBlur={formik.handleBlur}
-          value={formik.values.email}
-        />
-        {formik.touched.email && formik.errors.email && (
+          {formik.touched.email && formik.errors.email && (
           <div className='error'>{formik.errors.email}</div>
         )}
 
-        <input
-          type='password'
-          placeholder='Contraseña'
-          name='password'
-          onChange={formik.handleChange}
-          onBlur={formik.handleBlur}
-          value={formik.values.password}
-        />
-        {formik.touched.password && formik.errors.password && (
+          <div className={style['input-div'] + ' ' + style.pass}>
+            <div className={style.i}></div>
+            <div className={style.div}>
+              <h5>Dirección</h5>
+              <input type="text" className={style.input}
+              name='location'
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
+              value={formik.values.location}
+               />
+            </div>
+          </div>
+
+
+          <div className={style['input-div'] + ' ' + style.pass}>
+            <div className={style.i}></div>
+            <div className={style.div}>
+              <h5>Contraseña</h5>
+              <input type="password" className={style.input}
+              name='password'
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
+              value={formik.values.password}
+               />
+            </div>
+          </div>
+
+          {formik.touched.password && formik.errors.password && (
           <div className='error'>{formik.errors.password}</div>
         )}
-
-        <input
-          type='text'
-          placeholder='Localidad'
-          name='location'
-          onChange={formik.handleChange}
-          onBlur={formik.handleBlur}
-          value={formik.values.location}
-        />
-
-        <button type='submit'>Registrarse</button>
-      </form>
+          
+          <input type="submit" className={style.btn} value="Register" />
+        </form>
+      </div>
     </div>
+  </div>
   );
 };
 
