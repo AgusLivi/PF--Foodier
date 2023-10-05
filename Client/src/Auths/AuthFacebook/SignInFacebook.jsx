@@ -1,33 +1,39 @@
 import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom"; // Importa useNavigate para la navegación
 import { signInWithPopup } from 'firebase/auth';
 import { auth, provider } from "./configFace";
-//import Home from '../../Views/Home/Home.jsx'
 import style from './SignInFacebook.module.css'
 
-const FacebookSignIn = () => {
-
+const SignInFacebook = () => {
     const [value, setValue] = useState('');
+    const navigate = useNavigate(); // Obtiene la función de navegación
 
     const handleClick = () => {
-        signInWithPopup(auth, provider).then((data) => {
-            setValue(data.user.email)
-            console.log('data:',data);
-            localStorage.setItem("email", data.user.email)
-        })
+        signInWithPopup(auth, provider).then((result) => {
+            const user = result.user;
+            setValue(user.email);
+            localStorage.setItem("email", user.email);
+            // Redirige a /home después de la autenticación exitosa
+            navigate("/home");
+        }).catch((error) => {
+            console.error(error);
+        });
     };
 
     useEffect(() => {
-        setValue(localStorage.getItem("email"))
-        console.log('value: ', value);
-    });
+        const storedEmail = localStorage.getItem("email");
+        if (storedEmail) {
+            setValue(storedEmail);
+        }
+    }, []);
 
     return (
         <div className={style.socialsignin}>
-        <button onClick={handleClick} className={style.inputfacebook}>
-             <p>Sign In with Facebook</p>
-        </button>
+            <button className={style.inputfacebook} onClick={handleClick}>
+                <p>Sign In with Facebook</p>
+            </button>
         </div>
     );
 }
 
-export default FacebookSignIn;
+export default SignInFacebook;
