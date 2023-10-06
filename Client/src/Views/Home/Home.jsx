@@ -16,31 +16,42 @@ const Home = () => {
   const provincias = useSelector((state) => state.provincias);
   const municipios = useSelector((state) => state.municipios);
   const localidades = useSelector((state) => state.localidades);
+  const  productsAmount = useSelector((state) => state.productsAmount)
 
-  const [selectedProvincia, setSelectedProvincia] = useState("");
-  const [selectedMunicipio, setSelectedMunicipio] = useState("");
-  const [selectedLocalidad, setSelectedLocalidad] = useState("");
 
   const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(getCategories());
     dispatch(getProducts(new URLSearchParams(formData).toString()));
+    console.log(new URLSearchParams(formData).toString());
     dispatch(locationProvincia());
-    return;
+
   }, []);
 
   const [formData, setFormData] = useState({
     page: 1,
     pageSize: 8,
     name: "",
-    categories: [],
+    categories: [].join(','),
     address: "",
     average_rating: "",
     payment: "",
     orderBy: "name",
     order: "asc",
   });
+
+
+  const nextHandler = () => {
+    console.log(Math.ceil(productsAmount/formData.pageSize));
+    if(formData.page < Math.ceil(productsAmount/formData.pageSize)){
+      console.log("page "+ formData.page);
+      setFormData({...formData, page: formData.page + 1 })
+      dispatch(getProducts(new URLSearchParams(formData).toString()))
+    }else{
+      alert("stop!")
+    }
+  }
 
   const handleInputChange = (event) => {
     const { name, value } = event.target;
@@ -61,40 +72,43 @@ const Home = () => {
     }
   };
 
+
   const handleSubmit = (event) => {
     event.preventDefault();
-    const {
-      name,
-      categories,
-      address,
-      average_rating,
-      payment,
-      orderBy,
-      order,
-    } = formData;
+    dispatch(getProducts(new URLSearchParams(formData).toString()))
 
-    // generamos la cadena de consulta
-    const queryParams = new URLSearchParams({
-      name,
-      categories: categories.join(","),
-      address,
-      average_rating,
-      payment,
-      orderBy,
-      order,
-    }).toString();
-    console.log(queryParams);
 
-    // hacer dispatch con la cadena de consulta
-    dispatch(getProducts(queryParams));
   };
 
-  const [isModalVisible, setIsModalVisible] = useState(false);
+  // const [isModalVisible, setIsModalVisible] = useState(false);
 
-  // Función para mostrar u ocultar el modal
-  const toggleModal = () => {
-    setIsModalVisible(!isModalVisible);
-  };
+  // // Función para mostrar u ocultar el modal
+  // const toggleModal = () => {
+  //   setIsModalVisible(!isModalVisible);
+  // };
+  const handleOnChange = (event) => {
+    const { name, value } = event.target;
+    if (name === 'categoriess') {
+        setFormData({
+            ...formData,
+            categories: [...formData.categories, value]
+        })
+    } else {
+        setProductPost({
+            ...formData,
+            [name]: value
+        });
+    }
+};
+
+const handleDeleteCategorie = (_event, ca) => {
+    setFormData({
+        ...formData,
+        categories: formData.categories.filter(
+            (cate) => cate !== ca
+        ),
+    })
+};
 
   const handleProvinciaChange = (event) => {
     setSelectedProvincia(event.target.options[event.target.selectedIndex].getAttribute("name"));
@@ -125,7 +139,7 @@ const Home = () => {
       
       <div className={Style.containerChild}>
         
-        <form onSubmit={handleSubmit} className={Style.containerChildFilter}>
+        <form className={Style.containerChildFilter}>
           
           {/* Modal */}
           <div className={Style.itemForm}>
@@ -168,13 +182,13 @@ const Home = () => {
           </div>
           {/* Resto de tus elementos de formulario aquí */}
           <div
-          className={`${Style.checkbox} ${isModalVisible ? Style.modalVisible : ""}`}
+          className={`${Style.checkbox}`} // className={`${Style.checkbox} ${isModalVisible ? Style.modalVisible : ""}`}
         >
-          <div className={Style.itemForm}>
+          {/* <div className={Style.itemForm}>
             <button name="categoria" id="showHideButton" onClick={toggleModal}>
               X
             </button>
-          </div>
+          </div> */}
           <div className={Style.itemForm}>
             {categories.map((categoryItem) => (
               <label>
@@ -240,12 +254,42 @@ const Home = () => {
           </select>
         </div>
         <div className={Style.itemForm}>
-          <button onClick={toggleModal} className={Style.categoria}>
-            Categorias{" "}
-          </button>
+            {/* aca empiezan las categorias--------------------------------------------------------------------- */}
+            <label htmlFor="categoriess">Categorias: {' '}</label>
+
+              <select name='categoriess' onChange={handleOnChange}>
+                  <option value=''>Selecciona tus categorias</option>
+                  {categories
+                      .map((categorie) => {
+                          return (
+                              <option key={categorie} value={categorie}>
+                                  {categorie}
+                              </option>
+                          )
+                      })}
+              </select>
+
+              {formData.categories.length !== 0 && <p>Categoria/s seleccionada/s: </p>}
+
+              {
+                  formData.categories.map((ca) => {
+                      return (
+                          <button
+                              type='button'
+                              key={ca}
+                              onClick={(event) => handleDeleteCategorie(event, ca)}
+                              value={ca}
+                          >
+                              {ca}
+                          </button>
+                      )
+                  })
+              }
+
+            {formData.categories.length !== 0 && <p>Para borrar una categoria seleccionada da click sobre ella</p>}
+            {/* aca terminan las categorias----------------------------------------------------------- */}
         </div>
         <div className={Style.itemForm}>
-          <button type="submit">Filtrar</button>
         </div>
         </form>
         
@@ -253,6 +297,9 @@ const Home = () => {
       </div>
       <div className={Style.containerPost}>
         <CardContainer />
+        <button>prev</button>
+        <button onClick={()=> nextHandler()}>next</button>
+
       </div>
     </div>
 

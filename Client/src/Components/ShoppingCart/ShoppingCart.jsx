@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import ItemCart from './ItemCart';
+import styles from'./ShoppingCart.module.css'; // Importar el archivo CSS
 
 function ShoppingCart() {
   const [cartItems, setCartItems] = useState([]); // estado local para los items
@@ -44,17 +45,21 @@ function ShoppingCart() {
   const total = Object.values(prices).reduce((acc, price) => acc + price, 0);
 
   return (
-    <div>
-      <h2>Carrito de Compras</h2>
-      <ul>
-        {cartItems.map((item, index) => (
-          <li key={index}>
-            <ItemCart item={item} removeFromCart={removeFromCart} prices={prices} setPrices={setPrices} />
-          </li>
-        ))}
-      </ul>
-      <h3>Total: ${total.toFixed(2)}</h3>
-      <button>Comprar</button>
+
+    <div> 
+      <div> 
+
+        <h2>Carrito de Compras</h2>
+        <ul>
+          {cartItems.map((item, index) => (
+            <li key={index}>
+              <ItemCart item={item} removeFromCart={removeFromCart} prices={prices} setPrices={setPrices} />
+            </li>
+          ))}
+        </ul>
+        <h3>Total: ${total.toFixed(2)}</h3>
+        <button>Comprar</button>
+      </div>
     </div>
   );
 }
