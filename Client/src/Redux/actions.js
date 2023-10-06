@@ -374,12 +374,14 @@ export const createUser = (userData) => {
 
 //login
 export const login  = (userData) => {
+    console.log("LOGINNNN: ", userData)
     return async () => {
         try {
-            const { data } = await axios.post(`${endPoint}/login`)
-            alert(`Inicio de sesión exitoso`)
+            const { data } = await axios.post(`${endPoint}/login`, userData)
+            const { token, error } = response.data;
+            alert(`Inicio de sesión exitoso ${data.name}`)
          } catch(error) {
-            alert(error.message)
+            alert("Error al iniciar sesión" + error.message)
          }
     }
 }
