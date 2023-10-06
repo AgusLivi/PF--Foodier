@@ -55,7 +55,7 @@ const Detalle = () => {
 
 return (
         <div className={styles.detailContainer}>
-            {/* <img src={productDetail.image} alt={productDetail.name} className={styles.detailImg}/> */}
+            <img src={productDetail.image} alt={productDetail.name} className={styles.detailImg}/>
             <div className={styles.detailContent}>
                 {productDetail ? (
                     <div>
