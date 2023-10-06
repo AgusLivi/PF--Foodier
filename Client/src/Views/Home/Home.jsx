@@ -41,6 +41,7 @@ const Home = () => {
     order: "asc",
   });
 
+
   const nextHandler = () => {
     console.log(Math.ceil(productsAmount/formData.pageSize));
     if(formData.page < Math.ceil(productsAmount/formData.pageSize)){
@@ -71,18 +72,43 @@ const Home = () => {
     }
   };
 
+
   const handleSubmit = (event) => {
     event.preventDefault();
     dispatch(getProducts(new URLSearchParams(formData).toString()))
 
+
   };
 
-  const [isModalVisible, setIsModalVisible] = useState(false);
+  // const [isModalVisible, setIsModalVisible] = useState(false);
 
-  // Función para mostrar u ocultar el modal
-  const toggleModal = () => {
-    setIsModalVisible(!isModalVisible);
-  };
+  // // Función para mostrar u ocultar el modal
+  // const toggleModal = () => {
+  //   setIsModalVisible(!isModalVisible);
+  // };
+  const handleOnChange = (event) => {
+    const { name, value } = event.target;
+    if (name === 'categoriess') {
+        setFormData({
+            ...formData,
+            categories: [...formData.categories, value]
+        })
+    } else {
+        setProductPost({
+            ...formData,
+            [name]: value
+        });
+    }
+};
+
+const handleDeleteCategorie = (_event, ca) => {
+    setFormData({
+        ...formData,
+        categories: formData.categories.filter(
+            (cate) => cate !== ca
+        ),
+    })
+};
 
   const handleProvinciaChange = (event) => {
     setSelectedProvincia(event.target.options[event.target.selectedIndex].getAttribute("name"));
@@ -113,7 +139,7 @@ const Home = () => {
       
       <div className={Style.containerChild}>
         
-        <form onSubmit={handleSubmit} className={Style.containerChildFilter}>
+        <form className={Style.containerChildFilter}>
           
           {/* Modal */}
           <div className={Style.itemForm}>
@@ -156,13 +182,13 @@ const Home = () => {
           </div>
           {/* Resto de tus elementos de formulario aquí */}
           <div
-          className={`${Style.checkbox} ${isModalVisible ? Style.modalVisible : ""}`}
+          className={`${Style.checkbox}`} // className={`${Style.checkbox} ${isModalVisible ? Style.modalVisible : ""}`}
         >
-          <div className={Style.itemForm}>
+          {/* <div className={Style.itemForm}>
             <button name="categoria" id="showHideButton" onClick={toggleModal}>
               X
             </button>
-          </div>
+          </div> */}
           <div className={Style.itemForm}>
             {categories.map((categoryItem) => (
               <label>
@@ -228,12 +254,42 @@ const Home = () => {
           </select>
         </div>
         <div className={Style.itemForm}>
-          <button onClick={toggleModal} className={Style.categoria}>
-            Categorias{" "}
-          </button>
+            {/* aca empiezan las categorias--------------------------------------------------------------------- */}
+            <label htmlFor="categoriess">Categorias: {' '}</label>
+
+              <select name='categoriess' onChange={handleOnChange}>
+                  <option value=''>Selecciona tus categorias</option>
+                  {categories
+                      .map((categorie) => {
+                          return (
+                              <option key={categorie} value={categorie}>
+                                  {categorie}
+                              </option>
+                          )
+                      })}
+              </select>
+
+              {formData.categories.length !== 0 && <p>Categoria/s seleccionada/s: </p>}
+
+              {
+                  formData.categories.map((ca) => {
+                      return (
+                          <button
+                              type='button'
+                              key={ca}
+                              onClick={(event) => handleDeleteCategorie(event, ca)}
+                              value={ca}
+                          >
+                              {ca}
+                          </button>
+                      )
+                  })
+              }
+
+            {formData.categories.length !== 0 && <p>Para borrar una categoria seleccionada da click sobre ella</p>}
+            {/* aca terminan las categorias----------------------------------------------------------- */}
         </div>
         <div className={Style.itemForm}>
-          <button type="submit">Filtrar</button>
         </div>
         </form>
         

@@ -90,89 +90,67 @@ const Cloudinary = (props) => {
 
     //console.log(productPost);
     return (
-
-        <div className={Style.container}>
-            {console.log('este es el product', productPost)}
-            <div className={Style.containerChild}>
-                <div className={Style.containerChildText}>
-                    <div>
-                        <h1>text</h1>
-                    </div>
-                </div>
-                <div className={Style.containerChildInput}>
-
-                    <form onSubmit={(event) => handlerCreateProduct(event)} className={Style.form}>
-                        <button type='submit'>ENVIAR</button>
-
-                        {/* SUBIR IMAGEN*/}
-                        <Container>
+            <div>
+                <div className={Style.container}>
+                    <form onSubmit={(event) => handlerCreateProduct(event)} >
+                      
+                        <div className={Style.imageUploadContainer}>
                             <FormGroup>
-                                <Input
-                                    className={Style.exclude}
-                                    type="file"
-                                    name="file"
-                                    placeholder="carga tu imagen"
-                                    onChange={handlerCloudinary}
-                                />
-                                {loading ? (
-                                    <h3>Cargando imagen...</h3>
-                                ) : (
-                                    <img src={productPost.image} style={{ width: '300px' }} alt="Producto" />
-                                )}
+                                <div className={Style.imageUpload}>
+                                    <Input type="file"  name="file" placeholder="carga tu imagen" onChange={handlerCloudinary}/>
+                                    {loading ? (
+                                        <h3>Cargando imagen...</h3>
+                                    ) : (
+                                        <img src={productPost.image} alt="Producto" />
+                                    )}
+                                </div>
+
                             </FormGroup>
-                        </Container>
-                        {/* SUBIR IMAGEN*/}
-
-                        <div>
-                            {/* DESDE ACA EMPIEZA EL CATEGORIES*/}
-                            <label htmlFor="categoriess">Categorias: {' '}</label>
-
+                        </div>
+    
+                     
+    
+                        <div className={Style.productDetails}>
+                        <div className={Style.categories}>
+                            <label htmlFor="categories">Categorías:</label>
                             <select name='categoriess' onChange={handleOnChange}>
-                                <option value=''>Selecciona tus categorias</option>
-                                {categories
-                                    .map((categorie) => {
-                                        return (
-                                            <option key={categorie} value={categorie}>
-                                                {categorie}
-                                            </option>
-                                        )
-                                    })}
-                            </select>
-
-                            {productPost.categories.length !== 0 && <p>{textAux}</p>}
-
-                            {
-                                productPost.categories.map((ca) => {
+                                <option value=''>Selecciona tus categorías</option>
+                                {categories.map((categorie) => {
                                     return (
-                                        <button
-                                            type='button'
-                                            key={ca}
-                                            onClick={(event) => handleDeleteCategorie(event, ca)}
-                                            value={ca}
-                                        >
-                                            {ca}
-                                        </button>
+                                        <option key={categorie} value={categorie}>
+                                            {categorie}
+                                        </option>
                                     )
-                                })
-                            }
-
+                                })}
+                            </select>
+    
+                            {productPost.categories.length !== 0 && <p>{textAux}</p>}
+    
+                            {productPost.categories.map((ca) => {
+                                return (
+                                    <button
+                                        type='button'
+                                        key={ca}
+                                        onClick={(event) => handleDeleteCategorie(event, ca)}
+                                        value={ca}
+                                    >
+                                        {ca}
+                                    </button>
+                                )
+                            })}
+    
                             {productPost.categories.length !== 0 && <p>{textAux2}</p>}
-
-                            {/* HASTA ACA VA CATEGORIES*/}
-
-                            {/* NAME PRODUCT*/}
-                            <label htmlFor="name">Nombre producto: {' '}</label>
+                        </div>
+                            <label htmlFor="name">Nombre producto:</label>
                             <input
                                 type="text"
                                 name='name'
                                 value={productPost.name}
-                                placeholder='Ej: Panaderia Pancho'
+                                placeholder='Ej: Panadería Pancho'
                                 onChange={handleOnChange}
                             />
-                            {/* NAME PRODUCT*/}
-
-                            {/* CANTIDAD*/}
-                            <label htmlFor="amount">Cantidad: {' '}</label>
+    
+                            <label htmlFor="amount">Cantidad:</label>
                             <input
                                 type="number"
                                 name='amount'
@@ -180,10 +158,8 @@ const Cloudinary = (props) => {
                                 placeholder='Ej: 10'
                                 onChange={handleOnChange}
                             />
-                            {/* CANTIDAD*/}
-
-                            {/* DESCRIPTION*/}
-                            <label htmlFor="description">Descripcion: {' '}</label>
+    
+                            <label htmlFor="description">Descripción:</label>
                             <textarea
                                 name="description"
                                 value={productPost.description}
@@ -192,10 +168,8 @@ const Cloudinary = (props) => {
                                 placeholder='Rica docena de pan de queso'
                                 onChange={handleOnChange}
                             />
-                            {/* DESCRIPTION*/}
-
-                            {/* PRECIO VIEJO*/}
-                            <label htmlFor="old_price">Precio viejo: {' '}</label>
+    
+                            <label htmlFor="old_price">Precio viejo:</label>
                             <input
                                 type="number"
                                 name='old_price'
@@ -203,10 +177,8 @@ const Cloudinary = (props) => {
                                 placeholder='Ej: 800'
                                 onChange={handleOnChange}
                             />
-                            {/* PRECIO VIEJO*/}
-
-                            {/* PRECIO NUEVO*/}
-                            <label htmlFor="price">Precio nuevo: {' '}</label>
+    
+                            <label htmlFor="price">Precio nuevo:</label>
                             <input
                                 type="number"
                                 name='price'
@@ -214,14 +186,13 @@ const Cloudinary = (props) => {
                                 placeholder='Ej: 400'
                                 onChange={handleOnChange}
                             />
-                            {/* PRECIO NUEVO*/}
+                              <button type='submit' className={Style.submitButton}>ENVIAR</button>
+    
                         </div>
-
                     </form>
                 </div>
             </div>
-        </div >
-    )
-}
-
-export default Cloudinary;
+        )
+    }
+    
+    export default Cloudinary;

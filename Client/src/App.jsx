@@ -1,3 +1,4 @@
+//App.jsx
 import { Routes, Route, useLocation } from "react-router-dom";
 import PerfilUsuario from './Views/PerfilUsuario/PerfilUsuario'
 import NavBar from './Components/NavBar/NavBar'
@@ -13,6 +14,8 @@ import CreateProduct from './Views/CreateProduct/CreateProduct';
 import Detalle from './Views/Detalle/Detalle';
 import SignUp from "./Components/SignUp/SignUp";
 import Payment from "./Components/Payment/Payment";
+import ShoppingCart from './Components/ShoppingCart/ShoppingCart';
+
 
 
 const App = () => {
@@ -40,6 +43,8 @@ const App = () => {
         <Route path='/create' element={<CreateProduct />} />
         <Route path='/products/:product_ID' element={<Detalle/>} />
         <Route path='/payments/:monto/:descripcion' element={<Payment/>}/>
+        <Route path='/carrito' element={<ShoppingCart />} />
+
 
       </Routes>
 
