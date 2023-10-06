@@ -61,28 +61,6 @@
     margin-bottom: 20px;
 }
 
-.quantityContainer {
-    display: flex;
-    align-items: center;
-}
-
-.quantityButton {
-    font-size: 20px;
-    background-color: #fe9e0d;
-    color: #fff;
-    width: 30px;
-    height: 30px;
-    border-radius: 50%;
-    border: none;
-    cursor: pointer;
-    align-items: center;
-    justify-content: center;
-    margin-top: 10px;
-    margin-bottom: 20px;
-    margin-left: 20px;
-    margin-right: 20px;
-  }
-
 .closeButton {
     background-color: #e74c3c;
     padding: 10px 15px;
@@ -93,11 +71,13 @@
     cursor: pointer;
     transition: background-color 0.3s ease, box-shadow 0.3s ease;
     margin-left: 5px;
+    margin-top: 20px;
 }
 
 .closeButton:hover {
     background-color: #c0392b;
     box-shadow: 0px 0px 10px rgb(253, 52, 52);
+    margin-top: 20px;
 }
 
 .oldPrice {

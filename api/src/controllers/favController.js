@@ -30,14 +30,14 @@ const getFavorites = async (req, res) => {
 
     // Obtener la lista de vendedores favoritos del usuario utilizando Sequelize
     const user = await User.findByPk(user_ID, {
-      include: [{ model: Seller, as: 'Fav' }],
+      include: [{ model: Seller, through: 'Fav' }],
     });
 
     if (!user) {
       return res.status(404).json({ error: 'Usuario no encontrado.' });
     }
 
-    res.status(200).json({ favorites });
+    res.status(200).json({ user });
   } catch (error) {
     console.error(error);
     res.status(500).json({ error: 'Error al obtener la lista de favoritos.' });
