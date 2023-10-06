@@ -38,10 +38,10 @@ import {
 
 const endPoint = 'http://localhost:3001'  //definir rutas del back
 
-export const getAllFav = (id) => {
+export const getAllFav = (id) => { //en realidad obtiene el fav del usuario
     return async dispatch => {
         try {
-            const { data } = await axios(`${endPoint}/get-favorites/${id}`) //definir despues como pusieron la ruta en el back
+            const { data } = await axios(`${endPoint}/favorites/${id}`) //definir despues como pusieron la ruta en el back
             return dispatch({
                 type: GET_ALL_FAV,
                 payload: data
