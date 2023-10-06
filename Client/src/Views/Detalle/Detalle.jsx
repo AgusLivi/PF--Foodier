@@ -66,9 +66,7 @@ return (
                         <p className={styles.oldPrice}>Precio viejo: {productDetail.old_price}</p>
                         <p>Precio: {productDetail.price}</p>
                         <div className={styles.quantityContainer}>
-                            <button className={styles.quantityButton}>-</button>
-                            <p>{productDetail.amount}</p>
-                            <button className={styles.quantityButton}>+</button>
+                            <p>Stock: {productDetail.amount}</p>
                         </div>
 
                         <button className={styles.paymentButton} onClick={addCartHandler}>Añadir al carrito</button> {/*Agregar funcionalidad*/}
