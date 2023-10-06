@@ -35,7 +35,7 @@ const Home = () => {
     pageSize: 8,
     name: "",
     categories: [],
-    address: "",
+    address: [],
     average_rating: "",
     payment: "",
     orderBy: "name",
@@ -76,21 +76,21 @@ const Home = () => {
       orderBy,
       order,
     } = formData;
-
+    console.log('QUERYYYYYYYYY_ADRESSS',address.join(", "));
     // generamos la cadena de consulta
     const queryParams = new URLSearchParams({
       name,
-      categories: categories.join(","),
+      categories: categories.join(", "),
       address,
       average_rating,
       payment,
       orderBy,
       order,
     }).toString();
-    console.log('QUERYYYYYYYYY',queryParams);
 
     // hacer dispatch con la cadena de consulta
     dispatch(getProducts(queryParams));
+    console.log('ADDRESSSS', formData.address)
   };
 
   // const [isModalVisible, setIsModalVisible] = useState(false);
@@ -123,19 +123,68 @@ const handleDeleteCategorie = (_event, ca) => {
     })
 };
 
-  const handleProvinciaChange = (event) => {
-    setSelectedProvincia(event.target.options[event.target.selectedIndex].getAttribute("name"));
-    dispatch(locationMunicipio(event.target.value));
+const handleProvinciaChange = (event) => {
+  const selectedProvinciaValue = event.target.options[event.target.selectedIndex].getAttribute("name");
+  dispatch(locationMunicipio(event.target.value));
+  
+  // agrega la provincia a address y actualiza el estado
+  let updatedAddress = [selectedProvinciaValue];
+  
+  setFormData({
+    ...formData,
+    address: updatedAddress
+  });
+
+  //  actualiza la cadena de consulta
+  updateQueryParams({ address: updatedAddress });
+};
+
+const handleMuniChange = (event) => {
+  const selectedMunicipioValue = event.target.options[event.target.selectedIndex].getAttribute("name");
+  dispatch(locationLocalidad(event.target.value));
+  
+  // agrega el municipio a address y actualiza el estado
+  const updatedAddress = [...formData.address];
+  updatedAddress[1] = selectedMunicipioValue
+  if (updatedAddress.length > 2) {
+    updatedAddress.pop();
+  }
+  setFormData({
+    ...formData,
+    address: updatedAddress
+  });
+  // actualiza la cadena de consulta
+  updateQueryParams({ address: updatedAddress });
+};
+
+const handleLocalChange = (event) => {
+  const selectedLocalidadValue = event.target.options[event.target.selectedIndex].getAttribute("name");
+  
+  // agrega la localidad a address y actualiza el estado
+  const updatedAddress = [...formData.address];
+  updatedAddress[2] = selectedLocalidadValue;
+  setFormData({
+    ...formData,
+    address: updatedAddress
+  });
+
+  // actualiza la cadena de consulta
+  updateQueryParams({ address: updatedAddress });
+};
+
+ // actualizar la cadena de consulta
+ const updateQueryParams = (paramsToUpdate) => {
+  const updatedParams = {
+    ...formData,
+    ...paramsToUpdate
   };
 
-  const handleMuniChange = (event) => {
-    setSelectedMunicipio(event.target.options[event.target.selectedIndex].getAttribute("name"));
-    dispatch(locationLocalidad(event.target.value));
-  };
+  const queryParams = new URLSearchParams(updatedParams).toString();
+  console.log('QUERYYYYYYYYY', queryParams);
 
-  const handleLocalChange = (event) => {
-    setSelectedLocalidad(event.target.options[event.target.selectedIndex].getAttribute("name"));
-  };
+  //  dispatch con la cadena de consulta
+  dispatch(getProducts(queryParams));
+};
 
   return (
     <div className={Style.containerChilds}>
@@ -156,6 +205,7 @@ const handleDeleteCategorie = (_event, ca) => {
           
           {/* Modal */}
           <div className={Style.itemForm}>
+            {/*---------------------------UBICACION------------------------------------------------*/}
             <div>
               <select name="" id="" onChange={handleProvinciaChange}>
                 <option value="" disabled selected>Selecciona una provincia</option>
@@ -193,6 +243,8 @@ const handleDeleteCategorie = (_event, ca) => {
               )}
             </select>
           </div>
+          {/*---------------------------TERMINA UBICACION------------------------------------------------*/}
+
           {/* Resto de tus elementos de formulario aquí */}
           <div
           className={`${Style.checkbox}`} // className={`${Style.checkbox} ${isModalVisible ? Style.modalVisible : ""}`}

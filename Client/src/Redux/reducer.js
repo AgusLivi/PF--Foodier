@@ -125,6 +125,7 @@ const reducer = (state = initialState, { type, payload }) => {
       return {
         ...state,
         municipios: payload,
+        localidades: []
       };
 
     case LOCALIDADES:

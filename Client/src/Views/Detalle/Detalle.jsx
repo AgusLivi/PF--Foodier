@@ -50,6 +50,7 @@ const Detalle = () => {
   
       // actualiza el localStorage con los ítems actuales del carrito
       localStorage.setItem('cartItems', JSON.stringify([...cartItems, productDetail]));
+      alert('Producto agregado al carrito')
     }
   };
 
