@@ -11,7 +11,6 @@ mercadopago.configure({
 
 const port = process.env.PORT || 3001
 
-// Syncing all the models at once.
 conn.sync({ force: true }).then(() => {
   cargarPruevas()
   server.listen(port, () => {
