@@ -39,12 +39,19 @@ const Detalle = () => {
   };
 
   const addCartHandler = () => {
-    // Agregar el producto al estado local del carrito
-    setCartItems([...cartItems, productDetail]);
-
-    // Actualizar el Local Storage con los ítems actuales del carrito
-    localStorage.setItem('cartItems', JSON.stringify([...cartItems, productDetail]));
-  }
+    // verificamos si el producto ya existe en el carrito
+    const productAlreadyExists = cartItems.some((item) => item.product_ID === productDetail.product_ID);
+  
+    if (productAlreadyExists) {
+      alert('Otra vez lo vas a agregar papi?');
+    } else {
+      // agregamos el producto al estado local del carrito
+      setCartItems((prevCartItems) => [...prevCartItems, productDetail]);
+  
+      // actualiza el localStorage con los ítems actuales del carrito
+      localStorage.setItem('cartItems', JSON.stringify([...cartItems, productDetail]));
+    }
+  };
 
 return (
         <div className={styles.detailContainer}>
