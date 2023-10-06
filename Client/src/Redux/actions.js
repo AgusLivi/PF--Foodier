@@ -32,6 +32,9 @@ import {
     CREATE_PAYMENT_SUCCESS,
     CREATE_PAYMENT_FAILURE,
 
+    //token autenticacion inicio de sesion 
+    SET_AUTH_TOKEN,
+
     
     GET_CATEGORIES,
 } from './actionsType'
@@ -266,7 +269,9 @@ export const getSellerById = (id) => {
 export const getProducts = (querys) => {
     return async dispatch => {
         const { data } = await axios.get(`${endPoint}/products/?${querys}`)
-        console.log('ACTION!!!', data)
+
+        console.log('ACTION!!!', querys)
+
         return dispatch({
             type: GET_PRODUCTS,
             payload: data
@@ -372,6 +377,41 @@ export const createUser = (userData) => {
     }
 }
 
+//login
+export const login  = (formData) => {
+    return async () => {
+        try {
+            const { data } = await axios.post(`${endPoint}/login`, formData)
+            console.log(data);
+                // Si se recibe un token, puedes almacenarlo en el estado global o en el almacenamiento local
+                // para mantener al usuario autenticado
+            if (token) {
+            dispatch(setAuthToken(token))
+                 }
+            else {
+            // Maneja errores de inicio de sesión específicos
+            if (error === "InvalidPassword") {
+              alert("Contraseña incorrecta");
+            } else if (error === "UserNotFound") {
+              alert("Usuario no encontrado");
+            } else {
+              alert("Error desconocido en el inicio de sesión");
+            }
+          }
+
+            alert(`Inicio de sesión exitoso ${data}`)
+         } catch(error) {
+            alert("Error al iniciar sesión" + error.message)
+         }
+    }
+}
+    const setAuthToken = (token) => {
+     return {
+     type: SET_AUTH_TOKEN, //guardarlo en el reducer o localstorage
+      payload: token,
+     };
+};
+
 //payment actions
 export const createPaymentRequest = (paymentData) => async (dispatch) => {
     try {
@@ -402,3 +442,4 @@ export const createPaymentRequest = (paymentData) => async (dispatch) => {
             payload: error.message });
     }
 };
+

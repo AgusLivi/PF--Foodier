@@ -1,8 +1,9 @@
 import React, { useRef } from "react";
-import { FaBars, FaTimes } from "react-icons/fa";
+import { FaBars, FaTimes , FaShoppingCart} from "react-icons/fa";
 import styles from "./NavBar.module.css"; 
 import Logo from '../../assets/Logo.svg'
 import { Link } from 'react-router-dom'
+
 
 function Navbar() {
   const navRef = useRef();
@@ -24,6 +25,12 @@ function Navbar() {
       <Link to={`/create`}>
         <a>Vender</a>
       </Link>
+      <Link to={`/carrito`}>
+      <a>
+      <FaShoppingCart />
+      </a>
+      </Link>
+
     
         <button
           className={`${styles["nav-btn"]} ${styles["nav-close-btn"]}`} 
