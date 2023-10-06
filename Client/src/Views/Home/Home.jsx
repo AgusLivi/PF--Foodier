@@ -46,6 +46,10 @@ const Home = () => {
     order: "asc",
   });
 
+  useEffect(()=>{
+    handleSubmit()
+  }, [formData])
+
   //Paginations
 
   const pagination = (page) => {
@@ -80,8 +84,7 @@ const Home = () => {
   };
 
 
-  const handleSubmit = (event) => {
-    event.preventDefault();
+  const handleSubmit = () => {
     dispatch(
       getProducts(
         new URLSearchParams({
