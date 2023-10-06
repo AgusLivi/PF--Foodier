@@ -1,63 +1,454 @@
-/* Estilo para el contenedor principal del carrito */
-.shopping-cart-container {
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Reem Kufi", sans-serif !important;
+}
+img {
+  max-width: 100%;
+  height: auto;
+}
+.App {
+  min-height: 100vh;
+  width: 85vw;
+  max-width: 1900px;
+  margin: 0rem auto;
+}
+body {
+  max-width: 100%;
+  overflow-x: hidden;
+  background-color: #f6f6f6;
+}
+.logo{
+  color: #fe9e0d;
+  font-family: Georgia, 'Times New Roman', Times, serif;
+  font-size: 5em;
+  margin-left:2em;
+}
+nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  min-height: 90px;
+}
+.navbarmenucontainer {
+  display: none;
+}
+.navbarlinkscontainer a {
+  margin-right: 3.2rem;
+  text-decoration: none;
+  color: black;
+  font-size: 1.1rem;
+  font-weight: 600;
+}
+.primarybutton {
+  padding: 0.9rem 1.75rem;
+  background-color: white;
+  outline: none;
+  border: none;
+  border-radius: 5rem;
+  font-size: 1.1rem;
+  cursor: pointer;
+  font-weight: 600;
+  transition: 0.2s;
+
+}
+.navbarcarticon {
+  font-size: 1.15rem;
+}
+.primarybutton:hover {
+  background-color: rgb(234, 234, 234);
+}
+
+.homebannercontainer {
+  position: relative;
+  display: flex;
+  padding-top: 3rem;
+}
+.homebannerimagecontainer {
+  position: absolute;
+  top: -100px;
+  right: -170px;
+  z-index: -2;
+  max-width: 700px;
+}
+.homeimagesection {
+  max-width: 600px;
+  flex: 1;
+}
+.hometextsection {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+.link{
+  text-decoration: none;
+}
+.primaryheading {
+  font-size: clamp(2rem, 5vw, 4rem);
+  color: #4c4c4c;
+  /* line-height: 5rem; */
+  max-width: 1000px;
+}
+.primarytext {
+  font-size: clamp(2rem, 3vw, 1.5rem);
+  max-width: 900px;
+  color: #6a6a6a;
+  margin: 1.5rem 0rem;
+}
+.secondarybutton {
+  padding: 1rem 2.5rem;
+  background-color: #fe9e0d;
+  outline: none;
+  border: none;
+  border-radius: 5rem;
+  font-size: 2rem;
+  cursor: pointer;
+  font-weight: 600;
+  color: white;
+  transition: 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.secondarybutton svg {
+  margin-left: 0.75rem;
+  font-size: 1.5rem;
+}
+.secondarybutton:hover {
+  background-color: #e48f0f;
+}
+.aboutsectioncontainer {
+  margin-top: 20rem;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.aboutbackgroundimagecontainer {
+  position: absolute;
+  left: -150px;
+  z-index: -2;
+}
+.aboutsectionimagecontainer {
+  flex: 0.9;
+  margin-right: 1rem;
+}
+.aboutsectiontextcontainer {
+  flex: 1;
+  justify-content: center;
+  display: flex;
+  flex-direction: column;
+}
+.primarysubheading {
+  font-weight: 700;
+  color: #fe9e0d;
+  font-size: 1.15rem;
+}
+.aboutbuttonscontainer {
+  margin-top: 2rem;
+  display: flex;
+}
+.watchvideobutton {
+  margin-left: 2rem;
+  background-color: transparent;
+  outline: none;
+  border: none;
+  border-radius: 5rem;
+  font-size: 1.1rem;
+  cursor: pointer;
+  font-weight: 600;
+  color: #484848;
+  transition: 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.watchvideobutton svg {
+  font-size: 3rem;
+  margin-right: 1rem;
+}
+.contactpagewrapper h1 {
+  max-width: 900px !important;
+}
+.contactpagewrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  margin: 6rem 0rem;
+}
+.contactformcontainer {
+  background-color: white;
+  max-width: 700px;
+  width: 100%;
+  margin-top: 3rem;
+  display: flex;
+  align-items: center;
+  padding: 1rem;
+  border-radius: 5rem;
+}
+.contactformcontainer input {
+  flex: 1;
+  height: 100%;
+  border: none;
+  outline: none;
+  font-size: 1.3rem;
+  padding: 0.5rem 1rem;
+}
+.footerwrapper {
+  margin: 6rem 0rem;
+  display: flex;
+  margin-top: 10rem;
+}
+.footerlogocontainer {
+  max-width: 110px;
+}
+.footericons {
+  margin-top: 2.5rem;
+}
+.footericons svg {
+  font-size: 1.5rem;
+  margin-right: 1.25rem;
+  color: #585858;
+}
+/* .footer-section-one {
+  border: 2px solid blue;
+} */
+.footersectiontwo {
+  flex: 1;
+  display: flex;
+  justify-content: flex-end;
+}
+.footersectioncolumns {
+  display: flex;
+  flex-direction: column;
+  min-width: 190px;
+}
+.footersectioncolumns span {
+  margin: 0.25rem 0rem;
+  font-weight: 600;
+  color: #4c4c4c;
+  cursor: pointer;
+}
+.testimonialsectionbottom {
+  margin-top: 2rem;
+  background-color: white;
+  padding: 1.5rem 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  max-width: 750px;
+  border-radius: 2rem;
+  flex-direction: column;
+  text-align: center;
+}
+.testimonialsectionbottom {
+  margin: 2rem auto;
+}
+.testimonialsectionbottom p {
+  font-weight: 700;
+  color: #515151;
+  max-width: 500px;
+  font-size: 1.1rem;
+  margin: 2rem 0rem;
+}
+.testimonialsstarscontainer svg {
+  margin: 0rem 0.25rem;
+  font-size: 1.5rem;
+  color: #fe9e0d;
+}
+.testimonialsectionbottom h2 {
+  margin-top: 1.5rem;
+}
+.worksectionwrapper {
+  margin-top: 15rem;
+}
+.worksectiontop p {
+  text-align: center;
+  max-width: 600px !important;
+}
+.worksectiontop h1 {
+  max-width: 700px !important;
+}
+.worksectiontop {
   display: flex;
   justify-content: center;
   align-items: center;
-  min-height: 100vh;
-  background-color: #000; /* Fondo negro */
+  flex-direction: column;
 }
-
-/* Estilo para el carrito de compras */
-.shopping-cart {
-  background-color: #fff; /* Fondo blanco */
-  border: 2px solid #000; /* Borde negro de 2px */
-  border-radius: 10px; /* Bordes redondeados */
-  padding: 20px;
-  width: 60%; /* Ancho del 60% */
-  max-width: 400px; /* Máximo ancho de 400px */
-  text-align: center; /* Alineación del texto al centro */
-}
-
-/* Estilo para el título del carrito */
-h2 {
-  color: #000; /* Texto negro */
-  font-size: 24px; /* Tamaño de fuente 24px */
-  margin-bottom: 20px; /* Espaciado inferior de 20px */
-}
-
-/* Estilo para la lista de items del carrito */
-ul {
-  list-style: none; /* Sin viñetas */
-  padding: 0;
-}
-
-/* Estilo para cada item del carrito */
-li {
-  margin-bottom: 10px; /* Espaciado inferior de 10px */
-  border-bottom: 1px solid #000; /* Borde inferior de 1px negro */
-  padding: 10px;
+.worksectioninfo {
+  width: 290px;
+  min-height: 350px;
+  background-color: white;
+  padding: 1rem 2rem;
   display: flex;
-  justify-content: space-between;
+  flex-direction: column;
+  justify-content: center;
   align-items: center;
+  text-align: center;
+  border-radius: 1rem;
+  color: #505050;
+  margin: 1rem 2rem;
+}
+.worksectioninfo h2 {
+  margin: 1rem 0rem;
+}
+.worksectionbottom {
+  margin-top: 5rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+}
+.worksectioninfo p {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  font-weight: 600;
 }
 
-/* Estilo para el botón "Comprar" */
-button {
-  background-color: #fe9e0d; /* Color amarillo */
-  color: #fff; /* Texto blanco */
-  border: none;
-  padding: 10px 20px; /* Espaciado interior de 10px arriba/abajo y 20px izquierda/derecha */
-  border-radius: 5px; /* Bordes redondeados */
-  cursor: pointer;
-  font-size: 16px; /* Tamaño de fuente 16px */
-  width: 100%; /* Ancho del 100% */
-  margin-top: 20px; /* Espaciado superior de 20px */
+@media (max-width: 1000px) {
+  .navbarlinkscontainer a {
+    margin-right: 1rem;
+    font-size: 1rem;
+  }
+  .primarybutton {
+    font-size: 1rem;
+  }
+  .homebannerimagecontainer {
+    max-width: 600px;
+  }
+}
+@media (max-width: 800px) {
+  .navlogocontainer {
+    max-width: 140px;
+  }
+  .navbarlinkscontainer {
+    display: none;
+  }
+  .navbarmenucontainer {
+    display: flex;
+  }
+  .homebannerimagecontainer {
+    max-width: 450px;
+  }
+  .homebannercontainer,
+  .aboutsectioncontainer {
+    flex-direction: column-reverse;
+    align-items: center;
+    justify-content: center;
+  }
+  .aboutsectioncontainer {
+    flex-direction: column;
+  }
+  .homeimagesection,
+  .aboutsectionimagecontainer {
+    width: 100%;
+    max-width: 400px;
+  }
+  .primaryheading {
+    text-align: center;
+    max-width: 90%;
+  }
+  .primarytext {
+    text-align: center;
+    max-width: 80%;
+  }
+  .hometextsection,
+  .aboutsectiontextcontainer {
+    justify-content: center;
+    align-items: center;
+    margin-top: 4rem;
+  }
+  .secondarybutton {
+    font-size: 1rem;
+    padding: 0.8rem 2rem;
+    cursor: pointer;
+  }
+  .aboutsectioncontainer {
+    margin-top: 5rem !important;
+  }
+  .aboutbuttonscontainer {
+    justify-content: center;
+    flex-direction: column;
+  }
+  .primarysubheading {
+    text-align: center;
+  }
+  .watchvideobutton {
+    margin-left: 0rem !important;
+    margin-top: 1rem;
+    font-size: 1rem !important;
+  }
+  .watchvideobutton svg {
+    margin-right: 0.5rem !important;
+  }
+  .aboutsectionimagecontainer {
+    margin-right: 0rem !important;
+  }
+  .worksectionwrapper {
+    margin-top: 5rem !important;
+  }
+  .worksectionbottom {
+    margin-top: 1rem !important;
+  }
+  .contactformcontainer {
+    padding: 0.5rem !important;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border-radius: 1rem !important;
+  }
+  .contactformcontainer input {
+    font-size: 1rem !important;
+    max-width: 100%;
+    padding: 0.5rem 1rem !important;
+    margin-bottom: 0.8rem !important;
+    text-align: center;
+  }
+  .footerwrapper {
+    flex-direction: column;
+  }
+  .footersectiontwo {
+    flex-direction: column;
+    margin-top: 2rem;
+  }
+  .footersectioncolumns {
+    margin: 1rem 0rem;
+  }
+  .App {
+    max-width: 95vw;
+  }
+}
+@media (max-width: 600px) {
+  .homebannerImagecontainer,
+  .aboutbackgroundimagecontainer {
+    display: none;
+  }
+}
+/* Estilos para el contenedor del modal */
+.modalContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 50vh;
+  background-color: rgba(211, 0, 0, 0.3); /* Fondo semitransparente detrás del modal */
+  position: relative;
+  max-width: 100px;
+
+
+
 }
 
-/* Estilo para el precio total */
-h3 {
-  font-size: 18px; /* Tamaño de fuente 18px */
-  margin-top: 20px; /* Espaciado superior de 20px */
-  text-align: right; /* Alineación derecha del texto */
-  color: #000; /* Texto negro */
+.modalTextContainer {
+  display:flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  height: 100%; /* Asegura que el contenedor ocupe toda la altura del modal */
 }
