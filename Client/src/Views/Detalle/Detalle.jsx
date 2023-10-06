@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useParams, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { cleanDetail, getProductById } from '../../Redux/actions';
@@ -55,7 +55,7 @@ const Detalle = () => {
 
 return (
         <div className={styles.detailContainer}>
-            {/* <img src={productDetail.image} alt={productDetail.name} className={styles.detailImg}/> */}
+            {<img src={productDetail.image} alt={productDetail.name} className={styles.detailImg}/>}
             <div className={styles.detailContent}>
                 {productDetail ? (
                     <div>
@@ -67,7 +67,7 @@ return (
                         <p>{productDetail.average_rating}</p></div>
                         <h2>Descripción:</h2>
                         <p>{productDetail.description}</p>
-                        <p>Hora de publicación: {productDetail.date}</p>
+                        <p>Fecha de publicación: {productDetail.date}</p>
                         {productDetail.categories ? (
                             <p>{productDetail.categories.join(', ')}</p>
                         ) : (
