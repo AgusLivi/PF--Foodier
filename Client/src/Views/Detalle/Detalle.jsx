@@ -62,6 +62,7 @@ const Detalle = () => {
     }
   };
 
+
   return (
     <div className={styles.detailContainer}>
       {<img src={productDetail.image} alt={productDetail.name} className={styles.detailImg} />}

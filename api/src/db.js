@@ -35,6 +35,7 @@ const { User, Seller, Product, Post } = sequelize.models;
 Seller.hasMany(Product);
 Seller.hasMany(Post);
 Seller.belongsToMany(User, { through: 'Fav', onDelete: 'CASCADE'});
+User.belongsToMany(Seller, { through: 'Fav', onDelete: 'CASCADE' });
 Product.belongsTo(Seller);
 Product.belongsToMany(User, { through: 'Order', onDelete: 'CASCADE'});
 User.hasMany(Post);
