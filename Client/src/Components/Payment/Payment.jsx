@@ -30,6 +30,13 @@ const Payment = () => {
     dispatch(createPaymentRequest(paymentData));
   };  
 
+  // Redirigir automáticamente al usuario a la página de pago al obtener la URL de pago
+  useEffect(() => {
+    if (paymentUrl) {
+      window.location.href = paymentUrl;
+    }
+  }, [paymentUrl]);
+
   return (
     <div className={styles.paymentContainer}>
       <h2 className={styles.paymentImg}/>
@@ -37,9 +44,6 @@ const Payment = () => {
       {paymentUrl && (
         <div>
           <p>Redirigiendo a la página de pago de Mercado Pago...</p>
-          <a href={paymentUrl} target="_blank" rel="noopener noreferrer">
-            Continuar con el pago
-          </a>
         </div>
       )}
       {!paymentUrl && (

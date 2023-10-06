@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from 'react';
-import { Container, Form, FormGroup, Input } from 'reactstrap';
+import { Card, Container, Form, FormGroup, Input } from 'reactstrap';
 import Style from "./CreateProduct.module.css"
 import uploadImage from '../../helperCloudinary/helperCloudinary';
 import { useDispatch, useSelector } from 'react-redux';
+import wave from '../../assets/wave.svg'
 import {
     getCategories, createProduct,
 } from '../../Redux/actions';
@@ -16,7 +17,7 @@ const Cloudinary = (props) => {
     const [reset, setReset] = useState(false);
     const textAux = 'Categoria/s seleccionada/s: ';
     const textAux2 = 'Para borrar una categoria seleccionada da click sobre ella';
-
+ 
     const [productPost, setProductPost] = useState({
         name: '',
         description: '',
@@ -90,138 +91,78 @@ const Cloudinary = (props) => {
 
     //console.log(productPost);
     return (
-
-        <div className={Style.container}>
-            {console.log('este es el product', productPost)}
-            <div className={Style.containerChild}>
-                <div className={Style.containerChildText}>
-                    <div>
-                        <h1>text</h1>
-                    </div>
-                </div>
-                <div className={Style.containerChildInput}>
-
-                    <form onSubmit={(event) => handlerCreateProduct(event)} className={Style.form}>
-                        <button type='submit'>ENVIAR</button>
-
-                        {/* SUBIR IMAGEN*/}
-                        <Container>
-                            <FormGroup>
-                                <Input
-                                    className={Style.exclude}
-                                    type="file"
-                                    name="file"
-                                    placeholder="carga tu imagen"
-                                    onChange={handlerCloudinary}
-                                />
-                                {loading ? (
-                                    <h3>Cargando imagen...</h3>
-                                ) : (
-                                    <img src={productPost.image} style={{ width: '300px' }} alt="Producto" />
-                                )}
-                            </FormGroup>
-                        </Container>
-                        {/* SUBIR IMAGEN*/}
-
-                        <div>
-                            {/* DESDE ACA EMPIEZA EL CATEGORIES*/}
-                            <label htmlFor="categoriess">Categorias: {' '}</label>
-
-                            <select name='categoriess' onChange={handleOnChange}>
-                                <option value=''>Selecciona tus categorias</option>
-                                {categories
-                                    .map((categorie) => {
+            <div className={Style.container}>
+ <img className={Style.wave} src={wave} alt="Wave" />
+                <form onSubmit={(event) => handlerCreateProduct(event)} className={Style.form}>
+                    <div className={Style.containerChilds}>
+                        <div className={Style.containerChildForm}>                    
+                                <label htmlFor="name">Nombre producto:</label>
+                                <input type="text" name='name' value={productPost.name} placeholder='Ej: Panadería Pancho' onChange={handleOnChange}/>
+        
+                               
+                                <label htmlFor="categories">Categorías:</label>
+                                    <select name='categoriess' onChange={handleOnChange} className={Style.cat}>
+                                        <option value=''>Selecciona tus categorías</option>
+                                        {categories.map((categorie) => {
+                                            return (
+                                                <option key={categorie} value={categorie}>
+                                                    {categorie}
+                                                </option>
+                                            )
+                                        })}
+                                    </select>
+            
+                                    {productPost.categories.length !== 0 && <p>{textAux}</p>}
+            
+                                    {productPost.categories.map((ca) => {
                                         return (
-                                            <option key={categorie} value={categorie}>
-                                                {categorie}
-                                            </option>
+                                            <button
+                                                type='button'
+                                                key={ca}
+                                                onClick={(event) => handleDeleteCategorie(event, ca)}
+                                                value={ca}
+                                            >
+                                                {ca}
+                                            </button>
                                         )
                                     })}
-                            </select>
+            
+                                    {productPost.categories.length !== 0 && <p>{textAux2}</p>}
+                                
+                            
 
-                            {productPost.categories.length !== 0 && <p>{textAux}</p>}
-
-                            {
-                                productPost.categories.map((ca) => {
-                                    return (
-                                        <button
-                                            type='button'
-                                            key={ca}
-                                            onClick={(event) => handleDeleteCategorie(event, ca)}
-                                            value={ca}
-                                        >
-                                            {ca}
-                                        </button>
-                                    )
-                                })
-                            }
-
-                            {productPost.categories.length !== 0 && <p>{textAux2}</p>}
-
-                            {/* HASTA ACA VA CATEGORIES*/}
-
-                            {/* NAME PRODUCT*/}
-                            <label htmlFor="name">Nombre producto: {' '}</label>
-                            <input
-                                type="text"
-                                name='name'
-                                value={productPost.name}
-                                placeholder='Ej: Panaderia Pancho'
-                                onChange={handleOnChange}
-                            />
-                            {/* NAME PRODUCT*/}
-
-                            {/* CANTIDAD*/}
-                            <label htmlFor="amount">Cantidad: {' '}</label>
-                            <input
-                                type="number"
-                                name='amount'
-                                value={productPost.amount}
-                                placeholder='Ej: 10'
-                                onChange={handleOnChange}
-                            />
-                            {/* CANTIDAD*/}
-
-                            {/* DESCRIPTION*/}
-                            <label htmlFor="description">Descripcion: {' '}</label>
-                            <textarea
-                                name="description"
-                                value={productPost.description}
-                                cols="30"
-                                rows="6"
-                                placeholder='Rica docena de pan de queso'
-                                onChange={handleOnChange}
-                            />
-                            {/* DESCRIPTION*/}
-
-                            {/* PRECIO VIEJO*/}
-                            <label htmlFor="old_price">Precio viejo: {' '}</label>
-                            <input
-                                type="number"
-                                name='old_price'
-                                value={productPost.old_price}
-                                placeholder='Ej: 800'
-                                onChange={handleOnChange}
-                            />
-                            {/* PRECIO VIEJO*/}
-
-                            {/* PRECIO NUEVO*/}
-                            <label htmlFor="price">Precio nuevo: {' '}</label>
-                            <input
-                                type="number"
-                                name='price'
-                                value={productPost.price}
-                                placeholder='Ej: 400'
-                                onChange={handleOnChange}
-                            />
-                            {/* PRECIO NUEVO*/}
+                                <label htmlFor="amount">Cantidad:</label>
+                                <input type="number" name='amount' value={productPost.amount}  onChange={handleOnChange}/>
+                 
+                                <label htmlFor="description">Descripción:</label>
+                                <textarea name="description" value={productPost.description} cols="3" rows="1" placeholder='Rica docena de pan de queso' onChange={handleOnChange}/>
+                          
+                   
+                                <label htmlFor="old_price">Precio viejo:</label>
+                                <input type="number" name='old_price' value={productPost.old_price} placeholder='Ej: 800' onChange={handleOnChange}/>
+          
+                                <label htmlFor="price">Precio nuevo:</label>
+                                <input type="number" name='price' value={productPost.price} placeholder='Ej: 400' onChange={handleOnChange}/>
+                                
+                              
+                                <button type='submit' className={Style.btn}>Subir</button>
+        
                         </div>
-
-                    </form>
-                </div>
-            </div>
-        </div >
-    )
-}
-
-export default Cloudinary;
+                        <FormGroup className={Style.containerChildImg}>
+                                    <Input type="file" className={Style.input} name="file" placeholder="carga tu imagen" onChange={handlerCloudinary}/>
+                                          {loading ? (
+                                        <h3>Cargando imagen...</h3>
+                                         ) : (
+                                            <div className={Style.containerImg}>    
+                                                <img src={productPost.image} alt="Producto" />
+                                            </div>
+                                         )}
+                        </FormGroup>
+                    </div>
+                </form>
+             </div>
+           
+        )
+    }
+    
+    export default Cloudinary;

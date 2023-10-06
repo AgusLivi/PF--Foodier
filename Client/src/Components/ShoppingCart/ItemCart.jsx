@@ -1,3 +1,4 @@
+//ItemCart.jsx
 import React, { useEffect, useState } from 'react';
 
 function ItemCart({ item, removeFromCart, prices, setPrices }) {

@@ -36,7 +36,7 @@ import {
 
 const initialState = {
   products: [],
-  productsCopy: [],
+  productsAmount: 0,
   productDetail:{},
   sellersFav: [],
   users: [],
@@ -60,11 +60,12 @@ const reducer = (state = initialState, { type, payload }) => {
   switch (type) {
     //pruducts CASEs
     case GET_PRODUCTS:
+      console.log(payload.rows);
 
       return {
         ...state,
-        products: payload,
-        productsCopy: payload,
+        products: payload.rows,
+        productsAmount: payload.count
       };
 
     case GET_SELLER_FAV:
