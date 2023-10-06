@@ -3,12 +3,13 @@ import { useDispatch, useSelector } from "react-redux";
 import Card from "../Card/card";
 import styles from "./CardContainer.module.css";
 
-const CardContainer = () => {
-  const products = useSelector((state) => state.productsCopy);
-  console.log('products: ', products);
+const CardContainer =  () => {
+  const products =  useSelector((state) => state.products);
+  console.log(products);
+
   return (
     <div className={styles.cardContainer}>
-      {products.map((product, index) => {
+      { products?.map((product, index) => {
         return (
           <Card
             key={index}

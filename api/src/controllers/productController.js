@@ -1,13 +1,13 @@
 const { User, Seller, Product, Post } = require("../db.js");
 const { Op } = require("sequelize");
 
+
 const paginate = (query, { page, pageSize }) => {
   const offset = (page - 1) * pageSize;
   const limit = pageSize;
 
   return { query, offset, limit };
 };
-
 // Obtener todos los productos paginados y filtrados por nombre segun se requieran x query
 const getAllProducts = async (req,res) => {
   
@@ -54,9 +54,9 @@ const getAllProducts = async (req,res) => {
 
     // hace la peticion teniendo en cuenta los query q se envian
     if (page || pageSize) {
-      const filteredProducts = await Product.findAll(
-        paginate(
+      const filteredProducts = await Product.findAndCountAll(
           {
+            where: filterConditions,
             order: ordenamiento,
             include: [
               {
@@ -64,19 +64,19 @@ const getAllProducts = async (req,res) => {
                 where: sellerFilterConditions,
               },
             ],
-            where: filterConditions,
+            offset: (page - 1) * pageSize,
+            limit: pageSize
           },
-          { page, pageSize }
         )
-      );
+      ;
       return res.status(200).json(filteredProducts);
     } else {
-      const filteredProducts = await Product.findAll({
+      const filteredProducts = await Product.findAndCountAll({
         order: ordenamiento,
         include: [
           {
             model: Seller,
-            where: sellerFilterConditions,
+            where: sellerFilterConditions
           },
         ],
         where: filterConditions,
@@ -193,6 +193,16 @@ const getAllCategories = async (req, res)=>{
   }
 }
 
+const getTotalProducts = async (req, res) => {
+  try {
+    const tota = await Product.count()
+    console.log(tota);
+    res.json(tota)
+  } catch (error) {
+    res.status(500).json({ mensaje: 'Error interno del servidor' });
+  }
+}
+
 
 // ... otros metodos para crear, actualizar y eliminar productos
 
@@ -202,5 +212,6 @@ module.exports = {
   createProduct,
   deleteProduct,
   getAllCategories,
-  updateProduct
+  updateProduct,
+  getTotalProducts
 };

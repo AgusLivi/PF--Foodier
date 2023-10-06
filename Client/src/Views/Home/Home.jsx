@@ -16,25 +16,24 @@ const Home = () => {
   const provincias = useSelector((state) => state.provincias);
   const municipios = useSelector((state) => state.municipios);
   const localidades = useSelector((state) => state.localidades);
+  const  productsAmount = useSelector((state) => state.productsAmount)
 
-  const [selectedProvincia, setSelectedProvincia] = useState("");
-  const [selectedMunicipio, setSelectedMunicipio] = useState("");
-  const [selectedLocalidad, setSelectedLocalidad] = useState("");
 
   const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(getCategories());
     dispatch(getProducts(new URLSearchParams(formData).toString()));
+    console.log(new URLSearchParams(formData).toString());
     dispatch(locationProvincia());
-    return;
+
   }, []);
 
   const [formData, setFormData] = useState({
     page: 1,
     pageSize: 8,
     name: "",
-    categories: [],
+    categories: [].join(','),
     address: "",
     average_rating: "",
     payment: "",
@@ -42,10 +41,17 @@ const Home = () => {
     order: "asc",
   });
 
-  useEffect(()=>{
-    handleSubmit()
-  }, [formData])
 
+  const nextHandler = () => {
+    console.log(Math.ceil(productsAmount/formData.pageSize));
+    if(formData.page < Math.ceil(productsAmount/formData.pageSize)){
+      console.log("page "+ formData.page);
+      setFormData({...formData, page: formData.page + 1 })
+      dispatch(getProducts(new URLSearchParams(formData).toString()))
+    }else{
+      alert("stop!")
+    }
+  }
 
   const handleInputChange = (event) => {
     const { name, value } = event.target;
@@ -66,31 +72,12 @@ const Home = () => {
     }
   };
 
-  const handleSubmit = () => {
-    const {
-      name,
-      categories,
-      address,
-      average_rating,
-      payment,
-      orderBy,
-      order,
-    } = formData;
 
-    // generamos la cadena de consulta
-    const queryParams = new URLSearchParams({
-      name,
-      categories: categories.join(","),
-      address,
-      average_rating,
-      payment,
-      orderBy,
-      order,
-    }).toString();
-    console.log('QUERYYYYYYYYY',queryParams);
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    dispatch(getProducts(new URLSearchParams(formData).toString()))
 
-    // hacer dispatch con la cadena de consulta
-    dispatch(getProducts(queryParams));
+
   };
 
   // const [isModalVisible, setIsModalVisible] = useState(false);
@@ -310,6 +297,9 @@ const handleDeleteCategorie = (_event, ca) => {
       </div>
       <div className={Style.containerPost}>
         <CardContainer />
+        <button>prev</button>
+        <button onClick={()=> nextHandler()}>next</button>
+
       </div>
     </div>
 
