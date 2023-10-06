@@ -379,12 +379,33 @@ export const login  = (userData) => {
         try {
             const { data } = await axios.post(`${endPoint}/login`, userData)
             const { token, error } = response.data;
+         // Si se recibe un token, puedes almacenarlo en el estado global o en el almacenamiento local
+         // para mantener al usuario autenticado
+            if (token) {
+                dispatch(setAuthToken(token))
+            }
+            else {
+                // Maneja errores de inicio de sesión específicos
+                if (error === "InvalidPassword") {
+                  alert("Contraseña incorrecta");
+                } else if (error === "UserNotFound") {
+                  alert("Usuario no encontrado");
+                } else {
+                  alert("Error desconocido en el inicio de sesión");
+                }
+              }
             alert(`Inicio de sesión exitoso ${data.name}`)
          } catch(error) {
             alert("Error al iniciar sesión" + error.message)
          }
     }
 }
+    const setAuthToken = (token) => {
+        return {
+        type: "SET_AUTH_TOKEN",
+        payload: token,
+        };
+    };
 
 //payment actions
 export const createPaymentRequest = (paymentData) => async (dispatch) => {
