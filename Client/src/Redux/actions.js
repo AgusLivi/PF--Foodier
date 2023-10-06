@@ -266,7 +266,7 @@ export const getSellerById = (id) => {
 export const getProducts = (querys) => {
     return async dispatch => {
         const { data } = await axios.get(`${endPoint}/products/?${querys}`)
-        console.log('ACTION!!!', data)
+        console.log('ACTION!!!', querys)
         return dispatch({
             type: GET_PRODUCTS,
             payload: data
