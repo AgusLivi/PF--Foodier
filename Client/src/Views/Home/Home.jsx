@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import CardContainer from "../../Components/CardContainer/CardContainer.jsx";
+import Paginate from "../../Components/Pagination/paginate.jsx";
 import Style from "./Home.module.css";
 import {
   getCategories,
@@ -18,16 +19,17 @@ const Home = () => {
   const localidades = useSelector((state) => state.localidades);
   const productsAmount = useSelector((state) => state.productsAmount);
 
-
   const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(getCategories());
-    dispatch(getProducts(new URLSearchParams(formData).toString()));
-    console.log(
-      new URLSearchParams(
-        setFormData({ ...formData, categories: formData.categories.join(",") })
-      ).toString()
+    dispatch(
+      getProducts(
+        new URLSearchParams({
+          ...formData,
+          categories: formData.categories.join(","),
+        }).toString()
+      )
     );
     dispatch(locationProvincia());
   }, []);
@@ -44,15 +46,18 @@ const Home = () => {
     order: "asc",
   });
 
-  const nextHandler = () => {
-    console.log(Math.ceil(productsAmount / formData.pageSize));
-    if (formData.page < Math.ceil(productsAmount / formData.pageSize)) {
-      console.log("page " + formData.page);
-      setFormData({ ...formData, page: formData.page + 1 });
-      dispatch(getProducts(new URLSearchParams(formData).toString()));
-    } else {
-      alert("stop!");
-    }
+  //Paginations
+
+  const pagination = (page) => {
+    setFormData({ ...formData, page: page });
+    dispatch(
+      getProducts(
+        new URLSearchParams({
+          ...formData,
+          categories: formData.categories.join(","),
+        }).toString()
+      )
+    );;
   };
 
   const handleInputChange = (event) => {
@@ -77,8 +82,14 @@ const Home = () => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    dispatch(getProducts(new URLSearchParams(formData).toString()));
-
+    dispatch(
+      getProducts(
+        new URLSearchParams({
+          ...formData,
+          categories: formData.categories.join(","),
+        }).toString()
+      )
+    );;
   };
 
   // const [isModalVisible, setIsModalVisible] = useState(false);
@@ -339,7 +350,8 @@ const handleLocalChange = (event) => {
             {formData.categories.length !== 0 && (
               <p>Categoria/s seleccionada/s: </p>
             )}
-            {formData.categories && formData.categories.map((ca) => 
+            {
+              formData.categories.map((ca) => (
                 <button
                   type="button"
                   key={ca}
@@ -348,7 +360,7 @@ const handleLocalChange = (event) => {
                 >
                   {ca}
                 </button>
-            )}
+              ))}
 
             {formData.categories.length !== 0 && (
               <p>Para borrar una categoria seleccionada da click sobre ella</p>
@@ -359,9 +371,8 @@ const handleLocalChange = (event) => {
         </form>
       </div>
       <div className={Style.containerPost}>
-        <CardContainer />
-        <button>prev</button>
-        <button onClick={() => nextHandler()}>next</button>
+        <CardContainer/>
+        <Paginate currentPage={formData.page} page={pagination} size={formData.pageSize}/>
       </div>
     </div>
   );
