@@ -372,6 +372,18 @@ export const createUser = (userData) => {
     }
 }
 
+//login
+export const login  = (userData) => {
+    return async () => {
+        try {
+            const { data } = await axios.post(`${endPoint}/login`)
+            alert(`Inicio de sesión exitoso`)
+         } catch(error) {
+            alert(error.message)
+         }
+    }
+}
+
 //payment actions
 export const createPaymentRequest = (paymentData) => async (dispatch) => {
     try {
@@ -402,3 +414,4 @@ export const createPaymentRequest = (paymentData) => async (dispatch) => {
             payload: error.message });
     }
 };
+

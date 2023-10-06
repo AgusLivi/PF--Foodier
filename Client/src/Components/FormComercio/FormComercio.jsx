@@ -1,66 +1,72 @@
 import React from 'react';
 import { createRoutesFromChildren, useNavigate } from 'react-router-dom';
 import { useFormik } from 'formik';
-import {createSeller } from '../../Redux/actions'
-import { useDispatch } from 'react-redux'
+import { createSeller } from '../../Redux/actions';
+import { useDispatch } from 'react-redux';
+import style from './FormComercio.module.css';
+import wave from '../../assets/wave.svg';
 
 const FormComercio = () => {
-  const navigate = useNavigate(); 
+  const navigate = useNavigate();
   const dispatch = useDispatch();
 
   const submitForm = async (values) => {
+    try {
+      const sellerData = {
+        name: values.name,
+        email: values.email,
+        address: values.address,
+        password: values.password,
+        time: values.time,
+        contact: values.contact,
+        payment: values.payment,
+        image: values.image,
+      };
 
-  try{ 
-
-    const sellerData = {
-      name: values.name,
-      email: values.email,
-      address: values.address,
-      password: values.password,
-      time: values.time,
-      contact: values.contact, 
-      payment: values.payment, 
-      image: values.image, 
-    } 
-    
-    await dispatch(createSeller(sellerData)); 
-    navigate('/home'); 
-
-  } catch(error) {
-    console.error(error)
-  }
+      await dispatch(createSeller(sellerData));
+      navigate('/home');
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   const validateForm = (values) => {
     const errors = {};
 
-    // Validación para el campo usuario
     if (!values.name) {
-      errors.usuario = 'El usuario es obligatorio';
+      errors.name = 'El nombre es obligatorio';
     }
 
-    // Validación para el campo email
     if (!values.email) {
       errors.email = 'El correo es obligatorio';
     } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(values.email)) {
       errors.email = 'Formato de correo electrónico inválido';
     }
 
-    // Validación para el campo dirección
     if (!values.address) {
       errors.address = 'La dirección es obligatoria';
     }
 
-    // Validación para el campo teléfono
     if (!values.contact) {
       errors.contact = 'El teléfono es obligatorio';
     }
 
-    // Validación para el campo contraseña
     if (!values.password) {
       errors.password = 'La contraseña es obligatoria';
     } else if (!/(?=.*[A-Z])(?=.*\d)/.test(values.password)) {
       errors.password = 'La contraseña debe contener al menos una mayúscula y un número';
+    }
+
+    if (!values.time) {
+      errors.time = 'El horario es obligatorio';
+    }
+
+    if (!values.payment) {
+      errors.payment = 'Los métodos de pago son obligatorios';
+    }
+
+    if (!values.image) {
+      errors.image = 'La imagen es obligatoria';
     }
 
     return errors;
@@ -69,127 +75,174 @@ const FormComercio = () => {
   const formik = useFormik({
     initialValues: {
       name: '',
-      usuario: '',
       email: '',
       address: '',
       contact: '',
       password: '',
+      time: '',
+      payment: '',
+      image: '',
     },
     onSubmit: submitForm,
-    validate: validateForm, 
+    validate: validateForm,
   });
 
   return (
     <div>
-      <form onSubmit={formik.handleSubmit}>
-        <label>
-          Usuario:
-          <input
-            type='text'
-            name='name'
-            onChange={formik.handleChange}
-            onBlur={formik.handleBlur}
-            value={formik.values.name}
-          />
-          {formik.touched.name && formik.errors.name && (
-            <div className='error'>{formik.errors.name}</div>
-          )}
-        </label>
+      <img className={style.wave} src={wave} alt="Wave" />
+      <div className={style.container}>
+        <div className={style.img}></div>
+        <div className={style['login-content']}>
+          <form onSubmit={formik.handleSubmit} action="index.html">
+            <h2 className={style.title}>Sign Up</h2>
+            <div className={style['input-div'] + ' ' + style.one}>
+              <div className={style.i}></div>
+              <div className={style.div}>
+                <h5>Nombre</h5>
+                <input
+                  type="text"
+                  className={style.input}
+                  name="name"
+                  onChange={formik.handleChange}
+                  onBlur={formik.handleBlur}
+                  value={formik.values.name}
+                />
+              </div>
+              {formik.touched.name && formik.errors.name && (
+                <div className={style.error}>{formik.errors.name}</div>
+              )}
+            </div>
 
-        <label>
-          Email:
-          <input
-            type='email'
-            name='email'
-            onChange={formik.handleChange}
-            onBlur={formik.handleBlur}
-            value={formik.values.email}
-          />
-          {formik.touched.email && formik.errors.email && (
-            <div className='error'>{formik.errors.email}</div>
-          )}
-        </label>
+            <div className={style['input-div'] + ' ' + style.one}>
+              <div className={style.i}></div>
+              <div className={style.div}>
+                <h5>Email</h5>
+                <input
+                  type="email"
+                  className={style.input}
+                  name="email"
+                  onChange={formik.handleChange}
+                  onBlur={formik.handleBlur}
+                  value={formik.values.email}
+                />
+              </div>
+              {formik.touched.email && formik.errors.email && (
+                <div className={style.error}>{formik.errors.email}</div>
+              )}
+            </div>
 
-        <label>
-          Dirección:
-          <input
-            type='text'
-            name='address'
-            onChange={formik.handleChange}
-            onBlur={formik.handleBlur}
-            value={formik.values.address}
-          />
-          {formik.touched.address && formik.errors.address && (
-            <div className='error'>{formik.errors.address}</div>
-          )}
-        </label>
+            <div className={style['input-div'] + ' ' + style.pass}>
+              <div className={style.i}></div>
+              <div className={style.div}>
+                <h5>Dirección</h5>
+                <input
+                  type="text"
+                  className={style.input}
+                  name="address"
+                  onChange={formik.handleChange}
+                  onBlur={formik.handleBlur}
+                  value={formik.values.address}
+                />
+              </div>
+              {formik.touched.address && formik.errors.address && (
+                <div className={style.error}>{formik.errors.address}</div>
+              )}
+            </div>
 
-        <label>
-          Teléfono:
-          <input
-            type='text'
-            name='contact'
-            onChange={formik.handleChange}
-            onBlur={formik.handleBlur}
-            value={formik.values.contact}
-          />
-          {formik.touched.phonenumber && formik.errors.phonenumber && (
-            <div className='error'>{formik.errors.phonenumber}</div>
-          )}
-        </label>
+            <div className={style['input-div'] + ' ' + style.pass}>
+              <div className={style.i}></div>
+              <div className={style.div}>
+                <h5>Teléfono</h5>
+                <input
+                  type="text"
+                  className={style.input}
+                  name="contact"
+                  onChange={formik.handleChange}
+                  onBlur={formik.handleBlur}
+                  value={formik.values.contact}
+                />
+              </div>
+              {formik.touched.contact && formik.errors.contact && (
+                <div className={style.error}>{formik.errors.contact}</div>
+              )}
+            </div>
 
-        <label>
-          Horario:
-          <input
-            type='text'
-            name='time'
-            onChange={formik.handleChange}
-            onBlur={formik.handleBlur}
-            value={formik.values.time}
-          />
-        </label>
+            <div className={style['input-div'] + ' ' + style.pass}>
+              <div className={style.i}></div>
+              <div className={style.div}>
+                <h5>Horario</h5>
+                <input
+                  type="text"
+                  className={style.input}
+                  name="time"
+                  onChange={formik.handleChange}
+                  onBlur={formik.handleBlur}
+                  value={formik.values.time}
+                />
+              </div>
+              {formik.touched.time && formik.errors.time && (
+                <div className={style.error}>{formik.errors.time}</div>
+              )}
+            </div>
 
+            <div className={style['input-div'] + ' ' + style.pass}>
+              <div className={style.i}></div>
+              <div className={style.div}>
+                <h5>Métodos de Pago</h5>
+                <input
+                  type="text"
+                  className={style.input}
+                  name="payment"
+                  onChange={formik.handleChange}
+                  onBlur={formik.handleBlur}
+                  value={formik.values.payment}
+                />
+              </div>
+              {formik.touched.payment && formik.errors.payment && (
+                <div className={style.error}>{formik.errors.payment}</div>
+              )}
+            </div>
 
-        <label>
-          Métodos de pago:
-          <input
-          type='texr'
-          name='payment'
-          onChange={formik.handleChange}
-          onBlur={formik.handleBlur}
-          value={formik.values.payment}
-          />
-        </label>
+            <div className={style['input-div'] + ' ' + style.pass}>
+              <div className={style.i}></div>
+              <div className={style.div}>
+                <h5>Imagen</h5>
+                <input
+                  type="text"
+                  className={style.input}
+                  name="image"
+                  onChange={formik.handleChange}
+                  onBlur={formik.handleBlur}
+                  value={formik.values.image}
+                />
+              </div>
+              {formik.touched.image && formik.errors.image && (
+                <div className={style.error}>{formik.errors.image}</div>
+              )}
+            </div>
 
+            <div className={style['input-div'] + ' ' + style.pass}>
+              <div className={style.i}></div>
+              <div className={style.div}>
+                <h5>Contraseña</h5>
+                <input
+                  type="password"
+                  className={style.input}
+                  name="password"
+                  onChange={formik.handleChange}
+                  onBlur={formik.handleBlur}
+                  value={formik.values.password}
+                />
+              </div>
+              {formik.touched.password && formik.errors.password && (
+                <div className={style.error}>{formik.errors.password}</div>
+              )}
+            </div>
 
-
-        <label>
-          Contraseña:
-          <input
-            type='password'
-            name='password'
-            onChange={formik.handleChange}
-            onBlur={formik.handleBlur}
-            value={formik.values.password}
-          />
-          {formik.touched.password && formik.errors.password && (
-            <div className='error'>{formik.errors.password}</div>
-          )}
-        </label>
-
-        <label>
-          Imagen:
-          <input
-            type='text'
-            name='image'
-            onChange={formik.handleChange}
-            onBlur={formik.handleBlur}
-            value={formik.values.image}
-          />
-        </label>
-
-        <button type='submit'>Registrarse</button>
-      </form>
+            <input type="submit" className={style.btn} value="Register" />
+          </form>
+        </div>
+      </div>
     </div>
   );
 };
