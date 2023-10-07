@@ -149,22 +149,6 @@ form{
 .link{
     text-decoration: none;
 }
-.select-field {
-    width: 100%;
-    height: 45px;
-    border: none;
-    outline: none;
-    background: none;
-    padding: 0.5rem 0.7rem;
-    font-size: 1.2rem;
-    color: #555;
-    font-family: 'Poppins', sans-serif;
-    border-bottom: 2px solid #d9d9d9;
-    transition: border-color 0.4s;
-  }
-  
-
-
 a{
     display: block;
     text-align: right;
