@@ -1,0 +1,15 @@
+/* ItemCart.module.css */
+
+.button {
+    background-color: #fe9e0d; /* Fondo amarillo */
+    color: white; /* Texto blanco */
+    border: none; /* Sin borde */
+    padding: 4px 10px; /* Espacio interno */
+    border-radius: 5px; /* Bordes redondeados */
+    cursor: pointer; /* Cambiar cursor al pasar el ratón */
+  }
+  
+  .button:hover {
+    background-color: #ffbb3e; /* Cambiar color al pasar el ratón */
+  }
+  
