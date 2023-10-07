@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import CardContainer from "../../Components/CardContainer/CardContainer.jsx";
+import Paginate from "../../Components/Pagination/paginate.jsx";
 import Style from "./Home.module.css";
 import {
   getCategories,
@@ -18,16 +19,17 @@ const Home = () => {
   const localidades = useSelector((state) => state.localidades);
   const productsAmount = useSelector((state) => state.productsAmount);
 
-
   const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(getCategories());
-    dispatch(getProducts(new URLSearchParams(formData).toString()));
-    console.log(
-      new URLSearchParams(
-        setFormData({ ...formData, categories: formData.categories.join(",") })
-      ).toString()
+    dispatch(
+      getProducts(
+        new URLSearchParams({
+          ...formData,
+          categories: formData.categories.join(","),
+        }).toString()
+      )
     );
     dispatch(locationProvincia());
   }, []);
@@ -37,22 +39,29 @@ const Home = () => {
     pageSize: 8,
     name: "",
     categories: [],
-    address: "",
+    address: [],
     average_rating: "",
     payment: "",
     orderBy: "name",
     order: "asc",
   });
 
-  const nextHandler = () => {
-    console.log(Math.ceil(productsAmount / formData.pageSize));
-    if (formData.page < Math.ceil(productsAmount / formData.pageSize)) {
-      console.log("page " + formData.page);
-      setFormData({ ...formData, page: formData.page + 1 });
-      dispatch(getProducts(new URLSearchParams(formData).toString()));
-    } else {
-      alert("stop!");
-    }
+  useEffect(()=>{
+    handleSubmit()
+  }, [formData])
+
+  //Paginations
+
+  const pagination = (page) => {
+    setFormData({ ...formData, page: page });
+    dispatch(
+      getProducts(
+        new URLSearchParams({
+          ...formData,
+          categories: formData.categories.join(","),
+        }).toString()
+      )
+    );;
   };
 
   const handleInputChange = (event) => {
@@ -74,9 +83,16 @@ const Home = () => {
     }
   };
 
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    dispatch(getProducts(new URLSearchParams(formData).toString()));
+
+  const handleSubmit = () => {
+    dispatch(
+      getProducts(
+        new URLSearchParams({
+          ...formData,
+          categories: formData.categories.join(","),
+        }).toString()
+      )
+    );;
   };
 
   // const [isModalVisible, setIsModalVisible] = useState(false);
@@ -107,25 +123,70 @@ const Home = () => {
     });
   };
 
-  const handleProvinciaChange = (event) => {
-    setSelectedProvincia(
-      event.target.options[event.target.selectedIndex].getAttribute("name")
-    );
-    dispatch(locationMunicipio(event.target.value));
+
+const handleProvinciaChange = (event) => {
+  const selectedProvinciaValue = event.target.options[event.target.selectedIndex].getAttribute("name");
+  dispatch(locationMunicipio(event.target.value));
+  
+  // agrega la provincia a address y actualiza el estado
+  let updatedAddress = [selectedProvinciaValue];
+  
+  setFormData({
+    ...formData,
+    address: updatedAddress
+  });
+
+  //  actualiza la cadena de consulta
+  updateQueryParams({ address: updatedAddress });
+};
+
+const handleMuniChange = (event) => {
+  const selectedMunicipioValue = event.target.options[event.target.selectedIndex].getAttribute("name");
+  dispatch(locationLocalidad(event.target.value));
+  
+  // agrega el municipio a address y actualiza el estado
+  const updatedAddress = [...formData.address];
+  updatedAddress[1] = selectedMunicipioValue
+  if (updatedAddress.length > 2) {
+    updatedAddress.pop();
+  }
+  setFormData({
+    ...formData,
+    address: updatedAddress
+  });
+  // actualiza la cadena de consulta
+  updateQueryParams({ address: updatedAddress });
+};
+
+const handleLocalChange = (event) => {
+  const selectedLocalidadValue = event.target.options[event.target.selectedIndex].getAttribute("name");
+  
+  // agrega la localidad a address y actualiza el estado
+  const updatedAddress = [...formData.address];
+  updatedAddress[2] = selectedLocalidadValue;
+  setFormData({
+    ...formData,
+    address: updatedAddress
+  });
+
+  // actualiza la cadena de consulta
+  updateQueryParams({ address: updatedAddress });
+};
+
+ // actualizar la cadena de consulta
+ const updateQueryParams = (paramsToUpdate) => {
+  const updatedParams = {
+    ...formData,
+    ...paramsToUpdate
+
   };
 
-  const handleMuniChange = (event) => {
-    setSelectedMunicipio(
-      event.target.options[event.target.selectedIndex].getAttribute("name")
-    );
-    dispatch(locationLocalidad(event.target.value));
-  };
+  const queryParams = new URLSearchParams(updatedParams).toString();
+  console.log('QUERYYYYYYYYY', queryParams);
 
-  const handleLocalChange = (event) => {
-    setSelectedLocalidad(
-      event.target.options[event.target.selectedIndex].getAttribute("name")
-    );
-  };
+  //  dispatch con la cadena de consulta
+  dispatch(getProducts(queryParams));
+};
 
   return (
     <div className={Style.containerChilds}>
@@ -147,6 +208,7 @@ const Home = () => {
         <form className={Style.containerChildFilter}>
           {/* Modal */}
           <div className={Style.itemForm}>
+            {/*---------------------------UBICACION------------------------------------------------*/}
             <div>
               <select name="" id="" onChange={handleProvinciaChange}>
                 <option value="" disabled selected>
@@ -198,6 +260,8 @@ const Home = () => {
               )}
             </select>
           </div>
+          {/*---------------------------TERMINA UBICACION------------------------------------------------*/}
+
           {/* Resto de tus elementos de formulario aquí */}
           <div
             className={`${Style.checkbox}`} // className={`${Style.checkbox} ${isModalVisible ? Style.modalVisible : ""}`}
@@ -289,7 +353,8 @@ const Home = () => {
             {formData.categories.length !== 0 && (
               <p>Categoria/s seleccionada/s: </p>
             )}
-            {formData.categories && formData.categories.map((ca) => 
+            {
+              formData.categories.map((ca) => (
                 <button
                   type="button"
                   key={ca}
@@ -298,7 +363,7 @@ const Home = () => {
                 >
                   {ca}
                 </button>
-            )}
+              ))}
 
             {formData.categories.length !== 0 && (
               <p>Para borrar una categoria seleccionada da click sobre ella</p>
@@ -309,9 +374,8 @@ const Home = () => {
         </form>
       </div>
       <div className={Style.containerPost}>
-        <CardContainer />
-        <button>prev</button>
-        <button onClick={() => nextHandler()}>next</button>
+        <CardContainer/>
+        <Paginate currentPage={formData.page} page={pagination} size={formData.pageSize}/>
       </div>
     </div>
   );

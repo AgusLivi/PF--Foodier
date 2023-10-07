@@ -1,0 +1,48 @@
+.reservaContainer {
+    text-align: center;
+    margin-top: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    flex-direction: column;
+    text-align: center;
+    border-style: none;
+}
+
+.modal {
+    text-align: center;
+    margin-top: 200px;
+}
+
+.modalImg {
+    background-image: url('../../assets/clock.png');
+    width: 50px;
+    height: 50px;
+    background-repeat: no-repeat;
+    background-size: contain;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto;
+    margin-top: 30px;
+    margin-bottom: 30px;
+}
+
+.modalButton {
+    padding: 10px 15px;
+    background-color: #ff8c00;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    margin-top: 20px;
+    margin-left: 5px;
+    margin-right: 5px;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.modalButton:hover {
+    background-color: #ff6b00;
+    box-shadow: 0px 0px 10px rgba(255, 140, 0, 0.87);
+}

@@ -11,9 +11,11 @@ const paginate = (query, { page, pageSize }) => {
 // Obtener todos los productos paginados y filtrados por nombre segun se requieran x query
 const getAllProducts = async (req,res) => {
   
-  const {categories, address, average_rating, payment, order, orderBy, page, pageSize, name} = req.query;
+  let {categories, address, average_rating, payment, order, orderBy, page, pageSize, name} = req.query;
+  address? address = address.replace(/,/g, ', ') : address
   try {
     // Filtra por categoría exacta en la tabla 'products'
+    console.log(address)
     let filterConditions = {};
     if (categories != null && categories != "") {
       const categoriesArray = categories.split(",");
