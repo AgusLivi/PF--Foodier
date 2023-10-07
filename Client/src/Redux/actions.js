@@ -379,6 +379,7 @@ export const createUser = (userData) => {
 
 //login
 export const login  = (formData) => {
+    console.log(formData);
     return async () => {
         try {
             const { data } = await axios.post(`${endPoint}/login`, formData)

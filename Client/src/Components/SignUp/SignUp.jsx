@@ -1,10 +1,9 @@
 import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import styles from "./SignUp.module.css"
 import wave from "../../assets/wave.svg"
 import { login } from "../../Redux/actions";
-import { useFormik } from 'formik';
+import { Field, useFormik } from 'formik';
 import { useNavigate } from 'react-router-dom';
 
 const SignUp = () => {
@@ -106,14 +105,17 @@ return(
             </div>
             <div className={styles.div}>
               <h5>Usuario o vendedor</h5>
-              <input
+              <select
                 name="userOrSeller"
-                type="text" 
-                className={styles.input} 
-                value={formik.values.userOrSeller} 
-                onChange={formik.handleChange} 
+                className={styles['select-field']}
+                value={formik.values.userOrSeller}
+                onChange={formik.handleChange}
                 onBlur={formik.handleBlur}
-                />
+                >
+                <option value="">Selecciona un tipo</option>
+                <option value="user">Usuario</option>
+                <option value="seller">Vendedor</option>
+                </select>
             </div>
           </div>
           <a href="#">Olvidaste tu contraseña?</a>
