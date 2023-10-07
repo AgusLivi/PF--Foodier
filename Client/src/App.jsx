@@ -15,6 +15,7 @@ import Detalle from './Views/Detalle/Detalle';
 import SignUp from "./Components/SignUp/SignUp";
 import Payment from "./Components/Payment/Payment";
 import ShoppingCart from './Components/ShoppingCart/ShoppingCart';
+import Reserva from "./Components/Reserva/Reserva";
 
 
 
@@ -44,6 +45,7 @@ const App = () => {
         <Route path='/products/:product_ID' element={<Detalle/>} />
         <Route path='/payments/:monto/:descripcion' element={<Payment/>}/>
         <Route path='/carrito' element={<ShoppingCart />} />
+        <Route path='/reserva' element={<Reserva />} />
 
 
       </Routes>
