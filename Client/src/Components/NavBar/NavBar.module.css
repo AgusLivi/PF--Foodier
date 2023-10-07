@@ -25,13 +25,16 @@ header {
 }
 
 nav a {
+	scale:1.2;
 	margin: 0 1rem;
+	font-size: 24px;
 	color: var(--textColor);
 	text-decoration: none;
 }
 
 nav a:hover {
 	color: var(--secondaryColor);
+	scale: 1.5;
 }
 
 header .nav-btn {
@@ -41,7 +44,7 @@ header .nav-btn {
 	border: none;
 	outline: none;
 	color: var(--textColor);
-	visibility: hidden;
+	display: none;
 	opacity: 0;
 	font-size: 1.8rem;
 }
@@ -54,7 +57,7 @@ nav {
 
 @media only screen and (max-width: 1024px) {
 	header .nav-btn {
-		visibility: visible;
+		display: block;
 		opacity: 1;
 	}
 
