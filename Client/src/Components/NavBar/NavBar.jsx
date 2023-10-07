@@ -1,5 +1,5 @@
 import React, { useRef } from "react";
-import { FaBars, FaTimes , FaShoppingCart} from "react-icons/fa";
+import { FaBars, FaTimes , FaShoppingCart,FaMoneyBillAlt,FaStoreAlt} from "react-icons/fa";
 import styles from "./NavBar.module.css"; 
 import Logo from '../../assets/Logo.svg'
 import { Link } from 'react-router-dom'
@@ -17,13 +17,12 @@ function Navbar() {
       <img src={Logo}alt="logo"></img>
       <nav ref={navRef} className={styles.nav}> 
       <Link to={`/home`}>
-        <a>Comprar</a>
-      </Link>
-      <Link to={`/ubicacion`}>
-        <a>Ubicación</a>
+        <a><FaStoreAlt /></a>
       </Link>
       <Link to={`/create`}>
-        <a>Vender</a>
+      <a>
+      <FaMoneyBillAlt />
+      </a>
       </Link>
       <Link to={`/carrito`}>
       <a>
