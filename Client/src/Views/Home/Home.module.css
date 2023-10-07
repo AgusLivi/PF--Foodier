@@ -1,22 +1,21 @@
-/* Estilos generales para el formulario y botón de mostrar/ocultar modal */
+/* Estilos generales para el formulario y botón de mostrar/ocultar filtro */
 form {
   display: flex;
-  flex-direction: column; /* Cambia a dirección de columna */
-
-  padding: 16px; /* Añade espaciado interior */
+  flex-direction: column;
+  padding: 16px;
 }
 form select {
-  width: 100%; /* Ajusta el ancho al 100% */
-  margin-bottom: 10px; /* Espaciado inferior entre elementos */
+  width: 100%;
+  margin-bottom: 10px;
 }
-/* Estilos para el modal */
+/* Estilos para el filtro */
 .checkbox {
   background: #f5f5f5;
   overflow: hidden;
   max-height: 0;
   transition: max-height 0.3s ease-in-out;
 }
-/* Estilos para los elementos dentro del modal */
+/* Estilos para los elementos dentro del filtro */
 .checkbox label {
   margin: 2px auto;
   display: flex;
@@ -24,69 +23,28 @@ form select {
   justify-content: space-between;
   max-width: fit-content;
 }
-/* Estilos para el modal cuando está visible */
+/* Estilos para el filtro cuando está visible */
 .checkbox.modalVisible {
   max-height: 500px;
   overflow: scroll;
 }
-.categoria {
-  background: #f5f5f5;
-}
 
-/* Estilos para la columna derecha */
-.containerPost {
-  display: flex;
-  flex-direction: column;
-  width: 50%; /* Ancho de la columna derecha */
-  margin: 0 auto;
-}
-/* Estilos para la columna izquierda */
-.containerChild {
-  display: flex;
-  flex-direction: column; /* Cambia a dirección de columna */
-  width: auto; /* Ancho de la columna izquierda */
-  padding: 16px; /* Añade espaciado interior */
-  
-}
-.itemForm{
 
+.itemForm {
   padding: 8px;
   border-radius: 20px;
   margin: 10px;
   width: 200px;
   display: flex;
   flex-direction: column;
-
-  
-}
-.itemForm button{
-  background: none;
-  border: none;
-  width: 100%;
-  height: 100%;
-  cursor: pointer;
-  text-align: left;
+  border: 3px solid #555;
 }
 
-.containerChildFilter {
-  margin: 0;
-  height: 100%; /* Cambia a altura del 100% */
-  align-items: baseline;
-  justify-content: flex-start; /* Alinea el contenido en la parte superior */
-  position: absolute;
-  top: 3em;
-  left: 0px;
-  
-}
-.containerChilds{
+.containerChilds {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   position: relative;
-}
-.itemForm {
-  margin-bottom: 10px;
- /* Espaciado inferior entre elementos */
 }
 
 .searchBar {
@@ -94,31 +52,76 @@ form select {
   margin: 0 auto;
   display: flex;
   justify-content: center;
-
+ background-color: #fff;
 }
-.searchBar label{
+.searchBar label {
   display: flex;
-
   width: 50%;
-
-  align-items: center;  
+  align-items: center;
   justify-content: center;
-
 }
-.searchBar i{
+.searchBar i {
   font-size: 2em;
 }
-.searchBar input{
-  width: 96%;
-  border-radius: 20px;
+.searchBar input {
+  width: 50%;
+  
   padding: 16px;
-  height: 2em;  border: 3px solid #333;
+  height: 2em;
+  border-bottom: 3px solid #333;
   background: none;
-  border: none;
+
   font-size: 20px;
   margin: 0px 5px;
 }
-.searchBar input:active{
+.searchBar input:active {
   background: none;
   border: none;
+}
+.containerChild {
+  display: flex;
+  flex-direction: row;
+  
+}
+
+.containerChildFilterContainer {
+  margin: 0;
+  background: #000;
+
+}
+.containerChildFilter{
+  display: flex;
+  width: 100%;
+  height: 100%;
+  flex: 1;
+}
+.containerChildFilter select{
+  width: 80%;
+
+  margin: 15px auto;
+  padding: 8px;
+  background: none;
+
+}
+
+
+.containerPost {
+  display: flex;
+  flex-direction: column;
+  margin: 0 auto;
+  width: 60%;
+  flex: 2; /* El div central ocupará más espacio que los otros dos */
+}
+
+.containerChildSpace {
+  flex: 1; /* Este div ocupará la misma cantidad de espacio que .containerChildFilter */
+}
+
+.waveOne {
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  height: 100%;
+  z-index: -1;
+  rotate: 180deg;
 }
