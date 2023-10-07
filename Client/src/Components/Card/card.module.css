@@ -11,7 +11,11 @@
   backdrop-filter: blur(100px);
   width: 50%;
 
-  height: 500px;
+  height: auto;
+}
+.card a{
+  text-decoration: none;
+  display: flex;
 }
 
 .containerInfo {
@@ -19,7 +23,7 @@
   flex-direction: column;
   justify-content: space-between;
   text-align: center;
- 
+  width: 100%;
 }
 
 .containerInfoChild {
@@ -30,27 +34,25 @@
 }
 
 .containerImg {
-  flex: 40%;
+  flex: 60%;
   /* Resto del estilo permanece igual */
   text-align: center;
   display: flex;
   justify-content: center;
   align-items: center;
   min-height: 200px;
+  overflow: hidden;
 }
 
 .containerImg img {
-  max-width: 100%;
-  max-height: 100%; /* Hace que la imagen ocupe todo el espacio verticalmente */
-  width: auto;
-  height: auto;
+  
 
   object-fit: cover; /* Escala la imagen para que llene todo el espacio disponible sin distorsionarla */
 }
 
 
 .info {
-  flex: 60%; /* Cambiar el tamaño de la información al 60% */
+  flex: 40%; /* Cambiar el tamaño de la información al 60% */
   background: #fff;
   margin-top: 30px;
   padding: 20px;
