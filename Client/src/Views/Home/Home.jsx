@@ -191,6 +191,8 @@ const handleLocalChange = (event) => {
 
   return (
     <div className={Style.containerChilds}>
+        <img className={Style.wave} src={wave} alt="Wave" />
+
       <div className={Style.searchBar}>
           <label>
             <input

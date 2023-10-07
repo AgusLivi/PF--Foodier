@@ -117,11 +117,19 @@ form select {
   flex: 1; /* Este div ocupará la misma cantidad de espacio que .containerChildFilter */
 }
 
-.waveOne {
+.wave {
   position: fixed;
   bottom: 0;
   right: 0;
   height: 100%;
   z-index: -1;
   rotate: 180deg;
+}
+.waveTwo {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  height: 100%;
+  z-index: -1;
+  transform: rotateY(360deg); /* Realiza un giro en el eje Y (flip horizontal) */
 }
