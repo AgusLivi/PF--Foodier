@@ -29,14 +29,15 @@ function ItemCart({ item, removeFromCart, prices, setPrices }) {
   };
 
   return (
-    <div>
-      <button className={styles.button} onClick={removeHandler}>
+    <div className={styles.cart}>
+      <button className={styles.buttonClose} onClick={removeHandler}>
         x
-      </button>
+      </button><br/><br/>
+      <img src={item.image} alt={item.name} />
       <h3>{item.name}</h3>
-      <h3>{item.price.toFixed(2)}</h3>
+      <h3>{item.price.toFixed(2)} $</h3>
       <h3>
-        Cantidad:
+        Cantidad: 
         <button className={styles.button} onClick={decreaseQuantity}>
           -
         </button>

@@ -12,4 +12,27 @@
   .button:hover {
     background-color: #ffbb3e; /* Cambiar color al pasar el ratón */
   }
+
+  .cart {
+    background-color: #f0f0f0; /* Fondo gris claro */
+    padding: 20px;
+    margin: 20px;
+    border-radius: 10px; /* Bordes redondeados */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Sombra suave */
+  }
+
+  .cart img {
+    width: 300px;
+    border-radius: 10px; /* Bordes redondeados */
+  }
+
+  .buttonClose{
+    background-color: #fe9e0d; /* Fondo amarillo */
+    color: white; /* Texto blanco */
+    border: none; /* Sin borde */
+    padding: 4px 10px; /* Espacio interno */
+    border-radius: 5px; /* Bordes redondeados */
+    cursor: pointer; /* Cambiar cursor al pasar el ratón */
+    float: right;
+  }
   
