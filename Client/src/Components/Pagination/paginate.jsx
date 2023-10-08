@@ -16,7 +16,7 @@ function paginate({ currentPage, page, size }) {
       {currentPage - 1 <= 0 ? (
         ""
       ) : (
-        <button onClick={() => page(currentPage - 1)} className={styles.prevButton}>prev</button>
+        <button onClick={() => page(currentPage - 1)} className={styles.prevbutton}>Prev</button>
       )}
     
       {/* page buttons */}
@@ -24,7 +24,7 @@ function paginate({ currentPage, page, size }) {
         <button
           key={n}
           onClick={() => page(n)}
-          className={`${styles.pageButton} ${n === currentPage ? styles.active : ''}`}
+          className={`${styles.pagebutton} ${n === currentPage ? styles.active : ''}`}
         >
           {n}
         </button>
@@ -34,7 +34,7 @@ function paginate({ currentPage, page, size }) {
       {currentPage >= pageNumber.length ? (
         ""
       ) : (
-        <button onClick={() => page(currentPage + 1)} className={styles.nextButton}>next</button>
+        <button onClick={() => page(currentPage + 1)} className={styles.nextbutton}>Next</button>
       )}
     </div>
     
