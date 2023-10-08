@@ -15,6 +15,10 @@
 }
 
 header {
+	position: fixed;
+	width: 100%;
+	z-index: 1000;
+
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
@@ -23,7 +27,18 @@ header {
 	background-color: var(--mainColor);
 	color: var(--textColor);
 }
+.navHPF{
+	display: flex;
+	width: auto;
+	margin: 0 auto;
 
+}
+
+.nav{
+	display: flex;
+	
+	width: 100%;
+}
 nav a {
 	scale:1.2;
 	margin: 0 1rem;
