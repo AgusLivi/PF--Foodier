@@ -102,7 +102,7 @@ return(
           {formik.touched.password && formik.errors.password && (
           <div >{formik.errors.password}</div>
            )}
-           <div className={styles['input-div'] + ' ' + styles.one}>
+           {/* <div className={styles['input-div'] + ' ' + styles.one}>
             <div className={styles.i}>
             </div>
             <div className={styles['input-div'] + ' ' + styles.pass}>
@@ -122,7 +122,7 @@ return(
                 </select>
             </div>
             </div>
-          </div>
+          </div> */}
           <a href="#">Olvidaste tu contraseña?</a>
          
           <input type="submit" className={styles.btn} value="Login" />
