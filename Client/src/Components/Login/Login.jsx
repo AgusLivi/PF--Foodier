@@ -11,6 +11,7 @@ import { BsShop } from "react-icons/bs"
 import { FiUserCheck } from "react-icons/fi"
 import { Link } from "react-router-dom"
 import { LiaFacebookSquare } from "react-icons/lia"
+import { TbUserSearch } from "react-icons/tb"
 
 const Login = () => {
 
@@ -61,6 +62,13 @@ const Login = () => {
               <FiUserCheck/>
               <Link to={`/userlogin`}>
               <input className={style.input} type="button" value="Ya tengo cuenta"></input>
+              </Link>
+              </label> <div className=""></div>
+
+              <label className={style.labelfive}>
+                <TbUserSearch/>
+              <Link to={`/home`}>
+              <input className={style.input} type="button" value="Entrar como invitado"></input>
               </Link>
               </label> <div className=""></div>
 
