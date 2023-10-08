@@ -49,7 +49,7 @@ module.exports = [
     "price": 250,
     "old_price": 300,
     "categories": ["Panaderia", "Desayunos/Meriendas", "Chocolates"],
-    "image": 'https://www.infobae.com/new-resizer/qsL1H5sQ1TIG44otgrM6Sadmhhw=/arc-anglerfish-arc2-prod-infobae/public/D3KOPXLOUNBE3AOEMEHR75YJOY.jpg',
+    // "image": 'https://www.infobae.com/new-resizer/qsL1H5sQ1TIG44otgrM6Sadmhhw=/arc-anglerfish-arc2-prod-infobae/public/D3KOPXLOUNBE3AOEMEHR75YJOY.jpg',
     "amount": 5
   },
   {
@@ -59,7 +59,7 @@ module.exports = [
     "price": 350,
     "old_price": 400,
     "categories": ["Pizzas", "Italiana"],
-    "image": 'https://resizer.glanacion.com/resizer/v2/la-pizza-margarita-lleva-los-colores-de-la-M7NX62ONAJGRHMGZQKL3UMOIG4.jpeg?auth=95a4f0c18b4249f8a85c43e89ed95fc56dbfa22ac852945962285bb3c2638680&width=768&height=512&quality=70&smart=true',
+    // "image": 'https://resizer.glanacion.com/resizer/v2/la-pizza-margarita-lleva-los-colores-de-la-M7NX62ONAJGRHMGZQKL3UMOIG4.jpeg?auth=95a4f0c18b4249f8a85c43e89ed95fc56dbfa22ac852945962285bb3c2638680&width=768&height=512&quality=70&smart=true',
     "amount": 3
   },
   {
@@ -129,7 +129,7 @@ module.exports = [
     "price": 450,
     "old_price": 500,
     "categories": ["Parrilla", "Carnes"],
-    "image": 'https://www.lanacion.com.ar/resizer/v2/parrillada-completa-BCMNCK4U35CBNHAHVLKS3S2R5Y.jpg?auth=9a156e897b2f058181cf11dcf105762dc445b59640712d42824718870f2f897f&width=420&height=280&quality=70&smart=true',
+    // "image": 'https://www.lanacion.com.ar/resizer/v2/parrillada-completa-BCMNCK4U35CBNHAHVLKS3S2R5Y.jpg?auth=9a156e897b2f058181cf11dcf105762dc445b59640712d42824718870f2f897f&width=420&height=280&quality=70&smart=true',
     "amount": 4
   },
   {
@@ -149,7 +149,7 @@ module.exports = [
     "price": 120,
     "old_price": 150,
     "categories": ["Papas Fritas", "Acompañamientos"],
-    "image": 'https://phantom-marca.unidadeditorial.es/813d16708dc72860fd3cf319c9a245b5/resize/828/f/jpg/assets/multimedia/imagenes/2023/08/04/16911461030527.jpg',
+    // "image": 'https://phantom-marca.unidadeditorial.es/813d16708dc72860fd3cf319c9a245b5/resize/828/f/jpg/assets/multimedia/imagenes/2023/08/04/16911461030527.jpg',
     "amount": 20
   },
   {
@@ -169,7 +169,7 @@ module.exports = [
     "price": 280,
     "old_price": 320,
     "categories": ["Empanadas", "Argentina"],
-    "image": 'https://3.bp.blogspot.com/-Or3czZDmhBA/W7vKnLAF0sI/AAAAAAAASjs/UAT5C35jEIkJ_rBv979MCCKj9O4nipr8QCK4BGAYYCw/s1600/Empanadas%2Bde%2BCarne%2B2.JPG',
+    // "image": 'https://3.bp.blogspot.com/-Or3czZDmhBA/W7vKnLAF0sI/AAAAAAAASjs/UAT5C35jEIkJ_rBv979MCCKj9O4nipr8QCK4BGAYYCw/s1600/Empanadas%2Bde%2BCarne%2B2.JPG',
     "amount": 10
   },
   {
@@ -219,7 +219,7 @@ module.exports = [
     "price": 260,
     "old_price": 290,
     "categories": ["Milanesas", "Pollo"],
-    "image": 'https://th.bing.com/th/id/R.a64710e252df048762b1121e6f3c51b5?rik=7I0zWrEjW%2b%2fv6A&riu=http%3a%2f%2fi.huffpost.com%2fgen%2f1160995%2fthumbs%2fo-MILANESA-DE-POLLO-facebook.jpg&ehk=XgayaUuzAPlQZPEwmT8QwjfmTfD2Zycxng1mz90FHXA%3d&risl=&pid=ImgRaw&r=0',
+    // "image": 'https://th.bing.com/th/id/R.a64710e252df048762b1121e6f3c51b5?rik=7I0zWrEjW%2b%2fv6A&riu=http%3a%2f%2fi.huffpost.com%2fgen%2f1160995%2fthumbs%2fo-MILANESA-DE-POLLO-facebook.jpg&ehk=XgayaUuzAPlQZPEwmT8QwjfmTfD2Zycxng1mz90FHXA%3d&risl=&pid=ImgRaw&r=0',
     "amount": 7
   },
   {
@@ -289,7 +289,7 @@ module.exports = [
     "price": 200,
     "old_price": 220,
     "categories": ["Tartas", "Postres"],
-    "image": 'https://th.bing.com/th/id/R.4b8cb7c2ede7198aee3007becd9a2ca6?rik=gvjSgqexeAWN9Q&riu=http%3a%2f%2fmundoderecetas.com%2fwp-content%2fuploads%2f2016%2f11%2fmaxresdefault.jpg&ehk=8JFpDH2G7n%2bAOkEi0HGpOYyE0OuqpKV7kj16E5BcXQE%3d&risl=&pid=ImgRaw&r=0',
+    // "image": 'https://th.bing.com/th/id/R.4b8cb7c2ede7198aee3007becd9a2ca6?rik=gvjSgqexeAWN9Q&riu=http%3a%2f%2fmundoderecetas.com%2fwp-content%2fuploads%2f2016%2f11%2fmaxresdefault.jpg&ehk=8JFpDH2G7n%2bAOkEi0HGpOYyE0OuqpKV7kj16E5BcXQE%3d&risl=&pid=ImgRaw&r=0',
     "amount": 6
   },
   {
@@ -299,7 +299,7 @@ module.exports = [
     "price": 320,
     "old_price": 360,
     "categories": ["Parrilla", "Pollo"],
-    "image": 'https://th.bing.com/th/id/R.2153549bfee3a3d9908d30592be07f0b?rik=4XdyKTUM2DeThw&riu=http%3a%2f%2fmarchedesameriques.ca%2fwp-content%2fuploads%2fPollo-a-ala-parrilla-goya-sazon.jpg&ehk=vSkBRvzlefZ0dwVZTJtexA4ccGowbopxH4YXM27yJKk%3d&risl=&pid=ImgRaw&r=0',
+    // "image": 'https://th.bing.com/th/id/R.2153549bfee3a3d9908d30592be07f0b?rik=4XdyKTUM2DeThw&riu=http%3a%2f%2fmarchedesameriques.ca%2fwp-content%2fuploads%2fPollo-a-ala-parrilla-goya-sazon.jpg&ehk=vSkBRvzlefZ0dwVZTJtexA4ccGowbopxH4YXM27yJKk%3d&risl=&pid=ImgRaw&r=0',
     "amount": 4
   },
   {
@@ -319,7 +319,7 @@ module.exports = [
     "price": 260,
     "old_price": 290,
     "categories": ["Hamburguesas", "Vegetariano/Vegano"],
-    "image": 'https://th.bing.com/th/id/OIP.ZqqYKo6osjlSuNqLOdZOMQHaE8?pid=ImgDet&rs=1https://th.bing.com/th/id/OIP.ZqqYKo6osjlSuNqLOdZOMQHaE8?pid=ImgDet&rs=1',
+    // "image": 'https://th.bing.com/th/id/OIP.ZqqYKo6osjlSuNqLOdZOMQHaE8?pid=ImgDet&rs=1https://th.bing.com/th/id/OIP.ZqqYKo6osjlSuNqLOdZOMQHaE8?pid=ImgDet&rs=1',
     "amount": 5
   },
   {
@@ -379,7 +379,7 @@ module.exports = [
     "price": 280,
     "old_price": 310,
     "categories": ["Sandwiches", "Parrilla"],
-    "image": 'https://www.simplyrecipes.com/thmb/O6O751ImVYyRZvrOv22JJZ0eMNc=/1706x0/filters:no_upscale():max_bytes(150000):strip_icc()/Simply-Recipes-Philly-Cheesesteak-LEAD-2-b182ca21d19344159d44efd361db1477.jpg',
+    // "image": 'https://www.simplyrecipes.com/thmb/O6O751ImVYyRZvrOv22JJZ0eMNc=/1706x0/filters:no_upscale():max_bytes(150000):strip_icc()/Simply-Recipes-Philly-Cheesesteak-LEAD-2-b182ca21d19344159d44efd361db1477.jpg',
     "amount": 6
   },
   {
@@ -459,7 +459,7 @@ module.exports = [
     "price": 220,
     "old_price": 250,
     "categories": ["Tartas", "Postres", "Frutas y Verduras"],
-    "image": 'https://th.bing.com/th/id/R.31a1f87f1f56c4ef75414b3aa70bc6d3?rik=B2nBeYTvcZIIXg&riu=http%3a%2f%2fi1.wp.com%2fwww.algomasquerecetas.com%2fwp-content%2fuploads%2f2018%2f05%2f1.jpg%3ffit%3d800%2c600&ehk=XZXQYspaXI%2b1UMkPay1XGrF%2fO3Cna1KSlBBNezLPB6M%3d&risl=&pid=ImgRaw&r=0',
+    // "image": 'https://th.bing.com/th/id/R.31a1f87f1f56c4ef75414b3aa70bc6d3?rik=B2nBeYTvcZIIXg&riu=http%3a%2f%2fi1.wp.com%2fwww.algomasquerecetas.com%2fwp-content%2fuploads%2f2018%2f05%2f1.jpg%3ffit%3d800%2c600&ehk=XZXQYspaXI%2b1UMkPay1XGrF%2fO3Cna1KSlBBNezLPB6M%3d&risl=&pid=ImgRaw&r=0',
     "amount": 7
   },
   {
@@ -469,7 +469,7 @@ module.exports = [
     "price": 320,
     "old_price": 350,
     "categories": ["Parrilla", "Carnes"],
-    "image": 'https://th.bing.com/th/id/R.08040c2f4317b14c48ecd579367300c0?rik=xg05ZnNN7IKxcQ&riu=http%3a%2f%2fasadacho.com%2fwp-content%2fuploads%2f2014%2f12%2fcordero-parrilla.jpg&ehk=W5T3DSPmypu0FrNtAyd9nVxVHfeVrWiJkdwsuOi3X3I%3d&risl=&pid=ImgRaw&r=0',
+    // "image": 'https://th.bing.com/th/id/R.08040c2f4317b14c48ecd579367300c0?rik=xg05ZnNN7IKxcQ&riu=http%3a%2f%2fasadacho.com%2fwp-content%2fuploads%2f2014%2f12%2fcordero-parrilla.jpg&ehk=W5T3DSPmypu0FrNtAyd9nVxVHfeVrWiJkdwsuOi3X3I%3d&risl=&pid=ImgRaw&r=0',
     "amount": 4
   },
   {
@@ -479,7 +479,7 @@ module.exports = [
     "price": 210,
     "old_price": 240,
     "categories": ["Ensaladas"],
-    "image": 'https://th.bing.com/th/id/R.1ba9146c19da956b48f1dbd1d962249c?rik=T0IcbBkZfpgeHA&riu=http%3a%2f%2f2.bp.blogspot.com%2f-_Nm9YLBaVW4%2fT_CnxsReIKI%2fAAAAAAAADBQ%2fo02UF6XAlRw%2fs1600%2fEnsalada%2bgriega.JPG&ehk=7Te21OS1LNLfyrasz8uS8y5ltsBKu3okPCEau3Fw3w8%3d&risl=&pid=ImgRaw&r=0',
+    // "image": 'https://th.bing.com/th/id/R.1ba9146c19da956b48f1dbd1d962249c?rik=T0IcbBkZfpgeHA&riu=http%3a%2f%2f2.bp.blogspot.com%2f-_Nm9YLBaVW4%2fT_CnxsReIKI%2fAAAAAAAADBQ%2fo02UF6XAlRw%2fs1600%2fEnsalada%2bgriega.JPG&ehk=7Te21OS1LNLfyrasz8uS8y5ltsBKu3okPCEau3Fw3w8%3d&risl=&pid=ImgRaw&r=0',
     "amount": 9
   },
   {
@@ -609,7 +609,7 @@ module.exports = [
     "price": 190,
     "old_price": 220,
     "categories": ["Tortillas", "Española"],
-    "image": 'https://th.bing.com/th/id/R.a21a1f9a33ee0d5c29d7e77c497aea43?rik=mMlhTaIThLJr5g&riu=http%3a%2f%2ftomassanchezcocina.com%2fwp-content%2fuploads%2f2014%2f09%2ftortilla-de-papas.jpg&ehk=xH8ZJ5RpLav7TBk5CQJW%2bjsZ343lEc5bhf7XlmwTPbM%3d&risl=&pid=ImgRaw&r=0',
+    // "image": 'https://th.bing.com/th/id/R.a21a1f9a33ee0d5c29d7e77c497aea43?rik=mMlhTaIThLJr5g&riu=http%3a%2f%2ftomassanchezcocina.com%2fwp-content%2fuploads%2f2014%2f09%2ftortilla-de-papas.jpg&ehk=xH8ZJ5RpLav7TBk5CQJW%2bjsZ343lEc5bhf7XlmwTPbM%3d&risl=&pid=ImgRaw&r=0',
     "amount": 8
   },
   {
