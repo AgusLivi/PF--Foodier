@@ -1,64 +1,29 @@
-/* Estilo para el recuadro centrado en la pantalla */
-.centered-box {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh;
-    background-color: #000; /* Fondo negro */
-  }
-  
-  /* Estilo para el carrito de compras */
-  .shopping-cart {
-    background-color: #fff; /* Fondo blanco */
-    border: 2px solid #000; /* Borde negro de 2px */
-    border-radius: 10px; /* Bordes redondeados */
-    padding: 20px;
-    width: 60%; /* Ancho del 60% */
-    max-width: 400px; /* Máximo ancho de 400px */
-    text-align: center; /* Alineación del texto al centro */
-  }
-  
-  /* Estilo para el título del carrito */
-  .shopping-cart h2 {
-    color: #000; /* Texto negro */
-    font-size: 24px; /* Tamaño de fuente 24px */
-    margin-bottom: 20px; /* Espaciado inferior de 20px */
-  }
-  
-  /* Estilo para la lista de items del carrito */
-  .shopping-cart ul {
-    list-style: none; /* Sin viñetas */
-    padding: 0;
-  }
-  
-  /* Estilo para cada item del carrito */
-  .shopping-cart li {
-    margin-bottom: 10px; /* Espaciado inferior de 10px */
-    border-bottom: 1px solid #000; /* Borde inferior de 1px negro */
-    padding: 10px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
-  
-  /* Estilo para el botón "Comprar" */
-  .shopping-cart button {
-    background-color: #fe9e0d; /* Color amarillo */
-    color: #fff; /* Texto blanco */
-    border: none;
-    padding: 10px 20px; /* Espaciado interior de 10px arriba/abajo y 20px izquierda/derecha */
-    border-radius: 5px; /* Bordes redondeados */
-    cursor: pointer;
-    font-size: 16px; /* Tamaño de fuente 16px */
-    width: 100%; /* Ancho del 100% */
-    margin-top: 20px; /* Espaciado superior de 20px */
-  }
-  
-  /* Estilo para el precio total */
-  .shopping-cart h3 {
-    font-size: 18px; /* Tamaño de fuente 18px */
-    margin-top: 20px; /* Espaciado superior de 20px */
-    text-align: right; /* Alineación derecha del texto */
-    color: #000; /* Texto negro */
-  }
-  
+/* ShoppingCart.module.css */
+
+.container {
+  border: 2px solid black; /* Línea negra alrededor del contenedor */
+  padding: 100px; /* Espacio interno */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.cart {
+  background-color: #f0f0f0; /* Fondo gris claro */
+  padding: 20px;
+  border-radius: 10px; /* Bordes redondeados */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Sombra suave */
+}
+
+.button {
+  background-color: #fe9e0d; /* Fondo amarillo */
+  color: white; /* Texto blanco */
+  border: none; /* Sin borde */
+  padding: 8px 40px; /* Espacio interno */
+  border-radius: 5px; /* Bordes redondeados */
+  cursor: pointer; /* Cambiar cursor al pasar el ratón */
+}
+
+.button:hover {
+  background-color: #ffbb3e; /* Cambiar color al pasar el ratón */
+}
