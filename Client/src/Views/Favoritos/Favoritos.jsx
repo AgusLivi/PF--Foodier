@@ -1,45 +1,32 @@
 import React, { useEffect } from 'react';
-import Style from "./Favoritos.module.css";
 import { getAllFav } from '../../Redux/actions';
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { useParams } from 'react-router-dom';
+import Style from "./Favoritos.module.css";
+import FavsContainer from '../../Components/FavsContainer/FavsContainer';
 
 const Favoritos = () => {
 
-  const allFavs = useSelector((state) => state.allFavoritesSeller);
-  console.log('allFavs: ', allFavs);
-
   const dispatch = useDispatch();
-  const { user_Id } = useParams();
+  const { user_Id } = useParams(); //debe ser el id que se le manda al back, pero aun no me trae el id por params
 
-  const id = 'fa5eee04-93a2-44dc-8618-05be0d21ad6c';
-
-
-  /*const image = "https://img.freepik.com/vector-premium/logo-carne-fresca_139869-393.jpg?w=2000"
+  const id = 'e1f79504-4942-4f78-807d-9db50405eae5'; //es provicional para ponerle el id aca al back para que traiga los resultados
+  //ESTILOS
+  const image = "https://img.freepik.com/vector-premium/logo-carne-fresca_139869-393.jpg?w=2000"
   const cardStyle = {
     backgroundImage: `url(${image})`,
     backgroundSize: 'cover',
     backgroundPosition: 'center',//quiero que la img esta mas arriba
     backgroundRepeat: 'no-repeat',
-
-  };*/
+  };
 
   useEffect(() => {
-    dispatch(getAllFav(/*recibe un id*/ id))
-  })
+    dispatch(getAllFav(id))
+  }, []);
+
   return (
-    <div className={Style.container}>
-      <div className={Style.fav} >
-        <div style={cardStyle} className={Style.image}></div>
-        <div className={Style.info}>
-          <h1>Asadero Henry</h1>
-          <p>Descripcion:{ }</p>
-          <p>Ubicacion:{ }</p>
-          <p>Horario:{ }</p>
-        </div>
-
-      </div>
-
+    <div>
+      <FavsContainer />
     </div>
   );
 };
