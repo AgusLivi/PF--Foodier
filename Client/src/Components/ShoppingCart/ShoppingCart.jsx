@@ -45,8 +45,10 @@ function ShoppingCart() {
   const total = Object.values(prices).reduce((acc, price) => acc + price, 0);
 
   return (
-    <div className="centered-box"> {/* Aplicar la clase del archivo CSS */}
-      <div className="shopping-cart"> {/* Contenedor del carrito */}
+
+    <div> 
+      <div> 
+
         <h2>Carrito de Compras</h2>
         <ul>
           {cartItems.map((item, index) => (

@@ -6,6 +6,7 @@
     justify-content: flex-start;
     align-items: flex-start;
     flex-wrap: wrap;
+    text-align: center;
 }
 
 .detailImg {
@@ -42,12 +43,15 @@
     border-radius: 5px;
     font-size: 16px;
     cursor: pointer;
+    margin-top: 20px;
+    margin-left: 5px;
+    margin-right: 5px;
     transition: background-color 0.3s ease, box-shadow 0.3s ease;
 }
 
 .paymentButton:hover {
     background-color: #ff6b00;
-    box-shadow: 0px 0px 10px rgba(255, 140, 0, 0.5);
+    box-shadow: 0px 0px 10px rgba(255, 140, 0, 0.87);
 }
 
 .detailLoading {
@@ -71,13 +75,11 @@
     cursor: pointer;
     transition: background-color 0.3s ease, box-shadow 0.3s ease;
     margin-left: 5px;
-    margin-top: 20px;
 }
 
 .closeButton:hover {
     background-color: #c0392b;
     box-shadow: 0px 0px 10px rgb(253, 52, 52);
-    margin-top: 20px;
 }
 
 .oldPrice {
