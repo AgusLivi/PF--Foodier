@@ -10,13 +10,28 @@
   margin: 30px auto;
   backdrop-filter: blur(100px);
   width: 50%;
-
+  max-width: 600px;
   height: auto;
 }
 .card a{
   text-decoration: none;
   display: flex;
   cursor: pointer;
+}
+.love{
+  position: absolute;
+  top: 0;
+  right: 0;
+  margin: 20px;
+  scale: 1.5;
+  color: #ff000030;
+  z-index: 100;
+  cursor: pointer;
+}
+.love:hover{
+  scale: 2.5;
+  transition: .5s all;
+  color: #ff0000;
 }
 
 .containerInfo {

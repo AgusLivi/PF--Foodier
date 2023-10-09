@@ -15,15 +15,33 @@
 }
 
 header {
+
+	width: 100%;
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
 	height: 80px;
 	padding: 0 2rem;
-	background-color: var(--mainColor);
-	color: var(--textColor);
+	margin: 4px auto;
+}
+.navHPF{
+	display: flex;
+	width: auto;
+	margin: 0 auto;
+
 }
 
+.nav{
+	display: flex;
+	position: fixed;
+	width: 100%;
+	top: 0;
+	left: 0;
+	z-index: 1000;
+	background-color: var(--mainColor);
+	color: var(--textColor);
+	margin: 0 auto;
+}
 nav a {
 	scale:1.2;
 	margin: 0 1rem;

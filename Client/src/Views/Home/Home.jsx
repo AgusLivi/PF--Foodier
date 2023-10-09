@@ -191,6 +191,8 @@ const handleLocalChange = (event) => {
 
   return (
     <div className={Style.containerChilds}>
+        <img className={Style.wave} src={wave} alt="Wave" />
+
       <div className={Style.searchBar}>
           <label>
             <input
@@ -370,8 +372,7 @@ const handleLocalChange = (event) => {
           <CardContainer/>
           <Paginate currentPage={formData.page} page={pagination} size={formData.pageSize}/>
           </div>
-          <div className={Style.containerChildSpace}>
-          </div>
+         
       </div>
     </div>
   );

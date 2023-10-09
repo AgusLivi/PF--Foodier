@@ -1,5 +1,5 @@
-//ItemCart.jsx
 import React, { useEffect, useState } from 'react';
+import styles from './ItemCart.module.css'; // Importa el archivo CSS Module aquí
 
 function ItemCart({ item, removeFromCart, prices, setPrices }) {
   const [quantity, setQuantity] = useState(item.quantity || 1);
@@ -11,12 +11,11 @@ function ItemCart({ item, removeFromCart, prices, setPrices }) {
       updatedPrices[item.product_ID] = item.price * quantity;
       return updatedPrices;
     });
-    console.log(item)
+    console.log(item);
   }, [quantity, item.product_ID, item.price, setPrices]);
 
   const increaseQuantity = () => {
-    if(quantity < item.amount)
-    setQuantity(quantity + 1);
+    if (quantity < item.amount) setQuantity(quantity + 1);
   };
 
   const decreaseQuantity = () => {
@@ -30,15 +29,22 @@ function ItemCart({ item, removeFromCart, prices, setPrices }) {
   };
 
   return (
-    <div>
-      <button onClick={removeHandler}>x</button>
+    <div className={styles.cart}>
+      <button className={styles.buttonClose} onClick={removeHandler}>
+        x
+      </button><br/><br/>
+      <img src={item.image} alt={item.name} />
       <h3>{item.name}</h3>
-      <h3>{item.price.toFixed(2)}</h3>
+      <h3>{item.price.toFixed(2)} $</h3>
       <h3>
-        Cantidad:
-        <button onClick={decreaseQuantity}>-</button>
+        Cantidad: 
+        <button className={styles.button} onClick={decreaseQuantity}>
+          -
+        </button>
         {quantity}
-        <button onClick={increaseQuantity}>+</button>
+        <button className={styles.button} onClick={increaseQuantity}>
+          +
+        </button>
       </h3>
     </div>
   );
