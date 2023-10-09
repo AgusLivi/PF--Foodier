@@ -1,26 +1,33 @@
 import React, { useEffect, useState } from 'react';
-import styles from './ItemCart.module.css'; // Importa el archivo CSS Module aquí
+import styles from './ItemCart.module.css';
 
-function ItemCart({ item, removeFromCart, prices, setPrices }) {
-  const [quantity, setQuantity] = useState(item.quantity || 1);
+function ItemCart({ item, removeFromCart, prices, setPrices, updateCartItemQuantity }) {
+  const [quantity, setQuantity] = useState(item.amount > 0 ? 1 : 0);
 
   useEffect(() => {
-    // Actualiza el precio en el componente ShoppingCart cada vez que cambia la cantidad
+    // Actualiza el precio en función de la cantidad seleccionada
     setPrices((prevPrices) => {
       const updatedPrices = { ...prevPrices };
       updatedPrices[item.product_ID] = item.price * quantity;
       return updatedPrices;
     });
-    console.log(item);
-  }, [quantity, item.product_ID, item.price, setPrices]);
+  
+    // Llama a la función para actualizar la cantidad en el carrito
+    updateCartItemQuantity(item.product_ID, quantity);
+  }, []);  
+
 
   const increaseQuantity = () => {
-    if (quantity < item.amount) setQuantity(quantity + 1);
+    if (quantity < item.amount) {
+      setQuantity(quantity + 1);
+      updateCartItemQuantity(item.product_ID, quantity + 1);
+    }
   };
-
+  
   const decreaseQuantity = () => {
     if (quantity > 1) {
       setQuantity(quantity - 1);
+      updateCartItemQuantity(item.product_ID, quantity - 1);
     }
   };
 
@@ -32,16 +39,17 @@ function ItemCart({ item, removeFromCart, prices, setPrices }) {
     <div className={styles.cart}>
       <button className={styles.buttonClose} onClick={removeHandler}>
         x
-      </button><br/><br/>
+      </button>
+      <br /><br />
       <img src={item.image} alt={item.name} />
       <h3>{item.name}</h3>
-      <h3>{item.price.toFixed(2)} $</h3>
+      <h3>${item.price.toFixed(2)}</h3>
       <h3>
-        Cantidad: 
+        Cantidad:
         <button className={styles.button} onClick={decreaseQuantity}>
           -
         </button>
-        {quantity}
+        {item.quantity}
         <button className={styles.button} onClick={increaseQuantity}>
           +
         </button>
