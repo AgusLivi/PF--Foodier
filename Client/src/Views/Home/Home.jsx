@@ -174,6 +174,19 @@ const handleLocalChange = (event) => {
   updateQueryParams({ address: updatedAddress });
 };
 
+const resetHandler = ()=>{
+  setFormData({
+  ...formData,
+  name: "",
+  categories: [],
+  address: [],
+  average_rating: "",
+  payment: "",
+  orderBy: "name",
+  order: "asc"
+  })
+}
+
  // actualizar la cadena de consulta
  const updateQueryParams = (paramsToUpdate) => {
   const updatedParams = {
@@ -210,7 +223,7 @@ const handleLocalChange = (event) => {
       <div className={Style.containerChild}>
           <form className={Style.containerChildFilter}>
             {/* Modal */}
-    
+                <button onClick={resetHandler}>Restablecer filtros</button>
               {/*---------------------------UBICACION------------------------------------------------*/}
         
                 <select name="" id="" onChange={handleProvinciaChange}>
@@ -228,40 +241,40 @@ const handleLocalChange = (event) => {
                   )}
                 </select>
           
-  
-
-              <select name="" id="" onChange={handleMuniChange}>
-                <option value="" disabled selected>
-                  Selecciona un municipio
-                </option>
-                {municipios.length ? (
-                  municipios.map((muni) => (
-                    <option name={muni.nombre} key={muni.id} value={muni.id}>
-                      {muni.nombre}
-                    </option>
-                  ))
-                ) : (
-                  <option>Selecciona un municipio</option>
-                )}
-              </select>
-    
+              {municipios.length > 0 && (
+                <select name="" id="" onChange={handleMuniChange}>
+                  <option value="" disabled selected>
+                    Selecciona un municipio
+                  </option>
+                  {municipios.length ? (
+                    municipios.map((muni) => (
+                      <option name={muni.nombre} key={muni.id} value={muni.id}>
+                        {muni.nombre}
+                      </option>
+                    ))
+                  ) : (
+                    <option>Selecciona un municipio</option>
+                  )}
+                </select>
+              )}
         
-
-              <select name="" id="" onChange={handleLocalChange}>
-                <option value="" disabled selected>
-                  Selecciona una localidad
-                </option>
-                {localidades.length ? (
-                  localidades.map((local) => (
-                    <option name={local.nombre} key={local.id} value={local.id}>
-                      {local.nombre}
-                    </option>
-                  ))
-                ) : (
-                  <option>Selecciona una localidad</option>
-                )}
-              </select>
-    
+              {localidades.length > 0 && (
+                <select name="" id="" onChange={handleLocalChange}>
+                  <option value="" disabled selected>
+                    Selecciona una localidad
+                  </option>
+                  {localidades.length ? (
+                    localidades.map((local) => (
+                      <option name={local.nombre} key={local.id} value={local.id}>
+                        {local.nombre}
+                      </option>
+                    ))
+                  ) : (
+                    <option>Selecciona una localidad</option>
+                  )}
+                </select>
+              )}
+                
             {/*---------------------------TERMINA UBICACION------------------------------------------------*/}
 
             {/* Resto de tus elementos de formulario aquí */}
