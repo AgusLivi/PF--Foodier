@@ -120,6 +120,7 @@ const reducer = (state = initialState, { type, payload }) => {
       return {
         ...state,
         provincias: payload,
+        localidades: [],
       };
 
     case MUNICIPIOS:
