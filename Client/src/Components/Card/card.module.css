@@ -16,6 +16,7 @@
 .card a{
   text-decoration: none;
   display: flex;
+  cursor: pointer;
 }
 
 .containerInfo {
