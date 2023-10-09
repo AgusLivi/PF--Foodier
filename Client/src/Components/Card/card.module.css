@@ -16,7 +16,7 @@
 .card a{
   text-decoration: none;
   display: flex;
-  cursor: none;
+  cursor: pointer;
 }
 .love{
   position: absolute;
