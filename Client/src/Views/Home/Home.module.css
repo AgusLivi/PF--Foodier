@@ -3,6 +3,12 @@ form {
   display: flex;
   flex-direction: column;
   padding: 16px;
+  position: fixed;
+  top: 20%;
+  left: 0;
+  z-index: 90;
+
+
 }
 form select {
   width: 100%;
@@ -96,9 +102,9 @@ form select {
   flex: 1;
 }
 .containerChildFilter select{
-  width: 80%;
+  width: 20%;
 
-  margin: 15px auto;
+
   padding: 8px;
   background: none;
 
