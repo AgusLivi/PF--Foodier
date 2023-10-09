@@ -46,8 +46,8 @@ function ShoppingCart() {
 
   return (
     <div className={styles.container}> {/* Agregamos la clase CSS al contenedor */}
-      <div className={styles.cart}> {/* Agregamos la clase CSS al contenido del carrito */}
-        <h2>Carrito de Compras</h2>
+      <div>
+        <h2 className={styles.tittleCart}>Carrito de Compras</h2>
         <ul>
           {cartItems.map((item, index) => (
             <li key={index}>
