@@ -223,7 +223,7 @@ const resetHandler = ()=>{
       <div className={Style.containerChild}>
           <form className={Style.containerChildFilter}>
             {/* Modal */}
-                <button onClick={resetHandler}>Restablecer filtros</button>
+                <button onClick={resetHandler} className={Style.resetButton}>Restablecer filtros</button>
               {/*---------------------------UBICACION------------------------------------------------*/}
         
                 <select name="" id="" onChange={handleProvinciaChange}>
@@ -307,7 +307,7 @@ const resetHandler = ()=>{
                 value={formData.average_rating}
                 onChange={handleInputChange}
               >
-                <option value="">Todos</option>
+                <option value="" disabled>Valoracion</option>
                 <option value="5">5 estrellas</option>
                 <option value="4">4 estrellas</option>
                 <option value="3">3 estrellas</option>
@@ -321,7 +321,7 @@ const resetHandler = ()=>{
                 value={formData.payment}
                 onChange={handleInputChange}
               >
-                <option value="">Cualquier forma de pago</option>
+                <option value="" disabled>Cualquier forma de pago</option>
                 <option value="Efectivo">Efectivo</option>
                 <option value="Pago Online/Tarjeta">Pago Online/Tarjeta</option>
               </select>
@@ -350,7 +350,7 @@ const resetHandler = ()=>{
               
 
               <select name="categoriess" onChange={handleOnChange}>
-                <option value="">Selecciona tus categorias</option>
+                <option value="" disabled>Selecciona tus categorias</option>
                 {categoriesList.map((categorie) => {
                   return (
                     <option key={categorie} value={categorie}>

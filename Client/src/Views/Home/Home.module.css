@@ -79,6 +79,8 @@ form select {
 
   font-size: 20px;
   margin: 0px 5px;
+
+  border-radius: 20px;
 }
 .searchBar input:active {
   background: none;
@@ -138,4 +140,30 @@ form select {
   height: 100%;
   z-index: -1;
   transform: rotateY(360deg); /* Realiza un giro en el eje Y (flip horizontal) */
+}
+
+.resetButton {
+  display: block;
+  height: 50px;
+  border-radius: 25px;
+  outline: none;
+  border: none;
+  background-color: #dd8e18;
+  background-size: 200%;
+  font-size: 1.2rem;
+  color: #fff;
+  font-family: 'Poppins', sans-serif;
+  margin-bottom: 20px;
+  width: 20%;
+  cursor: pointer;
+ 
+}
+
+.resetButton:hover{
+  background-position: right;
+  background-color: #f8ba5e;
+}
+
+.containerChildFilter select{
+  border-radius: 20px;
 }
