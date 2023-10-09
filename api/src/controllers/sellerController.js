@@ -1,5 +1,7 @@
 const { Seller } = require('../db.js');
 const bcrypt = require('bcrypt');    // npm install bcrypt
+const nodemailer = require('../mailing/nodemailer.js'); // Importa la configuración de nodemailer
+
 
  // Obtener todos los vendedores
   const getAllSellers = async (req, res) => {
@@ -28,35 +30,50 @@ const bcrypt = require('bcrypt');    // npm install bcrypt
     }
   };
 
-    // Crear un nuevo comercio
   const createSeller = async (req, res) => {
-  try {
-    const { name, email, address, time, contact, payment, image, password } = req.body;
-
-    const hashedPassword = await bcrypt.hash(password, 10);
-
-    const newSeller = await Seller.create({
-      name,
-      email,
-      password: hashedPassword,
-      address,
-      time,
-      contact,
-      payment,
-      image
-    });
-
-    res.status(201).json(newSeller);
-  } catch (error) {
-    if (error.name === 'SequelizeUniqueConstraintError') {
-      res.status(400).json({ error: 'El email ya está registrado.' });
-    } else {
-      console.error(error);
-      res.status(500).json({ error: 'Error al crear el vendedor.', errorMessage: error.message });
+    try {
+      const { name, email, address, time, contact, payment, image, password } = req.body;
+  
+      const hashedPassword = await bcrypt.hash(password, 10);
+  
+      const newSeller = await Seller.create({
+        name,
+        email,
+        password: hashedPassword,
+        address,
+        time,
+        contact,
+        payment,
+        image
+      });
+  
+      // Configura el correo electrónico de bienvenida
+      const mailOptions = {
+        from: 'tu_correo@outlook.com', // Cambia esto a tu dirección de correo
+        to: email, // Utiliza la dirección de correo electrónico del vendedor registrado
+        subject: 'Bienvenido a Foodier',
+        html: `<p>Bienvenido ${name} a Foodier.</p><p>Gracias por registrarte como vendedor.</p>`,
+      };
+  
+      // Envía el correo electrónico de bienvenida
+      nodemailer.sendMail(mailOptions, (error, info) => {
+        if (error) {
+          console.error('Error al enviar el correo electrónico de bienvenida:', error);
+        } else {
+          console.log('Correo electrónico de bienvenida enviado:', info.response);
+        }
+      });
+  
+      res.status(201).json(newSeller);
+    } catch (error) {
+      if (error.name === 'SequelizeUniqueConstraintError') {
+        res.status(400).json({ error: 'El email ya está registrado.' });
+      } else {
+        console.error(error);
+        res.status(500).json({ error: 'Error al crear el vendedor.', errorMessage: error.message });
+      }
     }
-  }
-};
-
+  };
  // Controlador para actualizar los datos de un vendedor
 const updateSeller = async (req, res) => {
   try {
