@@ -3,13 +3,94 @@
   display: flex;
   flex-direction: column;
   padding: 16px;
- 
-  top: 20%;
+  flex: 1;  
+}
+.containerChildFilter .form{
+  width: 20%; /* Ancho del sidebar */
+  color: #fff;
+  border-right: 1px solid #333;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 100vh; /* Altura del sidebar igual a la altura de la ventana */
+  position: fixed; /* Fijar el sidebar en la ventana */
+  top: 0; /* Alinear el sidebar en la parte superior */
+  left: -100%; /* Oculta inicialmente los filtros fuera de la pantalla */
+  transition: left 0.5s ease-in-out;
+}
+.containerChildFilter .form.modalVisible {
+  left: 0; /* Muestra los filtros al ajustar la propiedad left a 0 */
+}
+.containerChildFilter .showFilter.modalVisible{
+  left: 100;
+}
+.toggleButton{
 
-
-
+  width: 300px;
+  height: 100px;
+}
+.showFilter{
+  background-color: #f5f5f5;
+  background-size: 200%;
+  font-size: 1.2rem;
+  font-family: 'Poppins', sans-serif;
+  cursor: pointer;
+  outline: none;
+  border: none;
+  border: 2px solid #222;
+  padding: 16px;
+  width: 50px;
+  height: 50px;
+  position: fixed;
+  top: 50%;
+  left: 18.5%;
+  z-index: 100;
+  transition: left 0.5s ease-in-out;
 
 }
+
+.slide-out {
+  left: -5px;
+  left: 100; 
+  border-top-right-radius: 25px;
+  border-bottom-right-radius: 25px;
+  transition: .5s all;
+}
+.slide-out::after{
+  content: '';
+  width: 1em;
+  height: 1em;
+  border-top: 2px solid #333;
+  border-left: 2px solid #333;
+  position: absolute;
+  transform: rotate(130deg);
+  top: 27%;
+  left: 25%;
+  
+}
+
+.slide-in {
+  left: 100; 
+  border-top-left-radius: 25px;
+  border-bottom-left-radius: 25px;
+  transition: .5s all;
+}
+.slide-in::after{
+  content: '';
+  width: 1em;
+  height: 1em;
+  border-top: 2px solid #333;
+  border-left: 2px solid #333;
+  position: absolute;
+  transform: rotate(320deg);
+  top: 27%;
+  left: 25%;
+  
+}
+
+
+
 .containerChildFilter select {
   width: 100%;
   margin-bottom: 10px;
