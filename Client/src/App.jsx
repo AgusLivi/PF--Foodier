@@ -16,7 +16,8 @@ import SignUp from "./Components/SignUp/SignUp";
 import Payment from "./Components/Payment/Payment";
 import ShoppingCart from './Components/ShoppingCart/ShoppingCart';
 import Reserva from "./Components/Reserva/Reserva";
-
+import Terminos from "./Views/TerminosYCondiciones/Terminos";
+import Politica from "./Views/PoliticaDePrivacidad/Politica";
 
 
 const App = () => {
@@ -46,7 +47,8 @@ const App = () => {
         <Route path='/payments/:monto/:descripcion' element={<Payment/>}/>
         <Route path='/carrito' element={<ShoppingCart />} />
         <Route path='/reserva' element={<Reserva />} />
-
+        <Route path='/terminos-y-condiciones' element={<Terminos />} />
+        <Route path='/politica-de-privacidad' element={<Politica />} />
 
       </Routes>
 

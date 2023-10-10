@@ -11,9 +11,10 @@ import { BiLogoInstagram } from "react-icons/bi";
 import { FaFacebookF } from "react-icons/fa";
 import Logo from "../../assets/Logo.svg";
 import style from './Landing.module.css'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 
 const Home = () => {
+  const navigate = useNavigate()
   const [modalIsOpen, setModalIsOpen] = useState(false);
 
   useEffect(() => {
@@ -46,6 +47,14 @@ const Home = () => {
 
   const closeModal = () => {
     setModalIsOpen(false);
+  };
+
+  const linkTerminos = () => {
+    navigate("/terminos-y-condiciones")
+  };
+
+  const linkPolitica = () => {
+    navigate("/politica-de-privacidad")
   };
 
   return (
@@ -130,8 +139,8 @@ const Home = () => {
             <span>helpfoodier@gmail.com</span>
           </div>
           <div className={style.footersectioncolumns}>
-            <span>Términos y Condiciones</span>
-            <span>Política de Privacidad</span>
+            <span onClick={linkTerminos}>Términos y Condiciones</span>
+            <span onClick={linkPolitica}>Política de Privacidad</span>
           </div>
         </div>
       </div>
