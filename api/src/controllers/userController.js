@@ -144,6 +144,6 @@
     createUser,
     updateUser,
     deleteUser,
-    verifyToken,
+    verifyToken
     
   };

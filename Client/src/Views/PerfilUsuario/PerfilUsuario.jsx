@@ -2,10 +2,12 @@ import React, { useState, useEffect, Component } from 'react';
 import styles from './PerfilUsuario.module.css';
 import RatingStars from './RatingStars';
 import { useDispatch, useSelector } from 'react-redux';
-
+import { verifyToken } from '../../Redux/actions';
 const PerfilUsuario = () => {
   const dispatch = useDispatch();
   const userData = useSelector((state) => state.userData);
+  const token = localStorage.getItem('token');
+  const userId = userData ? userData.user_ID : null;
 
   useEffect(() => {
     // Llama a la acción para verificar el token y obtener datos del usuario
@@ -14,7 +16,7 @@ const PerfilUsuario = () => {
 
   return (
     <div className={styles.container}>
-      {userData ? (
+      {userId ? (
         <div className={styles.containerChild}>
           <div className={styles.profileBackGround}>
           <div className={styles.containerChildProfile}>
@@ -33,7 +35,7 @@ const PerfilUsuario = () => {
        
               <div className={styles.info}>
                <strong><i className='bx bx-envelope'></i> <label>Email:</label></strong>
-                <p>{userData.email}</p>
+                <p>{userId.email}</p>
                 <hr />
               </div>
               {/* <div className={styles.info}>

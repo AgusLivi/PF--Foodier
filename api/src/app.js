@@ -15,7 +15,7 @@ server.use(cors({
     origin: 'http://localhost:5173', // Reemplaza con el origen permitido
     credentials: true,
     methods: 'GET, POST, OPTIONS, PUT, DELETE',
-    allowedHeaders: 'Origin, X-Requested-With, Content-Type, Accept',
+    allowedHeaders: 'Origin, X-Requested-With, Content-Type, Accept, Authorization',
 }));
 
 server.use(bodyParser.urlencoded({ extended: true, limit: '50mb' }));
