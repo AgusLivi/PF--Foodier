@@ -1,33 +1,52 @@
 /* ItemCart.module.css */
 
 .button {
-    background-color: #fe9e0d; /* Fondo amarillo */
+    background-color: #ff8c00;
     color: white; /* Texto blanco */
     border: none; /* Sin borde */
     padding: 4px 10px; /* Espacio interno */
     border-radius: 5px; /* Bordes redondeados */
     cursor: pointer; /* Cambiar cursor al pasar el ratón */
+    margin-left: 15px;
+    margin-right: 15px;
   }
   
   .button:hover {
-    background-color: #ffbb3e; /* Cambiar color al pasar el ratón */
+    background-color: #ff6b00;
+    box-shadow: 0px 0px 10px rgba(255, 140, 0, 0.87);
   }
 
   .cart {
-    background-color: #f0f0f0; /* Fondo gris claro */
-    padding: 20px;
+    background-color: #f0f0f0f5; /* Fondo gris claro */
+    padding: 10px;
     margin: 20px;
     border-radius: 10px; /* Bordes redondeados */
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Sombra suave */
   }
 
+  .cart:hover {
+    box-shadow: 0 4px 8px rgba(231, 93, 0, 0.822);
+  }
+
+  .cart h1,
+  .cart h3,
+  .cart h4 {
+    margin-bottom: 7px;
+  }
+
   .cart img {
-    width: 300px;
+    width: 350px;
     border-radius: 10px; /* Bordes redondeados */
+    margin-bottom: 10px;
+    transition: transform 0.3s ease;
+  }
+
+  .cart img:hover {
+    transform: scale(1.1);
   }
 
   .buttonClose{
-    background-color: #fe9e0d; /* Fondo amarillo */
+    background-color: #e74c3c;
     color: white; /* Texto blanco */
     border: none; /* Sin borde */
     padding: 4px 10px; /* Espacio interno */
@@ -35,4 +54,23 @@
     cursor: pointer; /* Cambiar cursor al pasar el ratón */
     float: right;
   }
+
+  .buttonClose:hover {
+    background-color: #c0392b;
+    box-shadow: 0px 0px 10px rgb(253, 52, 52);
+}
+
+/* Media Query para pantallas más pequeñas, por ejemplo, tablets */
+@media screen and (max-width: 768px) {
+  .cart {
+    margin: 10px; /* Reduce el margen en pantallas más pequeñas */
+  }
+}
+
+/* Media Query para pantallas aún más pequeñas, por ejemplo, teléfonos móviles */
+@media screen and (max-width: 480px) {
+  .button {
+    margin: 5px; /* Reduce el margen de los botones en pantallas más pequeñas */
+  }
+}
   
