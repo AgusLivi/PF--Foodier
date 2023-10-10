@@ -1,16 +1,16 @@
 /* Estilos generales para el formulario y botón de mostrar/ocultar filtro */
-form {
+.containerChildFilter {
   display: flex;
   flex-direction: column;
   padding: 16px;
-  position: fixed;
+  position: inherit; /*ESTA LINEA ARRUINA EL PAGINADO Y NO ANDA*/
   top: 20%;
   left: 0;
-  z-index: 0;
+  z-index: 1;
 
 
 }
-form select {
+.containerChildFilter select {
   width: 100%;
   margin-bottom: 10px;
 }

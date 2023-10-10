@@ -64,7 +64,7 @@ return(
     <div className={styles.container}>
       <div className={styles.img}></div>
       <div className={styles['login-content']}>
-        <form onSubmit={formik.handleSubmit} action="index.html">
+        <form onSubmit={formik.handleSubmit} action="index.html" className={styles.form}>
           <h2 className={styles.title}>Sign In</h2>
           <div className={styles['input-div'] + ' ' + styles.one}>
             <div className={styles.i}>
