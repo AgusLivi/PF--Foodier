@@ -11,19 +11,18 @@ import { BiLogoInstagram } from "react-icons/bi";
 import { FaFacebookF } from "react-icons/fa";
 import Logo from "../../assets/Logo.svg";
 import style from './Landing.module.css'
-import { Link, useNavigate } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom';
 
 const Home = () => {
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   const [modalIsOpen, setModalIsOpen] = useState(false);
+  const [email, setEmail] = useState("");
 
   useEffect(() => {
-    // Abre el modal automáticamente después de 2 segundos
     const timer = setTimeout(() => {
       setModalIsOpen(true);
     }, 2000);
 
-    // Limpia el temporizador cuando el componente se desmonta
     return () => clearTimeout(timer);
   }, []);
 
@@ -50,20 +49,38 @@ const Home = () => {
   };
 
   const linkTerminos = () => {
-    navigate("/terminos-y-condiciones")
+    navigate("/terminos-y-condiciones");
   };
 
   const linkPolitica = () => {
-    navigate("/politica-de-privacidad")
+    navigate("/politica-de-privacidad");
+  };
+
+  const handleEmailSend = async () => {
+    try {
+      const response = await fetch('/api/send-email', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ toEmail: email }),
+      });
+
+      if (response.status === 200) {
+        alert('Correo enviado con éxito');
+      } else {
+        alert('Error al enviar el correo');
+      }
+    } catch (error) {
+      console.error('Error al enviar el correo:', error);
+    }
   };
 
   return (
     <>
-   
       <div className={style.homecontainer}>
-        <img src={Logo}></img>
+        <img src={Logo} alt="Logo" />
         <div className={style.homebannercontainer}>
-     
           <div className={style.homebannerimagecontainer}>
             <img src={BannerBackground} alt="" />
           </div>
@@ -110,8 +127,15 @@ const Home = () => {
         <h1 className={style.primaryheading}>Tienes alguna pregunta?</h1>
         <h1 className={style.primaryheading}>Contáctanos!</h1>
         <div className={style.contactformcontainer}>
-          <input type="text" placeholder="tucorreo@gmail.com" />
-          <button className={style.secondarybutton}>Enviar</button>
+          <input
+            type="text"
+            placeholder="tucorreo@gmail.com"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+          />
+          <button className={style.secondarybutton} onClick={handleEmailSend}>
+            Enviar
+          </button>
         </div>
       </div>
 
@@ -125,7 +149,7 @@ const Home = () => {
               <SiLinkedin />
             </a>
             <a href="https://www.instagram.com/foodierapp/">
-              <BiLogoInstagram/>
+              <BiLogoInstagram />
             </a>
             <a href="https://www.facebook.com/foodierx/">
               <FaFacebookF />
@@ -145,24 +169,21 @@ const Home = () => {
         </div>
       </div>
 
-      <Modal 
-  isOpen={modalIsOpen}
-  onRequestClose={closeModal}
-  contentLabel="Ejemplo de Modal"
-  className={style.modalContent} // Agrega la clase para el estilo del modal
-  overlayClassName={style.modalOverlay} // Agrega la clase para el estilo del fondo semitransparente
->
-  <div className={style.modalTextContainer}> {/* Contenedor del texto */}
-    <h2 className={style.primaryheading}>¿Sabías estos datos?</h2>
-    <p className={style.primarytext}>El desperdicio de alimentos es responsable del 10% de las emisiones de gases de efecto invernadero.</p>
-    <p className={style.primarytext}>Desperdiciamos 2500 millones de toneladas de comida mientras 828 millones de personas pasan hambre.</p>
-    <p className={style.primarytext}>Este desperdicio nos cuesta 1,2 billones de dólares por año.</p>
-    <button className={style.secondarybutton} onClick={closeModal}>Cerrar</button>
-    
-    
-  </div>
-</Modal>
-
+      <Modal
+        isOpen={modalIsOpen}
+        onRequestClose={closeModal}
+        contentLabel="Ejemplo de Modal"
+        className={style.modalContent}
+        overlayClassName={style.modalOverlay}
+      >
+        <div className={style.modalTextContainer}>
+          <h2 className={style.primaryheading}>¿Sabías estos datos?</h2>
+          <p className={style.primarytext}>El desperdicio de alimentos es responsable del 10% de las emisiones de gases de efecto invernadero.</p>
+          <p className={style.primarytext}>Desperdiciamos 2500 millones de toneladas de comida mientras 828 millones de personas pasan hambre.</p>
+          <p className={style.primarytext}>Este desperdicio nos cuesta 1,2 billones de dólares por año.</p>
+          <button className={style.secondarybutton} onClick={closeModal}>Cerrar</button>
+        </div>
+      </Modal>
     </>
   );
 };
