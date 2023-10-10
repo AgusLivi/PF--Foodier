@@ -35,7 +35,8 @@ import {
 
     //token login
     SET_AUTH_TOKEN,
-    LOGIN_SUCCESS
+    LOGIN_SUCCESS,
+    VERIFY_TOKEN,
 } from "./actionsType";
 
 const initialState = {
@@ -87,6 +88,7 @@ const reducer = (state = initialState, { type, payload }) => {
       };
 
     case GET_USER_BY_ID:
+      console.log("se supone q recibe el id",payload)
       return {
         ...state,
         getUserById: payload,
@@ -177,13 +179,18 @@ const reducer = (state = initialState, { type, payload }) => {
           token: payload
         }
 
-    case LOGIN_SUCCESS:
-          console.log(payload);
-        return {
-          ...state,
-          userData: payload,
-      };
-
+    // case LOGIN_SUCCESS:
+    //       console.log(payload);
+    //     return {
+    //       ...state,
+    //       userData: payload,
+    //   };
+    case VERIFY_TOKEN: 
+    console.log("DATA DE VERIFYYYY",payload);
+      return {
+        ...state,
+        userData: payload
+      }
     default:
       return state;
   }

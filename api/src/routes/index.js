@@ -32,6 +32,7 @@ router.put("/users/:user_ID", userController.updateUser);
 router.delete("/users/:user_ID", userController.deleteUser);
 router.get("/users", userController.getAllUsers);
 router.get("/users/:user_ID", userController.getUserById);
+router.get("/users/me", userController.verifyToken)
 
 
 // Rutas relacionadas a los vendedores

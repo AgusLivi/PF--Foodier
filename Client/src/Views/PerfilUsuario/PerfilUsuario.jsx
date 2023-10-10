@@ -1,13 +1,16 @@
 import React, { useState, useEffect, Component } from 'react';
 import styles from './PerfilUsuario.module.css';
 import RatingStars from './RatingStars';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 const PerfilUsuario = () => {
+  const dispatch = useDispatch();
+  const userData = useSelector((state) => state.userData);
 
-  const userData = useSelector(state => state.userData)
-
-  console.log(userData);
+  useEffect(() => {
+    // Llama a la acción para verificar el token y obtener datos del usuario
+    dispatch(verifyToken());
+  }, [dispatch]);
 
   return (
     <div className={styles.container}>

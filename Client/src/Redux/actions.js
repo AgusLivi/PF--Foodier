@@ -35,6 +35,7 @@ import {
     //token autenticacion inicio de sesion 
     SET_AUTH_TOKEN,
     LOGIN_SUCCESS,
+    VERIFY_TOKEN,
 
 
     
@@ -190,10 +191,10 @@ export const getAllUser = () => {
     }
 }
 
-export const getUserById = (id) => {
+export const getUserById = (userId) => {
     return async (dispatch) => {
         try {
-            const { data } = await axios.get(`${endPoint}/users/${id}`)
+            const { data } = await axios.get(`${endPoint}/users/${userId}`)
             return dispatch({
                 type: GET_USER_BY_ID,
                 payload: data,
@@ -391,6 +392,9 @@ export const login  = (formData) => {
                 // Si se recibe un token, puedes almacenarlo en el estado global o en el almacenamiento local
                 // para mantener al usuario autenticado
             if (token) {
+
+            localStorage.setItem('token', token);
+                
             dispatch(setAuthToken(token))
             dispatch(loginSuccess(formData));
                  }
@@ -423,6 +427,20 @@ export const loginSuccess = (formData) => ({
     type: LOGIN_SUCCESS,
     payload: formData,
   });
+
+export const verifyToken = () => {
+    return async (dispatch)=> {
+        try {
+            const response = await axios.get(`${endPoint}/users/me`)
+            dispatch({
+                type: VERIFY_TOKEN,
+                payload: response.data
+            })
+        } catch (error) {
+            alert (error.message)
+        }
+    }
+}
   
 //payment actions
 export const createPaymentRequest = (paymentData) => async (dispatch) => {
