@@ -34,7 +34,8 @@ import {
     GET_CATEGORIES,
 
     //token login
-    SET_AUTH_TOKEN
+    SET_AUTH_TOKEN,
+    LOGIN_SUCCESS
 } from "./actionsType";
 
 const initialState = {
@@ -53,6 +54,7 @@ const initialState = {
   provincias: [],
   municipios: [],
   localidades: [],
+  userData: null,
   loading: false,
   paymentUrl: null,
   error: null,
@@ -174,6 +176,13 @@ const reducer = (state = initialState, { type, payload }) => {
           ...state,
           token: payload
         }
+
+    case LOGIN_SUCCESS:
+          console.log(payload);
+        return {
+          ...state,
+          userData: payload,
+      };
 
     default:
       return state;
