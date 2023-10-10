@@ -383,10 +383,12 @@ const resetHandler = ()=>{
           </form>
           <div className={Style.containerPost}>
           <CardContainer/>
+          
           <Paginate currentPage={formData.page} page={pagination} size={formData.pageSize}/>
           </div>
-         
+          <div className={Style.containerChildSpace}></div>
       </div>
+      
     </div>
   );
 };

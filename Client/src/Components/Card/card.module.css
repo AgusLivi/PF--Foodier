@@ -9,9 +9,15 @@
   overflow: hidden;
   margin: 30px auto;
   backdrop-filter: blur(100px);
-  width: 50%;
+  width: 49%;
   max-width: 600px;
   height: auto;
+}
+@media screen and (max-width: 1300px) {
+  .card {
+      width: 100%;
+  }
+  
 }
 .card a{
   text-decoration: none;
@@ -62,7 +68,7 @@
 
 .containerImg img {
   
-
+  height: 300px;
   object-fit: cover; /* Escala la imagen para que llene todo el espacio disponible sin distorsionarla */
 }
 

@@ -1,7 +1,7 @@
 const server = require('./src/app.js');
 const { conn } = require('./src/db.js');
 const mercadopago = require('mercadopago');
-const {cargarPruevas} = require('./src/controllers/controladorPrueva.js')
+
 
 // Credenciales de prueba de Mercado Pago
 mercadopago.configure({
@@ -11,9 +11,9 @@ mercadopago.configure({
 
 const port = process.env.PORT || 3001
 
-conn.sync({ force: true }).then(() => {
-  cargarPruevas()
+
+conn.sync({ force: false }).then(() => 
   server.listen(port, () => {
-    console.log(`%s listening at ${port} `); // eslint-disable-line no-console
+    console.log(`%s listening at ${port} `); 
   });
 });
