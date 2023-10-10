@@ -75,10 +75,8 @@ return (
                         ) : (
                             <p className={styles.noCategory}>Sin categoría</p>
                         )}
-                        <p className={styles.oldPrice}>Precio viejo: {productDetail.old_price}</p>
-                        <p>Precio: {productDetail.price}</p>
-                        <p>Stock: {productDetail.amount}</p>
-
+                        <p className={styles.oldPrice}>Precio anterior: ${productDetail.old_price}</p>
+                        <p>Precio: ${productDetail.price}</p>
                         <button className={styles.paymentButton} onClick={addCartHandler}>Añadir al carrito</button>
                         <button className={styles.paymentButton} onClick={handleReserva}>Reservar</button> 
                         <button className={styles.paymentButton} onClick={handlePayment}>Pagar</button>

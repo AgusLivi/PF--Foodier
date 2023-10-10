@@ -5,17 +5,15 @@
     display: flex;
     justify-content: flex-start;
     align-items: flex-start;
-    flex-wrap: wrap;
-    text-align: center;
+    text-align:start;
 }
 
 .detailImg {
-    max-width: 270px;
+    max-width: 400px;
     height: auto;
     margin-right: 80px;
     border-radius: 10px;
     transition: transform 0.3s ease;
-    margin-top: 80px;
 }
 
 .detailImg:hover {
@@ -75,6 +73,7 @@
     cursor: pointer;
     transition: background-color 0.3s ease, box-shadow 0.3s ease;
     margin-left: 5px;
+    margin-top: 10px;
 }
 
 .closeButton:hover {
