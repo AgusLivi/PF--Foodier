@@ -41,12 +41,12 @@ import {
     GET_CATEGORIES,
 } from './actionsType'
 
-const endPoint = 'http://localhost:3001'  //definir rutas del back
+// const  = 'http://localhost:3001'  //definir rutas del back
 
 export const getAllFav = (id) => { //en realidad obtiene el fav del usuario
     return async dispatch => {
         try {
-            const { data } = await axios(`${endPoint}/favorites/${id}`) //definir despues como pusieron la ruta en el back
+            const { data } = await axios(`/favorites/${id}`) //definir despues como pusieron la ruta en el back
             return dispatch({
                 type: GET_ALL_FAV,
                 payload: data
@@ -60,7 +60,7 @@ export const getAllFav = (id) => { //en realidad obtiene el fav del usuario
 export const postFav = (dataForm) => {
     return async (dispatch) => {
         try {
-            const { data } = await axios.post(`${endPoint}/favorites`, dataForm)
+            const { data } = await axios.post(`/favorites`, dataForm)
             return dispatch({
                 type: POST_FAVORITES,
                 payload: data
@@ -76,7 +76,7 @@ export const postFav = (dataForm) => {
 export const getSellerFav = (id) => {
     return async (dispatch) => {
         try {
-            const { data } = await axios.post(`${endPoint}/favorites/${id}`)
+            const { data } = await axios.post(`/favorites/${id}`)
             return dispatch({
                 type: GET_SELLER_FAV,
                 payload: data
@@ -90,7 +90,7 @@ export const getSellerFav = (id) => {
 export const createPayment = (pay) => {
     return async () => {
         try {
-            const { data } = await axios.post(`${endPoint}/payments`, pay)
+            const { data } = await axios.post(`/payments`, pay)
             alert(`orden ${data} creado`)
         } catch (error) {
             alert(error.message)
@@ -101,7 +101,7 @@ export const createPayment = (pay) => {
 export const createPost = (post) => {
     return async (dispatch) => {
         try {
-            const { data } = await axios.post(`${endPoint}/posts`, post)
+            const { data } = await axios.post(`/posts`, post)
             return dispatch({
                 type: CREATE_POST,
                 payload: data
@@ -115,7 +115,7 @@ export const createPost = (post) => {
 export const getCategories = () => {
     return async (dispatch) => {
         try {
-            const { data } = await axios.get(`${endPoint}/products/categories`);
+            const { data } = await axios.get(`/products/categories`);
             return dispatch({
                 type: GET_CATEGORIES,
                 payload: data,
@@ -129,7 +129,7 @@ export const getCategories = () => {
 export const getAllPost = () => {
     return async (dispatch) => {
         try {
-            const { data } = await axios.get(`${endPoint}/posts`)
+            const { data } = await axios.get(`/posts`)
             return dispatch({
                 type: GET_POST,
                 payload: data
@@ -143,7 +143,7 @@ export const getAllPost = () => {
 export const getPostById = (id) => {
     return async (dispatch) => {
         try {
-            const { data } = await axios.get(`${endPoint}/posts/${id}`)
+            const { data } = await axios.get(`/posts/${id}`)
             return dispatch({
                 type: GET_POST_BY_ID,
                 payload: data
@@ -168,7 +168,7 @@ export const updateUser = (id, updatedUserData) => {
 export const deleteUser = (id) => {
     return async () => {
         try {
-            const { data } = await axios.delete(`${endPoint}/users/${id}`) //definir las rutas del back
+            const { data } = await axios.delete(`/users/${id}`) //definir las rutas del back
             alert(`Usuario ${data.name} borrado correctamente`)
         } catch (error) {
             alert(error.message)
@@ -179,7 +179,7 @@ export const deleteUser = (id) => {
 export const getAllUser = () => {
     return async (dispatch) => {
         try {
-            const { data } = await axios.get(`${endPoint}/users`)
+            const { data } = await axios.get(`/users`)
             return dispatch({
                 type: GET_ALL_USER,
                 payload: data,
@@ -193,7 +193,7 @@ export const getAllUser = () => {
 export const getUserById = (id) => {
     return async (dispatch) => {
         try {
-            const { data } = await axios.get(`${endPoint}/users/${id}`)
+            const { data } = await axios.get(`/users/${id}`)
             return dispatch({
                 type: GET_USER_BY_ID,
                 payload: data,
@@ -208,7 +208,7 @@ export const createSeller = (sellerData) => {
     console.log(sellerData)
     return async () => {
         try {
-            const { data } = await axios.post(`${endPoint}/sellers`, sellerData)
+            const { data } = await axios.post(`/sellers`, sellerData)
             alert(`vendedor ${data.name} creado correctamente`)
         } catch (error) {
             alert(error.message)
@@ -230,7 +230,7 @@ export const updateSeller = (id, updatedSellerData) => {
 export const deleteSeller = (id) => {
     return async () => {
         try {
-            const { data } = await axios.delete(`${endPoint}/sellers/${id}`) //definir las rutas del back
+            const { data } = await axios.delete(`/sellers/${id}`) //definir las rutas del back
             alert(`vendedor ${data.name} borrado correctamente`)
         } catch (error) {
             alert(error.message)
@@ -241,7 +241,7 @@ export const deleteSeller = (id) => {
 export const getAllSeller = () => {
     return async (dispatch) => {
         try {
-            const { data } = await axios.get(`${endPoint}/sellers`)
+            const { data } = await axios.get(`/sellers`)
             return dispatch({
                 type: GET_ALL_SELLERS,
                 payload: data,
@@ -255,7 +255,7 @@ export const getAllSeller = () => {
 export const getSellerById = (id) => {
     return async (dispatch) => {
         try {
-            const { data } = await axios.get(`${endPoint}/sellers/${id}`)
+            const { data } = await axios.get(`/sellers/${id}`)
             return dispatch({
                 type: GET_SELLER_BY_ID,
                 payload: data,
@@ -270,7 +270,7 @@ export const getSellerById = (id) => {
 
 export const getProducts = (querys) => {
     return async dispatch => {
-        const { data } = await axios.get(`${endPoint}/products/?${querys}`)
+        const { data } = await axios.get(`/products/?${querys}`)
 
         console.log('ACTION!!!', querys)
 
@@ -284,7 +284,7 @@ export const getProducts = (querys) => {
 export const deleteProduct = (id) => {
     return async (dispatch) => {
         try {
-            const { data } = await axios.delete(`${endPoint}/products/${id}`) //definir las rutas del back
+            const { data } = await axios.delete(`/products/${id}`) //definir las rutas del back
             alert(`${data.name} fue borrado correctamente`)
         } catch (error) {
             alert(error.message)
@@ -295,7 +295,7 @@ export const deleteProduct = (id) => {
 export const getProductById = (product_ID) => {
     return async function (dispatch) {
         console.log('Fetching product by ID:', product_ID);
-        const { data } = await axios(`${endPoint}/products/${product_ID}`)
+        const { data } = await axios(`/products/${product_ID}`)
         return dispatch({
             type: SEARCH_BY_ID,
             payload: data
@@ -313,7 +313,7 @@ export const createProduct = (formmData, id) => {
     console.log('form data: ', formmData);
     return async () => {
         try {
-            const { data } = await axios.post(`${endPoint}/products/${id}`, formmData); // despues de la barra tengo que poner la ruta que definieron en el back
+            const { data } = await axios.post(`/products/${id}`, formmData); // despues de la barra tengo que poner la ruta que definieron en el back
             alert (`${data.name} fue creado correctamente`)
         } catch (error) {
             console.error(error.message)
@@ -370,7 +370,7 @@ export const locationLocalidad = (muniId) => {
 export const createUser = (userData) => {
     return async () => {
         try {
-            const { data } = await axios.post(`${endPoint}/users`, userData)
+            const { data } = await axios.post(`/users`, userData)
             alert(`Usuario ${data.name} creado correctamente`)
 
         } catch (error) {
@@ -384,7 +384,7 @@ export const login  = (formData) => {
     console.log(formData);
     return async (dispatch) => {
         try {
-            const { data } = await axios.post(`${endPoint}/login`, formData)
+            const { data } = await axios.post(`/login`, formData)
             console.log(data);
             const { token, error } = data
  
@@ -439,7 +439,7 @@ export const createPaymentRequest = (paymentData) => async (dispatch) => {
             },
         };
 
-        const response = await axios.post(`${endPoint}/payments`, paymentData, axiosConfig);
+        const response = await axios.post(`/payments`, paymentData, axiosConfig);
 
         console.log('Respuesta de la solicitud de pago:', response);
         
