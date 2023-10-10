@@ -73,7 +73,7 @@ const FormLogin = () => {
       <div className={style.container}>
         <div className={style.img}></div>
         <div className={style['login-content']}>
-          <form onSubmit={formik.handleSubmit} action="index.html">
+          <form onSubmit={formik.handleSubmit} action="index.html" className={style.form}>
             <h2 className={style.title}>Sign Up</h2>
             <div className={style['input-div'] + ' ' + style.one}>
               <div className={style.i}></div>
