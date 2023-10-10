@@ -8,7 +8,7 @@ import { useNavigate } from 'react-router-dom';
 
 const SignUp = () => {
 const navigate = useNavigate();
-const dispatch = useDispatch();
+const dispatch = useDispatch(); 
 
 const submitForm = async (values) => {
   try {
@@ -21,6 +21,7 @@ const submitForm = async (values) => {
     console.log(userData);
     await dispatch(login(userData))
     if (Object.keys(formik.errors).length === 0) {
+
     }
     navigate('/home')
 

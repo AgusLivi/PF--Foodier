@@ -1,24 +1,13 @@
-import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import React, { useState, useEffect, Component } from 'react';
 import styles from './PerfilUsuario.module.css';
 import RatingStars from './RatingStars';
+import { useSelector } from 'react-redux';
 
 const PerfilUsuario = () => {
-  const [userData, setUserData] = useState(null);
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await axios.get('http://localhost:3001/sellers/3094d19a-bd8b-4a54-b991-50eb811f5f45');//poner id
-        console.log(response)
-        setUserData(response.data);
-      } catch (error) {
-        console.error('Error al obtener los datos del usuario:', error);
-      }
-    };
+  const userData = useSelector(state => state.userData)
 
-    fetchData();
-  }, []);
+  console.log(userData);
 
   return (
     <div className={styles.container}>
@@ -28,7 +17,7 @@ const PerfilUsuario = () => {
           <div className={styles.containerChildProfile}>
               <div className={styles.profile}></div>
               <div className={styles.profileName}>{userData.name}</div>
-              <RatingStars average={userData.average_rating} />
+              {/* <RatingStars average={userData.average_rating} /> */}
             </div>
               </div>
           <div className={styles.containerChildAll}>
@@ -44,24 +33,25 @@ const PerfilUsuario = () => {
                 <p>{userData.email}</p>
                 <hr />
               </div>
-              <div className={styles.info}>
+              {/* <div className={styles.info}>
                 <strong><i className='bx bxs-home'></i><label>Vive en:</label></strong>
                 <p>{userData.address}</p>
                 <hr />
-              </div>
-              <div className={styles.info}>
+              </div> */}
+              {/* <div className={styles.info}>
                 <strong><i className='bx bx-phone'></i><label>Teléfono:</label></strong>
                 <p>{userData.contact}</p>
                 <hr />
-              </div>
-              <div className={styles.info}>
+              </div> */}
+              {/* <div className={styles.info}>
                <strong><i className='bx bxs-credit-card'></i>  <label>Método de Pago:</label></strong>
                 <p>{userData.payment}</p>
-              </div>
-              <hr />
+              </div> */}
+
+              {/* <hr />
               <div>
                 <input type='submit'>Historial</input>
-              </div>
+              </div> */}
             </div>
           </div>
          

@@ -34,6 +34,8 @@ import {
 
     //token autenticacion inicio de sesion 
     SET_AUTH_TOKEN,
+    LOGIN_SUCCESS,
+
 
     
     GET_CATEGORIES,
@@ -390,6 +392,7 @@ export const login  = (formData) => {
                 // para mantener al usuario autenticado
             if (token) {
             dispatch(setAuthToken(token))
+            dispatch(loginSuccess(formData));
                  }
             else {
             // Maneja errores de inicio de sesión específicos
@@ -411,11 +414,16 @@ export const login  = (formData) => {
     const setAuthToken = (token) => {
         console.log("esdto es el token", token);
      return {
-     type: SET_AUTH_TOKEN, //guardarlo en el reducer o localstorage
+     type: SET_AUTH_TOKEN, 
       payload: token,
      };
 };
-
+//SUCCESS LOGIN
+export const loginSuccess = (formData) => ({
+    type: LOGIN_SUCCESS,
+    payload: formData,
+  });
+  
 //payment actions
 export const createPaymentRequest = (paymentData) => async (dispatch) => {
     try {
