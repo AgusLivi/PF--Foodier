@@ -32,6 +32,9 @@ import {
 
     
     GET_CATEGORIES,
+
+    //token login
+    SET_AUTH_TOKEN
 } from "./actionsType";
 
 const initialState = {
@@ -53,6 +56,7 @@ const initialState = {
   loading: false,
   paymentUrl: null,
   error: null,
+  token: null
   //tengo q agregar mas
 };
 
@@ -164,6 +168,12 @@ const reducer = (state = initialState, { type, payload }) => {
       return { ...state, 
         loading: false, 
         error: payload };
+    
+    case  SET_AUTH_TOKEN: 
+        return {
+          ...state,
+          token: payload
+        }
 
     default:
       return state;

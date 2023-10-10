@@ -380,10 +380,12 @@ export const createUser = (userData) => {
 //login
 export const login  = (formData) => {
     console.log(formData);
-    return async () => {
+    return async (dispatch) => {
         try {
             const { data } = await axios.post(`${endPoint}/login`, formData)
             console.log(data);
+            const { token, error } = data
+ 
                 // Si se recibe un token, puedes almacenarlo en el estado global o en el almacenamiento local
                 // para mantener al usuario autenticado
             if (token) {
@@ -407,6 +409,7 @@ export const login  = (formData) => {
     }
 }
     const setAuthToken = (token) => {
+        console.log("esdto es el token", token);
      return {
      type: SET_AUTH_TOKEN, //guardarlo en el reducer o localstorage
       payload: token,
