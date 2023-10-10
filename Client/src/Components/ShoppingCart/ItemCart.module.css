@@ -9,6 +9,8 @@
     cursor: pointer; /* Cambiar cursor al pasar el ratón */
     margin-left: 15px;
     margin-right: 15px;
+    width: 50px; /* Ancho de 100 píxeles */
+    height: 30px;
   }
   
   .button:hover {
@@ -53,6 +55,8 @@
     border-radius: 5px; /* Bordes redondeados */
     cursor: pointer; /* Cambiar cursor al pasar el ratón */
     float: right;
+    width: 35px; /* Ancho de 100 píxeles */
+    height: 30px;
   }
 
   .buttonClose:hover {
