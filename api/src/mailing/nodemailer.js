@@ -11,4 +11,26 @@ const transporter = nodemailer.createTransport({
   },
 });
 
-module.exports = transporter;
+// Función para enviar el correo electrónico
+const sendEmail = async (toEmail) => {
+  const mailOptions = {
+    from: 'helpfoodier@outlook.com', // Remitente
+    to: toEmail, // Destinatario
+    subject: 'Foodier ayuda',
+    text: 'Gracias por contactarte con Foodier, en que podemos ayudarte?', // Cuerpo del correo electrónico
+  };
+
+  try {
+    await transporter.sendMail(mailOptions);
+    console.log('Correo enviado con éxito');
+  } catch (error) {
+    console.error('Error al enviar el correo:', error);
+  }
+};
+
+// Exporta las funciones
+module.exports = {
+  transporter,
+  sendEmail,
+};
+
