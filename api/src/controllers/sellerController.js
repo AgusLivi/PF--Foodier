@@ -3,78 +3,82 @@ const bcrypt = require('bcrypt');    // npm install bcrypt
 const nodemailer = require('../mailing/nodemailer.js'); // Importa la configuración de nodemailer
 
 
- // Obtener todos los vendedores
-  const getAllSellers = async (req, res) => {
-    try {
-      const sellers = await Seller.findAll();
-      res.json(sellers);
-    } catch (error) {
-      console.error(error);
-      res.status(500).json({ error: 'Error al obtener los vendedores.' });
-    }
-  };
-
-  // Obtener un vendedor por ID
-  const getSellerById = async (req, res) => {
-    const { seller_ID } = req.params;
-    try {
-      const seller = await Seller.findByPk(seller_ID);
-      if (seller) {
-        res.json(seller);
-      } else {
-        res.status(404).json({ error: 'Vendedor no encontrado.' });
+// Obtener todos los vendedores
+const getAllSellers = async (req, res) => {
+  try {
+    const sellers = await Seller.findAll({
+      where: {
+        deleted: false
       }
-    } catch (error) {
-      console.error(error);
-      res.status(500).json({ error: 'Error al obtener el vendedor.' });
-    }
-  };
+    });
+    res.json(sellers);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: 'Error al obtener los vendedores.' });
+  }
+};
 
-  const createSeller = async (req, res) => {
-    try {
-      const { name, email, address, time, contact, payment, image, password } = req.body;
-  
-      const hashedPassword = await bcrypt.hash(password, 10);
-  
-      const newSeller = await Seller.create({
-        name,
-        email,
-        password: hashedPassword,
-        address,
-        time,
-        contact,
-        payment,
-        image
-      });
-  
-      // Configura el correo electrónico de bienvenida
-      const mailOptions = {
-        from: 'tu_correo@outlook.com', // Cambia esto a tu dirección de correo
-        to: email, // Utiliza la dirección de correo electrónico del vendedor registrado
-        subject: 'Bienvenido a Foodier',
-        html: `<p>Bienvenido ${name} a Foodier.</p><p>Gracias por registrarte como vendedor.</p>`,
-      };
-  
-      // Envía el correo electrónico de bienvenida
-      nodemailer.sendMail(mailOptions, (error, info) => {
-        if (error) {
-          console.error('Error al enviar el correo electrónico de bienvenida:', error);
-        } else {
-          console.log('Correo electrónico de bienvenida enviado:', info.response);
-        }
-      });
-  
-      res.status(201).json(newSeller);
-    } catch (error) {
-      if (error.name === 'SequelizeUniqueConstraintError') {
-        res.status(400).json({ error: 'El email ya está registrado.' });
-      } else {
-        console.error(error);
-        res.status(500).json({ error: 'Error al crear el vendedor.', errorMessage: error.message });
-      }
+// Obtener un vendedor por ID
+const getSellerById = async (req, res) => {
+  const { seller_ID } = req.params;
+  try {
+    const seller = await Seller.findByPk(seller_ID);
+    if (seller) {
+      res.json(seller);
+    } else {
+      res.status(404).json({ error: 'Vendedor no encontrado.' });
     }
-  };
- // Controlador para actualizar los datos de un vendedor
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: 'Error al obtener el vendedor.' });
+  }
+};
+
+const createSeller = async (req, res) => {
+  try {
+    const { name, email, address, time, contact, payment, image, password } = req.body;
+
+    const hashedPassword = await bcrypt.hash(password, 10);
+
+    const newSeller = await Seller.create({
+      name,
+      email,
+      password: hashedPassword,
+      address,
+      time,
+      contact,
+      payment,
+      image
+    });
+
+    // Configura el correo electrónico de bienvenida
+    const mailOptions = {
+      from: 'tu_correo@outlook.com', // Cambia esto a tu dirección de correo
+      to: email, // Utiliza la dirección de correo electrónico del vendedor registrado
+      subject: 'Bienvenido a Foodier',
+      html: `<p>Bienvenido ${name} a Foodier.</p><p>Gracias por registrarte como vendedor.</p>`,
+    };
+
+    // Envía el correo electrónico de bienvenida
+    nodemailer.sendMail(mailOptions, (error, info) => {
+      if (error) {
+        console.error('Error al enviar el correo electrónico de bienvenida:', error);
+      } else {
+        console.log('Correo electrónico de bienvenida enviado:', info.response);
+      }
+    });
+
+    res.status(201).json(newSeller);
+  } catch (error) {
+    if (error.name === 'SequelizeUniqueConstraintError') {
+      res.status(400).json({ error: 'El email ya está registrado.' });
+    } else {
+      console.error(error);
+      res.status(500).json({ error: 'Error al crear el vendedor.', errorMessage: error.message });
+    }
+  }
+};
+// Controlador para actualizar los datos de un vendedor
 const updateSeller = async (req, res) => {
   try {
     const { seller_ID } = req.params;
@@ -121,12 +125,20 @@ const updateSeller = async (req, res) => {
   }
 };
 
-const deleteSeller = async (seller_ID)=>{
-  await Seller.destroy({where: {seller_ID}})
-}
+const deleteSeller = async (req, res) => {
+  try {
+    const { seller_ID } = req.params;
+    const info = await Seller.findByPk(seller_ID);
+    info.deleted = true;
+    info.save();
+    return res.status(200).send(`vendedor ${seller_ID} eliminado correctamente`);
+  } catch (error) {
+    res.status(400).json('Algo salio mal con la eliminacion del vendedor');
+  }
+};
 
 
-  // ... otros métodos para crear, actualizar y eliminar vendedores
+// ... otros métodos para crear, actualizar y eliminar vendedores
 
 module.exports = {
   getAllSellers,

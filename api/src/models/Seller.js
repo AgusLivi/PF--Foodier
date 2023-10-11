@@ -23,7 +23,7 @@ module.exports = (sequelize) => {
         },
       },
       password: {
-        type:DataTypes.STRING,
+        type: DataTypes.STRING,
         allowNull: false
       },
       address: {
@@ -50,9 +50,13 @@ module.exports = (sequelize) => {
       image: {
         type: DataTypes.STRING,
       },
+      deleted: {
+        type: DataTypes.BOOLEAN,
+        defaultValue: false,
+      }
     },
     {
-        // hoock para q la valoracion promedio se defina cada vez q algien actualiza el modelo
+      // hoock para q la valoracion promedio se defina cada vez q algien actualiza el modelo
       hooks: {
         afterSave: (seller, option) => {
           let total = 0;

@@ -12,5 +12,9 @@ module.exports = (sequelize) => {
 
           type: DataTypes.TEXT,
         },
+        deleted: {
+          type: DataTypes.BOOLEAN,
+          defaultValue: false,
+        }
     });
 }

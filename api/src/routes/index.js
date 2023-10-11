@@ -10,6 +10,9 @@ const postController = require('../controllers/postController');
 const sellerController = require('../controllers/sellerController');
 const productController = require('../controllers/productController')
 
+const { sendEmail } = require('../mailing/nodemailer');
+const { borradoLogico } = require("../controllers/controladorPrueva");
+
 
 // Rutas relacionadas con los productos
 router.get('/products/categories', productController.getAllCategories) // sacar las categorias para renderizar
@@ -18,11 +21,13 @@ router.post("/products/:seller_id", productController.createProduct); // crear p
 router.put("/products/:productId", productController.updateProduct) // editar productos
 router.delete("/products/:product_ID", productController.deleteProduct);  // borrar productos
 router.get("/products/", /*fireAuth,*/productController.getAllProducts); // busqueda general, filtrado y ordenamiento
+//router.delete('/products', borradoLogico); RUTA PRUEBA DELETED
 
 // Rutas para gestionar publicaciones
 router.post('/posts', postController.createPost);
 router.get('/posts', postController.getAllPost);
 router.get('/posts/:post_ID', postController.getPostById);
+router.delete('/posts/:post_ID', )
 
 // Rutas de autenticacion y usuarios
 router.post('/login', loginController.login);

@@ -6,7 +6,11 @@ const transporter = require('../mailing/nodemailer.js'); // Importa el archivo d
   // Obtener todos los usuarios
   const getAllUsers = async (req, res) => {
     try {
-      const users = await User.findAll();
+      const users = await User.findAll({
+        where: {
+          deleted: false
+        }
+      });
       res.json(users);
     } catch (error) {
       console.error(error);
@@ -107,8 +111,16 @@ const createUser = async (req, res) => {
     }
   };
 
-  const deleteUser = async (user_ID)=>{
-    await User.destroy({where: {user_ID}})
+  const deleteUser = async (req, res)=>{
+    try {
+      const { user_ID } = req.params;
+      const info = await User.findByPk(user_ID);
+      info.deleted = true;
+      info.save();
+      return res.status(200).send(`usuario ${user_ID} eliminado correctamente`);
+    } catch (error) {
+      res.status(400).json('Algo salio mal con la eliminacion del usuario');
+    }
   }
 
   // ... otros métodos para crear, actualizar y eliminar usuarios
