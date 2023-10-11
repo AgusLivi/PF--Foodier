@@ -10,8 +10,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Foodier</title>
     <script type="module" src="https://foodier-back-deploy.onrender.com/@vite/client"></script>
-    <script type="module" src="https://foodier-back-deploy.onrender.com/main.js"></script>
-    
+    <script type="module">
+      import RefreshRuntime from 'https://foodier-back-deploy.onrender.com/@react-refresh'
+      RefreshRuntime.injectIntoGlobalHook(window)
+      window.$RefreshReg$ = () => {}
+      window.$RefreshSig$ = () => (type) => type
+      window.__vite_plugin_react_preamble_installed__ = true
+    </script>
   </head>
   <body style="margin: 0px; padding: 0;background: #f5f5f5;" ><!--Poner en otro archivo para modularizar-->
     <div id="root"></div>
