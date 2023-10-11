@@ -11,7 +11,7 @@ const Terminos = () => {
         <div className={style.terminos}>
             <h1>Términos y Condiciones de Uso de Foodier</h1>
             <h2>1. Introducción</h2>
-            <p>1.1 Bienvenido a Foodier, una aplicación móvil desarrollada por [Nombre de la Empresa], que tiene como objetivo actuar como intermediario entre restaurantes, tiendas y consumidores para reducir el desperdicio de alimentos.</p>
+            <p>1.1 Bienvenido a Foodier, una aplicación móvil que tiene como objetivo actuar como intermediario entre restaurantes, tiendas y consumidores para reducir el desperdicio de alimentos.</p>
             <p>1.2 Estos Términos y Condiciones de Uso ("Términos") establecen un acuerdo legal entre usted (el "Usuario" o "Vendedor") y Foodier. Al utilizar la aplicación Foodier, usted acepta estar sujeto a estos Términos y a nuestra Política de Privacidad.</p>
             <h2>2. Registro de Usuarios</h2>
             <p>2.1 Para registrarse como usuario, debe proporcionar un correo electrónico, nombre de usuario, contraseña y lugar de residencia.</p>
