@@ -19,8 +19,10 @@ const Home = () => {
   const localidades = useSelector((state) => state.localidades);
   const productsAmount = useSelector((state) => state.productsAmount);
 
+  
   const dispatch = useDispatch();
-
+  
+  const [selectedProvincia, setSelectedProvincia] = useState(null);
   const [isFilterVisible, setIsFilterVisible] = useState(false);
 
   useEffect(() => {
@@ -123,6 +125,8 @@ const Home = () => {
 
     let updatedAddress = [selectedProvinciaValue];
 
+    setSelectedProvincia(event.target.value)
+
     setFormData({
       ...formData,
       address: updatedAddress,
@@ -173,6 +177,8 @@ const Home = () => {
       orderBy: "name",
       order: "asc",
     });
+    setSelectedProvincia("")
+    dispatch(locationProvincia());
   };
 
   const updateQueryParams = (paramsToUpdate) => {
@@ -216,11 +222,11 @@ const Home = () => {
 
           <form className={`${Style.form} ${isFilterVisible ? Style.modalVisible : ""}`}>
     
-            <button onClick={resetHandler} className={Style.resetButton}>
+            <button type="button" onClick={resetHandler} className={Style.resetButton}>
               Restablecer filtros
             </button>
 
-            <select name="" id="" onChange={handleProvinciaChange}>
+            <select name="" id="" onChange={handleProvinciaChange} value={selectedProvincia || ""}>
               <option value="" disabled selected>
                 Selecciona una provincia
               </option>

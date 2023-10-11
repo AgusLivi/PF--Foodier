@@ -9,8 +9,11 @@ const CardContainer =  () => {
 
   return (
     <div className={styles.cardContainer}>
-      { products?.map((product, index) => {
-        return (
+      {products.length === 0 ? (
+        <h1>No hay productos disponibles</h1>
+      ) : ( 
+       products?.map((product, index) => 
+            (
           <Card
             key={index}
             name={product.name}
@@ -22,8 +25,8 @@ const CardContainer =  () => {
             date={product.date}
             product_ID={product.product_ID}
           />
-        )
-      })}
+        ))
+      )}
     </div>
   );
 };

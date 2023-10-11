@@ -123,24 +123,65 @@ const reducer = (state = initialState, { type, payload }) => {
         allFavoritesSeller: payload,
       };
     case PROVINCIAS:
+      const sortedProvincias = payload.slice().sort((a, b) => {
+        const nameA = a.nombre.toLowerCase();
+        const nameB = b.nombre.toLowerCase();
+    
+        if (nameA < nameB) {
+          return -1;
+        }
+        if (nameA > nameB) {
+          return 1;
+        }
+        return 0;
+      });
+    
       return {
         ...state,
-        provincias: payload,
+        provincias: sortedProvincias,
         localidades: [],
+        municipios: [],
       };
 
     case MUNICIPIOS:
+      const sortedMunicipios = payload.slice().sort((a, b) => {
+        const nameA = a.nombre.toLowerCase();
+        const nameB = b.nombre.toLowerCase();
+    
+        if (nameA < nameB) {
+          return -1;
+        }
+        if (nameA > nameB) {
+          return 1;
+        }
+        return 0;
+      });
+    
       return {
         ...state,
-        municipios: payload,
+        municipios: sortedMunicipios,
         localidades: []
       };
+      
 
-    case LOCALIDADES:
-      return {
-        ...state,
-        localidades: payload,
-      };
+      case LOCALIDADES:
+        const sortedLocalidades = payload.slice().sort((a, b) => {
+          const nameA = a.nombre.toLowerCase();
+          const nameB = b.nombre.toLowerCase();
+      
+          if (nameA < nameB) {
+            return -1;
+          }
+          if (nameA > nameB) {
+            return 1;
+          }
+          return 0;
+        });
+      
+        return {
+          ...state,
+          localidades: sortedLocalidades
+        };
 
     case SEARCH_BY_ID:
       return {
