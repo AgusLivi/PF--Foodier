@@ -1,15 +1,14 @@
 const nodemailer = require('nodemailer');
+require('dotenv').config();
 
-// Configura el transporte SMTP para Outlook
 const transporter = nodemailer.createTransport({
-  host: 'smtp-mail.outlook.com', // Servidor SMTP de Outlook
-  port: 587, // Puerto de Outlook para SMTP
-  secure: false, // El uso de TLS/STARTTLS no se establece en true
+  host: 'smtp-mail.outlook.com',
+  port: 587,
+  secure: false,
   auth: {
-    user: 'helpfoodier@outlook.com', // Tu dirección de correo de Outlook
-    pass: 'Foodier2023.', // Tu contraseña de Outlook
+    user: process.env.OUTLOOK_USER, // Utiliza la variable de entorno para el usuario
+    pass: process.env.OUTLOOK_PASS, // Utiliza la variable de entorno para la contraseña
   },
 });
 
 module.exports = transporter;
-
