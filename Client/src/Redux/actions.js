@@ -306,13 +306,13 @@ export const cleanDetail = () => {
 };
 
 export const createProduct = (formmData, id) => {
-  console.log("form data: ", formmData);
+  console.log("form data: ", formmData.categories);
   return async () => {
     try {
       const { data } = await axios.post(`/products/${id}`, formmData); // despues de la barra tengo que poner la ruta que definieron en el back
       alert(`${data.name} fue creado correctamente`);
     } catch (error) {
-      console.error(error.message);
+      alert('Hubo un error', error.message);
     }
   };
 };

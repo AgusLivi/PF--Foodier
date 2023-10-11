@@ -105,5 +105,3 @@ dist
 
 # package-lock.json
 api/package-lock.json
-
-Client/src/main.jsx
