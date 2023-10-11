@@ -3,7 +3,11 @@ const { Post, Seller, User } = require("../db.js");
 // Obtener todos los posteos
 const getAllPost = async (req, res) => {
   try {
-    const posts = await Post.findAll();
+    const posts = await Post.findAll({
+      where: {
+        deleted: false
+      }
+    });
     res.json(posts);
   } catch (error) {
     console.error(error);
@@ -35,15 +39,15 @@ const createPost = async (req, res) => {
 
     const findUser = await User.findByPk(user_ID);
     const findSeller = await Seller.findByPk(seller_ID)
-    findSeller.valoraciones = [...findSeller.valoraciones, valoration]
+    findSeller.valoration = [...findSeller.valoration, valoration]
     await findSeller.save()
-    
-    const newPost = await Post.create({comentario: comment});
+
+    const newPost = await Post.create({ comentario: comment });
 
     await findUser.addPost(newPost)
     await findSeller.addPost(newPost)
-    
-    
+
+
     res.json("posteado")
 
   } catch (error) {
@@ -51,8 +55,21 @@ const createPost = async (req, res) => {
   }
 };
 
+const deletePost = async (req, res) => {
+  try {
+    const { posts_ID } = req.params;
+    const info = await Post.findByPk(posts_ID);
+    info.deleted = true;
+    info.save();
+    return res.status(200).send(`post/comentario ${posts_ID} eliminado correctamente`);
+  } catch (error) {
+    res.status(400).json('Algo salio mal con la eliminacion del post/comentario');
+  }
+};
+
 module.exports = {
   getAllPost,
   getPostById,
-  createPost
+  createPost,
+  deletePost
 };

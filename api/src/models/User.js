@@ -27,5 +27,9 @@ module.exports = (sequelize) => {
         location: {
           type: DataTypes.STRING,
         },
+        deleted: {
+          type: DataTypes.BOOLEAN,
+          defaultValue: false,
+        }
     });
 }
