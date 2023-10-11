@@ -56,25 +56,7 @@ const Home = () => {
     navigate("/politica-de-privacidad");
   };
 
-  const handleEmailSend = async () => {
-    try {
-      const response = await fetch('/api/send-email', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ toEmail: email }),
-      });
-
-      if (response.status === 200) {
-        alert('Correo enviado con éxito');
-      } else {
-        alert('Error al enviar el correo');
-      }
-    } catch (error) {
-      console.error('Error al enviar el correo:', error);
-    }
-  };
+  
 
   return (
     <>
@@ -127,15 +109,8 @@ const Home = () => {
         <h1 className={style.primaryheading}>Tienes alguna pregunta?</h1>
         <h1 className={style.primaryheading}>Contáctanos!</h1>
         <div className={style.contactformcontainer}>
-          <input
-            type="text"
-            placeholder="tucorreo@gmail.com"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-          />
-          <button className={style.secondarybutton} onClick={handleEmailSend}>
-            Enviar
-          </button>
+          <input type="text" placeholder="tucorrgit pueo@gmail.com" />
+          <button className={style.secondarybutton}>Enviar</button>
         </div>
       </div>
 
