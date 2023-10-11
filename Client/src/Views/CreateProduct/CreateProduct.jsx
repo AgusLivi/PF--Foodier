@@ -7,6 +7,7 @@ import wave from '../../assets/wave.svg'
 import {
     getCategories, createProduct,
 } from '../../Redux/actions';
+// import { copy } from '../../../../api/src/routes';
 
 const Cloudinary = (props) => {
     // Estado para controlar la carga de la imagen y el formulario
@@ -72,7 +73,7 @@ const Cloudinary = (props) => {
             old_price: Number(productPost.old_price),
             amount: Number(productPost.amount)
         }
-        const id = 'e5de2f23-6b98-40d6-944d-503d880ef773';
+        const id = "14409bf1-fa8c-4e7f-8189-bf11925bbc64";
         await dispatch(createProduct(copyProduct, id));
         setProductPost({
             name: '',
