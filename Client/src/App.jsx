@@ -14,6 +14,9 @@ import CreateProduct from './Views/CreateProduct/CreateProduct';
 import Detalle from './Views/Detalle/Detalle';
 import SignUp from "./Components/SignUp/SignUp";
 import Payment from "./Components/Payment/Payment";
+import SuccessPage from "./Components/Payment/SuccessPage";
+import PendingPage from "./Components/Payment/PendingPage";
+import FailurePage from "./Components/Payment/FailurePage";
 import ShoppingCart from './Components/ShoppingCart/ShoppingCart';
 import Reserva from "./Components/Reserva/Reserva";
 import Terminos from "./Views/TerminosYCondiciones/Terminos";
@@ -45,6 +48,9 @@ const App = () => {
         <Route path='/create' element={<CreateProduct />} />
         <Route path='/products/:product_ID' element={<Detalle/>} />
         <Route path='/payments/:monto/:descripcion' element={<Payment/>}/>
+        <Route path="/payments/success" element={<SuccessPage/>} />
+        <Route path="/payments/pending" element={<PendingPage/>} />
+        <Route path="/payments/failure" element={<FailurePage/>} />
         <Route path='/carrito' element={<ShoppingCart />} />
         <Route path='/reserva' element={<Reserva />} />
         <Route path='/terminos-y-condiciones' element={<Terminos />} />
