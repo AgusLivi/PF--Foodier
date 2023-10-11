@@ -12,7 +12,7 @@ const server = express();
 server.name = 'API';
 
 server.use(cors({
-    origin: 'https://foodier.onrender.com' || 'http://localhost:5173', // Reemplaza con el origen permitido
+    origin: 'https://foodier.onrender.com' && 'http://localhost:5173', // Reemplaza con el origen permitido
     credentials: true,
     methods: 'GET, POST, OPTIONS, PUT, DELETE',
     allowedHeaders: 'Origin, X-Requested-With, Content-Type, Accept',
