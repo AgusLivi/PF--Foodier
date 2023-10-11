@@ -9,7 +9,7 @@ const loginController = require('../controllers/loginController')
 const postController = require('../controllers/postController');
 const sellerController = require('../controllers/sellerController');
 const productController = require('../controllers/productController')
-const { sendEmail } = require('../mailing/nodemailer');
+
 
 // Rutas relacionadas con los productos
 router.get('/products/categories', productController.getAllCategories) // sacar las categorias para renderizar
@@ -49,8 +49,7 @@ router.get('/favorites/:user_ID', favController.getFavorites);
 // Rutas de pagos
 router.post('/payments', paymentController.createPayment);
 
-// Define la ruta para enviar correos electrónicos
-router.post('/send-email', sendEmail);
+
 
 
 module.exports = router; 
