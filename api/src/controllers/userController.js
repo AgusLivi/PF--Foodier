@@ -119,16 +119,15 @@
       return res.status(401).json({ error: 'Token no proporcionado.' });
     }
 
-    const secretKey = config.secretKey;
-
-    jwt.verify(token, secretKey, (err, decoded) => {
+    console.log("ACA SERIA NLA CLABE PAPA", config.secretKey);
+    console.log("TOKEN DESDE EL SERVIDOR QUE HAY ACA ",  token);
+    jwt.verify(token, config.secretKey, (err, decoded) => {
       if (err) {
-        return res.status(401).json({ error: 'Token no válido.' });
+        return res.status(401).json({ error: err.message });
       }
           // Los datos del usuario decodificado estarán en `decoded`
           const userData = decoded;
-          // Puedes hacer lo que necesites con los datos del usuario aquí
-          // Por ejemplo, puedes enviarlos como respuesta
+
       res.json({ userData });
   });
 };

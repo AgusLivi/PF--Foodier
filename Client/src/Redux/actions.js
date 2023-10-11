@@ -432,16 +432,18 @@ export const verifyToken = () => {
     return async (dispatch)=> {
         try {
             const token = localStorage.getItem('token');
-            const response = await axios.get(`${endPoint}/users/me/verify`, {
-                headers: {
+
+            console.log("TOKEN DE VERIFY TOKEN", token);
+                const { data } = await axios.get(`${endPoint}/users/me/verify`, {
+                    headers: {
                     Authorization: `Bearer ${token}`,
                 }
             })
-            console.log("RESPONSE", response.data);
+            console.log("RESPONSE", data);
 
             dispatch({
                 type: VERIFY_TOKEN,
-                payload: response.data
+                payload: data
             })
         } catch (error) {
             alert (error.message)

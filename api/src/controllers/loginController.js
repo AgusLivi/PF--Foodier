@@ -22,7 +22,7 @@ const login = async (req,res)=>{
     
         if (passwordMatch) {
             // Generamos un token de autenticación
-            const token = jwt.sign({ userId: user.id, userOrSeller }, 'losdelfrontnoselabancan', { expiresIn: '1h' });
+            const token = jwt.sign({ userId: user.id, userOrSeller }, 'losdelfrontnoselabancan', {expiresIn: '1h' });
             
             res.json({ token }); // Devuelve el token como respuesta
         } else {

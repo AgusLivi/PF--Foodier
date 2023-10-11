@@ -186,7 +186,7 @@ const reducer = (state = initialState, { type, payload }) => {
     //       userData: payload,
     //   };
     case VERIFY_TOKEN: 
-    console.log("DATA DE VERIFYYYY",payload);
+    console.log("DATA DE VERIFYYYY", payload);
       return {
         ...state,
         userData: payload

@@ -35,7 +35,7 @@ const PerfilUsuario = () => {
        
               <div className={styles.info}>
                <strong><i className='bx bx-envelope'></i> <label>Email:</label></strong>
-                <p>{userId.email}</p>
+                <p>{userData.email}</p>
                 <hr />
               </div>
               {/* <div className={styles.info}>
