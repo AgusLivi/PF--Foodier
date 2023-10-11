@@ -42,7 +42,7 @@ header {
 	color: var(--textColor);
 	margin: 0 auto;
 }
-nav a {
+nav a:not(.links) {
 	scale:1.2;
 	margin: 0 1rem;
 	font-size: 24px;
@@ -50,7 +50,7 @@ nav a {
 	text-decoration: none;
 }
 
-nav a:hover {
+nav a:hover:not(.links) {
 	color: var(--secondaryColor);
 	scale: 1.5;
 }

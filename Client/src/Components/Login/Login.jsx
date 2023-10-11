@@ -12,7 +12,7 @@ import { FiUserCheck } from "react-icons/fi"
 import { Link } from "react-router-dom"
 import { LiaFacebookSquare } from "react-icons/lia"
 import { TbUserSearch } from "react-icons/tb"
-
+import logo from "../../assets/logoblanco.png"
 const Login = () => {
 
   return (
@@ -29,8 +29,8 @@ const Login = () => {
     
     <div className={style.body}>
       <div className={style.containerform}>
-
         <div className={style.forminformation}>
+        
           <div className={style.forminformationchilds}>
             <h2>Registrate o ingresá para continuar</h2>
           
