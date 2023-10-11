@@ -1,4 +1,5 @@
 const mercadopago = require('mercadopago');
+const endPoint = 'http://localhost:5173'
 
 // Controlador para crear un pago
 const createPayment = async (req, res) => {
@@ -14,6 +15,11 @@ const createPayment = async (req, res) => {
           quantity: 1,
         },
       ],
+      back_urls: {
+        success: `${endPoint}/payments/success`, // URL de éxito
+        failure: `${endPoint}/payments/failure`, // URL de fallo
+        pending: `${endPoint}/payments/pending`, // URL intermedia
+      },
     };
 
     // Esta es la preferencia de pago en Mercado Pago
