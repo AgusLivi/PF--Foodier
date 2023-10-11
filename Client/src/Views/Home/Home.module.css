@@ -51,7 +51,7 @@
   align-items: center;
 }
 .showFilter:hover{
-  scale: 1.5;
+  scale: 1.2;
   color: #333;
 }
 .showFilter::before{
@@ -222,8 +222,8 @@
   display: flex;
   flex-direction: column;
   margin: 0 auto;
-  width: 70%;
-  flex: 2; /* El div central ocupará más espacio que los otros dos */
+  width: 80%;
+  flex: 3; /* El div central ocupará más espacio que los otros dos */
 
 }
 
