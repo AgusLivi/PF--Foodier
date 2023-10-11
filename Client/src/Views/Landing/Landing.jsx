@@ -109,7 +109,7 @@ const Home = () => {
         <h1 className={style.primaryheading}>Tienes alguna pregunta?</h1>
         <h1 className={style.primaryheading}>Contáctanos!</h1>
         <div className={style.contactformcontainer}>
-          <input type="text" placeholder="tucorrgit pueo@gmail.com" />
+          <input type="text" placeholder="tucorreo@gmail.com" />
           <button className={style.secondarybutton}>Enviar</button>
         </div>
       </div>
