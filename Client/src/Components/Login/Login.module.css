@@ -16,15 +16,18 @@ nav img{
    }
 
 
-.navtext{
+
+
+.links a{
     color: #333;
     text-decoration: none;
-}
+    font-weight: 800px;
 
-.links{
-    text-decoration: none;
+    text-decoration-line: none;
 }
-
+.links a:hover{
+    scale: 1;
+}
 .body {
     display: flex;
     align-items: center;
@@ -36,13 +39,13 @@ nav img{
 
 .containerform {
     display: flex;
-    height: 500px;
-    max-width: 900px;
-    transition: all 3s ease;
+    height: 100%;
+    width: 80%;
     margin: 10px;
-   
-
+    justify-content: center;
+    align-items: center;
 }
+
 
 
 .infochilds {
@@ -56,18 +59,33 @@ nav img{
     color: #333;
     
 }
-
 .forminformation {
+    box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.3);
     display: flex;
-    align-items: center;
-    justify-content: center;
+    align-items: center; /* Corregido: cambiar "align-items:center" a "align-items: center" */
+    justify-content: flex-end;
     width: 100%;
-    border-top-right-radius: 20px;
-    border-bottom-right-radius: 20px;
-   
+    height: 80%;
+    position: relative;
+    overflow: hidden;
+  
 }
 
-
+.forminformation::before{
+    content: '';
+    width: 80%;
+    height: 150%;
+    position: absolute;
+    border-radius: 100%;
+    backdrop-filter: blur(4px);
+    background: linear-gradient(50deg, #db880b, #db880b, #db880b,  #ff4800);
+    z-index: -1;
+    top: -15em;
+    left: -26em;
+}
+.forminformationchilds{
+    padding: 3em;
+}
 .forminformationchilds h2 {
     color: #333;
     font-size: 2rem;
