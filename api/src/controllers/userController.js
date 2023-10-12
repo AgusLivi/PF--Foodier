@@ -1,7 +1,7 @@
 const { User }= require('../db.js');
 const bcrypt = require('bcrypt');    // npm install bcrypt
-const transporter = require('../mailing/nodemailer.js'); // Importa el archivo de configuración de Nodemailer
-
+const createTransporter = require('../mailing/nodemailer'); // Importa la función createTransporter desde tu archivo local
+const transporter = createTransporter(); // Llama a la función para crear el transporter
 
   // Obtener todos los usuarios
   const getAllUsers = async (req, res) => {
@@ -35,47 +35,49 @@ const transporter = require('../mailing/nodemailer.js'); // Importa el archivo d
   };
 
   // Controlador para crear un nuevo usuario
-const createUser = async (req, res) => {
-  try {
-    const { name, email, password, location } = req.body;
+  const createUser = async (req, res) => {
+    try {
+      const { name, email, password, location } = req.body;
+  
+      // Genera un hash seguro de la contraseña
+      const hashedPassword = await bcrypt.hash(password, 10); // 10 es el costo (número de rondas de hashing)
+  
+      const newUser = await User.create({
+        name,
+        email,
+        password: hashedPassword, // Almacena el hash en lugar de la contraseña en texto claro
+        location
+      });
+  
+      // Configura el correo electrónico de confirmación
+      const info = await transporter.sendMail({
+        from: 'onboarding@resend.dev',
+        to: email,
+        subject: 'Hello World',
+        html: '<strong>Bienvenido a Foodier, muchas gracias por registrarte, combatamos el desperdicio de alimentos juntos!!!</strong>',
+        
+      });
+      console.log('Message sent: %s', info.messageId);
 
-    // Genera un hash seguro de la contraseña
-    const hashedPassword = await bcrypt.hash(password, 10); // 10 es el costo (número de rondas de hashing)
-
-    const newUser = await User.create({
-      name,
-      email,
-      password: hashedPassword, // Almacena el hash en lugar de la contraseña en texto claro
-      location
-    });
-
-    // Configura el correo electrónico de confirmación
-    const mailOptions = {
-      from: 'helpfoodier@outlook.com', // Tu dirección de correo de Outlook
-      to: email, // Utiliza la dirección de correo electrónico del usuario registrado
-      subject: 'Registro exitoso',
-      html: `<p>Bienvenido a nuestro sitio web, ${name}.</p><p>Gracias por registrarte.</p>`,
-    };
-
-    // Envía el correo electrónico de confirmación
-    transporter.sendMail(mailOptions, (error, info) => {
-      if (error) {
-        console.error('Error al enviar el correo electrónico de confirmación:', error);
+      // Envía el correo electrónico de confirmación
+      transporter.sendMail(info, (error, info) => {
+        if (error) {
+          console.error('Error al enviar el correo electrónico de confirmación:', error);
+        } else {
+          console.log('Correo electrónico de confirmación enviado:', info.response);
+        }
+      });
+  
+      res.status(201).json(newUser);
+    } catch (error) {
+      if (error.name === 'SequelizeUniqueConstraintError') {
+        res.status(400).json({ error: 'El email ya está registrado.' });
       } else {
-        console.log('Correo electrónico de confirmación enviado:', info.response);
+        console.error(error);
+        res.status(500).json({ error: 'Error al crear el usuario.' });
       }
-    });
-
-    res.status(201).json(newUser);
-  } catch (error) {
-    if (error.name === 'SequelizeUniqueConstraintError') {
-      res.status(400).json({ error: 'El email ya está registrado.' });
-    } else {
-      console.error(error);
-      res.status(500).json({ error: 'Error al crear el usuario.' });
     }
-  }
-};
+  };
 
 
   const updateUser = async (req, res) => {
