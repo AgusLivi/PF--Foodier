@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Card, Container, Form, FormGroup, Input } from 'reactstrap';
+import { FormGroup, Input } from 'reactstrap';
 import Style from "./CreateProduct.module.css"
 import uploadImage from '../../helperCloudinary/helperCloudinary';
 import { useDispatch, useSelector } from 'react-redux';
@@ -18,7 +18,7 @@ const Cloudinary = (props) => {
     const [reset, setReset] = useState(false);
     const textAux = 'Categoria/s seleccionada/s: ';
     const textAux2 = 'Para borrar una categoria seleccionada da click sobre ella';
- 
+
     const [productPost, setProductPost] = useState({
         name: '',
         description: '',
@@ -92,82 +92,82 @@ const Cloudinary = (props) => {
 
     //console.log(productPost);
     return (
-            <div className={Style.container}>
-            
-                <div className={Style.containerChilds}>
-                <FormGroup className={Style.containerChildImg}>
-                                    <Input type="file" className={Style.input} name="file" placeholder="carga tu imagen" onChange={handlerCloudinary}/>
-                                          {loading ? (
-                                        <h3>Cargando imagen...</h3>
-                                         ) : (
-                                            <div className={Style.containerImg}>    
-                                                <img src={productPost.image} alt="Producto" />
-                                            </div>
-                                         )}
-                        </FormGroup>
-                <form onSubmit={(event) => handlerCreateProduct(event)} className={Style.form}>
-                    
-                                     
-                                <label htmlFor="name">Nombre producto:</label>
-                                <input type="text" name='name' value={productPost.name} placeholder='Ej: Panadería Pancho' onChange={handleOnChange}/>
-        
-                               
-                                <label htmlFor="categories">Categorías:</label>
-                                    <select name='categoriess' onChange={handleOnChange} className={Style.cat}>
-                                        <option value=''>Selecciona tus categorías</option>
-                                        {categories.map((categorie) => {
-                                            return (
-                                                <option key={categorie} value={categorie}>
-                                                    {categorie}
-                                                </option>
-                                            )
-                                        })}
-                                    </select>
-            
-                                    {productPost.categories.length !== 0 && <p>{textAux}</p>}
-            
-                                    {productPost.categories.map((ca) => {
-                                        return (
-                                            <button
-                                                type='button'
-                                                key={ca}
-                                                onClick={(event) => handleDeleteCategorie(event, ca)}
-                                                value={ca}
-                                            >
-                                                {ca}
-                                            </button>
-                                        )
-                                    })}
-            
-                                    {productPost.categories.length !== 0 && <p>{textAux2}</p>}
-                                
-                            
+        <div className={Style.container}>
 
-                                <label htmlFor="amount">Cantidad:</label>
-                                <input type="number" name='amount' value={productPost.amount}  onChange={handleOnChange}/>
-                 
-                                <label htmlFor="description">Descripción:</label>
-                                <textarea name="description" value={productPost.description} cols="3" rows="1" placeholder='Rica docena de pan de queso' onChange={handleOnChange}/>
-                          
-                   
-                                <label htmlFor="old_price">Precio viejo:</label>
-                                <input type="number" name='old_price' value={productPost.old_price} placeholder='Ej: 800' onChange={handleOnChange}/>
-          
-                                <label htmlFor="price">Precio nuevo:</label>
-                                <input type="number" name='price' value={productPost.price} placeholder='Ej: 400' onChange={handleOnChange}/>
-                                
-                              
-                                <button type='submit' className={Style.btn}>Subir</button>
-        
-             
-                        
-                    
+            <div className={Style.containerChilds}>
+                <FormGroup className={Style.containerChildImg}>
+                    <Input type="file" className={Style.input} name="file" placeholder="carga tu imagen" onChange={handlerCloudinary} />
+                    {loading ? (
+                        <h3>Cargando imagen...</h3>
+                    ) : (
+                        <div className={Style.containerImg}>
+                            <img src={productPost.image} alt="Producto" />
+                        </div>
+                    )}
+                </FormGroup>
+                <form onSubmit={(event) => handlerCreateProduct(event)} className={Style.form}>
+
+
+                    <label htmlFor="name">Nombre producto:</label>
+                    <input type="text" name='name' value={productPost.name} placeholder='Ej: Panadería Pancho' onChange={handleOnChange} />
+
+
+                    <label htmlFor="categories">Categorías:</label>
+                    <select name='categoriess' onChange={handleOnChange} className={Style.cat}>
+                        <option value=''>Selecciona tus categorías</option>
+                        {categories.map((categorie) => {
+                            return (
+                                <option key={categorie} value={categorie}>
+                                    {categorie}
+                                </option>
+                            )
+                        })}
+                    </select>
+
+                    {productPost.categories.length !== 0 && <p>{textAux}</p>}
+
+                    {productPost.categories.map((ca) => {
+                        return (
+                            <button
+                                type='button'
+                                key={ca}
+                                onClick={(event) => handleDeleteCategorie(event, ca)}
+                                value={ca}
+                            >
+                                {ca}
+                            </button>
+                        )
+                    })}
+
+                    {productPost.categories.length !== 0 && <p>{textAux2}</p>}
+
+
+
+                    <label htmlFor="amount">Cantidad:</label>
+                    <input type="number" name='amount' value={productPost.amount} onChange={handleOnChange} />
+
+                    <label htmlFor="description">Descripción:</label>
+                    <textarea name="description" value={productPost.description} cols="3" rows="1" placeholder='Rica docena de pan de queso' onChange={handleOnChange} />
+
+
+                    <label htmlFor="old_price">Precio viejo:</label>
+                    <input type="number" name='old_price' value={productPost.old_price} placeholder='Ej: 800' onChange={handleOnChange} />
+
+                    <label htmlFor="price">Precio nuevo:</label>
+                    <input type="number" name='price' value={productPost.price} placeholder='Ej: 400' onChange={handleOnChange} />
+
+
+                    <button type='submit' className={Style.btn}>Subir</button>
+
+
+
+
                 </form>
-              
-                </div>
-             </div>
-           
-        )
-    }
-    
-    export default Cloudinary;
+
+            </div>
+        </div>
+
+    )
+}
+
+export default Cloudinary;
