@@ -72,6 +72,21 @@ nav {
 	display: flex;
 	align-items: center;
 }
+.containerLogo {
+	position: relative;
+	width: 300px;
+	height: 100px;
+	overflow: hidden;
+}
+
+
+.containerLogo img {
+    position: absolute;
+    top: 50%; /* Coloca el punto superior de la imagen en el centro vertical del contenedor */
+    left: 50%; /* Coloca el punto izquierdo de la imagen en el centro horizontal del contenedor */
+    transform: translate(-50%, -50%); /* Centra la imagen */
+}
+
 
 @media only screen and (max-width: 1024px) {
 	header .nav-btn {

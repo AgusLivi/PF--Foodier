@@ -1,7 +1,7 @@
 const server = require('./src/app.js');
 const { conn } = require('./src/db.js');
 const mercadopago = require('mercadopago');
-//const { cargarPruevas } = require('./src/controllers/controladorPrueva.js');
+const { cargarPruevas } = require('./src/controllers/controladorPrueva.js');
 
 // Credenciales de prueba de Mercado Pago
 mercadopago.configure({

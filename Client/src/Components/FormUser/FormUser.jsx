@@ -1,8 +1,8 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useFormik } from 'formik';
-import { useDispatch } from 'react-redux';
-import { createUser } from '../../Redux/actions';
+import { useDispatch, useSelector } from 'react-redux';
+import { createUser, locationLocalidad, locationMunicipio, locationProvincia } from '../../Redux/actions';
 import style from './FormUser.module.css';
 import wave from '../../assets/wave.svg';
 
@@ -10,13 +10,39 @@ const FormLogin = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
+  const provincias = useSelector((state) => state.provincias);
+  const municipios = useSelector((state) => state.municipios);
+  const localidades = useSelector((state) => state.localidades);
+
+  useEffect(() => {
+    dispatch(locationProvincia());
+   }, []);
+
+   const handleProvinciaChange = (event) => {
+    const selectedProvinciaId = event.target.options[event.target.selectedIndex].getAttribute("data-id");
+    dispatch(locationMunicipio(selectedProvinciaId));
+
+    formik.handleChange(event)
+  }; 
+
+  const handleMuniChange = (event) => {
+    const selectedMunicipioId = event.target.options[event.target.selectedIndex].getAttribute("data-id");
+    dispatch(locationLocalidad(selectedMunicipioId));
+
+    formik.handleChange(event)
+  };
+
+  const handleLocalChange = (event) => {
+      formik.handleChange(event)
+  };
+
   const submitForm = async (values) => {
     try {
       const userData = {
         name: values.name,
         email: values.email,
         password: values.password,
-        location: values.location,
+        location: `${values.provincia}, ${values.municipio}, ${values.localidad}`,
       };
 
       await dispatch(createUser(userData));
@@ -49,8 +75,14 @@ const FormLogin = () => {
         'La contraseña debe contener al menos una mayúscula y un número';
     }
 
-    if (!values.location) {
-      errors.location = 'La dirección es obligatoria';
+    if (!values.provincia) {
+      errors.provincia = 'La provincia es obligatoria';
+    }
+    if (!values.municipio) {
+      errors.municipio = 'El municipio es obligatoria';
+    }
+    if (!values.localidad) {
+      errors.localidad = 'La localidad es obligatoria';
     }
 
     return errors;
@@ -61,7 +93,9 @@ const FormLogin = () => {
       name: '',
       email: '',
       password: '',
-      location: '',
+      provincia: '',
+      municipio: '',
+      localidad: '',
     },
     onSubmit: submitForm,
     validate: validateForm,
@@ -115,14 +149,81 @@ const FormLogin = () => {
               <div className={style.i}></div>
               <div className={style.div}>
                 <h5>Dirección</h5>
-                <input
+                
+                <select
+                  className={style.input}
+                  name="provincia"
+                  onChange={handleProvinciaChange}
+                  onBlur={formik.handleBlur}
+                  value={formik.values.provincia}
+                  >
+                  <option value="" disabled selected>
+                    Selecciona una provincia
+                  </option>
+                  {provincias.length ? (
+                    provincias.map((prov) => (
+                      <option key={prov.id} value={prov.nombre}  data-id={prov.id} >
+                        {prov.nombre}
+                      </option>
+                    ))
+                  ) : (
+                    <option>Selecciona una provincia</option>
+                  )}
+                </select>
+
+                {municipios.length > 0 && (
+                  <select className={style.input}
+                  name="municipio"
+                  onChange={handleMuniChange}
+                  onBlur={formik.handleBlur}
+                  value={formik.values.municipio}>
+                    <option value="" disabled selected>
+                      Selecciona un municipio
+                    </option>
+                    {municipios.length ? (
+                      municipios.map((muni) => (
+                        <option data-id={muni.id} key={muni.id} value={muni.nombre}>
+                          {muni.nombre}
+                        </option>
+                      ))
+                    ) : (
+                      <option>Selecciona un municipio</option>
+                    )}
+                  </select>
+                )}
+
+                {localidades.length > 0 && (
+                  <select 
+                  className={style.input}
+                  name="localidad"
+                  onChange={handleLocalChange}
+                  onBlur={formik.handleBlur}
+                  value={formik.values.localidad}
+                  >
+                    <option value="" disabled selected>
+                      Selecciona una localidad
+                    </option>
+                    {localidades.length ? (
+                      localidades.map((local) => (
+                        <option data-id={local.id} key={local.id} value={local.nombre}>
+                          {local.nombre}
+                        </option>
+                      ))
+                    ) : (
+                      <option>Selecciona una localidad</option>
+                    )}
+                  </select>
+                )}
+
+                
+                {/* <input
                   type="text"
                   className={style.input}
                   name="location"
                   onChange={formik.handleChange}
                   onBlur={formik.handleBlur}
                   value={formik.values.location}
-                />
+                /> */}
               </div>
               {formik.touched.location && formik.errors.location && (
                 <div className={style.error}>{formik.errors.location}</div>

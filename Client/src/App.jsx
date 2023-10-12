@@ -21,6 +21,7 @@ import ShoppingCart from './Components/ShoppingCart/ShoppingCart';
 import Reserva from "./Components/Reserva/Reserva";
 import Terminos from "./Views/TerminosYCondiciones/Terminos";
 import Politica from "./Views/PoliticaDePrivacidad/Politica";
+import SellerDetails from "./Views/DetailSeller/DetailSeller";
 
 
 const App = () => {
@@ -55,6 +56,7 @@ const App = () => {
         <Route path='/reserva' element={<Reserva />} />
         <Route path='/terminos-y-condiciones' element={<Terminos />} />
         <Route path='/politica-de-privacidad' element={<Politica />} />
+        <Route path='/seller/:seller_ID' element={<SellerDetails />}/>
 
       </Routes>
 

@@ -60,3 +60,12 @@ module.exports = [
         "location": "Misiones, Posadas, Centro"
     }
 ]
+
+// transformar a JS con explress
+
+// $http_origin = $_SERVER['HTTP_ORIGIN'];
+
+// if ($http_origin == "http://www.domain1.com" || $http_origin == "http://www.domain2.com" || $http_origin == "http://www.domain3.com")
+// {  
+//     header("Access-Control-Allow-Origin: $http_origin");
+// }

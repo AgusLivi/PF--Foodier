@@ -1,13 +1,6 @@
 const { User, Seller, Product, Post } = require("../db.js");
 const { Op } = require("sequelize");
 
-
-const paginate = (query, { page, pageSize }) => {
-  const offset = (page - 1) * pageSize;
-  const limit = pageSize;
-
-  return { query, offset, limit };
-};
 // Obtener todos los productos paginados y filtrados por nombre segun se requieran x query
 const getAllProducts = async (req, res) => {
 

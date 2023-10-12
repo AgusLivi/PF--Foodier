@@ -3,7 +3,7 @@ import { Card, Container, Form, FormGroup, Input } from 'reactstrap';
 import Style from "./CreateProduct.module.css"
 import uploadImage from '../../helperCloudinary/helperCloudinary';
 import { useDispatch, useSelector } from 'react-redux';
-import wave from '../../assets/wave.svg'
+
 import {
     getCategories, createProduct,
 } from '../../Redux/actions';
@@ -93,10 +93,21 @@ const Cloudinary = (props) => {
     //console.log(productPost);
     return (
             <div className={Style.container}>
- <img className={Style.wave} src={wave} alt="Wave" />
+            
+                <div className={Style.containerChilds}>
+                <FormGroup className={Style.containerChildImg}>
+                                    <Input type="file" className={Style.input} name="file" placeholder="carga tu imagen" onChange={handlerCloudinary}/>
+                                          {loading ? (
+                                        <h3>Cargando imagen...</h3>
+                                         ) : (
+                                            <div className={Style.containerImg}>    
+                                                <img src={productPost.image} alt="Producto" />
+                                            </div>
+                                         )}
+                        </FormGroup>
                 <form onSubmit={(event) => handlerCreateProduct(event)} className={Style.form}>
-                    <div className={Style.containerChilds}>
-                        <div className={Style.containerChildForm}>                    
+                    
+                                     
                                 <label htmlFor="name">Nombre producto:</label>
                                 <input type="text" name='name' value={productPost.name} placeholder='Ej: Panadería Pancho' onChange={handleOnChange}/>
         
@@ -148,19 +159,12 @@ const Cloudinary = (props) => {
                               
                                 <button type='submit' className={Style.btn}>Subir</button>
         
-                        </div>
-                        <FormGroup className={Style.containerChildImg}>
-                                    <Input type="file" className={Style.input} name="file" placeholder="carga tu imagen" onChange={handlerCloudinary}/>
-                                          {loading ? (
-                                        <h3>Cargando imagen...</h3>
-                                         ) : (
-                                            <div className={Style.containerImg}>    
-                                                <img src={productPost.image} alt="Producto" />
-                                            </div>
-                                         )}
-                        </FormGroup>
-                    </div>
+             
+                        
+                    
                 </form>
+              
+                </div>
              </div>
            
         )

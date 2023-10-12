@@ -31,7 +31,7 @@ module.exports = (sequelize) => {
         allowNull: false,
       },
       time: {
-        type: DataTypes.DATEONLY,
+        type: DataTypes.STRING,
       },
       average_rating: {
         type: DataTypes.FLOAT,
@@ -45,7 +45,7 @@ module.exports = (sequelize) => {
         type: DataTypes.STRING,
       },
       payment: {
-        type: DataTypes.ENUM("Efectivo", "Pago Online/Tarjeta"), //agregar array
+        type: DataTypes.ARRAY(DataTypes.ENUM("Efectivo", "Pago Online/Tarjeta")),
       },
       image: {
         type: DataTypes.STRING,
