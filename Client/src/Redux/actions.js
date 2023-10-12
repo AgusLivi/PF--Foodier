@@ -5,6 +5,7 @@ import {
   GET_PRODUCTS,
   SEARCH_BY_ID,
   CLEAN_DETAIL,
+  GET_SIMILAR_PRODUCTS,
 
   //user actionTypes:
   GET_USER_BY_ID,
@@ -313,6 +314,22 @@ export const createProduct = (formmData, id) => {
       alert(`${data.name} fue creado correctamente`);
     } catch (error) {
       alert('Hubo un error', error.message);
+    }
+  };
+};
+
+export const getSimilarProducts = (product_ID, categories) => {
+  return async (dispatch) => {
+    try {
+      const { data } = await axios.get(`/products/similar/${product_ID}`, {
+        params: { categories },
+      });
+      dispatch({
+        type: GET_SIMILAR_PRODUCTS,
+        payload: data,
+      });
+    } catch (error) {
+      console.error("Error al obtener productos similares:", error);
     }
   };
 };

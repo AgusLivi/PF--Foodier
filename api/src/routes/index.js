@@ -20,6 +20,7 @@ router.get("/products/:id", productController.getProductById); //busqueda por id
 router.post("/products/:seller_id", productController.createProduct); // crear productos
 router.put("/products/:productId", productController.updateProduct) // editar productos
 router.delete("/products/:product_ID", productController.deleteProduct);  // borrar productos
+router.get('/products/similar/:product_ID', productController.getSimilarProducts); // obtener productos similares
 router.get("/products/", /*fireAuth,*/productController.getAllProducts); // busqueda general, filtrado y ordenamiento
 //router.delete('/products', borradoLogico); RUTA PRUEBA DELETED
 

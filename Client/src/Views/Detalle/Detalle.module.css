@@ -1,18 +1,20 @@
 .detailContainer {
     max-width: 800px;
     margin: 0 auto;
-    padding: 20px;
+    padding: 5px;
     display: flex;
-    justify-content: flex-start;
-    align-items: flex-start;
-    text-align:start;
+    flex-direction: column;
+    align-items: center;
+    text-align: start;
+    border: 1px solid #ccc; /* Agregar un borde */
+    border-radius: 10px;
 }
 
 .detailImg {
-    max-width: 400px;
+    max-width: 450px;
     height: auto;
-    margin-right: 80px;
     border-radius: 10px;
+    margin-bottom: 10px;
     transition: transform 0.3s ease;
 }
 
@@ -33,6 +35,13 @@
   margin-bottom: 10px;
 }
 
+.buttonContainer {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    flex-wrap: nowrap; 
+}
+
 .paymentButton {
     padding: 10px 15px;
     background-color: #ff8c00;
@@ -41,9 +50,8 @@
     border-radius: 5px;
     font-size: 16px;
     cursor: pointer;
-    margin-top: 20px;
-    margin-left: 5px;
-    margin-right: 5px;
+    margin: 5px; 
+    white-space: nowrap; 
     transition: background-color 0.3s ease, box-shadow 0.3s ease;
 }
 
@@ -65,15 +73,13 @@
 
 .closeButton {
     background-color: #e74c3c;
-    padding: 10px 15px;
     color: #fff;
     border: none;
     border-radius: 5px;
     font-size: 16px;
     cursor: pointer;
+    margin: 5px;
     transition: background-color 0.3s ease, box-shadow 0.3s ease;
-    margin-left: 5px;
-    margin-top: 10px;
 }
 
 .closeButton:hover {

@@ -7,7 +7,7 @@ import store from './Redux/store.js'
 import axios from 'axios'
 
 //defino la baseURL de axios con la url del servidor en una variable de entorno
-const apiUrl = import.meta.env.VITE_REACT_APP_API_URL;
+const apiUrl = "http://localhost:3001";
 axios.defaults.baseURL = apiUrl;
 
 ReactDOM.createRoot(document.getElementById('root')).render(
