@@ -1,7 +1,7 @@
 import React, { useRef } from "react";
 import { FaBars, FaTimes ,FaHeart,FaUserAlt, FaDoorOpen,FaShoppingCart,FaMoneyBillAlt,FaStoreAlt} from "react-icons/fa";
 import styles from "./NavBar.module.css"; 
-import Logo from '../../assets/Logo.svg'
+import Logo from '../../assets/logoNaranja.png'
 import { Link } from 'react-router-dom'
 
 
@@ -14,8 +14,11 @@ function Navbar() {
 // hola
   return (
     <header>
-      <img src={Logo}alt="logo"></img>
+     
       <nav ref={navRef} className={styles.nav}> 
+      <div className={styles.containerLogo}>
+      <img src={Logo} alt="Mi logotipo" />
+      </div>
       <div className={styles.navHPF}>
         <Link to={`/home`}>
           <a><FaStoreAlt /></a>
