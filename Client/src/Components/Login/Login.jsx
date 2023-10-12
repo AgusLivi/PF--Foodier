@@ -12,20 +12,12 @@ import { FiUserCheck } from "react-icons/fi"
 import { Link } from "react-router-dom"
 import { LiaFacebookSquare } from "react-icons/lia"
 import { TbUserSearch } from "react-icons/tb"
-import logo from "../../assets/logoblanco.png"
+
 const Login = () => {
 
   return (
     <>
-    <div className={style.containerNav}>
-    <nav className={style.nav}> 
-    <Link className={style.links} to={`/`}>
-      <a className={style.navtext}><BiArrowBack/> Volver </a>
-    </Link>
-
-    <img src={Logo}alt="logo"></img>
-   </nav>
-    </div>
+ 
     
     <div className={style.body}>
       <div className={style.containerform}>
