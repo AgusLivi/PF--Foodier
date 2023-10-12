@@ -1,10 +1,12 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { createRoutesFromChildren, useNavigate } from 'react-router-dom';
 import { useFormik } from 'formik';
 import { createSeller, locationLocalidad, locationMunicipio, locationProvincia } from '../../Redux/actions';
 import { useDispatch, useSelector } from 'react-redux';
 import style from './FormComercio.module.css';
 import wave from '../../assets/wave.svg';
+import uploadImage from '../../helperCloudinary/helperCloudinary';
+import { FormGroup, Input } from 'reactstrap';
 
 const FormComercio = () => {
   const navigate = useNavigate();
@@ -14,16 +16,19 @@ const FormComercio = () => {
   const municipios = useSelector((state) => state.municipios);
   const localidades = useSelector((state) => state.localidades);
 
+  //Estados de Cloudinary
+  const [loading, setLoading] = useState(false);
+
   useEffect(() => {
     dispatch(locationProvincia());
-   }, []);
-  
-   const handleProvinciaChange = (event) => {
+  }, []);
+
+  const handleProvinciaChange = (event) => {
     const selectedProvinciaId = event.target.options[event.target.selectedIndex].getAttribute("data-id");
     dispatch(locationMunicipio(selectedProvinciaId));
 
     formik.handleChange(event)
-  }; 
+  };
 
   const handleMuniChange = (event) => {
     const selectedMunicipioId = event.target.options[event.target.selectedIndex].getAttribute("data-id");
@@ -33,7 +38,7 @@ const FormComercio = () => {
   };
 
   const handleLocalChange = (event) => {
-      formik.handleChange(event)
+    formik.handleChange(event)
   };
 
   const handlePaymentChange = (event) => {
@@ -75,7 +80,7 @@ const FormComercio = () => {
     }
   };
 
-  const  validateForm = (values) => {
+  const validateForm = (values) => {
     const errors = {};
     console.log(values);
     if (!values.name) {
@@ -148,6 +153,13 @@ const FormComercio = () => {
     validate: validateForm,
   });
 
+  const handlerCloudinary = async (event) => {
+    setLoading(true);
+    const imagenCargada = await uploadImage(event);
+    formik.setFieldValue('image', imagenCargada);
+    setLoading(false);
+  };
+  console.log('formik: ', formik);
   return (
     <div>
       <img className={style.wave} src={wave} alt="Wave" />
@@ -196,21 +208,21 @@ const FormComercio = () => {
               <div className={style.i}></div>
               <div className={style.div}>
                 <h5>Dirección</h5>
-                
-                
+
+
                 <select
                   className={style.input}
                   name="provincia"
                   onChange={handleProvinciaChange}
                   onBlur={formik.handleBlur}
                   value={formik.values.provincia}
-                  >
+                >
                   <option value="" disabled selected>
                     Selecciona una provincia
                   </option>
                   {provincias.length ? (
                     provincias.map((prov) => (
-                      <option key={prov.id} value={prov.nombre}  data-id={prov.id} >
+                      <option key={prov.id} value={prov.nombre} data-id={prov.id} >
                         {prov.nombre}
                       </option>
                     ))
@@ -221,10 +233,10 @@ const FormComercio = () => {
 
                 {municipios.length > 0 && (
                   <select className={style.input}
-                  name="municipio"
-                  onChange={handleMuniChange}
-                  onBlur={formik.handleBlur}
-                  value={formik.values.municipio}>
+                    name="municipio"
+                    onChange={handleMuniChange}
+                    onBlur={formik.handleBlur}
+                    value={formik.values.municipio}>
                     <option value="" disabled selected>
                       Selecciona un municipio
                     </option>
@@ -241,12 +253,12 @@ const FormComercio = () => {
                 )}
 
                 {localidades.length > 0 && (
-                  <select 
-                  className={style.input}
-                  name="localidad"
-                  onChange={handleLocalChange}
-                  onBlur={formik.handleBlur}
-                  value={formik.values.localidad}
+                  <select
+                    className={style.input}
+                    name="localidad"
+                    onChange={handleLocalChange}
+                    onBlur={formik.handleBlur}
+                    value={formik.values.localidad}
                   >
                     <option value="" disabled selected>
                       Selecciona una localidad
@@ -263,7 +275,7 @@ const FormComercio = () => {
                   </select>
                 )}
 
-                
+
                 <input
                   type="text"
                   className={style.input}
@@ -366,14 +378,17 @@ const FormComercio = () => {
               <div className={style.i}></div>
               <div className={style.div}>
                 <h5>Imagen</h5>
-                <input
-                  type="text"
-                  className={style.input}
-                  name="image"
-                  onChange={formik.handleChange}
-                  onBlur={formik.handleBlur}
-                  value={formik.values.image}
-                />
+                <FormGroup >
+                  <Input type="file" placeholder="carga tu imagen" onChange={handlerCloudinary} />
+                  {loading ? (
+                    <h3>Cargando imagen...</h3>
+                  ) : (
+                    formik.values.image &&
+                    <div >
+                      <img src={formik.values.image} />
+                    </div>
+                  )}
+                </FormGroup>
               </div>
               {formik.touched.image && formik.errors.image && (
                 <div className={style.error}>{formik.errors.image}</div>
