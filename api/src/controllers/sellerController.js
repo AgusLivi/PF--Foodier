@@ -1,6 +1,6 @@
 const { Seller } = require('../db.js');
 const bcrypt = require('bcrypt');    // npm install bcrypt
-const nodemailer = require('../mailing/nodemailer.js'); // Importa la configuración de nodemailer
+const nodemailer = require('../mailing/nodemailer.js').default; // Importa la configuración de nodemailer
 
 
 // Obtener todos los vendedores
