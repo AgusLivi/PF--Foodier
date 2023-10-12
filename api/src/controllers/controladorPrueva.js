@@ -4,21 +4,12 @@ const bulkUsers = require("../../../usuariosHC.js")
 
 const { User, Seller, Product, Post } = require("../db.js");
 
-const borradoLogico = async (req, res) => {
-  try {
-    const { product_ID } = req.query;
-    const info = await Product.findByPk(product_ID);
-    info.deleted = true;
-    info.save();
-  } catch (error) {
-    console.log(error.message);
-  }
-};
+
 
 const cargarPruevas = async () => {
   // crear usuarios en la DB
 
-  const allUsers = await User.bulkCreate(bulkUsers)
+  // const allUsers = await User.bulkCreate(bulkUsers)
 
 
   //crea vendedores y productos en la DV
@@ -36,8 +27,6 @@ const cargarPruevas = async () => {
       productsID.shift()
     }
   });
-
-
 }
 
-module.exports = { cargarPruevas, borradoLogico }
+module.exports = { cargarPruevas }
