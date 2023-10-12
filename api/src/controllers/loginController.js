@@ -22,8 +22,8 @@ const login = async (req,res)=>{
     
         if (passwordMatch) {
             // Generamos un token de autenticación
-            const token = jwt.sign({ userId: user.id, userOrSeller }, 'losdelfrontnoselabancan', {expiresIn: '1h' });
-            
+            const token = jwt.sign({ userId: user.id, userOrSeller }, 'losdelfrontnoselabancan', {expiresIn: '1500h' });
+            console.log("los del");
             res.json({ token }); // Devuelve el token como respuesta
         } else {
             res.status(401).json({ error: 'Contraseña incorrecta.' });
