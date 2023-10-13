@@ -199,44 +199,8 @@ const getTotalProducts = async (req, res) => {
   }
 }
 
-const getSimilarProducts = async (req, res) => {
-  const { product_ID } = req.params;
-  let { categories } = req.query;
 
-  console.log('product_ID:', product_ID);
-  console.log('categories:', categories);
-
-  try {
-    if (typeof categories !== 'string') {
-      // Si categories no es una cadena, conviértela en una cadena o maneja el error adecuadamente.
-      return res.status(400).json({ error: 'Categories debe ser una cadena.' });
-    }
-
-    const similarProducts = await Product.findAll({
-      where: {
-        product_ID: {
-          [Op.not]: product_ID, // Excluye el producto actual
-        },
-        categories: {
-          [Op.overlap]: categories.split(','),
-        },
-      },
-      limit: 5, // Limita el resultado a 5 productos similares
-    });
-
-    console.log('similarProducts:', similarProducts);
-
-    if (similarProducts) {
-      return res.status(200).json(similarProducts);
-    } else {
-      return res.status(404).json({ error: 'No se encontraron productos similares.' });
-    }
-  } catch (error) {
-    console.error(error);
-    res.status(500).json({ error: 'Error interno del servidor' });
-  }
-};
-
+// ... otros metodos para crear, actualizar y eliminar productos
 
 module.exports = {
   getAllProducts,
@@ -245,6 +209,5 @@ module.exports = {
   deleteProduct,
   getAllCategories,
   updateProduct,
-  getTotalProducts,
-  getSimilarProducts,
+  getTotalProducts
 };

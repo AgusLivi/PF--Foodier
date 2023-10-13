@@ -2,8 +2,6 @@ import { useEffect, useState } from 'react';
 import { useParams, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { cleanDetail, getProductById } from '../../Redux/actions';
-import { getSimilarProducts } from '../../Redux/actions';
-import { Carousel } from 'reactstrap';
 import styles from './Detalle.module.css';
 
 const Detalle = () => {
@@ -11,7 +9,6 @@ const Detalle = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const productDetail = useSelector((state) => state.productDetail);
-  const similarProducts = useSelector((state) => state.similarProducts);
   const [cartItems, setCartItems] = useState([]);
   console.log('pDetail:', productDetail);
 
@@ -24,12 +21,6 @@ const Detalle = () => {
     const cartItemsFromLocalStorage = JSON.parse(localStorage.getItem('cartItems')) || [];
     setCartItems(cartItemsFromLocalStorage);
   }, []);
-
-  useEffect(() => {
-    if (productDetail && productDetail.categories) {
-      dispatch(getSimilarProducts(productDetail.product_ID, productDetail.categories));
-    }
-  }, [dispatch, productDetail]);
 
   const handleClose = () => {
     navigate('/home');
@@ -90,29 +81,8 @@ return (
                     <p className={styles.detailLoading}>Cargando...</p>
                 )}
             </div>
-            {similarProducts.length > 0 && (
-            <div className="container mt-4">
-              <h3>Productos Similares</h3>
-              <Carousel>
-                {similarProducts.map((product, index) => (
-                  <Carousel.Item key={index}>
-                    <img
-                      className="d-block w-100"
-                      src={product.image}
-                      alt={product.name}
-                    />
-                    <Carousel.Caption>
-                      <h3>{product.name}</h3>
-                      <p>{product.description}</p>
-                      <p>Precio: ${product.price}</p>
-                    </Carousel.Caption>
-                  </Carousel.Item>
-                ))}
-              </Carousel>
-            </div>
-          )}
         </div>
-      );
-    };
+    );
+};
 
 export default Detalle;

@@ -4,7 +4,6 @@ import {
     GET_PRODUCTS,
     SEARCH_BY_ID,
     CLEAN_DETAIL,
-    GET_SIMILAR_PRODUCTS,
 
     //user actionTypes:
     GET_USER_BY_ID,
@@ -43,7 +42,6 @@ const initialState = {
   products: [],
   productsAmount: 0,
   productDetail:{},
-  similarProducts:[],
   sellersFav: [],
   users: [],
   getUserById: [],
@@ -226,12 +224,6 @@ const reducer = (state = initialState, { type, payload }) => {
           ...state,
           userData: payload,
       };
-    
-    case GET_SIMILAR_PRODUCTS:
-        return {
-          ...state,
-          similarProducts: payload,
-        };
 
     default:
       return state;
