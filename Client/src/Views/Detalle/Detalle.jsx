@@ -4,18 +4,17 @@ import { useDispatch, useSelector } from "react-redux";
 import { cleanDetail, getProductById } from '../../Redux/actions';
 import styles from './Detalle.module.css';
 
-const CartContext = React.createContext();
+import { CartContext } from '../../Utils/CartContext';
 
 const Detalle = () => {
   const { product_ID } = useParams();
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const productDetail = useSelector((state) => state.productDetail);
+  const cartContext = useContext(CartContext);
 
   const [cartItems, setCartItems] = useState([]);
-  const [cartCounter, setCartCounter] = useState(() => {
-    return parseInt(localStorage.getItem('cartCounter'), 10) || 0;
-  });
+
 
   useEffect(() => {
     dispatch(getProductById(product_ID));
@@ -27,9 +26,6 @@ const Detalle = () => {
     setCartItems(cartItemsFromLocalStorage);
   }, []);
 
-  useEffect(() => {
-    localStorage.setItem('cartCounter', cartCounter.toString());
-  }, [cartCounter]);
 
   const handleClose = () => {
     navigate('/home');
@@ -56,7 +52,7 @@ const Detalle = () => {
       alert('Otra vez lo vas a agregar papi?');
     } else {
       setCartItems((prevCartItems) => [...prevCartItems, productDetail]);
-      setCartCounter(cartCounter + 1);
+      cartContext.addToCart(productDetail);
       localStorage.setItem('cartItems', JSON.stringify([...cartItems, productDetail]));
       alert('Producto agregado al carrito');
     }
@@ -81,7 +77,7 @@ const Detalle = () => {
         <p className={styles.oldPrice}>Precio anterior: ${productDetail.old_price}</p>
         <p>Precio: ${productDetail.price}</p>
         <button className={styles.paymentButton} onClick={addCartHandler}>
-          Añadir al carrito ({cartCounter})
+          Añadir al carrito
         </button>
         <button className={styles.paymentButton} onClick={handleReserva}>Reservar</button>
         <button className={styles.paymentButton} onClick={handlePayment}>Pagar</button>
