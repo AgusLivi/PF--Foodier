@@ -7,7 +7,6 @@ import Login from './Components/Login/Login';
 import Landing from './Views/Landing/Landing'
 import FormUser from "./Components/FormUser/FormUser";
 import PerfilNegocio from "./Views/PerfilNegocio/PerfilNegocio";
-import Footer from "./Components/Footer/Footer";
 import Home from "./Views/Home/Home"
 import Favoritos from "./Views/Favoritos/Favoritos";
 import FormComercio from './Components/FormComercio/FormComercio';
@@ -67,12 +66,7 @@ const App = () => {
         </Routes>
       </CartProvider>
 
-      {location.pathname !== "/"
-        && location.pathname !== "/login"
-        && location.pathname !== "/formcomercio"
-        && location.pathname !== "/formuser"
-        && location.pathname !== "/userlogin"
-        && <Footer />}
+      
     </div>
   );
 }
