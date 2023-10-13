@@ -23,20 +23,24 @@ import Terminos from "./Views/TerminosYCondiciones/Terminos";
 import Politica from "./Views/PoliticaDePrivacidad/Politica";
 import SellerDetails from './Views/DetailSeller/DetailSeller';
 import { CartProvider } from './Utils/CartContext';
+import DashboardAdmin from './Views/DashboardAdmin/DasboardAdmin';
+import LoginAdmin from './Views/LoginAdmin/LoginAdmin';
 
 const App = () => {
   const location = useLocation();
   return (
     <div className="App">
       <CartProvider>
-      {location.pathname !== "/" 
-      && location.pathname !== "/login" 
-      && location.pathname !== "/formcomercio" 
-      && location.pathname !== "/formuser" 
-      && location.pathname !== "/userlogin" 
-      && <NavBar />}
+        {location.pathname !== "/"
+          && location.pathname !== "/login"
+          && location.pathname !== "/formcomercio"
+          && location.pathname !== "/formuser"
+          && location.pathname !== "/userlogin"
+          && location.pathname !== "/dashboard-admin"
+          && location.pathname !== "/login-admin"
+          && <NavBar />}
 
-    
+
         <Routes>
           <Route path='/' element={<Landing />} />
           <Route path='/profile' element={<PerfilUsuario />} />
@@ -44,29 +48,31 @@ const App = () => {
           <Route path='/login' element={<Login />} />
           <Route path='/business' element={<PerfilNegocio />} />
           <Route path='/formcomercio' element={<FormComercio />} />
-          <Route path="/userlogin" element={<SignUp/>}/>
+          <Route path="/userlogin" element={<SignUp />} />
           <Route path='/formuser' element={<FormUser />} />
           <Route path='/favoritos' element={<Favoritos />} />
           <Route path='/create' element={<CreateProduct />} />
-          <Route path='/products/:product_ID' element={<Detalle/>} />
-          <Route path='/payments/:monto/:descripcion' element={<Payment/>} />
-          <Route path="/payments/success" element={<SuccessPage/>} />
-          <Route path="/payments/pending" element={<PendingPage/>} />
-          <Route path="/payments/failure" element={<FailurePage/>} />
+          <Route path='/products/:product_ID' element={<Detalle />} />
+          <Route path='/payments/:monto/:descripcion' element={<Payment />} />
+          <Route path="/payments/success" element={<SuccessPage />} />
+          <Route path="/payments/pending" element={<PendingPage />} />
+          <Route path="/payments/failure" element={<FailurePage />} />
           <Route path='/carrito' element={<ShoppingCart />} />
           <Route path='/reserva' element={<Reserva />} />
           <Route path='/terminos-y-condiciones' element={<Terminos />} />
           <Route path='/politica-de-privacidad' element={<Politica />} />
-          <Route path='/seller/:seller_ID' element={<SellerDetails />}/>
+          <Route path='/seller/:seller_ID' element={<SellerDetails />} />
+          <Route path='/dashboard-admin' element={<DashboardAdmin />} />
+          <Route path='/login-admin' element={<LoginAdmin />} />
         </Routes>
       </CartProvider>
 
-      {location.pathname !== "/"  
-      && location.pathname !== "/login" 
-      && location.pathname !== "/formcomercio" 
-      && location.pathname !== "/formuser" 
-      && location.pathname !== "/userlogin" 
-      && <Footer />}
+      {location.pathname !== "/"
+        && location.pathname !== "/login"
+        && location.pathname !== "/formcomercio"
+        && location.pathname !== "/formuser"
+        && location.pathname !== "/userlogin"
+        && <Footer />}
     </div>
   );
 }
