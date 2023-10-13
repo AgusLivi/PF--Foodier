@@ -48,6 +48,7 @@ const Detalle = () => {
       alert('Otra vez lo vas a agregar papi?');
     } else {
       // agregamos el producto al estado local del carrito
+      productDetail.quantity = 1
       setCartItems((prevCartItems) => [...prevCartItems, productDetail]);
   
       // actualiza el localStorage con los ítems actuales del carrito

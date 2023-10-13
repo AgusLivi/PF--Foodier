@@ -18,18 +18,18 @@ function ItemCart({ item, removeFromCart, prices, setPrices, updateCartItemQuant
 
 
   const increaseQuantity = () => {
-    if (quantity < item.amount) {
-      setQuantity(quantity + 1);
-      updateCartItemQuantity(item.product_ID, quantity + 1);
+    if (item.quantity < item.amount) {
+      const newQuantity = item.quantity + 1;
+      updateCartItemQuantity(item.product_ID, newQuantity);
     }
   };
   
   const decreaseQuantity = () => {
-    if (quantity > 1) {
-      setQuantity(quantity - 1);
-      updateCartItemQuantity(item.product_ID, quantity - 1);
+    if (item.quantity > 1) {
+      const newQuantity = item.quantity - 1;
+      updateCartItemQuantity(item.product_ID, newQuantity);
     }
-  };
+  }
 
   const removeHandler = () => {
     removeFromCart(item.product_ID, item.price);
