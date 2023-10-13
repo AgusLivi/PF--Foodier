@@ -15,7 +15,7 @@ const submitForm = async (values) => {
     const userData = {
       email: values.email,
       password: values.password,
-      userOrSeller: values.userOrSeller
+      rol: values.rol
     }
 
     console.log(userData);
@@ -52,7 +52,7 @@ const formik = useFormik({
   initialValues: {
     email: '',
     password: '',
-    userOrSeller: ''
+    rol: ''
   },
   onSubmit: submitForm,
   validate: validateForm
@@ -111,9 +111,9 @@ return(
             <div className={styles.div}>
               <h5>Usuario o vendedor</h5>
               <select
-                name="userOrSeller"
+                name="rol"
                 className={styles.input} 
-                value={formik.values.userOrSeller}
+                value={formik.values.rol}
                 onChange={formik.handleChange}
                 onBlur={formik.handleBlur}
                 >
