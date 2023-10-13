@@ -3,26 +3,19 @@
     margin: 0;
     box-sizing: border-box;
     font-family: 'Montserrat', sans-serif;
-
 }
 .containerNav{
     background: #f3e2c8;
 }
-
 nav img{
   	display: flex;
 	align-items: center;
 	justify-content: space-between;
    }
-
-
-
-
 .links a{
     color: #333;
     text-decoration: none;
     font-weight: 800px;
-
     text-decoration-line: none;
 }
 .links a:hover{
@@ -33,10 +26,7 @@ nav img{
     align-items: center;
     justify-content: center;
     height: 100vh;
-    
-    
 }
-
 .containerform {
     display: flex;
     height: 100%;
@@ -45,19 +35,13 @@ nav img{
     justify-content: center;
     align-items: center;
 }
-
-
-
 .infochilds {
     width: 100%;
     padding: 0 30px;
-  
 }
-
 .infochilds h2 {
     font-size: 2.5rem;
     color: #333;
-    
 }
 .forminformation {
     box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.3);
@@ -68,9 +52,7 @@ nav img{
     height: 80%;
     position: relative;
     overflow: hidden;
-  
 }
-
 .forminformation::before{
     content: '';
     width: 80%;
@@ -89,21 +71,20 @@ nav img{
 .containerChild{
     display: flex;
     flex-direction: column;
-    width: 30%;
+    width: 50%;
+    justify-content: center;
+    align-items: center;
     position: relative;
     height: 100%;
-
 }
-
 .forminformationchilds h2 {
     color: #333;
     font-size: 2rem;
     flex:1;
 }
-
-
-
-
+.imgLogin{
+    width: 80%;
+}
 .form {
     margin: 30px 0 0 0;
     display: flex;
@@ -112,7 +93,6 @@ nav img{
     width: 100%;
     height: auto;
 }
-
 .form label {
     overflow: hidden;
     width: 100%;
@@ -124,9 +104,7 @@ nav img{
     padding: 0 30px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, .1);
     height: 3em;
-
 }
-
 .form label input {
     width: 100%;
     margin: 12px;
@@ -136,13 +114,10 @@ nav img{
     border-radius: 20px;
     color: #333;
     background-color: transparent;
-   
 }
-
 .labelone{
     background-color: #fff;
 }
-
 .labeltwo{
 background-color: #4677d8;
 }
@@ -152,12 +127,9 @@ background-color: #4677d8;
 .labelone button{
     padding: 0px 10px;
 }
-
 .labelfive{
  border-color: #f3b353;
 }
-
-
 /*Responsive Form */
 @media (max-width: 1150px) {
     .forminformation::before {
@@ -178,17 +150,14 @@ background-color: #4677d8;
         font-size: 12px;
     }
 }
-
 @media screen and (max-width: 580px) {
     html {
         font-size: 10px;
     }
-
     .containerform {
         height: auto;
         flex-direction: column;
     }
-
     .information {
         width: 100%;
         padding: 20px;
@@ -197,7 +166,6 @@ background-color: #4677d8;
         border-bottom-left-radius: 0px;
         border-bottom-right-radius: 0px;
     }
-
     .forminformation {
         width: 100%;
         padding: 20px;

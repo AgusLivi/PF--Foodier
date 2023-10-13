@@ -3,7 +3,7 @@ import React from "react";
 import style from "./Login.module.css";
 import SignInGoogle from "../../Auths/AuthGoogle/SignInGoogle";
 import SignInFacebook from "../../Auths/AuthFacebook/SignInFacebook";
-import Logo from '../../assets/Logo.svg'
+import Logo from '../../assets/imgLogin.svg'
 import { BiArrowBack } from "react-icons/bi";
 import { FcGoogle } from "react-icons/fc"
 import { BiUser } from "react-icons/bi"
@@ -24,8 +24,8 @@ const Login = () => {
         
         <div className={style.forminformation}>
         <div className={style.containerChild}>
-     
-        </div>
+          <img src={Logo} alt="img" className={style.imgLogin}></img>
+       </div>
           <div className={style.forminformationchilds}>
             <h2>Registrate o ingresá para continuar</h2>
           
