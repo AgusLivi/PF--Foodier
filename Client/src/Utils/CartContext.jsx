@@ -1,6 +1,6 @@
 import React, { createContext, useContext, useState, useCallback } from 'react';
 
-export const CartContext = createContext(); // Asegúrate de exportar el contexto con el nombre CartContext
+export const CartContext = createContext();
 
 export function useCart() {
   return useContext(CartContext);
