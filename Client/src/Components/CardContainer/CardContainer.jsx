@@ -1,11 +1,18 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Card from "../Card/card";
 import styles from "./CardContainer.module.css";
+import { getSellerById } from "../../Redux/actions";
 
 const CardContainer =  () => {
   const products =  useSelector((state) => state.products);
-  console.log(products);
+  const [selectedSeller, setSelectedSeller] = useState(null)
+  useEffect(() => {
+    if (selectedSeller) {
+      // Realiza la solicitud GET a la URL con selectedSeller
+      dispatch(getSellerById(selectedSeller));
+    }
+  }, [selectedSeller]);
 
   return (
     <div className={styles.cardContainer}>
@@ -24,6 +31,8 @@ const CardContainer =  () => {
             amount={product.amount}
             date={product.date}
             product_ID={product.product_ID}
+            seller_ID={product.SellerSellerID}
+            onSellerClick={(seller_ID) => setSelectedSeller(seller_ID)}
           />
         ))
       )}

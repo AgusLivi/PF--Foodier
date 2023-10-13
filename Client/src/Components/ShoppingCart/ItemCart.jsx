@@ -1,8 +1,10 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import styles from './ItemCart.module.css';
+import { CartContext } from '../../Utils/CartContext';
 
 function ItemCart({ item, removeFromCart, prices, setPrices, updateCartItemQuantity }) {
-  const [quantity, setQuantity] = useState(item.amount > 0 ? 1 : 0);
+  const [quantity, setQuantity] = useState(item.amount);
+  const cartContext = useContext(CartContext);
 
   useEffect(() => {
     // Actualiza el precio en función de la cantidad seleccionada
@@ -33,6 +35,7 @@ function ItemCart({ item, removeFromCart, prices, setPrices, updateCartItemQuant
 
   const removeHandler = () => {
     removeFromCart(item.product_ID, item.price);
+    cartContext.removeCounter();
   };
 
   return (

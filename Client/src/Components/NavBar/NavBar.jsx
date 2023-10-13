@@ -3,10 +3,11 @@ import { FaBars, FaTimes ,FaHeart,FaUserAlt, FaDoorOpen,FaShoppingCart,FaMoneyBi
 import styles from "./NavBar.module.css"; 
 import Logo from '../../assets/logoNaranja.png'
 import { Link } from 'react-router-dom'
-
+import { useCart } from '../../Utils/CartContext';
 
 function Navbar() {
   const navRef = useRef();
+  const { cartCounter } = useCart(); // Utiliza useCart para acceder al contexto
 
   const showNavbar = () => {
     navRef.current.classList.toggle(styles.responsive_nav); 
@@ -35,7 +36,8 @@ function Navbar() {
         <a><FaMoneyBillAlt /></a>
         </Link>
         <Link to={`/carrito`}>
-        <a><FaShoppingCart /></a>
+        <a><FaShoppingCart />{cartCounter}</a>
+        
         </Link>
         <Link to={'/'}>
           <a><FaDoorOpen/></a>

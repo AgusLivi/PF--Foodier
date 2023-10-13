@@ -3,12 +3,21 @@ const { Op } = require("sequelize");
 
 // Obtener todos los productos paginados y filtrados por nombre segun se requieran x query
 const getAllProducts = async (req, res) => {
-
-  let { categories, address, average_rating, payment, order, orderBy, page, pageSize, name } = req.query;
-  address ? address = address.replace(/,/g, ', ') : address
+  let {
+    categories,
+    address,
+    average_rating,
+    payment,
+    order,
+    orderBy,
+    page,
+    pageSize,
+    name,
+  } = req.query;
+  address ? (address = address.replace(/,/g, ", ")) : address;
   try {
     // Filtra por categoría exacta en la tabla 'products'
-    console.log(address)
+    console.log(address);
     let filterConditions = { deleted: false };
     if (categories != null && categories != "") {
       const categoriesArray = categories.split(",");
@@ -32,7 +41,7 @@ const getAllProducts = async (req, res) => {
 
     if (address != null && address != "") {
       sellerFilterConditions.address = {
-        [Op.iLike]: `%${address}%`
+        [Op.iLike]: `%${address}%`,
       };
     }
 
@@ -49,21 +58,18 @@ const getAllProducts = async (req, res) => {
 
     // hace la peticion teniendo en cuenta los query q se envian
     if (page || pageSize) {
-      const filteredProducts = await Product.findAndCountAll(
-        {
-          where: filterConditions,
-          order: ordenamiento,
-          include: [
-            {
-              model: Seller,
-              where: sellerFilterConditions,
-            },
-          ],
-          offset: (page - 1) * pageSize,
-          limit: pageSize
-        },
-      )
-        ;
+      const filteredProducts = await Product.findAndCountAll({
+        where: filterConditions,
+        order: ordenamiento,
+        include: [
+          {
+            model: Seller,
+            where: sellerFilterConditions,
+          },
+        ],
+        offset: (page - 1) * pageSize,
+        limit: pageSize,
+      });
       return res.status(200).json(filteredProducts);
     } else {
       const filteredProducts = await Product.findAndCountAll({
@@ -71,7 +77,7 @@ const getAllProducts = async (req, res) => {
         include: [
           {
             model: Seller,
-            where: sellerFilterConditions
+            where: sellerFilterConditions,
           },
         ],
         where: filterConditions,
@@ -85,7 +91,6 @@ const getAllProducts = async (req, res) => {
 
 // Obtener un producto por ID
 const getProductById = async (req, res) => {
-
   const { id } = req.params;
 
   try {
@@ -96,34 +101,47 @@ const getProductById = async (req, res) => {
         },
       ],
     });
+
     if (product) {
       return res.status(200).json(product);
     } else {
       throw new Error("Producto no encontrado.");
     }
   } catch (error) {
-    res.status(400).json("Error al obtener el producto.")
+    res.status(400).json("Error al obtener el producto.");
   }
 };
 
 // Post de productos
 const createProduct = async (req, res) => {
-  const { name, description, price, old_price, categories, image, amount } = req.body;
-  const { seller_id } = req.params; // sacamos el ID del vendedor con params
-  try {
-    const newProduct = await Product.create({
-      // creamos el nuevo producto en la base de datos
-      name,
-      description,
-      price,
-      old_price,
-      categories,
-      image,
-      amount,
-    });
+  const login = req.user;
+  if (!login) return res.status(401).json("Debe tener una cuenta para acceder");
+  if (login.rol !== "seller")
+    return res.status(401).json("Debe acceder como vendedor");
 
-    const seller = await Seller.findByPk(seller_id); // agregamos la relación entre el producto y el vendedor
-    await seller.addProduct(newProduct)
+  const { name, description, price, old_price, categories, image, amount } =
+    req.body;
+  try {
+    const [newProduct, created] = await Product.findOrCreate({
+      where: {
+        SellerSellerID: login.id,
+        name,
+        description,
+        price,
+        old_price,
+        categories,
+        image,
+        amount,
+      },
+      default: {
+        name,
+      },
+    });
+    
+    if (!created) return res.status(300).json("ya existe este producto")
+
+    const seller = await Seller.findByPk(login.id); // agregamos la relación entre el producto y el vendedor
+    await seller.addProduct(newProduct);
 
     return res.status(201).json(newProduct);
   } catch (error) {
@@ -132,17 +150,35 @@ const createProduct = async (req, res) => {
 };
 
 const updateProduct = async (req, res) => {
-  const { name, description, price, old_price, categories, image, amount } = req.body;
-  const { productId } = req.params; // id del producto por params
-
   try {
+    const seller = req.user;
 
-    const product = await Product.findByPk(productId); // producto por su ID en la base de datos
+    const { name, description, price, old_price, categories, image, amount } =
+      req.body;
+    const { productId } = req.params; // id del producto por params
+    const product = await Product.findByPk(productId, {
+      include: [
+        {
+          model: Seller,
+        },
+      ],
+    }); // producto por su ID en la base de datos
+
+    if (product.Sellerseller_ID !== seller.id)
+      return res.status(401).json("Usted no esta autorizado para modificar");
 
     if (!product) {
       return res.status(404).json({ error: "Producto no encontrado" });
     }
 
+    if (seller.rol === "user") {
+      product.amount = product.amount - amount;
+      if (product.amount <= 0) {
+        product.deleted = true;
+      }
+    }
+    if (seller.rol !== "seller")
+      return res.status(401).json("Usted no esta autorizado para modificar");
     // actualizamos los campos del producto con los nuevos valores
     product.name = name;
     // product.date = date;
@@ -151,9 +187,9 @@ const updateProduct = async (req, res) => {
     product.old_price = old_price;
     product.categories = categories;
     product.image = image;
-    product.amount = amount;
 
     // guardamos los cambios en la base de datos
+
     await product.save();
 
     return res.status(200).json(product);
@@ -165,40 +201,72 @@ const updateProduct = async (req, res) => {
 
 const deleteProduct = async (req, res) => {
   try {
-    const { product_ID } = req.params;
+    const seller = req.user;
+    if (seller.rol !== "seller")
+      res.status(401).json("Usted no esta autorizado para modificar");
+    const { product_ID } = req.body;
     const info = await Product.findByPk(product_ID);
+    if (info.Sellerseller_ID !== seller.id)
+      return res.status(401).json("Usted no esta autorizado para modificar");
     info.deleted = true;
     info.save();
-    return res.status(200).send(`producto ${product_ID} eliminado correctamente`);
+    return res
+      .status(200)
+      .send(`producto ${info.name} eliminado correctamente`);
   } catch (error) {
-    res.status(400).json('Algo salio mal con la eliminacion del producto');
+    res.status(400).json("Algo salio mal con la eliminacion del producto");
   }
 };
 
 const getAllCategories = async (req, res) => {
   try {
-
-    const categorias = ["Acompañamientos", "Americana", "Aperitivos", "Argentina", "Bebidas", "Cafeterias", "Carnes", "Chocolates", "Congelados", "Desayunos/Meriendas",
-      "Empanadas", "Ensaladas", "Española", "Fiambres y Embutidos", "Frutas y Verduras", "Hamburguesas", "Helados", "Italiana", "Japonesa", "Lacteos/Quesos",
-      "Mexicana", "Milanesas", "Panaderia", "Papas Fritas", "Parrilla", "Pastas", "Pescados", "Peruana", "Picadas", "Pizzas", "Pollo", "Postres",
-      "Sushi", "Saludable", "Sandwiches", "Sopas", "Tartas", "Tortillas", "Vegetariano/Vegano"];
+    const categorias = [
+      "Acompañamientos",
+      "Americana",
+      "Aperitivos",
+      "Argentina",
+      "Bebidas",
+      "Cafeterias",
+      "Carnes",
+      "Chocolates",
+      "Congelados",
+      "Desayunos/Meriendas",
+      "Empanadas",
+      "Ensaladas",
+      "Española",
+      "Fiambres y Embutidos",
+      "Frutas y Verduras",
+      "Hamburguesas",
+      "Helados",
+      "Italiana",
+      "Japonesa",
+      "Lacteos/Quesos",
+      "Mexicana",
+      "Milanesas",
+      "Panaderia",
+      "Papas Fritas",
+      "Parrilla",
+      "Pastas",
+      "Pescados",
+      "Peruana",
+      "Picadas",
+      "Pizzas",
+      "Pollo",
+      "Postres",
+      "Sushi",
+      "Saludable",
+      "Sandwiches",
+      "Sopas",
+      "Tartas",
+      "Tortillas",
+      "Vegetariano/Vegano",
+    ];
 
     res.json(categorias);
   } catch (error) {
-    res.status(500).json({ mensaje: 'Error interno del servidor' });
+    res.status(500).json({ mensaje: "Error interno del servidor" });
   }
-}
-
-const getTotalProducts = async (req, res) => {
-  try {
-    const tota = await Product.count()
-    console.log(tota);
-    res.json(tota)
-  } catch (error) {
-    res.status(500).json({ mensaje: 'Error interno del servidor' });
-  }
-}
-
+};
 
 // ... otros metodos para crear, actualizar y eliminar productos
 
@@ -209,5 +277,4 @@ module.exports = {
   deleteProduct,
   getAllCategories,
   updateProduct,
-  getTotalProducts
 };

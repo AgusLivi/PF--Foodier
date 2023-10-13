@@ -5,7 +5,7 @@ import { createPost } from '../../Redux/actions';
 
 function Comments({user_ID, seller_ID }) {
   const [rating, setRating] = useState(0);
-  const [comment, setComment] = useState('');
+  const [comments, setComment] = useState('');
 
   const dispatch = useDispatch()
   
@@ -20,15 +20,15 @@ function Comments({user_ID, seller_ID }) {
   const handleSubmit = (event) => {
     event.preventDefault();
 
-    if (rating > 0 && comment.trim() !== '') {
+    if (rating > 0 && comments.trim() !== '') {
       // Aquí puedes enviar los datos del comentario y la valoración al servidor o a algún otro lugar donde los almacenes.
       const newComment = {
         user_ID,
         seller_ID,
-        comment,
+        comments,
         rating,
       };
-
+      console.log(newComment);
       dispatch(createPost(newComment))
 
       setRating(0);
@@ -55,7 +55,7 @@ function Comments({user_ID, seller_ID }) {
             rows="4"
             cols="50"
             placeholder="Escribe tu comentario..."
-            value={comment}
+            value={comments}
             onChange={handleCommentChange}
           ></textarea>
         </div>
