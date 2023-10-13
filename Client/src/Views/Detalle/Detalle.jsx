@@ -51,6 +51,8 @@ const Detalle = () => {
     if (productAlreadyExists) {
       alert('Otra vez lo vas a agregar papi?');
     } else {
+      // agregamos el producto al estado local del carrito
+      productDetail.quantity = 1
       setCartItems((prevCartItems) => [...prevCartItems, productDetail]);
       cartContext.addToCart(productDetail);
       localStorage.setItem('cartItems', JSON.stringify([...cartItems, productDetail]));
