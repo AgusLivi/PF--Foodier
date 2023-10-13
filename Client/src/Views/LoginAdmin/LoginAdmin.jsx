@@ -1,63 +1,39 @@
-import React, { useState } from "react";
+import React from "react";
 import { useDispatch } from "react-redux";
 import { login } from "../../Redux/actions";
 import { useNavigate } from "react-router-dom";
+import { Formik, Form, Field } from "formik";
+
+const initialValues = {
+  email: "",
+  password: "",
+  rol: "admin",
+};
 
 const LoginAdmin = () => {
-    const [formAdmin, setFormAdmin] = useState({
-        email: '',
-        password: '',
-        rol: 'admin'
-    });
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
-    const dispatch = useDispatch();
-    const navigate = useNavigate();
+  const handleSubmit = (values) => {
+    dispatch(login(values));
+    navigate("/dashboard-admin");
+  };
 
-    const handleInputOnChange = (event) => {
-        const { name, value } = event.target
-        setFormAdmin({
-            ...formAdmin,
-            [name]: value
-        });
-    };
+  return (
+    <div>
+      <Formik initialValues={initialValues} onSubmit={handleSubmit}>
+        <Form>
+          <label htmlFor="email">Email: </label>
+          <Field type="text" name="email" />
 
-    const handleSubmit = () => {
-        dispatch(login(userData));
-        navigate('/dashboard-admin');
-    };
+          <label htmlFor="password">Password: </label>
+          <Field type="text" name="password" />
 
-    console.log('form: ', formAdmin);
-    return (
-        <div>
-            <form onSubmit={handleSubmit}>
-                <label htmlFor="email">
-                    Email: {' '}
-                </label>
-                <input
-                    type='text'
-                    name='email'
-                    value={formAdmin.email}
-                    onChange={handleInputOnChange}
-                />
-
-                <label htmlFor="password">
-                    Password: {' '}
-                </label>
-                <input
-                    type='text'
-                    name='password'
-                    value={formAdmin.password}
-                    onChange={handleInputOnChange}
-                />
-
-                <button
-                    type="submit"
-                >
-                    Send
-                </button>
-            </form>
-        </div>
-    );
-}
+          <button type="submit">Send</button>
+        </Form>
+      </Formik>
+    </div>
+  );
+};
 
 export default LoginAdmin;
