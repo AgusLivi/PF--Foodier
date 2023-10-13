@@ -56,6 +56,7 @@ const App = () => {
           <Route path='/reserva' element={<Reserva />} />
           <Route path='/terminos-y-condiciones' element={<Terminos />} />
           <Route path='/politica-de-privacidad' element={<Politica />} />
+          <Route path='/seller/:seller_ID' element={<SellerDetails />}/>
         </Routes>
       </CartProvider>
 
