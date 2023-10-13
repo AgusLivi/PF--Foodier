@@ -391,21 +391,22 @@ export const login = (formData) => {
 
       // Si se recibe un token, puedes almacenarlo en el estado global o en el almacenamiento local
       // para mantener al usuario autenticado
-      if (token) {
-        dispatch(setAuthToken(token));
-        dispatch(loginSuccess(formData));
-      } else {
-        // Maneja errores de inicio de sesión específicos
-        if (error === "InvalidPassword") {
-          alert("Contraseña incorrecta");
-        } else if (error === "UserNotFound") {
-          alert("Usuario no encontrado");
-        } else {
-          alert("Error desconocido en el inicio de sesión");
-        }
-      }
+      // if (token) {
+      //   dispatch(setAuthToken(token));
+      //   dispatch(loginSuccess(formData));
+      // } else {
+      //   // Maneja errores de inicio de sesión específicos
+      //   if (error === "InvalidPassword") {
+      //     alert("Contraseña incorrecta");
+      //   } else if (error === "UserNotFound") {
+      //     alert("Usuario no encontrado");
+      //   } else {
+      //     alert("Error desconocido en el inicio de sesión");
+      //   }
+      // }
+      localStorage.setItem("token" ,token)
 
-      alert(`Inicio de sesión exitoso ${data}`);
+      // alert(`Inicio de sesión exitoso ${data}`);
     } catch (error) {
       alert("Error al iniciar sesión" + error.message);
     }
