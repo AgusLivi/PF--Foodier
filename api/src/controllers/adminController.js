@@ -1,4 +1,4 @@
-const { Seller, User } = require("../db.js");
+const { Seller, User, Product } = require("../db.js");
 
 // Obtener todos los vendedores
 const getAllSellers = async (req, res) => {
@@ -32,5 +32,50 @@ const getAllUsers = async (req, res) => {
     res.status(500).json({ error: "Error al obtener los usuarios." });
   }
 };
+//borrado logico de user
+const deleteUser = async (req, res) => {
+  const { user_ID } = req.params;
+  if (!user_ID) return res.status(401).json("Seleccione un usuario")
+  try {
 
-module.exports = { getAllSellers, getAllUsers };
+      const info = await User.findByPk(user_ID);
+      info.deleted = true;
+      info.save();
+      return res
+        .status(200)
+        .send(`usuario ${info.name} eliminado correctamente`);
+  } catch (error) {
+    res.status(400).json("Algo salio mal con la eliminacion del usuario");
+  }
+};
+
+//borrado logico de seller
+const deleteSeller = async (req, res) => {
+  const { seller_ID } = req.params
+  if (!seller_ID) return res.status(401).json("Seleccione un vendedor")
+  try {
+
+
+    const info = await Seller.findByPk(seller_ID
+    //    {
+    //   include: [
+    //     {
+    //       model: Product,
+    //     },
+    //   ],
+    // }
+    );
+    console.log("info del seller",info);
+    if (!info) return res.status(404).json("vendedor no encontrado");
+    info.deleted = true;
+    info.save();
+    return res
+      .status(200)
+      .send(`vendedor ${info.name} eliminado correctamente`);
+  } catch (error) {
+    res.status(400).json("Algo salio mal con lla eliminacion del vendedor");
+  }
+};
+
+
+module.exports = { getAllSellers, getAllUsers, deleteUser, deleteSeller };
