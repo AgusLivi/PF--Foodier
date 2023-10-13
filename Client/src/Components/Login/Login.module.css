@@ -114,6 +114,7 @@ nav img{
 }
 
 .form label {
+    overflow: hidden;
     width: 100%;
     display: flex;
     align-items: center;
@@ -158,7 +159,20 @@ background-color: #4677d8;
 
 
 /*Responsive Form */
-
+@media (max-width: 1150px) {
+    .forminformation::before {
+        visibility: hidden;
+    }
+    .forminformationchilds{
+        margin: 0 auto;
+    }
+    .containerChild{
+        display: none;
+    }
+    .form label{
+        height: 2em;
+    }
+}
 @media screen and (max-width: 750px) {
     html {
         font-size: 12px;
