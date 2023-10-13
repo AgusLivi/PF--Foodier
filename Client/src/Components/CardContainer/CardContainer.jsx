@@ -1,11 +1,12 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Card from "../Card/card";
 import styles from "./CardContainer.module.css";
+import { getSellerById } from "../../Redux/actions";
 
 const CardContainer =  () => {
   const products =  useSelector((state) => state.products);
-  console.log(products);
+  const [selectedSeller, setSelectedSeller] = useState(null)
 
   return (
     <div className={styles.cardContainer}>
@@ -24,6 +25,8 @@ const CardContainer =  () => {
             amount={product.amount}
             date={product.date}
             product_ID={product.product_ID}
+            seller_ID={product.seller_ID}
+            onSellerClick={(sellerID) => setSelectedSeller(sellerID)}
           />
         ))
       )}
