@@ -21,9 +21,14 @@ import ShoppingCart from './Components/ShoppingCart/ShoppingCart';
 import Reserva from "./Components/Reserva/Reserva";
 import Terminos from "./Views/TerminosYCondiciones/Terminos";
 import Politica from "./Views/PoliticaDePrivacidad/Politica";
+<<<<<<< HEAD
 import { CartProvider } from './Utils/CartContext';
 import SellerDetails from "./Views/DetailSeller/DetailSeller";
 
+=======
+import SellerDetails from './Views/DetailSeller/DetailSeller';
+import { CartProvider } from './Utils/CartContext';
+>>>>>>> e8d931aabf3f72383604d4ceb37108be7c848b21
 
 const App = () => {
   const location = useLocation();
