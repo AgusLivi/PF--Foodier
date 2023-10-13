@@ -7,6 +7,12 @@ import { getSellerById } from "../../Redux/actions";
 const CardContainer =  () => {
   const products =  useSelector((state) => state.products);
   const [selectedSeller, setSelectedSeller] = useState(null)
+  useEffect(() => {
+    if (selectedSeller) {
+      // Realiza la solicitud GET a la URL con selectedSeller
+      dispatch(getSellerById(selectedSeller));
+    }
+  }, [selectedSeller]);
 
   return (
     <div className={styles.cardContainer}>
@@ -25,8 +31,8 @@ const CardContainer =  () => {
             amount={product.amount}
             date={product.date}
             product_ID={product.product_ID}
-            seller_ID={product.seller_ID}
-            onSellerClick={(sellerID) => setSelectedSeller(sellerID)}
+            seller_ID={product.SellerSellerID}
+            onSellerClick={(seller_ID) => setSelectedSeller(seller_ID)}
           />
         ))
       )}
