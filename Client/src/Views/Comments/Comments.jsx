@@ -28,7 +28,7 @@ function Comments({user_ID, seller_ID }) {
         comments,
         rating,
       };
-
+      console.log(newComment);
       dispatch(createPost(newComment))
 
       setRating(0);

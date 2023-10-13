@@ -26,7 +26,7 @@ const SellerDetails = () => {
 
 
         <div>
-          <CommentSection/>
+          <CommentSection seller_ID={seller_ID}/>
         </div>
       </div>
   
