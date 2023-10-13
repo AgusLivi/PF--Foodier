@@ -33,16 +33,18 @@ const getPostById = async (req, res) => {
 // ... otros métodos para crear, actualizar y eliminar posteos
 
 const createPost = async (req, res) => {
-  const { user_ID, seller_ID, comment, valoration } = req.body;
+  const { user_ID, seller_ID, comments, rating } = req.body;
+
+  console.log(user_ID, seller_ID, comments, rating);
   try {
-    if (!user_ID || !seller_ID || !valoration) res.status(400).json("faltan datos")
+    if (!user_ID || !seller_ID || !rating) res.status(400).json("faltan datos")
 
     const findUser = await User.findByPk(user_ID);
     const findSeller = await Seller.findByPk(seller_ID)
-    findSeller.valoration = [...findSeller.valoration, valoration]
+    findSeller.rating = [...findSeller.rating, rating]
     await findSeller.save()
 
-    const newPost = await Post.create({ comentario: comment });
+    const newPost = await Post.create({ comments: comments });
 
     await findUser.addPost(newPost)
     await findSeller.addPost(newPost)
