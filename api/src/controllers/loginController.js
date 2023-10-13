@@ -12,12 +12,15 @@ const login = async (req, res) => {
     switch (rol) {
       case "user":
         user = await User.findOne({ where: { email } });
+        if (user.deleted) return res.status(403).json("Este email se encuetra inhabilitado")
         break;
       case "admin":
-        user = await User.findOne({ where: { email, admin: true } });
+        user = await User.findOne({ where: { email } });
+        if (!user.admin) return res.status(401).json("Usted no cuenta con permisos de adminitrador")
         break;
       case "seller":
         user = await Seller.findOne({ where: { email } });
+        if (user.deleted) return res.status(403).json("Este email se encuetra inhabilitado")
         break;
       default:
         return res.status(400).json({ error: "Tipo de usuario no válido." });

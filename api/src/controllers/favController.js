@@ -26,10 +26,12 @@ const addFavorites = async (req, res) => {
 // Controlador para obtener la lista de vendedores favoritos de un usuario
 const getFavorites = async (req, res) => {
   try {
-    const { user_ID } = req.params; // Obtengo el id del usuario
+    const userlog = req.user;
+    
+    // const { user_ID } = req.params; // Obtengo el id del usuario
 
     // Obtener la lista de vendedores favoritos del usuario utilizando Sequelize
-    const user = await User.findByPk(user_ID, {
+    const user = await User.findByPk(userlog.id, {
       include: [{ model: Seller, through: 'Fav' }],
     });
 

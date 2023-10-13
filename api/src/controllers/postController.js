@@ -49,7 +49,6 @@ const createPost = async (req, res) => {
     await findUser.addPost(newPost)
     await findSeller.addPost(newPost)
 
-
     res.json("posteado")
 
   } catch (error) {
