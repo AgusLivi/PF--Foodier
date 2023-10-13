@@ -55,16 +55,5 @@ module.exports = (sequelize) => {
         defaultValue: false,
       }
     },
-    {
-      // hoock para q la valoracion promedio se defina cada vez q algien actualiza el modelo
-      hooks: {
-        afterSave: (seller, option) => {
-          let total = 0;
-          seller.rating.forEach((star) => (total = total + star));
-          let promedio = total / seller.rating.length || 0
-          seller.setDataValue("valoracionPromedio", promedio)
-        },
-      },
-    }
   );
 };

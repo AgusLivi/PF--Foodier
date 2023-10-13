@@ -1,27 +1,26 @@
-const { Seller } = require("../db.js");
+const { Seller, Product } = require("../db.js");
 const bcrypt = require("bcrypt"); // npm install bcrypt
 const nodemailer = require("../mailing/nodemailer.js").default; // Importa la configuración de nodemailer
-const jwt = require("jsonwebtoken"); // npm install jsonwebtoken
-const { JWT_SECRET } = process.env;
 
 // Obtener un vendedor por ID
 const getSellerById = async (req, res) => {
-  const { token } = req.headers;
-  if (!token)
-    return res.status(401).json("Debe tener una cuenta para acceder");
-  const decode = jwt.verify(token, JWT_SECRET);
-  if (decode.rol !== "seller")
-    return res.status(401).json("Debe acceder como vendedor");
   try {
-    const seller = await Seller.findByPk(decode.id);
+   const {seller_ID} = req.params
+    const seller = await Seller.findByPk(seller_ID, {
+      include: [
+        {
+          model: Product,
+        },
+      ],
+    });
     if (seller) {
-      res.json(seller);
+      return res.json(seller);
     } else {
-      res.status(404).json({ error: "Vendedor no encontrado." });
+      return res.status(404).json({ error: "Vendedor no encontrado." });
     }
   } catch (error) {
     console.error(error);
-    res.status(500).json({ error: "Error al obtener el vendedor." });
+    return res.status(500).json({ error: "Error al obtener el vendedor." });
   }
 };
 
@@ -44,36 +43,30 @@ const createSeller = async (req, res) => {
         image,
       },
       default: {
-        name,
         email,
-        password: hashedPassword,
-        address,
-        time,
-        contact,
-        payment,
-        image,
       },
     });
-    if(created) return res.status(400).json("ya existe un vendedor con ese email");
+    if (!created)
+      return res.status(400).json("ya existe un vendedor con ese email");
     // Configura el correo electrónico de bienvenida
-    const mailOptions = {
-      from: "tu_correo@outlook.com", // Cambia esto a tu dirección de correo
-      to: email, // Utiliza la dirección de correo electrónico del vendedor registrado
-      subject: "Bienvenido a Foodier",
-      html: `<p>Bienvenido ${name} a Foodier.</p><p>Gracias por registrarte como vendedor.</p>`,
-    };
+    // const mailOptions = {
+    //   from: "tu_correo@outlook.com", // Cambia esto a tu dirección de correo
+    //   to: email, // Utiliza la dirección de correo electrónico del vendedor registrado
+    //   subject: "Bienvenido a Foodier",
+    //   html: `<p>Bienvenido ${name} a Foodier.</p><p>Gracias por registrarte como vendedor.</p>`,
+    // };
 
-    // Envía el correo electrónico de bienvenida
-    nodemailer.sendMail(mailOptions, (error, info) => {
-      if (error) {
-        console.error(
-          "Error al enviar el correo electrónico de bienvenida:",
-          error
-        );
-      } else {
-        console.log("Correo electrónico de bienvenida enviado:", info.response);
-      }
-    });
+    // // Envía el correo electrónico de bienvenida
+    // nodemailer.sendMail(mailOptions, (error, info) => {
+    //   if (error) {
+    //     console.error(
+    //       "Error al enviar el correo electrónico de bienvenida:",
+    //       error
+    //     );
+    //   } else {
+    //     console.log("Correo electrónico de bienvenida enviado:", info.response);
+    //   }
+    // });
 
     res.status(201).json(newSeller);
   } catch (error) {
@@ -81,21 +74,22 @@ const createSeller = async (req, res) => {
       res.status(400).json({ error: "El email ya está registrado." });
     } else {
       console.error(error);
-      res
-        .status(500)
-        .json({
-          error: "Error al crear el vendedor.",
-          errorMessage: error.message,
-        });
+      res.status(500).json({
+        error: "Error al crear el vendedor.",
+        errorMessage: error.message,
+      });
     }
   }
 };
 // Controlador para actualizar los datos de un vendedor
 const updateSeller = async (req, res) => {
   try {
-    const { seller_ID } = req.params;
-    const updatedData = req.body;
-    const seller = await Seller.findByPk(seller_ID);
+    const login = req.user;
+    if (!login)
+      return res.status(401).json("Debe tener una cuenta para acceder");
+    if (login.rol !== "seller")
+      return res.status(401).json("Debe acceder como vendedor");
+    const seller = await Seller.findByPk(login.id);
 
     if (seller) {
       // Actualizar los datos del vendedor con los nuevos datos proporcionados
@@ -139,13 +133,28 @@ const updateSeller = async (req, res) => {
 
 const deleteSeller = async (req, res) => {
   try {
-    const { seller_ID } = req.params;
-    const info = await Seller.findByPk(seller_ID);
+    const login = req.user;
+    if (!login)
+      return res.status(401).json("Debe tener una cuenta para acceder");
+    if (login.rol !== "seller")
+      return res.status(401).json("Debe acceder como vendedor");
+    const info = await Seller.findByPk(login.id, {
+      include: [
+        {
+          model: Product,
+        },
+      ],
+    });
+    if (!info) return res.status(404).json("vendedor no encontrado");
+    info.Products.map(async (prod) => {
+      prod.deleted = true;
+      await Product.save()
+    });
     info.deleted = true;
     info.save();
     return res
       .status(200)
-      .send(`vendedor ${seller_ID} eliminado correctamente`);
+      .send(`vendedor ${info.name} eliminado correctamente`);
   } catch (error) {
     res.status(400).json("Algo salio mal con la eliminacion del vendedor");
   }

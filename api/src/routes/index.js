@@ -36,8 +36,8 @@ router.use(JWTMiddleware)
 
 // Rutas de productos
 router.delete("/products/:product_ID", productController.deleteProduct);  // borrar productos/ seller
-router.post("/products/:seller_id", productController.createProduct); // crear productos/ seller
 router.put("/products/:productId", productController.updateProduct) // editar productos /seller y user
+router.post("/products", productController.createProduct); // seller
 
 // Rutas para gestionar publicaciones
 router.post('/posts', postController.createPost); // user
@@ -46,15 +46,14 @@ router.delete('/posts/:post_ID') // user / admin
 
 // Rutas relacionadas a los usuarios
 router.put("/users/", userController.updateUser); //user
-router.delete("/users/", userController.deleteUser); //admin (borrado definitivo) / user y admin (borrado logico)
+router.delete("/users/", userController.deleteUser); // user
 router.get("/users/", userController.getUserById); //user
 router.get("/users/:admin_id", adminControler.getAllUsers);// admin
 
 // Rutas relacionadas a los vendedores
-
 router.put('/sellers/:seller_ID', sellerController.updateSeller); // seller
-router.delete('/sellers/:seller_ID', sellerController.deleteSeller); // admin (borrado definitivo) / seller
-router.get('/sellers', adminControler.getAllSellers); // admin
+router.delete('/sellers/:seller_ID', sellerController.deleteSeller); /// seller
+
 
 // Rutas de favoritos
 router.post('/favorites', favController.addFavorites); //user
@@ -62,5 +61,9 @@ router.get('/favorites/:user_ID', favController.getFavorites); //user
 
 // Rutas de pagos
 router.post('/payments', paymentController.createPayment); // user
+
+// Rutas de admin
+router.get('/admin/sellers', adminControler.getAllSellers); // admin
+
 
 module.exports = router; 
