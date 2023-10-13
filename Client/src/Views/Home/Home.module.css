@@ -156,6 +156,7 @@
   flex-direction: column;
   justify-content: space-between;
   position: relative;
+ 
 }
 
 .searchBar {
@@ -163,8 +164,10 @@
   margin: 0 auto;
   display: flex;
   justify-content: center;
- background-color: #fff;
- position: fixed;
+  background-color: #fff;
+  position: fixed;
+  z-index: 10;
+
 }
 .searchBar label {
   display: flex;
@@ -222,7 +225,7 @@
 .containerPost {
   display: flex;
   flex-direction: column;
-  margin: 0 auto;
+  margin: 60px auto;
   width: 80%;
   flex: 3; /* El div central ocupará más espacio que los otros dos */
 
