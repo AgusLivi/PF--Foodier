@@ -2,10 +2,13 @@ import React from 'react';
 import styles from "./card.module.css";
 import { Link } from "react-router-dom"
 import { FaHeart } from 'react-icons/fa';
-const Card = ({ name, description, price, old_price, image, amount, date, product_ID, seller_ID, onSellerClick  }) => {
+
+
+const Card = ({ name, description, price, old_price, image, amount, date, product_ID, seller_ID, onSellerClick, sellerImage  }) => {
   const dateSplit = date.split("T")
   const dateOk = dateSplit[0]
-  
+
+  console.log(sellerImage);
   return (
     <div key={product_ID} className={styles.card}>
       <div className={styles.love}><FaHeart/></div>
@@ -22,6 +25,7 @@ const Card = ({ name, description, price, old_price, image, amount, date, produc
       
           <Link to={`/seller/${seller_ID}`} onClick={() => onSellerClick(seller_ID)} >
           <div className={styles.profileImg}></div>
+          <img src={sellerImage}></img>
           </Link>
         </div>
 
