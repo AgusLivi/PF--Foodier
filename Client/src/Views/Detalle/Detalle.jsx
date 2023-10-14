@@ -3,6 +3,8 @@ import { useParams, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { cleanDetail, getProductById } from '../../Redux/actions';
 import styles from './Detalle.module.css';
+import { toast, Toaster } from 'react-hot-toast';
+
 
 import { CartContext } from '../../Utils/CartContext';
 
@@ -47,18 +49,20 @@ const Detalle = () => {
 
   const addCartHandler = () => {
     const productAlreadyExists = cartItems.some((item) => item.product_ID === productDetail.product_ID);
-
+  
     if (productAlreadyExists) {
-      alert('Otra vez lo vas a agregar papi?');
+      toast.error('Este producto ya está en tu carrito.');
     } else {
-      // agregamos el producto al estado local del carrito
-      productDetail.quantity = 1
+      // Agregamos el producto al estado local del carrito
+      productDetail.quantity = 1;
       setCartItems((prevCartItems) => [...prevCartItems, productDetail]);
       cartContext.addToCart(productDetail);
-      localStorage.setItem('cartItems', JSON.stringify([...cartItems, productDetail]));
-      alert('Producto agregado al carrito');
+      const updatedCartItems = [...cartItems, productDetail];
+      localStorage.setItem('cartItems', JSON.stringify(updatedCartItems));
+      toast.success('El producto se ha agregado al carrito.');
     }
   };
+  
 
   return (
     <div className={styles.detailContainer}>
