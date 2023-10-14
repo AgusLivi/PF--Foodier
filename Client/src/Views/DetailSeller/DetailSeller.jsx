@@ -7,9 +7,10 @@ const SellerDetails = () => {
     const dispatch = useDispatch()
     const { seller_ID } = useParams(); 
     const seller = useSelector((state) => state.getSellerById); 
-  
+
     useEffect(() => {
       dispatch(getSellerById(seller_ID));
+      console.log('PAYMENT!!',seller.payment)
     }, [dispatch, seller_ID]);
 
 
@@ -21,7 +22,7 @@ const SellerDetails = () => {
         <p>Teléfono: {seller.contact}</p>
         <p>Dirección: {seller.address}</p>
         <p>Rating: {seller.average_rating}</p>
-        <p>Método de Pago: {seller.payment}</p>
+        <p>Método de Pago: {seller.payment?.join(', ')}</p>
 
 
 
