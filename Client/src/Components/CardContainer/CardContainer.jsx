@@ -6,6 +6,7 @@ import { getSellerById } from "../../Redux/actions";
 
 const CardContainer =  () => {
   const products =  useSelector((state) => state.products);
+  const seller = useSelector((state) => state.getSellerById)
   const [selectedSeller, setSelectedSeller] = useState(null)
   useEffect(() => {
     if (selectedSeller) {
@@ -13,7 +14,8 @@ const CardContainer =  () => {
       dispatch(getSellerById(selectedSeller));
     }
   }, [selectedSeller]);
-
+  console.log(seller);
+  console.log(seller.image);
   return (
     <div className={styles.cardContainer}>
       {products.length === 0 ? (
@@ -33,6 +35,8 @@ const CardContainer =  () => {
             product_ID={product.product_ID}
             seller_ID={product.SellerSellerID}
             onSellerClick={(seller_ID) => setSelectedSeller(seller_ID)}
+            sellerImage={seller.image}
+
           />
         ))
       )}
