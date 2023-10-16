@@ -109,6 +109,119 @@ export const getCategories = () => {
   };
 };
 
+
+// Location actions
+
+export const locationProvincia = () => {
+  return async (dispatch) => {
+    try {
+      const { data } = await axios.get(
+        `https://apis.datos.gob.ar/georef/api/provincias`
+      );
+      return dispatch({
+        type: PROVINCIAS,
+        payload: data.provincias,
+
+      });
+    } catch (error) {
+      alert(error.message);
+    }
+  };
+};
+
+export const locationMunicipio = (provId) => {
+  return async (dispatch) => {
+    try {
+      const { data } = await axios.get(
+        `https://apis.datos.gob.ar/georef/api/municipios?provincia=${provId}&campos=id,nombre&max=100`
+      );
+      return dispatch({
+        type: MUNICIPIOS,
+        payload: data.municipios,
+
+      });
+    } catch (error) {
+      alert(error.message);
+    }
+  };
+};
+
+
+export const locationLocalidad = (muniId) => {
+  return async (dispatch) => {
+    try {
+      const { data } = await axios.get(
+        `https://apis.datos.gob.ar/georef/api/localidades?municipio=${muniId}&campos=id,nombre&max=100`
+      );
+      return dispatch({
+        type: LOCALIDADES,
+        payload: data.localidades,
+      });
+    } catch (error) {
+      alert(error.message);
+    }
+  };
+};
+
+// User actions
+
+export const createUser = (userData) => {
+  return async () => {
+    try {
+      const { data } = await axios.post(`/users`, userData);
+      alert(`Usuario ${data.name} creado correctamente`);
+
+    } catch (error) {
+      alert(error.message);
+    }
+  };
+};
+
+
+export const getAllFav = (id) => {
+  //en realidad obtiene el fav del usuario
+  return async (dispatch) => {
+    try {
+      const { data } = await axios(`/favorites/${id}`); //definir despues como pusieron la ruta en el back
+      return dispatch({
+        type: GET_ALL_FAV,
+        payload: data,
+      });
+
+    } catch (error) {
+      alert('Hubo un error', error.message);
+    }
+  };
+};
+
+export const postFav = (dataForm) => {
+  return async (dispatch) => {
+    try {
+      const { data } = await axios.post(`/favorites`, dataForm);
+      return dispatch({
+        type: POST_FAVORITES,
+        payload: data,
+      });
+    } catch (error) {
+      alert(error.message);
+    }
+  };
+};
+
+export const createPost = (post) => {
+  return async (dispatch) => {
+    try {
+      const { data } = await axios.post(`/posts`, post);
+      return dispatch({
+        type: CREATE_POST,
+        payload: data,
+      });
+    } catch (error) {
+      alert(error.message);
+    }
+  };
+};
+
 // Location actions
 
 export const locationProvincia = () => {
@@ -172,22 +285,9 @@ export const createUser = (userData) => {
   };
 };
 
-export const getAllFav = (id) => {
-  //en realidad obtiene el fav del usuario
-  return async (dispatch) => {
-    try {
-      const { data } = await axios(`/favorites/${id}`); //definir despues como pusieron la ruta en el back
-      return dispatch({
-        type: GET_ALL_FAV,
-        payload: data,
-      });
-    } catch (error) {
-      alert(error.message);
-    }
-  };
-};
 
-export const postFav = (dataForm) => {
+export const getUserById = (id) => {
+
   return async (dispatch) => {
     try {
       const { data } = await axios.post(`/favorites`, dataForm);
@@ -201,83 +301,6 @@ export const postFav = (dataForm) => {
   };
 };
 
-export const createPost = (post) => {
-  return async (dispatch) => {
-    try {
-      const { data } = await axios.post(`/posts`, post);
-      return dispatch({
-        type: CREATE_POST,
-        payload: data,
-      });
-    } catch (error) {
-      alert(error.message);
-    }
-  };
-};
-
-export const getAllPost = () => {
-  return async (dispatch) => {
-    try {
-      const { data } = await axios.get(`/posts`);
-      return dispatch({
-        type: GET_POST,
-        payload: data,
-      });
-    } catch (error) {
-      alert(error.message);
-    }
-  };
-};
-
-export const getPostById = (id) => {
-  return async (dispatch) => {
-    try {
-      const { data } = await axios.get(`/posts/${id}`);
-      return dispatch({
-        type: GET_POST_BY_ID,
-        payload: data,
-      });
-    } catch (error) {
-      alert(error.message);
-    }
-  };
-};
-
-export const updateUser = (id, updatedUserData) => {
-  return async () => {
-    try {
-      const { data } = await axios.put(`/users/${id}`, updatedUserData);
-      alert(`Usuario ${data.name} actualizado correctamente`);
-    } catch (error) {
-      alert(error.message);
-    }
-  };
-};
-
-export const deleteUser = (id) => {
-  return async () => {
-    try {
-      const { data } = await axios.delete(`/users/${id}`); //definir las rutas del back
-      alert(`Usuario ${data.name} borrado correctamente`);
-    } catch (error) {
-      alert(error.message);
-    }
-  };
-};
-
-export const getUserById = (id) => {
-  return async (dispatch) => {
-    try {
-      const { data } = await axios.get(`/users/${id}`);
-      return dispatch({
-        type: GET_USER_BY_ID,
-        payload: data,
-      });
-    } catch (error) {
-      alert(error.message);
-    }
-  };
-};
 
 // Sellers actions
 
@@ -306,9 +329,13 @@ export const updateSeller = (id, updatedSellerData) => {
 
 export const deleteSeller = (id) => {
   return async () => {
+
     try {
-      const { data } = await axios.delete(`/sellers/${id}`); //definir las rutas del back
-      alert(`vendedor ${data.name} borrado correctamente`);
+      const { data } = await axios.post(`/posts`, post);
+      return dispatch({
+        type: CREATE_POST,
+        payload: data,
+      });
     } catch (error) {
       alert(error.message);
     }
@@ -316,11 +343,12 @@ export const deleteSeller = (id) => {
 };
 
 export const getSellerById = (id) => {
+
   return async (dispatch) => {
     try {
-      const { data } = await axios.get(`/sellers/${id}`);
+      const { data } = await axios.get(`/posts/${id}`);
       return dispatch({
-        type: GET_SELLER_BY_ID,
+        type: GET_POST_BY_ID,
         payload: data,
       });
     } catch (error) {
@@ -459,3 +487,4 @@ export const banUser = (id) => {
     }
   }
 }
+

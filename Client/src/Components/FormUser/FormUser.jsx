@@ -52,6 +52,7 @@ const FormLogin = () => {
         email: values.email,
         password: values.password,
         location: `${values.provincia}, ${values.municipio}, ${values.localidad}`,
+        admin: false
       };
 
       await dispatch(createUser(userData));
