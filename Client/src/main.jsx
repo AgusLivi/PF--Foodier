@@ -13,7 +13,7 @@ const apiUrl = import.meta.env.VITE_REACT_APP_API_URL;
 axios.defaults.baseURL = apiUrl;
 console.log(axios.defaults.headers);
 if (localStorage.getItem("token")) {
-  axios.defaults.headers = {"token": localStorage.getItem("token")}
+  
 }
 
 

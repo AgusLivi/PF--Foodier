@@ -58,16 +58,25 @@ router.delete('/sellers/:seller_ID', sellerController.deleteSeller); /// seller
 router.put('/sellers/deleteSeller/:seller_ID', adminControler.deleteSeller) //borrado logico de vendedor
 router.get('/sellers/allsellers', adminControler.getAllSellers) // obtener todos los vendedores admin
 
-
 // Rutas de favoritos
-router.post('/favorites', favController.addFavorites); //user
-router.get('/favorites/:user_ID', favController.getFavorites); //user
+router.post('/favorites/:id', favController.addFavorites); //user
+router.get('/favorites/', favController.getFavorites); //user
 
 // Rutas de pagos
 router.post('/payments', paymentController.createPayment); // user
 
 // Rutas de admin
+router.put('/admin/seller/:id', adminControler.banSeller); // admin
+router.put('/admin/user/:id', adminControler.banUser); // admin
+
+router.get('/admin/user', adminControler.getAllUsers); // admin
 router.get('/admin/sellers', adminControler.getAllSellers); // admin
+
+// router.get('/admin/ban/:id', adminControler.getAllSellers); // admin borrado 
+// router.get('/admin/ban/:id', adminControler.getAllSellers); // admin borrado
+
+
+
 
 
 module.exports = router; 

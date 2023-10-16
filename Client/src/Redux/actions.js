@@ -38,59 +38,6 @@ import {
   GET_CATEGORIES,
 } from "./actionsType";
 
-// export const getSellerFav = (id) => { // decatada
-//   return async (dispatch) => {
-//     try {
-//       const { data } = await axios.post(`/favorites/${id}`);
-//       return dispatch({
-//         type: GET_SELLER_FAV,
-//         payload: data,
-//       });
-//     } catch (error) {
-//       alert(error.message);
-//     }
-//   };
-// };
-
-export const createPayment = (pay) => {
-  return async () => {
-    try {
-      const { data } = await axios.post(`/payments`, pay);
-      alert(`orden ${data} creado`);
-    } catch (error) {
-      alert(error.message);
-    }
-  };
-};
-
-export const getAllUser = () => {
-  return async (dispatch) => {
-    try {
-      const { data } = await axios.get(`/users`);
-      return dispatch({
-        type: GET_ALL_USER,
-        payload: data,
-      });
-    } catch (error) {
-      alert(error.message);
-    }
-  };
-};
-
-export const getAllSeller = () => {
-  return async (dispatch) => {
-    try {
-      const { data } = await axios.get(`/sellers`);
-      return dispatch({
-        type: GET_ALL_SELLERS,
-        payload: data,
-      });
-    } catch (error) {
-      alert(error.message);
-    }
-  };
-};
-
 
 
 //Products acctions
@@ -390,25 +337,8 @@ export const login = (formData) => {
       const { data } = await axios.post(`/login`, formData);
       console.log(data);
       const { token, error } = data;
-
-      // Si se recibe un token, puedes almacenarlo en el estado global o en el almacenamiento local
-      // para mantener al usuario autenticado
-      // if (token) {
-      //   dispatch(setAuthToken(token));
-      //   dispatch(loginSuccess(formData));
-      // } else {
-      //   // Maneja errores de inicio de sesión específicos
-      //   if (error === "InvalidPassword") {
-      //     alert("Contraseña incorrecta");
-      //   } else if (error === "UserNotFound") {
-      //     alert("Usuario no encontrado");
-      //   } else {
-      //     alert("Error desconocido en el inicio de sesión");
-      //   }
-      // }
       localStorage.setItem("token" ,token)
-
-      // alert(`Inicio de sesión exitoso ${data}`);
+      axios.defaults.headers = {"token": localStorage.getItem("token")}
     } catch (error) {
       alert("Error al iniciar sesión" + error.message);
     }
@@ -465,12 +395,67 @@ export const createPaymentRequest = (paymentData) => async (dispatch) => {
   }
 };
 
+export const createPayment = (pay) => {
+  return async () => {
+    try {
+      const { data } = await axios.post(`/payments`, pay);
+      alert(`orden ${data} creado`);
+    } catch (error) {
+      alert(error.message);
+    }
+  };
+};
+
 // Admin actions
 
+export const getAllSeller = () => {
+  return async (dispatch) => {
+    try {
+      const { data } = await axios.get('/admin/sellers');
+      return dispatch({
+        type: GET_ALL_SELLERS,
+        payload: data,
+      });
+    } catch (error) {
+      alert(error.message);
+    }
+  };
+};
+
+export const getAllUser = () => {
+  return async (dispatch) => {
+    try {
+      const { data } = await axios.get('/admin/user');
+      return dispatch({
+        type: GET_ALL_USER,
+        payload: data,
+      });
+    } catch (error) {
+      alert(error.message);
+    }
+  };
+};
+
+export const banSeller = (id) => {
+  return async () => {
+    try { 
+      const { data } = await axios.put(`/admin/seller/${id}`);
+      console.log(data);
+      return data
+    } catch (error) {
+      alert(error.message);
+    }
+  }
+}
+
 export const banUser = (id) => {
-  try {
-    
-  } catch (error) {
-    
+  return async () => {
+    try { 
+      const { data } = await axios.put(`/admin/user/${id}`);
+      console.log(data);
+      return data
+    } catch (error) {
+      alert(error.message);
+    }
   }
 }

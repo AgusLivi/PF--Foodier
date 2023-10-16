@@ -3,7 +3,7 @@ const { Seller, User, Product, Post } = require("../db.js");
 // Obtener todos los vendedores
 const getAllSellers = async (req, res) => {
   try {
-    const admin = req.user
+    const admin = req.user;
     if (!admin)
       return res.status(401).json("Debe tener una cuenta para acceder");
     if (admin.rol !== "admin")
@@ -19,10 +19,9 @@ const getAllSellers = async (req, res) => {
 // Obtener todos los usuarios
 const getAllUsers = async (req, res) => {
   try {
-    const { token } = req.headers;
-    if (!token)
+    const admin = req.user;
+    if (!admin)
       return res.status(401).json("Debe tener una cuenta para acceder");
-    const admin = jwt.verify(token, JWT_SECRET);
     if (admin.rol !== "admin")
       return res.status(401).json("Usted no esta autorizado");
     const users = await User.findAll();
@@ -33,51 +32,52 @@ const getAllUsers = async (req, res) => {
   }
 };
 //borrado logico de user
-const deleteUser = async (req, res) => {
-  const { user_ID } = req.params;
-  if (!user_ID) return res.status(401).json("Seleccione un usuario")
+const banUser = async (req, res) => {
+  const admin = req.user;
+  if (!admin) return res.status(401).json("Debe tener una cuenta para acceder");
+  if (admin.rol !== "admin")
+    return res.status(401).json("Usted no esta autorizado");
+  const { id } = req.params;
+  if (!id) return res.status(401).json("Seleccione un usuario");
   try {
+    const info = await User.findByPk(id, {
+      include: [
+        {
+          model: Post,
+        },
+      ],
+    });
+    info.deleted = true;
+    await info.save();
 
-      const info = await User.findByPk(user_ID, {
-        include: [
-          {
-            model: Post,
-          }
-        ]
-      });
-      info.deleted = true;
-      await info.save();
+    for (const post of info.Posts) {
+      post.deleted = true;
+      await post.save();
+    }
 
-      for (const post of info.Posts) {
-        post.deleted = true;
-        await post.save();
-      }
-
-      return res
-        .status(200)
-        .send(`usuario ${info.name} eliminado correctamente`);
+    return res.status(200).send(`usuario ${info.name} eliminado correctamente`);
   } catch (error) {
     res.status(400).json("Algo salio mal con la eliminacion del usuario");
   }
 };
 
 //borrado logico de seller
-const deleteSeller = async (req, res) => {
-  const { seller_ID } = req.params
-  if (!seller_ID) return res.status(401).json("Seleccione un vendedor")
+const banSeller = async (req, res) => {
+  const admin = req.user;
+  if (!admin) return res.status(401).json("Debe tener una cuenta para acceder");
+  if (admin.rol !== "admin")
+    return res.status(401).json("Usted no esta autorizado");
+  const { id } = req.params;
+  if (!id) return res.status(401).json("Seleccione un vendedor");
   try {
-
-
-    const info = await Seller.findByPk(seller_ID,
-       {
+    const info = await Seller.findByPk(id, {
       include: [
         {
           model: Product,
         },
       ],
-    }
-    );
-    console.log("info del seller",info);
+    });
+    console.log("info del seller", info);
     if (!info) return res.status(404).json("vendedor no encontrado");
     info.deleted = true;
     await info.save();
@@ -86,7 +86,7 @@ const deleteSeller = async (req, res) => {
       product.deleted = true;
       await product.save();
     }
-    
+
     return res
       .status(200)
       .send(`vendedor ${info.name} eliminado correctamente`);
@@ -95,5 +95,4 @@ const deleteSeller = async (req, res) => {
   }
 };
 
-
-module.exports = { getAllSellers, getAllUsers, deleteUser, deleteSeller };
+module.exports = { getAllSellers, getAllUsers, banUser, banSeller };
