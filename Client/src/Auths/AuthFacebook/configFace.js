@@ -1,14 +1,16 @@
 import { initializeApp } from "firebase/app";
 import { getAuth, FacebookAuthProvider } from "firebase/auth";
 
+const FBConfig = import.meta.env
+
 const firebaseConfig = {
-    apiKey: "AIzaSyAF5W1jPmOTQYwBNOse3ZS8pxXJBXLnQec",
-    authDomain: "pf-foodier.firebaseapp.com",
-    projectId: "pf-foodier",
-    storageBucket: "pf-foodier.appspot.com",
-    messagingSenderId: "682893785062",
-    appId: "1:682893785062:web:c4b3fc11bb03bb16944827",
-    measurementId: "G-DM0X1FZPGC"
+    apiKey: FBConfig.VITE_REACT_APP_API_KEY,
+    authDomain: FBConfig.VITE_REACT_APP_AUTH_DOMAIN,
+    projectId: FBConfig.VITE_REACT_APP_PROJECT_ID,
+    storageBucket: FBConfig.VITE_REACT_APP_STORAGE_BUCKET,
+    messagingSenderId: FBConfig.VITE_REACT_APP_MESSAGIN_ID,
+    appId: FBConfig.VITE_REACT_APP_APP_ID,
+    measurementId: FBConfig.VITE_REACT_APP_MEASUREMENT_ID
 };
 
 // Inicializa Firebase

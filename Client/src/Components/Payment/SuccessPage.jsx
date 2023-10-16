@@ -4,6 +4,7 @@ import { useState } from 'react';
 import styles from './PaymentPages.module.css';
 
 const SuccessPage = () => {
+    
     const navigate = useNavigate();
     const [uniqueCode] = useState(generateUniqueCode());
 

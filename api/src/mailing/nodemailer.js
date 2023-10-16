@@ -2,15 +2,14 @@ const nodemailer = require('nodemailer');
 
 function createTransporter() {
   const transporter = nodemailer.createTransport({
-    host: 'smtp.resend.com',
-    port: 465,
-    secure: true,
+    host: process.env.HOST,
+    port: process.env.PORT_NM,
+    secure: process.env.SECURE,
     auth: {
-      user: 'resend', // Aquí debe ser el nombre de usuario de tu cuenta de correo
-      pass: 're_TN8GtRF2_7Aa2Bh3WmU9pPDTjL9sytQwY' // Utiliza la variable de entorno para la contraseña
+      user: process.env.AUTH_USER, // Aquí debe ser el nombre de usuario de tu cuenta de correo
+      pass: process.env.AUTH_PASS // Utiliza la variable de entorno para la contraseña
     },
   });
-
   return transporter;
 }
 

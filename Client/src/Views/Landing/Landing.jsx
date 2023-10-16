@@ -10,13 +10,14 @@ import { SiLinkedin } from "react-icons/si";
 import { BiLogoInstagram } from "react-icons/bi";
 import { FaFacebookF } from "react-icons/fa";
 import Logo from "../../assets/Logo.svg";
-import style from './Landing.module.css'
+import style from './Landing.module.css';
 import { Link, useNavigate } from 'react-router-dom';
+import { toast } from 'react-hot-toast'; // Importa 'toast'
 
 const Home = () => {
   const navigate = useNavigate();
   const [modalIsOpen, setModalIsOpen] = useState(false);
-  const [email, setEmail] = useState("");
+  const [email, setEmail] = useState('');
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -56,8 +57,26 @@ const Home = () => {
     navigate("/politica-de-privacidad");
   };
 
+  const handleSubscribe = () => {
+    if (email) {
+      // Realiza alguna validación adicional del correo si es necesario
   
-
+      // Muestra una notificación de éxito con toast
+      toast(
+        "Gracias por suscribirte a nuestro Newsletter👏, siempre tendras las últimas novedades de Foodier! ",
+        {
+          duration: 6000,
+        }
+      );
+        
+      // Borra el correo electrónico después de mostrar la notificación
+      setEmail('');
+    } else {
+      // Muestra una notificación de error si el campo de correo está vacío
+      toast.error('Por favor, ingresa tu correo antes de suscribirte');
+    }
+  };
+  
   return (
     <>
       <div className={style.homecontainer}>
@@ -109,8 +128,18 @@ const Home = () => {
         <h1 className={style.primaryheading}>Tienes alguna pregunta?</h1>
         <h1 className={style.primaryheading}>Contáctanos!</h1>
         <div className={style.contactformcontainer}>
-          <input type="text" placeholder="tucorreo@gmail.com" />
-          <button className={style.secondarybutton}>Enviar</button>
+          <input
+            type="text"
+            placeholder="tucorreo@gmail.com"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+          />
+          <button
+            className={style.secondarybutton}
+            onClick={handleSubscribe}
+          >
+            Enviar
+          </button>
         </div>
       </div>
 

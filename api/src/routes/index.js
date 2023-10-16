@@ -13,6 +13,7 @@ const adminControler = require('../controllers/adminController.js');
 
 // const { borradoLogico } = require("../controllers/controladorPrueva");
 const JWTMiddleware = require("../fireMiddlewares/JWTMiddleware.js"); // token widdleware
+const autenticacion = require("../fireMiddlewares/fireMiddlewares.js")
 
 // **Rutas publicas**
 
@@ -32,7 +33,7 @@ router.post("/users", userController.createUser);
 router.post('/sellers', sellerController.createSeller);
 
 //**Rutas privadas**
-router.use(JWTMiddleware)
+router.use(autenticacion)
 
 // Rutas de productos
 router.delete("/products/:product_ID", productController.deleteProduct);  // borrar productos/ seller
@@ -49,11 +50,10 @@ router.delete('/posts/',  ) // user / admin
 router.put("/users/", userController.updateUser); //user
 router.delete("/users/", userController.deleteUser); // user
 router.get("/users/", userController.getUserById); //user
-
+router.get("/users/:admin_id", adminControler.getAllUsers);// admin
 
 // Rutas relacionadas a los vendedores
-router.put('/sellers/', sellerController.updateSeller); // seller
-router.delete('/sellers/', sellerController.deleteSeller); // seller
+router.put('/sellers/:seller_ID', sellerController.updateSeller); // seller
 
 // Rutas de favoritos
 router.post('/favorites/:id', favController.addFavorites); //user

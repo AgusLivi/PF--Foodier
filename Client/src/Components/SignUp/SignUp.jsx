@@ -7,6 +7,7 @@ import { useFormik } from "formik";
 import { useNavigate } from "react-router-dom";
 
 const SignUp = () => {
+  
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
@@ -15,6 +16,7 @@ const SignUp = () => {
   const [touchedRol, setTouchedRol] = useState(false);
 
   const submitForm = async (values) => {
+
     try {
       const userData = {
         email: values.email,
@@ -22,7 +24,6 @@ const SignUp = () => {
         rol: values.rol,
       };
 
-      console.log(userData);
       await dispatch(login(userData));
       if (Object.keys(formik.errors).length === 0) {
         navigate("/home");
