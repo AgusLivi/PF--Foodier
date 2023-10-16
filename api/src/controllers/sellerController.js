@@ -49,24 +49,24 @@ const createSeller = async (req, res) => {
     if (!created)
       return res.status(400).json("ya existe un vendedor con ese email");
     // Configura el correo electrónico de bienvenida
-    // const mailOptions = {
-    //   from: "tu_correo@outlook.com", // Cambia esto a tu dirección de correo
-    //   to: email, // Utiliza la dirección de correo electrónico del vendedor registrado
-    //   subject: "Bienvenido a Foodier",
-    //   html: `<p>Bienvenido ${name} a Foodier.</p><p>Gracias por registrarte como vendedor.</p>`,
-    // };
+    const mailOptions = {
+      from: process.env.AUTH_EMAIL, // Cambia esto a tu dirección de correo
+      to: email, // Utiliza la dirección de correo electrónico del vendedor registrado
+      subject: "Bienvenido a Foodier",
+      html: `<p>Bienvenido ${name} a Foodier.</p><p>Gracias por registrarte como vendedor.</p>`,
+    };
 
-    // // Envía el correo electrónico de bienvenida
-    // nodemailer.sendMail(mailOptions, (error, info) => {
-    //   if (error) {
-    //     console.error(
-    //       "Error al enviar el correo electrónico de bienvenida:",
-    //       error
-    //     );
-    //   } else {
-    //     console.log("Correo electrónico de bienvenida enviado:", info.response);
-    //   }
-    // });
+    // Envía el correo electrónico de bienvenida
+    nodemailer.sendMail(mailOptions, (error, info) => {
+      if (error) {
+        console.error(
+          "Error al enviar el correo electrónico de bienvenida:",
+          error
+        );
+      } else {
+        console.log("Correo electrónico de bienvenida enviado:", info.response);
+      }
+    });
 
     res.status(201).json(newSeller);
   } catch (error) {
