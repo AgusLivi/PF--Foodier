@@ -14,6 +14,7 @@ const Detalle = () => {
   const dispatch = useDispatch();
   const productDetail = useSelector((state) => state.productDetail);
   const cartContext = useContext(CartContext);
+  const token = localStorage.getItem('token');
 
   const [cartItems, setCartItems] = useState([]);
 
@@ -82,11 +83,32 @@ const Detalle = () => {
         )}
         <p className={styles.oldPrice}>Precio anterior: ${productDetail.old_price}</p>
         <p>Precio: ${productDetail.price}</p>
-        <button className={styles.paymentButton} onClick={addCartHandler}>
-          Añadir al carrito
-        </button>
-        <button className={styles.paymentButton} onClick={handleReserva}>Reservar</button>
-        <button className={styles.paymentButton} onClick={handlePayment}>Pagar</button>
+        {token ? (
+        <>
+          <button className={styles.paymentButton} onClick={addCartHandler}>
+            Añadir al carrito
+          </button>
+          <button className={styles.paymentButton} onClick={handleReserva}>
+            Reservar
+          </button>
+          <button className={styles.paymentButton} onClick={handlePayment}>
+            Pagar
+          </button>
+        </>
+      ) : (
+        <>
+          <p className='disabled-buttons'>Debes estar logueado para realizar acciones de compra</p>
+          <button className={styles.disabledButton} disabled>
+            Añadir al carrito
+          </button>
+          <button className={styles.disabledButton} disabled>
+            Reservar
+          </button>
+          <button className={styles.disabledButton} disabled>
+            Pagar
+          </button>
+        </>
+      )}
         <button className={styles.closeButton} onClick={handleClose}>Cerrar</button>
       </div>
     </div>
