@@ -10,7 +10,6 @@ const SellerDetails = () => {
 
     useEffect(() => {
       dispatch(getSellerById(seller_ID));
-      console.log('PAYMENT!!',seller.payment)
     }, [dispatch, seller_ID]);
 
 

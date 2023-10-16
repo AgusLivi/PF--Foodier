@@ -4,6 +4,7 @@ import ItemCart from './ItemCart';
 import styles from './ShoppingCart.module.css'; 
 
 function ShoppingCart() {
+  
   const [cartItems, setCartItems] = useState([]); // estado local para los items
   const [prices, setPrices] = useState({}); // estado local para los precios individuales
   const navigate = useNavigate();

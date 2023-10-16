@@ -7,7 +7,6 @@ const PerfilUsuario = () => {
 
   const userData = useSelector(state => state.userData)
 
-  console.log(userData);
 
   return (
     <div className={styles.container}>

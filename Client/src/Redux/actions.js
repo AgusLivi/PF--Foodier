@@ -55,7 +55,7 @@ export const getProducts = (querys) => {
   return async (dispatch) => {
     const { data } = await axios.get(`/products/?${querys}`);
 
-    console.log("ACTION!!!", querys);
+  
 
     return dispatch({
       type: GET_PRODUCTS,
@@ -77,7 +77,7 @@ export const deleteProduct = (id) => {
 
 export const getProductById = (id) => {
   return async function (dispatch) {
-    console.log("Fetching product by ID:", id);
+
     const { data } = await axios(`/products/${id}`);
     return dispatch({
       type: SEARCH_BY_ID,
@@ -93,7 +93,7 @@ export const cleanDetail = () => { // ??
 };
 
 export const createProduct = (formmData,) => {
-  console.log("form data: ", formmData.categories);
+
   return async () => {
     try {
       const { data } = await axios.post(`/products`, formmData); // despues de la barra tengo que poner la ruta que definieron en el back
@@ -290,7 +290,7 @@ export const getUserById = () => {
 
 // Sellers actions
 export const createSeller = (sellerData) => {
-  console.log(sellerData);
+
   return async () => {
     try {
       const { data } = await axios.post(`/sellers`, sellerData);
@@ -339,11 +339,11 @@ export const getSellerById = (id) => {
 
 //login
 export const login = (formData) => {
-  console.log(formData);
+
   return async (dispatch) => {
     try {
       const { data } = await axios.post(`/login`, formData);
-      console.log(data);
+
       const { token, error } = data;
       localStorage.setItem("token" ,token)
       axios.defaults.headers = {"token": localStorage.getItem("token")}
@@ -353,7 +353,7 @@ export const login = (formData) => {
   };
 };
 const setAuthToken = (token) => {
-  console.log("esdto es el token", token);
+
   return {
     type: SET_AUTH_TOKEN,
     payload: token,
@@ -388,7 +388,7 @@ export const createPaymentRequest = (paymentData) => async (dispatch) => {
 
     const response = await axios.post(`/payments`, paymentData, axiosConfig);
 
-    console.log("Respuesta de la solicitud de pago:", response);
+   
 
     dispatch({
       type: CREATE_PAYMENT_SUCCESS,
