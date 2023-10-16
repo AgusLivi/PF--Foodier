@@ -7,15 +7,9 @@ import store from './Redux/store.js'
 import axios from 'axios'
 import { toast, Toaster } from 'react-hot-toast';
 
-
 //defino la baseURL de axios con la url del servidor en una variable de entorno
 const apiUrl = import.meta.env.VITE_REACT_APP_API_URL;
 axios.defaults.baseURL = apiUrl;
-console.log(axios.defaults.headers);
-if (localStorage.getItem("token")) {
-  
-}
-
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <Provider store={store}>

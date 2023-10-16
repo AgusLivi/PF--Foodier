@@ -23,5 +23,6 @@ dist-ssr
 *.sln
 *.sw?
 
-# variables de entorno
+# dotenv environment variables file
 .env
+.env.test
