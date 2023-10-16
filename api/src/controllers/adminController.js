@@ -56,19 +56,25 @@ const deleteSeller = async (req, res) => {
   try {
 
 
-    const info = await Seller.findByPk(seller_ID
-    //    {
-    //   include: [
-    //     {
-    //       model: Product,
-    //     },
-    //   ],
-    // }
+    const info = await Seller.findByPk(seller_ID,
+       {
+      include: [
+        {
+          model: Product,
+        },
+      ],
+    }
     );
     console.log("info del seller",info);
     if (!info) return res.status(404).json("vendedor no encontrado");
     info.deleted = true;
-    info.save();
+    await info.save();
+
+    for (const product of info.Products) {
+      product.deleted = true;
+      await product.save();
+    }
+    
     return res
       .status(200)
       .send(`vendedor ${info.name} eliminado correctamente`);

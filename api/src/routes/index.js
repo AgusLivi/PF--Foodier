@@ -39,6 +39,7 @@ router.delete("/products/:product_ID", productController.deleteProduct);  // bor
 router.put("/products/:productId", productController.updateProduct) // editar productos /seller y user
 router.post("/products", productController.createProduct); // seller
 
+
 // Rutas para gestionar publicaciones
 router.post('/posts', postController.createPost); // user
 router.get('/posts/', postController.getPostById); // user / admin
@@ -49,10 +50,13 @@ router.put("/users/", userController.updateUser); //user
 router.delete("/users/", userController.deleteUser); // user
 router.get("/users/", userController.getUserById); //user
 router.get("/users/:admin_id", adminControler.getAllUsers);// admin
+router.put('/users/deleteUser/:user_ID', adminControler.deleteUser) //borrado logico usuario
 
 // Rutas relacionadas a los vendedores
 router.put('/sellers/:seller_ID', sellerController.updateSeller); // seller
 router.delete('/sellers/:seller_ID', sellerController.deleteSeller); /// seller
+router.put('/sellers/deleteSeller/:seller_ID', adminControler.deleteSeller) //borrado logico de vendedor
+router.get('/sellers/allsellers', adminControler.getAllSellers) // obtener todos los vendedores admin
 
 
 // Rutas de favoritos
