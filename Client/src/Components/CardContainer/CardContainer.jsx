@@ -5,17 +5,18 @@ import styles from "./CardContainer.module.css";
 import { getSellerById } from "../../Redux/actions";
 
 const CardContainer =  () => {
+
   const products =  useSelector((state) => state.products);
   const seller = useSelector((state) => state.getSellerById)
   const [selectedSeller, setSelectedSeller] = useState(null)
+
   useEffect(() => {
     if (selectedSeller) {
       // Realiza la solicitud GET a la URL con selectedSeller
       dispatch(getSellerById(selectedSeller));
     }
   }, [selectedSeller]);
-  console.log(seller);
-  console.log(seller.image);
+
   return (
     <div className={styles.cardContainer}>
       {products.length === 0 ? (

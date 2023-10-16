@@ -1,5 +1,5 @@
 import React from 'react';
-import { Routes, Route, useLocation } from "react-router-dom";
+import { Routes, Route, useLocation, Navigate } from "react-router-dom";
 import NavBar from './Components/NavBar/NavBar';
 import Detalle from './Views/Detalle/Detalle';
 import PerfilUsuario from './Views/PerfilUsuario/PerfilUsuario'
@@ -27,6 +27,24 @@ import LoginAdmin from './Views/LoginAdmin/LoginAdmin';
 
 const App = () => {
   const location = useLocation();
+  const token = localStorage.getItem('token');
+  
+  if (!token 
+
+  && location.pathname !== '/login'
+  && location.pathname !== "/"
+  && location.pathname !== '/home'
+  && location.pathname !== "/formcomercio"
+  && location.pathname !== "/formuser"
+  && location.pathname !== "/userlogin"
+  && location.pathname !== "/seller/:seller_ID"
+  && location.pathname !== '/politica-de-privacidad'
+  && location.pathname !== "/terminos-y-condiciones"
+  && location.pathname !== "/products/:product_ID"
+  ) {
+    return <Navigate to="/login" />;
+  }
+  
   return (
     <div className="App">
       <CartProvider>

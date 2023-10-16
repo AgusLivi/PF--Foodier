@@ -4,7 +4,6 @@ import FavCard from '../FavCard/FavCard';
 
 const FavsContainer = () => {
     const { user } = useSelector((state) => state.allFavoritesSeller);
-    console.log('user: ', user);
 
     return (
         <div>
