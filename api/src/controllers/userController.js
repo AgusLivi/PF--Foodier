@@ -57,7 +57,7 @@ const createUser = async (req, res) => {
 
     // Configura el correo electrónico de confirmación
     const info = {
-      from: process.env.AUTH_EMAIL,
+      from: "helpfoodier@outlook.com",
       to: email,
       subject: "Hello World",
       html: "<strong>Bienvenido a Foodier, muchas gracias por registrarte, combatamos el desperdicio de alimentos juntos!!!</strong>",

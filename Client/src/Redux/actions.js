@@ -374,12 +374,6 @@ export const createPaymentRequest = (paymentData) => async (dispatch) => {
 
     // opciones de CORS para la solicitud
     const axiosConfig = {
-      // baseURL: "https://foodier-back-deploy.onrender.com",
-      // headers: {
-      //   common: {
-      //     Origin: "https://foodier.onrender.com", // Asegúrate de que coincida con tu origen
-      //   },
-      // },
       withCredentials: true, // Habilita el envio de cookies 🍪
       headers: {
         "Content-Type": "application/json",

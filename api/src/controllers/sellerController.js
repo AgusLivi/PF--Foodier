@@ -50,7 +50,7 @@ const createSeller = async (req, res) => {
       return res.status(400).json("ya existe un vendedor con ese email");
     // Configura el correo electrónico de bienvenida
     const mailOptions = {
-      from: process.env.AUTH_EMAIL, // Cambia esto a tu dirección de correo
+      from: "helpfoodier@outlook.com", // Cambia esto a tu dirección de correo
       to: email, // Utiliza la dirección de correo electrónico del vendedor registrado
       subject: "Bienvenido a Foodier",
       html: `<p>Bienvenido ${name} a Foodier.</p><p>Gracias por registrarte como vendedor.</p>`,
