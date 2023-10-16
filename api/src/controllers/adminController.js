@@ -96,4 +96,8 @@ const deleteSeller = async (req, res) => {
 };
 
 
-module.exports = { getAllSellers, getAllUsers, deleteUser, deleteSeller };
+module.exports = {
+  getAllSellers,
+  getAllUsers,
+  deleteUser,
+  deleteSeller };
