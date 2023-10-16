@@ -4,6 +4,7 @@ import Modal from 'react-modal';
 import styles from './Reserva.module.css';
 
 const Reserva = () => {
+  
   const [uniqueCode] = useState(generateUniqueCode());
   const [timeRemaining, setTimeRemaining] = useState(3600); // 3600 seg = 1 hora
   const [modalIsOpen, setModalIsOpen] = useState(false); // Estado para controlar la apertura del modal

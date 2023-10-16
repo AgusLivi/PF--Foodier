@@ -188,7 +188,6 @@ const Home = () => {
     };
 
     const queryParams = new URLSearchParams(updatedParams).toString();
-    console.log('QUERYYYYYYYYY', queryParams);
 
     dispatch(getProducts(queryParams));
   };

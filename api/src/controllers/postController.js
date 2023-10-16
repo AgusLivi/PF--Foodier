@@ -6,6 +6,7 @@ const getAllPost = async (req, res) => {
     const posts = await Post.findAll({
       where: {
         deleted: false
+        
       }
     });
     res.json(posts);

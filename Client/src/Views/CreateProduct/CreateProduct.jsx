@@ -12,7 +12,6 @@ import {
 const Cloudinary = (props) => {
     // Estado para controlar la carga de la imagen y el formulario
     const categories = useSelector(state => state.categories);
-    console.log('categorias:', categories);
     const [loading, setLoading] = useState(false);
     const dispatch = useDispatch();
     const [reset, setReset] = useState(false);
@@ -90,7 +89,6 @@ const Cloudinary = (props) => {
         dispatch(getCategories())
     }, [reset])
 
-    //console.log(productPost);
     return (
         <div className={Style.container}>
 

@@ -178,7 +178,7 @@ const reducer = (state = initialState, { type, payload }) => {
           return 0;
         });
       
-        return {
+        return { 
           ...state,
           localidades: sortedLocalidades
         };

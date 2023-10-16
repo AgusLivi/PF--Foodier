@@ -2,17 +2,29 @@ import React, { useRef } from "react";
 import { FaBars, FaTimes ,FaHeart,FaUserAlt, FaDoorOpen,FaShoppingCart,FaMoneyBillAlt,FaStoreAlt} from "react-icons/fa";
 import styles from "./NavBar.module.css"; 
 import Logo from '../../assets/logoNaranja.png'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { useCart } from '../../Utils/CartContext';
 
 function Navbar() {
   const navRef = useRef();
   const { cartCounter } = useCart(); // Utiliza useCart para acceder al contexto
+  const navigate = useNavigate();
 
   const showNavbar = () => {
     navRef.current.classList.toggle(styles.responsive_nav); 
   };
-// hola
+  const token = localStorage.getItem('token')
+  console.log(token);
+  const handleClick = () => {
+    if(!token){
+    navigate('/login')
+    }
+  }
+
+  const handleCloseSesion = () => {
+    localStorage.clear()
+  }
+
   return (
     <header>
      
@@ -32,15 +44,15 @@ function Navbar() {
         </Link>
       
       </div>
-      <Link to={`/create`}>
+      <Link to={`/create`} onClick={handleClick}>
         <a><FaMoneyBillAlt /></a>
         </Link>
         <Link to={`/carrito`}>
-        <a><FaShoppingCart />{cartCounter}</a>
+        <a className={styles.containerNotiCarrito}><FaShoppingCart /><p className={styles.notiCarrito}>{cartCounter}</p></a>
         
         </Link>
         <Link to={'/'}>
-          <a><FaDoorOpen/></a>
+          <a onClick={handleClick}><FaDoorOpen/></a>
         </Link>
         <button
           className={`${styles["nav-btn"]} ${styles["nav-close-btn"]}`} 
