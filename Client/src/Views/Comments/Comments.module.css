@@ -1,0 +1,19 @@
+
+.textarea{
+    resize:none;
+    border: 2px solid #333;
+    height: 60%;
+}
+.container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 40%;
+}
+.container div{
+    width: 100%;
+  
+}
+.btn{
+    width: 100%;
+}

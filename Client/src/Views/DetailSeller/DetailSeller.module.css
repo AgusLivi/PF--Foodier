@@ -1,0 +1,61 @@
+.seller-container{
+    display: flex;
+    width: 100vw;
+    height: 80vh;
+    justify-content: center;
+    align-items: center;
+    margin-top: 3em;
+}
+
+.seller-profile{
+    min-height: 70%;
+    width: 80%;
+    position: relative;
+    overflow: hidden;
+    border: 1px solid #333;
+
+}
+.seller-profile::before{
+    content: '';
+    position: absolute;
+    background: #db880b;
+    z-index: -1;
+    width: 100%;
+    height: 80%;
+    border-bottom-left-radius: 90%;
+    margin: 1 auto;
+    top: -4em;
+    left: 30em;
+
+    
+}
+.seller-details, .seller-profile,   .comment-section-container{
+    
+    padding: 20px;
+}
+
+.seller-details img[alt=""] {
+    /* Estilos para la imagen sin imagen (cuando alt está vacío) */
+    background-color: #cccccc; /* Color de fondo */
+    color: #ffffff; /* Color del texto */
+    font-size: 24px; /* Tamaño de fuente */
+    text-align: center; /* Centrar el texto horizontalmente */
+    vertical-align: middle; /* Centrar el texto verticalmente */
+    width: 150px; /* Ancho de la imagen */
+    height: 150px; /* Altura de la imagen */
+    border-radius: 50%; /* Hacer que la imagen sea circular */
+  }
+  
+.seller-details p {
+    font-size: 1.2em;
+    margin: 10px;
+
+}
+
+.seller-details {
+    display: flex;
+    flex-direction: column;
+  }
+.seller-logo{
+    font-size: 30px;
+}

@@ -2,7 +2,7 @@ import axios from 'axios';
 import React, { useState } from 'react';
 import {useDispatch} from 'react-redux'
 import { createPost } from '../../Redux/actions';
-
+import style from './Comments.module.css'
 function Comments({user_ID, seller_ID }) {
   const [rating, setRating] = useState(0);
   const [comments, setComment] = useState('');
@@ -39,9 +39,9 @@ function Comments({user_ID, seller_ID }) {
   return (
     <div>
       <h2>Dejar Comentario</h2>
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit}  className={style.container}>
         <div>
-          <select value={rating} onChange={handleRatingChange}>
+          <select value={rating} onChange={handleRatingChange} >
             <option value={0}>Selecciona una valoración</option>
             <option value={1}>1 Estrella</option>
             <option value={2}>2 Estrellas</option>
@@ -54,13 +54,14 @@ function Comments({user_ID, seller_ID }) {
           <textarea
             rows="4"
             cols="50"
+      
             placeholder="Escribe tu comentario..."
             value={comments}
             onChange={handleCommentChange}
-          ></textarea>
+         ></textarea>
         </div>
         <div>
-          <button type="submit">Enviar Comentario</button>
+          <button type="submit" className={style.btn}>Enviar Comentario</button>
         </div>
       </form>
     </div>
