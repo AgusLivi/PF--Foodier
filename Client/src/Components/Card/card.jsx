@@ -8,7 +8,6 @@ const Card = ({ name, description, price, old_price, image, amount, date, produc
   const dateSplit = date.split("T")
   const dateOk = dateSplit[0]
 
-  console.log(sellerImage);
   return (
     <div key={product_ID} className={styles.card}>
       <div className={styles.love}><FaHeart/></div>{/*poner funcionalidad para agregar card a fav*/}

@@ -17,7 +17,6 @@ const Payment = () => {
 
   const { monto, descripcion } = useParams();
 
-  console.log(monto + " " + descripcion + " ");
 
   useEffect(() => {
     setPaymentData({
