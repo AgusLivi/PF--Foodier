@@ -13,7 +13,19 @@
 	--secondaryColor: #db2b39;
 	--textColor: #fe9e0d;
 }
-
+.containerNotiCarrito{
+	position: relative;
+}
+.notiCarrito{
+	position: absolute;
+	top: 8px;
+	left: -10px;
+	z-index: 1000;
+	background-color: red;
+	border-radius: 25px;
+	width: 1em;
+	text-align: center;
+}
 header {
 
 	width: 100%;

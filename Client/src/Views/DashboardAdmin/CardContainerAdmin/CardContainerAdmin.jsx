@@ -4,21 +4,28 @@ import { useDispatch, useSelector } from "react-redux";
 import { getAllUser, getAllSeller } from '../../Redux/actions';
 
 
-const DashboardAdmin = () => {
+const CardContainerAdmin = () => {
     const dispatch = useDispatch()
     const users = useSelector((state) => state.users)
     const sellers = useSelector((state) => state.sellers)
 
     useEffect(() => {
-        dispatch(getAllSeller())
         dispatch(getAllUser())
+        dispatch(getAllSeller())
     }, [])
-    //hacer esto o hacer card aparte
-    return (
-        <div>
-            <h1>ola soy el dash</h1>
-        </div>
-    );
-}
 
-export default DashboardAdmin;
+    return(
+        <div>
+            {
+                users?.map((user, index) => (
+                    <CardAdmin 
+                    key={index}
+                    name={user.name}
+                    email={user.email}
+                    location={user.location} 
+                    />
+                ))
+            }
+        </div>
+    )
+}
