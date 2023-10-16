@@ -1,5 +1,5 @@
 //Login.jsx
-import React from "react";
+import React, { useEffect } from "react";
 import style from "./Login.module.css";
 import SignInGoogle from "../../Auths/AuthGoogle/SignInGoogle";
 import SignInFacebook from "../../Auths/AuthFacebook/SignInFacebook";
@@ -14,6 +14,11 @@ import { LiaFacebookSquare } from "react-icons/lia"
 import { TbUserSearch } from "react-icons/tb"
 
 const Login = () => {
+
+  useEffect(() => {
+    localStorage.setItem('isUser', 'false');
+  }, []);
+
   return (
     <>
  

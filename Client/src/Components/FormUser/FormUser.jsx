@@ -60,6 +60,7 @@ const FormLogin = () => {
       await dispatch(createUser(userData));
 
       if (Object.keys(formik.errors).length === 0) {
+        localStorage.setItem('isUser', 'true');
         navigate('/home');
       }
     } catch (error) {

@@ -49,11 +49,10 @@ router.delete('/posts/',  ) // user / admin
 router.put("/users/", userController.updateUser); //user
 router.delete("/users/", userController.deleteUser); // user
 router.get("/users/", userController.getUserById); //user
-
+router.get("/users/:admin_id", adminControler.getAllUsers);// admin
 
 // Rutas relacionadas a los vendedores
-router.put('/sellers/', sellerController.updateSeller); // seller
-router.delete('/sellers/', sellerController.deleteSeller); // seller
+router.put('/sellers/:seller_ID', sellerController.updateSeller); // seller
 
 // Rutas de favoritos
 router.post('/favorites/:id', favController.addFavorites); //user
