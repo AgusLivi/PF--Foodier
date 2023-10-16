@@ -1,4 +1,4 @@
-const { Seller, User, Product } = require("../db.js");
+const { Seller, User, Product, Post } = require("../db.js");
 
 // Obtener todos los vendedores
 const getAllSellers = async (req, res) => {
@@ -38,9 +38,21 @@ const deleteUser = async (req, res) => {
   if (!user_ID) return res.status(401).json("Seleccione un usuario")
   try {
 
-      const info = await User.findByPk(user_ID);
+      const info = await User.findByPk(user_ID, {
+        include: [
+          {
+            model: Post,
+          }
+        ]
+      });
       info.deleted = true;
-      info.save();
+      await info.save();
+
+      for (const post of info.Posts) {
+        post.deleted = true;
+        await post.save();
+      }
+
       return res
         .status(200)
         .send(`usuario ${info.name} eliminado correctamente`);
