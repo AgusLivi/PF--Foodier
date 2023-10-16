@@ -11,7 +11,7 @@ const Card = ({ name, description, price, old_price, image, amount, date, produc
   console.log(sellerImage);
   return (
     <div key={product_ID} className={styles.card}>
-      <div className={styles.love}><FaHeart/></div>
+      <div className={styles.love}><FaHeart/></div>{/*poner funcionalidad para agregar card a fav*/}
       <Link to={`/products/${product_ID}`} className={styles.containerInfo}>
       <div className={styles.containerInfoChild}>
         <div className={styles.containerImg}>  

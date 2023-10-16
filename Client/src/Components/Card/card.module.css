@@ -14,6 +14,7 @@
 }
 
 .card:hover{
+  transition: .3s all;
   scale: 1.1;
 }
 @media screen and (max-width: 1300px) {
@@ -32,10 +33,11 @@
   top: 0;
   right: 0;
   margin: 20px;
-  scale: 1.5;
-  color: #ff000030;
+  scale: 1.7;
+  color: #ff000090;
   z-index: 100;
   cursor: pointer;
+
 }
 .love:hover{
   scale: 2.5;
