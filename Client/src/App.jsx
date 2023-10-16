@@ -37,10 +37,10 @@ const App = () => {
     && location.pathname !== "/formcomercio"
     && location.pathname !== "/formuser"
     && location.pathname !== "/userlogin"
-    && location.pathname !== "/seller/:seller_ID"
+    && !location.pathname.startsWith("/seller/")
     && location.pathname !== '/politica-de-privacidad'
     && location.pathname !== "/terminos-y-condiciones"
-    && location.pathname !== "/products/:product_ID"
+    && !location.pathname.startsWith("/products/")
   ) {
     alert("Debes estar logueado como vendedor para crear un producto.");
     return <Navigate to="/login" />;
