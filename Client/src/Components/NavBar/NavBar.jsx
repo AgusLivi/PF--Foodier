@@ -36,7 +36,7 @@ function Navbar() {
         <a><FaMoneyBillAlt /></a>
         </Link>
         <Link to={`/carrito`}>
-        <a><FaShoppingCart />{cartCounter}</a>
+        <a className={styles.containerNotiCarrito}><FaShoppingCart /><p className={styles.notiCarrito}>{cartCounter}</p></a>
         
         </Link>
         <Link to={'/'}>
