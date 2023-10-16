@@ -13,6 +13,7 @@ const adminControler = require('../controllers/adminController.js');
 
 // const { borradoLogico } = require("../controllers/controladorPrueva");
 const JWTMiddleware = require("../fireMiddlewares/JWTMiddleware.js"); // token widdleware
+const autenticacion = require("../fireMiddlewares/fireMiddlewares.js")
 
 // **Rutas publicas**
 
@@ -32,7 +33,7 @@ router.post("/users", userController.createUser);
 router.post('/sellers', sellerController.createSeller);
 
 //**Rutas privadas**
-router.use(JWTMiddleware)
+router.use(autenticacion)
 
 // Rutas de productos
 router.delete("/products/:product_ID", productController.deleteProduct);  // borrar productos/ seller
