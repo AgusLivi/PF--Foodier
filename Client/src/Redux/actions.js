@@ -38,7 +38,16 @@ import {
   GET_CATEGORIES,
 } from "./actionsType";
 
-
+export const createPayment = (pay) => {
+  return async () => {
+    try {
+      const { data } = await axios.post(`/payments`, pay);
+      alert(`orden ${data} creado`);
+    } catch (error) {
+      alert(error.message);
+    }
+  };
+};
 
 //Products acctions
 
@@ -55,7 +64,7 @@ export const getProducts = (querys) => {
   };
 };
 
-export const deleteProduct = (product_ID) => {
+export const deleteProduct = (id) => {
   return async () => {
     try {
       const { data } = await axios.delete(`/products/${id}`); //definir las rutas del back
@@ -66,10 +75,10 @@ export const deleteProduct = (product_ID) => {
   };
 };
 
-export const getProductById = (product_ID) => {
+export const getProductById = (id) => {
   return async function (dispatch) {
-    console.log("Fetching product by ID:", product_ID);
-    const { data } = await axios(`/products/${product_ID}`);
+    console.log("Fetching product by ID:", id);
+    const { data } = await axios(`/products/${id}`);
     return dispatch({
       type: SEARCH_BY_ID,
       payload: data,
@@ -77,17 +86,17 @@ export const getProductById = (product_ID) => {
   };
 };
 
-export const cleanDetail = () => {
+export const cleanDetail = () => { // ??
   return {
     type: CLEAN_DETAIL,
   };
 };
 
-export const createProduct = (formmData, id) => {
+export const createProduct = (formmData,) => {
   console.log("form data: ", formmData.categories);
   return async () => {
     try {
-      const { data } = await axios.post(`/products/${id}`, formmData); // despues de la barra tengo que poner la ruta que definieron en el back
+      const { data } = await axios.post(`/products`, formmData); // despues de la barra tengo que poner la ruta que definieron en el back
       alert(`${data.name} fue creado correctamente`);
     } catch (error) {
       alert('Hubo un error', error.message);
@@ -109,7 +118,6 @@ export const getCategories = () => {
   };
 };
 
-
 // Location actions
 
 export const locationProvincia = () => {
@@ -121,7 +129,6 @@ export const locationProvincia = () => {
       return dispatch({
         type: PROVINCIAS,
         payload: data.provincias,
-
       });
     } catch (error) {
       alert(error.message);
@@ -138,14 +145,12 @@ export const locationMunicipio = (provId) => {
       return dispatch({
         type: MUNICIPIOS,
         payload: data.municipios,
-
       });
     } catch (error) {
       alert(error.message);
     }
   };
 };
-
 
 export const locationLocalidad = (muniId) => {
   return async (dispatch) => {
@@ -170,13 +175,11 @@ export const createUser = (userData) => {
     try {
       const { data } = await axios.post(`/users`, userData);
       alert(`Usuario ${data.name} creado correctamente`);
-
     } catch (error) {
       alert(error.message);
     }
   };
 };
-
 
 export const getAllFav = (id) => {
   //en realidad obtiene el fav del usuario
@@ -187,9 +190,8 @@ export const getAllFav = (id) => {
         type: GET_ALL_FAV,
         payload: data,
       });
-
     } catch (error) {
-      alert('Hubo un error', error.message);
+      alert(error.message);
     }
   };
 };
@@ -222,77 +224,12 @@ export const createPost = (post) => {
   };
 };
 
-// Location actions
-
-export const locationProvincia = () => {
+export const getAllPost = () => {
   return async (dispatch) => {
     try {
-      const { data } = await axios.get(
-        `https://apis.datos.gob.ar/georef/api/provincias`
-      );
+      const { data } = await axios.get(`/posts`);
       return dispatch({
-        type: PROVINCIAS,
-        payload: data.provincias,
-      });
-    } catch (error) {
-      alert(error.message);
-    }
-  };
-};
-
-export const locationMunicipio = (provId) => {
-  return async (dispatch) => {
-    try {
-      const { data } = await axios.get(
-        `https://apis.datos.gob.ar/georef/api/municipios?provincia=${provId}&campos=id,nombre&max=100`
-      );
-      return dispatch({
-        type: MUNICIPIOS,
-        payload: data.municipios,
-      });
-    } catch (error) {
-      alert(error.message);
-    }
-  };
-};
-
-export const locationLocalidad = (muniId) => {
-  return async (dispatch) => {
-    try {
-      const { data } = await axios.get(
-        `https://apis.datos.gob.ar/georef/api/localidades?municipio=${muniId}&campos=id,nombre&max=100`
-      );
-      return dispatch({
-        type: LOCALIDADES,
-        payload: data.localidades,
-      });
-    } catch (error) {
-      alert(error.message);
-    }
-  };
-};
-
-// User actions
-
-export const createUser = (userData) => {
-  return async () => {
-    try {
-      const { data } = await axios.post(`/users`, userData);
-      alert(`Usuario ${data.name} creado correctamente`);
-    } catch (error) {
-      alert(error.message);
-    }
-  };
-};
-
-
-export const getUserById = (id) => {
-
-  return async (dispatch) => {
-    try {
-      const { data } = await axios.post(`/favorites`, dataForm);
-      return dispatch({
-        type: POST_FAVORITES,
+        type: GET_POST,
         payload: data,
       });
     } catch (error) {
@@ -301,9 +238,57 @@ export const getUserById = (id) => {
   };
 };
 
+export const getPostById = (id) => {
+  return async (dispatch) => {
+    try {
+      const { data } = await axios.get(`/posts/${id}`);
+      return dispatch({
+        type: GET_POST_BY_ID,
+        payload: data,
+      });
+    } catch (error) {
+      alert(error.message);
+    }
+  };
+};
+
+export const updateUser = (updatedUserData) => {
+  return async () => {
+    try {
+      const { data } = await axios.put(`/users/`, updatedUserData);
+      alert(`Usuario ${data.name} actualizado correctamente`);
+    } catch (error) {
+      alert(error.message);
+    }
+  };
+};
+
+export const deleteUser = () => {
+  return async () => {
+    try {
+      const { data } = await axios.delete(`/users/`); //definir las rutas del back
+      alert(`Usuario ${data.name} borrado correctamente`);
+    } catch (error) {
+      alert(error.message);
+    }
+  };
+};
+
+export const getUserById = () => {
+  return async (dispatch) => {
+    try {
+      const { data } = await axios.get(`/users/`);
+      return dispatch({
+        type: GET_USER_BY_ID,
+        payload: data,
+      });
+    } catch (error) {
+      alert(error.message);
+    }
+  };
+};
 
 // Sellers actions
-
 export const createSeller = (sellerData) => {
   console.log(sellerData);
   return async () => {
@@ -316,10 +301,10 @@ export const createSeller = (sellerData) => {
   };
 };
 
-export const updateSeller = (id, updatedSellerData) => {
+export const updateSeller = (updatedSellerData) => {
   return async () => {
     try {
-      const { data } = await axios.put(`/sellers/${id}`, updatedSellerData);
+      const { data } = await axios.put(`/sellers/`, updatedSellerData);
       alert(`vendedor ${data.name} actualizado correctamente`);
     } catch (error) {
       alert(error.message);
@@ -327,15 +312,11 @@ export const updateSeller = (id, updatedSellerData) => {
   };
 };
 
-export const deleteSeller = (id) => {
+export const deleteSeller = () => {
   return async () => {
-
     try {
-      const { data } = await axios.post(`/posts`, post);
-      return dispatch({
-        type: CREATE_POST,
-        payload: data,
-      });
+      const { data } = await axios.delete(`/sellers/`); //definir las rutas del back
+      alert(`vendedor ${data.name} borrado correctamente`);
     } catch (error) {
       alert(error.message);
     }
@@ -343,12 +324,11 @@ export const deleteSeller = (id) => {
 };
 
 export const getSellerById = (id) => {
-
   return async (dispatch) => {
     try {
-      const { data } = await axios.get(`/posts/${id}`);
+      const { data } = await axios.get(`/sellers/${id}`);
       return dispatch({
-        type: GET_POST_BY_ID,
+        type: GET_SELLER_BY_ID,
         payload: data,
       });
     } catch (error) {
@@ -423,19 +403,7 @@ export const createPaymentRequest = (paymentData) => async (dispatch) => {
   }
 };
 
-export const createPayment = (pay) => {
-  return async () => {
-    try {
-      const { data } = await axios.post(`/payments`, pay);
-      alert(`orden ${data} creado`);
-    } catch (error) {
-      alert(error.message);
-    }
-  };
-};
-
 // Admin actions
-
 export const getAllSeller = () => {
   return async (dispatch) => {
     try {
@@ -487,4 +455,3 @@ export const banUser = (id) => {
     }
   }
 }
-
