@@ -38,134 +38,25 @@ import {
   GET_CATEGORIES,
 } from "./actionsType";
 
-// const  = 'http://localhost:3001'  //definir rutas del back
-
-export const getAllFav = (id) => {
-  //en realidad obtiene el fav del usuario
-  return async (dispatch) => {
-    try {
-      const { data } = await axios(`/favorites/${id}`); //definir despues como pusieron la ruta en el back
-      return dispatch({
-        type: GET_ALL_FAV,
-        payload: data,
-      });
-    } catch (error) {
-      alert(error.message);
-    }
-  };
-};
-
-export const postFav = (dataForm) => {
-  return async (dispatch) => {
-    try {
-      const { data } = await axios.post(`/favorites`, dataForm);
-      return dispatch({
-        type: POST_FAVORITES,
-        payload: data,
-      });
-    } catch (error) {
-      alert(error.message);
-    }
-  };
-};
-
-export const getSellerFav = (id) => {
-  return async (dispatch) => {
-    try {
-      const { data } = await axios.post(`/favorites/${id}`);
-      return dispatch({
-        type: GET_SELLER_FAV,
-        payload: data,
-      });
-    } catch (error) {
-      alert(error.message);
-    }
-  };
-};
+// export const getSellerFav = (id) => { // decatada
+//   return async (dispatch) => {
+//     try {
+//       const { data } = await axios.post(`/favorites/${id}`);
+//       return dispatch({
+//         type: GET_SELLER_FAV,
+//         payload: data,
+//       });
+//     } catch (error) {
+//       alert(error.message);
+//     }
+//   };
+// };
 
 export const createPayment = (pay) => {
   return async () => {
     try {
       const { data } = await axios.post(`/payments`, pay);
       alert(`orden ${data} creado`);
-    } catch (error) {
-      alert(error.message);
-    }
-  };
-};
-
-export const createPost = (post) => {
-  return async (dispatch) => {
-    try {
-      const { data } = await axios.post(`/posts`, post);
-      return dispatch({
-        type: CREATE_POST,
-        payload: data,
-      });
-    } catch (error) {
-      alert(error.message);
-    }
-  };
-};
-
-export const getCategories = () => {
-  return async (dispatch) => {
-    try {
-      const { data } = await axios.get(`/products/categories`);
-      return dispatch({
-        type: GET_CATEGORIES,
-        payload: data,
-      });
-    } catch (error) {
-      alert(error.message);
-    }
-  };
-};
-
-export const getAllPost = () => {
-  return async (dispatch) => {
-    try {
-      const { data } = await axios.get(`/posts`);
-      return dispatch({
-        type: GET_POST,
-        payload: data,
-      });
-    } catch (error) {
-      alert(error.message);
-    }
-  };
-};
-
-export const getPostById = (id) => {
-  return async (dispatch) => {
-    try {
-      const { data } = await axios.get(`/posts/${id}`);
-      return dispatch({
-        type: GET_POST_BY_ID,
-        payload: data,
-      });
-    } catch (error) {
-      alert(error.message);
-    }
-  };
-};
-
-export const updateUser = (id, updatedUserData) => {
-  return async () => {
-    try {
-      const { data } = await axios.put(`/users/${id}`, updatedUserData);
-      alert(`Usuario ${data.name} actualizado correctamente`);
-    } catch (error) {
-      alert(error.message);
-    }
-  };
-};
-
-export const deleteUser = (id) => {
-  return async () => {
-    try {
-      const { data } = await axios.delete(`/users/${id}`); //definir las rutas del back
-      alert(`Usuario ${data.name} borrado correctamente`);
     } catch (error) {
       alert(error.message);
     }
@@ -186,54 +77,6 @@ export const getAllUser = () => {
   };
 };
 
-export const getUserById = (id) => {
-  return async (dispatch) => {
-    try {
-      const { data } = await axios.get(`/users/${id}`);
-      return dispatch({
-        type: GET_USER_BY_ID,
-        payload: data,
-      });
-    } catch (error) {
-      alert(error.message);
-    }
-  };
-};
-
-export const createSeller = (sellerData) => {
-  console.log(sellerData);
-  return async () => {
-    try {
-      const { data } = await axios.post(`/sellers`, sellerData);
-      alert(`vendedor ${data.name} creado correctamente`);
-    } catch (error) {
-      alert(error.message);
-    }
-  };
-};
-
-export const updateSeller = (id, updatedSellerData) => {
-  return async () => {
-    try {
-      const { data } = await axios.put(`/sellers/${id}`, updatedSellerData);
-      alert(`vendedor ${data.name} actualizado correctamente`);
-    } catch (error) {
-      alert(error.message);
-    }
-  };
-};
-
-export const deleteSeller = (id) => {
-  return async () => {
-    try {
-      const { data } = await axios.delete(`/sellers/${id}`); //definir las rutas del back
-      alert(`vendedor ${data.name} borrado correctamente`);
-    } catch (error) {
-      alert(error.message);
-    }
-  };
-};
-
 export const getAllSeller = () => {
   return async (dispatch) => {
     try {
@@ -248,19 +91,7 @@ export const getAllSeller = () => {
   };
 };
 
-export const getSellerById = (id) => {
-  return async (dispatch) => {
-    try {
-      const { data } = await axios.get(`/sellers/${id}`);
-      return dispatch({
-        type: GET_SELLER_BY_ID,
-        payload: data,
-      });
-    } catch (error) {
-      alert(error.message);
-    }
-  };
-};
+
 
 //Products acctions
 
@@ -277,8 +108,8 @@ export const getProducts = (querys) => {
   };
 };
 
-export const deleteProduct = (id) => {
-  return async (dispatch) => {
+export const deleteProduct = (product_ID) => {
+  return async () => {
     try {
       const { data } = await axios.delete(`/products/${id}`); //definir las rutas del back
       alert(`${data.name} fue borrado correctamente`);
@@ -313,6 +144,20 @@ export const createProduct = (formmData, id) => {
       alert(`${data.name} fue creado correctamente`);
     } catch (error) {
       alert('Hubo un error', error.message);
+    }
+  };
+};
+
+export const getCategories = () => {
+  return async (dispatch) => {
+    try {
+      const { data } = await axios.get(`/products/categories`);
+      return dispatch({
+        type: GET_CATEGORIES,
+        payload: data,
+      });
+    } catch (error) {
+      alert(error.message);
     }
   };
 };
@@ -374,6 +219,163 @@ export const createUser = (userData) => {
     try {
       const { data } = await axios.post(`/users`, userData);
       alert(`Usuario ${data.name} creado correctamente`);
+    } catch (error) {
+      alert(error.message);
+    }
+  };
+};
+
+export const getAllFav = (id) => {
+  //en realidad obtiene el fav del usuario
+  return async (dispatch) => {
+    try {
+      const { data } = await axios(`/favorites/${id}`); //definir despues como pusieron la ruta en el back
+      return dispatch({
+        type: GET_ALL_FAV,
+        payload: data,
+      });
+    } catch (error) {
+      alert(error.message);
+    }
+  };
+};
+
+export const postFav = (dataForm) => {
+  return async (dispatch) => {
+    try {
+      const { data } = await axios.post(`/favorites`, dataForm);
+      return dispatch({
+        type: POST_FAVORITES,
+        payload: data,
+      });
+    } catch (error) {
+      alert(error.message);
+    }
+  };
+};
+
+export const createPost = (post) => {
+  return async (dispatch) => {
+    try {
+      const { data } = await axios.post(`/posts`, post);
+      return dispatch({
+        type: CREATE_POST,
+        payload: data,
+      });
+    } catch (error) {
+      alert(error.message);
+    }
+  };
+};
+
+export const getAllPost = () => {
+  return async (dispatch) => {
+    try {
+      const { data } = await axios.get(`/posts`);
+      return dispatch({
+        type: GET_POST,
+        payload: data,
+      });
+    } catch (error) {
+      alert(error.message);
+    }
+  };
+};
+
+export const getPostById = (id) => {
+  return async (dispatch) => {
+    try {
+      const { data } = await axios.get(`/posts/${id}`);
+      return dispatch({
+        type: GET_POST_BY_ID,
+        payload: data,
+      });
+    } catch (error) {
+      alert(error.message);
+    }
+  };
+};
+
+export const updateUser = (id, updatedUserData) => {
+  return async () => {
+    try {
+      const { data } = await axios.put(`/users/${id}`, updatedUserData);
+      alert(`Usuario ${data.name} actualizado correctamente`);
+    } catch (error) {
+      alert(error.message);
+    }
+  };
+};
+
+export const deleteUser = (id) => {
+  return async () => {
+    try {
+      const { data } = await axios.delete(`/users/${id}`); //definir las rutas del back
+      alert(`Usuario ${data.name} borrado correctamente`);
+    } catch (error) {
+      alert(error.message);
+    }
+  };
+};
+
+export const getUserById = (id) => {
+  return async (dispatch) => {
+    try {
+      const { data } = await axios.get(`/users/${id}`);
+      return dispatch({
+        type: GET_USER_BY_ID,
+        payload: data,
+      });
+    } catch (error) {
+      alert(error.message);
+    }
+  };
+};
+
+// Sellers actions
+
+export const createSeller = (sellerData) => {
+  console.log(sellerData);
+  return async () => {
+    try {
+      const { data } = await axios.post(`/sellers`, sellerData);
+      alert(`vendedor ${data.name} creado correctamente`);
+    } catch (error) {
+      alert(error.message);
+    }
+  };
+};
+
+export const updateSeller = (id, updatedSellerData) => {
+  return async () => {
+    try {
+      const { data } = await axios.put(`/sellers/${id}`, updatedSellerData);
+      alert(`vendedor ${data.name} actualizado correctamente`);
+    } catch (error) {
+      alert(error.message);
+    }
+  };
+};
+
+export const deleteSeller = (id) => {
+  return async () => {
+    try {
+      const { data } = await axios.delete(`/sellers/${id}`); //definir las rutas del back
+      alert(`vendedor ${data.name} borrado correctamente`);
+    } catch (error) {
+      alert(error.message);
+    }
+  };
+};
+
+export const getSellerById = (id) => {
+  return async (dispatch) => {
+    try {
+      const { data } = await axios.get(`/sellers/${id}`);
+      return dispatch({
+        type: GET_SELLER_BY_ID,
+        payload: data,
+      });
     } catch (error) {
       alert(error.message);
     }
@@ -462,3 +464,13 @@ export const createPaymentRequest = (paymentData) => async (dispatch) => {
     });
   }
 };
+
+// Admin actions
+
+export const banUser = (id) => {
+  try {
+    
+  } catch (error) {
+    
+  }
+}
