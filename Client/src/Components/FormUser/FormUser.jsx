@@ -1,8 +1,13 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useFormik } from 'formik';
 import { useDispatch, useSelector } from 'react-redux';
-import { createUser, locationLocalidad, locationMunicipio, locationProvincia } from '../../Redux/actions';
+import {
+  createUser,
+  locationLocalidad,
+  locationMunicipio,
+  locationProvincia,
+} from '../../Redux/actions';
 import style from './FormUser.module.css';
 import wave from '../../assets/wave.svg';
 
@@ -16,24 +21,28 @@ const FormLogin = () => {
 
   useEffect(() => {
     dispatch(locationProvincia());
-   }, []);
+  }, []);
 
-   const handleProvinciaChange = (event) => {
-    const selectedProvinciaId = event.target.options[event.target.selectedIndex].getAttribute("data-id");
+  const handleProvinciaChange = (event) => {
+    const selectedProvinciaId = event.target.options[event.target.selectedIndex].getAttribute('data-id');
     dispatch(locationMunicipio(selectedProvinciaId));
-
-    formik.handleChange(event)
-  }; 
+    formik.handleChange(event);
+  };
 
   const handleMuniChange = (event) => {
-    const selectedMunicipioId = event.target.options[event.target.selectedIndex].getAttribute("data-id");
+    const selectedMunicipioId = event.target.options[event.target.selectedIndex].getAttribute('data-id');
     dispatch(locationLocalidad(selectedMunicipioId));
-
-    formik.handleChange(event)
+    formik.handleChange(event);
   };
 
   const handleLocalChange = (event) => {
-      formik.handleChange(event)
+    formik.handleChange(event);
+    handleInputChange('localidad'); // Ocultar el h5 cuando se selecciona una localidad
+  };
+
+  const handlePasswordChange = (event) => {
+    formik.handleChange(event);
+    handleInputChange('password');
   };
 
   const submitForm = async (values) => {
@@ -71,15 +80,14 @@ const FormLogin = () => {
     if (!values.password) {
       errors.password = 'La contraseña es obligatoria';
     } else if (!/(?=.*[A-Z])(?=.*\d)/.test(values.password)) {
-      errors.password =
-        'La contraseña debe contener al menos una mayúscula y un número';
+      errors.password = 'La contraseña debe contener al menos una mayúscula y un número';
     }
 
     if (!values.provincia) {
       errors.provincia = 'La provincia es obligatoria';
     }
     if (!values.municipio) {
-      errors.municipio = 'El municipio es obligatoria';
+      errors.municipio = 'El municipio es obligatorio';
     }
     if (!values.localidad) {
       errors.localidad = 'La localidad es obligatoria';
@@ -101,6 +109,17 @@ const FormLogin = () => {
     validate: validateForm,
   });
 
+  const [hideH5, setHideH5] = useState({
+    name: false,
+    email: false,
+    password: false,
+    localidad: false,
+  });
+
+  const handleInputChange = (field) => {
+    setHideH5({ ...hideH5, [field]: true });
+  };
+
   return (
     <div>
       <img className={style.wave} src={wave} alt="Wave" />
@@ -112,12 +131,15 @@ const FormLogin = () => {
             <div className={style['input-div'] + ' ' + style.one}>
               <div className={style.i}></div>
               <div className={style.div}>
-                <h5>Nombre</h5>
+                <h5 style={{ display: hideH5.name ? 'none' : 'block' }}>Nombre</h5>
                 <input
                   type="text"
                   className={style.input}
                   name="name"
-                  onChange={formik.handleChange}
+                  onChange={(e) => {
+                    formik.handleChange(e);
+                    handleInputChange('name');
+                  }}
                   onBlur={formik.handleBlur}
                   value={formik.values.name}
                 />
@@ -130,12 +152,15 @@ const FormLogin = () => {
             <div className={style['input-div'] + ' ' + style.one}>
               <div className={style.i}></div>
               <div className={style.div}>
-                <h5>Email</h5>
+                <h5 style={{ display: hideH5.email ? 'none' : 'block' }}>Email</h5>
                 <input
                   type="email"
                   className={style.input}
                   name="email"
-                  onChange={formik.handleChange}
+                  onChange={(e) => {
+                    formik.handleChange(e);
+                    handleInputChange('email');
+                  }}
                   onBlur={formik.handleBlur}
                   value={formik.values.email}
                 />
@@ -148,21 +173,18 @@ const FormLogin = () => {
             <div className={style['input-div'] + ' ' + style.pass}>
               <div className={style.i}></div>
               <div className={style.div}>
-                <h5>Dirección</h5>
-                
+                <h5>Provincia</h5>
                 <select
                   className={style.input}
                   name="provincia"
                   onChange={handleProvinciaChange}
                   onBlur={formik.handleBlur}
                   value={formik.values.provincia}
-                  >
-                  <option value="" disabled selected>
-                    Selecciona una provincia
-                  </option>
+                >
+                  <option value="" disabled></option>
                   {provincias.length ? (
                     provincias.map((prov) => (
-                      <option key={prov.id} value={prov.nombre}  data-id={prov.id} >
+                      <option key={prov.id} value={prov.nombre} data-id={prov.id}>
                         {prov.nombre}
                       </option>
                     ))
@@ -170,64 +192,57 @@ const FormLogin = () => {
                     <option>Selecciona una provincia</option>
                   )}
                 </select>
+              </div>
+            </div>
 
-                {municipios.length > 0 && (
-                  <select className={style.input}
+            <div className={style['input-div'] + ' ' + style.pass}>
+              <div className={style.i}></div>
+              <div className={style.div}>
+                <h5>Municipio</h5>
+                <select
+                  className={style.input}
                   name="municipio"
                   onChange={handleMuniChange}
                   onBlur={formik.handleBlur}
-                  value={formik.values.municipio}>
-                    <option value="" disabled selected>
-                      Selecciona un municipio
-                    </option>
-                    {municipios.length ? (
-                      municipios.map((muni) => (
-                        <option data-id={muni.id} key={muni.id} value={muni.nombre}>
-                          {muni.nombre}
-                        </option>
-                      ))
-                    ) : (
-                      <option>Selecciona un municipio</option>
-                    )}
-                  </select>
-                )}
+                  value={formik.values.municipio}
+                >
+                  <option value="" disabled></option>
+                  {municipios.length ? (
+                    municipios.map((muni) => (
+                      <option data-id={muni.id} key={muni.id} value={muni.nombre}>
+                        {muni.nombre}
+                      </option>
+                    ))
+                  ) : (
+                    <option>Selecciona un municipio</option>
+                  )}
+                </select>
+              </div>
+            </div>
 
-                {localidades.length > 0 && (
-                  <select 
+            <div className={style['input-div'] + ' ' + style.pass}>
+              <div className={style.i}></div>
+              <div className={style.div}>
+                <h5>Localidad</h5>
+                <select
                   className={style.input}
                   name="localidad"
                   onChange={handleLocalChange}
                   onBlur={formik.handleBlur}
                   value={formik.values.localidad}
-                  >
-                    <option value="" disabled selected>
-                      Selecciona una localidad
-                    </option>
-                    {localidades.length ? (
-                      localidades.map((local) => (
-                        <option data-id={local.id} key={local.id} value={local.nombre}>
-                          {local.nombre}
-                        </option>
-                      ))
-                    ) : (
-                      <option>Selecciona una localidad</option>
-                    )}
-                  </select>
-                )}
-
-                
-                {/* <input
-                  type="text"
-                  className={style.input}
-                  name="location"
-                  onChange={formik.handleChange}
-                  onBlur={formik.handleBlur}
-                  value={formik.values.location}
-                /> */}
+                >
+                  <option value="" disabled></option>
+                  {localidades.length ? (
+                    localidades.map((local) => (
+                      <option data-id={local.id} key={local.id} value={local.nombre}>
+                        {local.nombre}
+                      </option>
+                    ))
+                  ) : (
+                    <option>Selecciona una localidad</option>
+                  )}
+                </select>
               </div>
-              {formik.touched.location && formik.errors.location && (
-                <div className={style.error}>{formik.errors.location}</div>
-              )}
             </div>
 
             <div className={style['input-div'] + ' ' + style.pass}>
@@ -238,7 +253,7 @@ const FormLogin = () => {
                   type="password"
                   className={style.input}
                   name="password"
-                  onChange={formik.handleChange}
+                  onChange={handlePasswordChange}
                   onBlur={formik.handleBlur}
                   value={formik.values.password}
                 />
