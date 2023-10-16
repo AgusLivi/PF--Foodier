@@ -27,22 +27,24 @@ const FormLogin = () => {
     const selectedProvinciaId = event.target.options[event.target.selectedIndex].getAttribute('data-id');
     dispatch(locationMunicipio(selectedProvinciaId));
     formik.handleChange(event);
+    formik.setFieldTouched('provincia', true);
   };
 
   const handleMuniChange = (event) => {
     const selectedMunicipioId = event.target.options[event.target.selectedIndex].getAttribute('data-id');
     dispatch(locationLocalidad(selectedMunicipioId));
     formik.handleChange(event);
+    formik.setFieldTouched('municipio', true);
   };
 
   const handleLocalChange = (event) => {
     formik.handleChange(event);
-    handleInputChange('localidad'); // Ocultar el h5 cuando se selecciona una localidad
+    formik.setFieldTouched('localidad', true);
   };
 
   const handlePasswordChange = (event) => {
     formik.handleChange(event);
-    handleInputChange('password');
+    formik.setFieldTouched('password', true);
   };
 
   const submitForm = async (values) => {
@@ -57,8 +59,8 @@ const FormLogin = () => {
       await dispatch(createUser(userData));
 
       if (Object.keys(formik.errors).length === 0) {
+        navigate('/home');
       }
-      navigate('/home');
     } catch (error) {
       console.error(error);
     }
@@ -109,15 +111,8 @@ const FormLogin = () => {
     validate: validateForm,
   });
 
-  const [hideH5, setHideH5] = useState({
-    name: false,
-    email: false,
-    password: false,
-    localidad: false,
-  });
-
   const handleInputChange = (field) => {
-    setHideH5({ ...hideH5, [field]: true });
+    formik.setFieldTouched(field, true);
   };
 
   return (
@@ -131,7 +126,7 @@ const FormLogin = () => {
             <div className={style['input-div'] + ' ' + style.one}>
               <div className={style.i}></div>
               <div className={style.div}>
-                <h5 style={{ display: hideH5.name ? 'none' : 'block' }}>Nombre</h5>
+                <h5 style={{ display: formik.touched.name ? 'none' : 'block' }}>Nombre</h5>
                 <input
                   type="text"
                   className={style.input}
@@ -152,7 +147,7 @@ const FormLogin = () => {
             <div className={style['input-div'] + ' ' + style.one}>
               <div className={style.i}></div>
               <div className={style.div}>
-                <h5 style={{ display: hideH5.email ? 'none' : 'block' }}>Email</h5>
+                <h5 style={{ display: formik.touched.email ? 'none' : 'block' }}>Email</h5>
                 <input
                   type="email"
                   className={style.input}
@@ -173,18 +168,25 @@ const FormLogin = () => {
             <div className={style['input-div'] + ' ' + style.pass}>
               <div className={style.i}></div>
               <div className={style.div}>
-                <h5>Provincia</h5>
+                <h5 style={{ display: formik.touched.provincia ? 'none' : 'block' }}>Provincia</h5>
                 <select
                   className={style.input}
                   name="provincia"
-                  onChange={handleProvinciaChange}
+                  onChange={(e) => {
+                    handleProvinciaChange(e);
+                    handleInputChange('provincia');
+                  }}
                   onBlur={formik.handleBlur}
                   value={formik.values.provincia}
                 >
                   <option value="" disabled></option>
                   {provincias.length ? (
                     provincias.map((prov) => (
-                      <option key={prov.id} value={prov.nombre} data-id={prov.id}>
+                      <option
+                        key={prov.id}
+                        value={prov.nombre}
+                        data-id={prov.id}
+                      >
                         {prov.nombre}
                       </option>
                     ))
@@ -193,16 +195,22 @@ const FormLogin = () => {
                   )}
                 </select>
               </div>
+              {formik.touched.provincia && formik.errors.provincia && (
+                <div className={style.error}>{formik.errors.provincia}</div>
+              )}
             </div>
 
             <div className={style['input-div'] + ' ' + style.pass}>
               <div className={style.i}></div>
               <div className={style.div}>
-                <h5>Municipio</h5>
+                <h5 style={{ display: formik.touched.municipio ? 'none' : 'block' }}>Municipio</h5>
                 <select
                   className={style.input}
                   name="municipio"
-                  onChange={handleMuniChange}
+                  onChange={(e) => {
+                    handleMuniChange(e);
+                    handleInputChange('municipio');
+                  }}
                   onBlur={formik.handleBlur}
                   value={formik.values.municipio}
                 >
@@ -218,16 +226,22 @@ const FormLogin = () => {
                   )}
                 </select>
               </div>
+              {formik.touched.municipio && formik.errors.municipio && (
+                <div className={style.error}>{formik.errors.municipio}</div>
+              )}
             </div>
 
             <div className={style['input-div'] + ' ' + style.pass}>
               <div className={style.i}></div>
               <div className={style.div}>
-                <h5>Localidad</h5>
+                <h5 style={{ display: formik.touched.localidad ? 'none' : 'block' }}>Localidad</h5>
                 <select
                   className={style.input}
                   name="localidad"
-                  onChange={handleLocalChange}
+                  onChange={(e) => {
+                    handleLocalChange(e);
+                    handleInputChange('localidad');
+                  }}
                   onBlur={formik.handleBlur}
                   value={formik.values.localidad}
                 >
@@ -243,17 +257,23 @@ const FormLogin = () => {
                   )}
                 </select>
               </div>
+              {formik.touched.localidad && formik.errors.localidad && (
+                <div className={style.error}>{formik.errors.localidad}</div>
+              )}
             </div>
 
             <div className={style['input-div'] + ' ' + style.pass}>
               <div className={style.i}></div>
               <div className={style.div}>
-                <h5>Contraseña</h5>
+                <h5 style={{ display: formik.touched.password ? 'none' : 'block' }}>Contraseña</h5>
                 <input
                   type="password"
                   className={style.input}
                   name="password"
-                  onChange={handlePasswordChange}
+                  onChange={(e) => {
+                    handlePasswordChange(e);
+                    handleInputChange('password');
+                  }}
                   onBlur={formik.handleBlur}
                   value={formik.values.password}
                 />
@@ -272,3 +292,4 @@ const FormLogin = () => {
 };
 
 export default FormLogin;
+
