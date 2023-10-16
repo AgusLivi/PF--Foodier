@@ -1,5 +1,4 @@
 const mercadopago = require('mercadopago');
-const endPoint = 'http://localhost:5173'
 
 // Controlador para crear un pago
 const createPayment = async (req, res) => {
@@ -16,9 +15,9 @@ const createPayment = async (req, res) => {
         },
       ],
       back_urls: {
-        success: `${endPoint}/payments/success`, // URL de éxito
-        failure: `${endPoint}/payments/failure`, // URL de fallo
-        pending: `${endPoint}/payments/pending`, // URL intermedia
+        success: `${process.env.FRONT_URL}/payments/success`, // URL de éxito
+        failure: `${process.env.FRONT_URL}/payments/failure`, // URL de fallo
+        pending: `${process.env.FRONT_URL}/payments/pending`, // URL intermedia
       },
     };
 
