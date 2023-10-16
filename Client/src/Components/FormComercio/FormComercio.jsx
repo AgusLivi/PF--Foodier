@@ -1,14 +1,19 @@
-import React, { useEffect, useState } from 'react';
-import { createRoutesFromChildren, useNavigate } from 'react-router-dom';
-import { useFormik } from 'formik';
-import { createSeller, locationLocalidad, locationMunicipio, locationProvincia } from '../../Redux/actions';
-import { useDispatch, useSelector } from 'react-redux';
-import style from './FormComercio.module.css';
-import wave from '../../assets/wave.svg';
-import uploadImage from '../../helperCloudinary/helperCloudinary';
-import { FormGroup, Input } from 'reactstrap';
+import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { useFormik } from "formik";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  createUser,
+  locationLocalidad,
+  locationMunicipio,
+  locationProvincia,
+} from "../../Redux/actions";
+import style from "./FormComercio.module.css";
+import wave from "../../assets/wave.svg";
+import uploadImage from "../../helperCloudinary/helperCloudinary";
+import { FormGroup, Input } from "reactstrap";
 
-const FormComercio = () => {
+const FormLogin = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
@@ -16,119 +21,94 @@ const FormComercio = () => {
   const municipios = useSelector((state) => state.municipios);
   const localidades = useSelector((state) => state.localidades);
 
-  //Estados de Cloudinary
-  const [loading, setLoading] = useState(false);
-
   useEffect(() => {
     dispatch(locationProvincia());
   }, []);
 
   const handleProvinciaChange = (event) => {
-    const selectedProvinciaId = event.target.options[event.target.selectedIndex].getAttribute("data-id");
+    const selectedProvinciaId =
+      event.target.options[event.target.selectedIndex].getAttribute("data-id");
     dispatch(locationMunicipio(selectedProvinciaId));
-
-    formik.handleChange(event)
+    formik.handleChange(event);
+    formik.setFieldTouched("provincia", true);
   };
 
   const handleMuniChange = (event) => {
-    const selectedMunicipioId = event.target.options[event.target.selectedIndex].getAttribute("data-id");
+    const selectedMunicipioId =
+      event.target.options[event.target.selectedIndex].getAttribute("data-id");
     dispatch(locationLocalidad(selectedMunicipioId));
-
-    formik.handleChange(event)
+    formik.handleChange(event);
+    formik.setFieldTouched("municipio", true);
   };
 
   const handleLocalChange = (event) => {
-    formik.handleChange(event)
+    formik.handleChange(event);
+    formik.setFieldTouched("localidad", true);
   };
 
-  const handlePaymentChange = (event) => {
-    const selectedValue = event.target.value;
-    const updatedPayments = [...formik.values.payment];
-
-    if (updatedPayments.includes(selectedValue)) {
-      // Si ya está seleccionado, quitarlo
-      const index = updatedPayments.indexOf(selectedValue);
-      if (index > -1) {
-        updatedPayments.splice(index, 1);
-      }
-    } else {
-      // Si no está seleccionado, agregarlo
-      updatedPayments.push(selectedValue);
-    }
-
-    formik.setFieldValue('payment', updatedPayments); // Actualizar el campo "payment"
+  const handlerCloudinary = async (event) => {
+    setLoading(true);
+    const imagenCargada = await uploadImage(event);
+    formik.setFieldValue("image", imagenCargada);
+    setLoading(false);
   };
 
+  const [loading, setLoading] = useState(false);
 
   const submitForm = async (values) => {
     try {
-      const sellerData = {
+      setLoading(true);
+      const userData = {
         name: values.name,
         email: values.email,
-        address: `${values.provincia}, ${values.municipio}, ${values.localidad}, ${values.calle}, ${values.numero}`,
         password: values.password,
-        time: values.time,
-        contact: values.contact,
-        payment: values.payment,
+        location: `${values.provincia}, ${values.municipio}, ${values.localidad}`,
         image: values.image,
+        phone: values.phone,
       };
-      console.log(sellerData.address);
-      await dispatch(createSeller(sellerData));
-      navigate('/home');
+
+      await dispatch(createUser(userData));
+
+      setLoading(false);
+      navigate("/home");
     } catch (error) {
+      setLoading(false);
       console.error(error);
     }
   };
 
   const validateForm = (values) => {
     const errors = {};
-    console.log(values);
+
     if (!values.name) {
-      errors.name = 'El nombre es obligatorio';
+      errors.name = "El nombre es obligatorio";
     }
 
     if (!values.email) {
-      errors.email = 'El correo es obligatorio';
+      errors.email = "El correo es obligatorio";
     } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(values.email)) {
-      errors.email = 'Formato de correo electrónico inválido';
-    }
-
-    if (!values.provincia) {
-      errors.provincia = 'La provincia es obligatoria';
-    }
-    if (!values.municipio) {
-      errors.municipio = 'El municipio es obligatoria';
-    }
-    if (!values.localidad) {
-      errors.localidad = 'La localidad es obligatoria';
-    }
-    if (!values.calle) {
-      errors.calle = 'La calle es obligatoria';
-    }
-    if (!values.numero) {
-      errors.numero = 'El numero es obligatoria';
-    }
-
-    if (!values.contact) {
-      errors.contact = 'El teléfono es obligatorio';
+      errors.email = "Formato de correo electrónico inválido";
     }
 
     if (!values.password) {
-      errors.password = 'La contraseña es obligatoria';
+      errors.password = "La contraseña es obligatoria";
     } else if (!/(?=.*[A-Z])(?=.*\d)/.test(values.password)) {
-      errors.password = 'La contraseña debe contener al menos una mayúscula y un número';
+      errors.password =
+        "La contraseña debe contener al menos una mayúscula y un número";
     }
 
-    if (!values.time) {
-      errors.time = 'El horario es obligatorio';
+    if (!values.provincia) {
+      errors.provincia = "La provincia es obligatoria";
+    }
+    if (!values.municipio) {
+      errors.municipio = "El municipio es obligatorio";
+    }
+    if (!values.localidad) {
+      errors.localidad = "La localidad es obligatoria";
     }
 
-    if (!values.payment) {
-      errors.payment = 'Los métodos de pago son obligatorios';
-    }
-
-    if (!values.image) {
-      errors.image = 'La imagen es obligatoria';
+    if (!values.phone) {
+      errors.phone = "El teléfono es obligatorio";
     }
 
     return errors;
@@ -136,47 +116,49 @@ const FormComercio = () => {
 
   const formik = useFormik({
     initialValues: {
-      name: '',
-      email: '',
-      provincia: '',
-      municipio: '',
-      localidad: '',
-      calle: '',
-      numero: '',
-      contact: '',
-      password: '',
-      time: '',
-      payment: [],
-      image: '',
+      name: "",
+      email: "",
+      password: "",
+      provincia: "",
+      municipio: "",
+      localidad: "",
+      phone: "",
+      image: "", // Campo para Cloudinary
     },
     onSubmit: submitForm,
     validate: validateForm,
   });
 
-  const handlerCloudinary = async (event) => {
-    setLoading(true);
-    const imagenCargada = await uploadImage(event);
-    formik.setFieldValue('image', imagenCargada);
-    setLoading(false);
+  const handleInputChange = (field) => {
+    formik.setFieldTouched(field, true);
   };
-  console.log('formik: ', formik);
+
   return (
     <div>
       <img className={style.wave} src={wave} alt="Wave" />
       <div className={style.container}>
         <div className={style.img}></div>
-        <div className={style['login-content']}>
-          <form onSubmit={formik.handleSubmit} action="index.html" className={style.form}>
+        <div className={style["login-content"]}>
+          <form
+            onSubmit={formik.handleSubmit}
+            action="index.html"
+            className={style.form}
+          >
             <h2 className={style.title}>Sign Up</h2>
-            <div className={style['input-div'] + ' ' + style.one}>
+            <div className={style["input-div"] + " " + style.one}>
               <div className={style.i}></div>
               <div className={style.div}>
-                <h5>Nombre</h5>
+                <h5 style={{ display: formik.touched.name ? "none" : "block" }}>
+                  Nombre
+                </h5>
                 <input
                   type="text"
                   className={style.input}
                   name="name"
-                  onChange={formik.handleChange}
+                  onChange={(e) => {
+                    formik.handleChange(e);
+                    handleInputChange("name");
+                  }}
                   onBlur={formik.handleBlur}
                   value={formik.values.name}
                 />
@@ -186,15 +168,22 @@ const FormComercio = () => {
               )}
             </div>
 
-            <div className={style['input-div'] + ' ' + style.one}>
+            <div className={style["input-div"] + " " + style.one}>
               <div className={style.i}></div>
               <div className={style.div}>
-                <h5>Email</h5>
+                <h5
+                  style={{ display: formik.touched.email ? "none" : "block" }}
+                >
+                  Email
+                </h5>
                 <input
                   type="email"
                   className={style.input}
                   name="email"
-                  onChange={formik.handleChange}
+                  onChange={(e) => {
+                    formik.handleChange(e);
+                    handleInputChange("email");
+                  }}
                   onBlur={formik.handleBlur}
                   value={formik.values.email}
                 />
@@ -204,25 +193,34 @@ const FormComercio = () => {
               )}
             </div>
 
-            <div className={style['input-div'] + ' ' + style.pass}>
+            <div className={style["input-div"] + " " + style.pass}>
               <div className={style.i}></div>
               <div className={style.div}>
-                <h5>Dirección</h5>
-
-
+                <h5
+                  style={{
+                    display: formik.touched.provincia ? "none" : "block",
+                  }}
+                >
+                  Provincia
+                </h5>
                 <select
                   className={style.input}
                   name="provincia"
-                  onChange={handleProvinciaChange}
+                  onChange={(e) => {
+                    handleProvinciaChange(e);
+                    handleInputChange("provincia");
+                  }}
                   onBlur={formik.handleBlur}
                   value={formik.values.provincia}
                 >
-                  <option value="" disabled selected>
-                    Selecciona una provincia
-                  </option>
+                  <option value="" disabled></option>
                   {provincias.length ? (
                     provincias.map((prov) => (
-                      <option key={prov.id} value={prov.nombre} data-id={prov.id} >
+                      <option
+                        key={prov.id}
+                        value={prov.nombre}
+                        data-id={prov.id}
+                      >
                         {prov.nombre}
                       </option>
                     ))
@@ -230,163 +228,137 @@ const FormComercio = () => {
                     <option>Selecciona una provincia</option>
                   )}
                 </select>
-
-                {municipios.length > 0 && (
-                  <select className={style.input}
-                    name="municipio"
-                    onChange={handleMuniChange}
-                    onBlur={formik.handleBlur}
-                    value={formik.values.municipio}>
-                    <option value="" disabled selected>
-                      Selecciona un municipio
-                    </option>
-                    {municipios.length ? (
-                      municipios.map((muni) => (
-                        <option data-id={muni.id} key={muni.id} value={muni.nombre}>
-                          {muni.nombre}
-                        </option>
-                      ))
-                    ) : (
-                      <option>Selecciona un municipio</option>
-                    )}
-                  </select>
-                )}
-
-                {localidades.length > 0 && (
-                  <select
-                    className={style.input}
-                    name="localidad"
-                    onChange={handleLocalChange}
-                    onBlur={formik.handleBlur}
-                    value={formik.values.localidad}
-                  >
-                    <option value="" disabled selected>
-                      Selecciona una localidad
-                    </option>
-                    {localidades.length ? (
-                      localidades.map((local) => (
-                        <option data-id={local.id} key={local.id} value={local.nombre}>
-                          {local.nombre}
-                        </option>
-                      ))
-                    ) : (
-                      <option>Selecciona una localidad</option>
-                    )}
-                  </select>
-                )}
-
-
-                <input
-                  type="text"
-                  className={style.input}
-                  name="calle"
-                  onChange={formik.handleChange}
-                  onBlur={formik.handleBlur}
-                  value={formik.values.calle}
-                />
-                <input
-                  type="text"
-                  className={style.input}
-                  name="numero"
-                  onChange={formik.handleChange}
-                  onBlur={formik.handleBlur}
-                  value={formik.values.numero}
-                />
               </div>
-              {formik.touched.address && formik.errors.address && (
-                <div className={style.error}>{formik.errors.address}</div>
+              {formik.touched.provincia && formik.errors.provincia && (
+                <div className={style.error}>{formik.errors.provincia}</div>
               )}
             </div>
 
-            <div className={style['input-div'] + ' ' + style.pass}>
+            <div className={style["input-div"] + " " + style.pass}>
               <div className={style.i}></div>
               <div className={style.div}>
-                <h5>Teléfono</h5>
-                <input
-                  type="text"
+                <h5
+                  style={{
+                    display: formik.touched.municipio ? "none" : "block",
+                  }}
+                >
+                  Municipio
+                </h5>
+                <select
                   className={style.input}
-                  name="contact"
-                  onChange={formik.handleChange}
+                  name="municipio"
+                  onChange={(e) => {
+                    handleMuniChange(e);
+                    handleInputChange("municipio");
+                  }}
                   onBlur={formik.handleBlur}
-                  value={formik.values.contact}
-                />
+                  value={formik.values.municipio}
+                >
+                  <option value="" disabled></option>
+                  {municipios.length ? (
+                    municipios.map((muni) => (
+                      <option
+                        data-id={muni.id}
+                        key={muni.id}
+                        value={muni.nombre}
+                      >
+                        {muni.nombre}
+                      </option>
+                    ))
+                  ) : (
+                    <option>Selecciona un municipio</option>
+                  )}
+                </select>
               </div>
-              {formik.touched.contact && formik.errors.contact && (
-                <div className={style.error}>{formik.errors.contact}</div>
+              {formik.touched.municipio && formik.errors.municipio && (
+                <div className={style.error}>{formik.errors.municipio}</div>
               )}
             </div>
 
-            <div className={style['input-div'] + ' ' + style.pass}>
+            <div className={style["input-div"] + " " + style.pass}>
               <div className={style.i}></div>
               <div className={style.div}>
-                <h5>Horario</h5>
-                <input
-                  type="text"
+                <h5
+                  style={{
+                    display: formik.touched.localidad ? "none" : "block",
+                  }}
+                >
+                  Localidad
+                </h5>
+                <select
                   className={style.input}
-                  name="time"
-                  onChange={formik.handleChange}
+                  name="localidad"
+                  onChange={(e) => {
+                    handleLocalChange(e);
+                    handleInputChange("localidad");
+                  }}
                   onBlur={formik.handleBlur}
-                  value={formik.values.time}
-                />
+                  value={formik.values.localidad}
+                >
+                  <option value="" disabled></option>
+                  {localidades.length ? (
+                    localidades.map((local) => (
+                      <option
+                        data-id={local.id}
+                        key={local.id}
+                        value={local.nombre}
+                      >
+                        {local.nombre}
+                      </option>
+                    ))
+                  ) : (
+                    <option>Selecciona una localidad</option>
+                  )}
+                </select>
               </div>
-              {formik.touched.time && formik.errors.time && (
-                <div className={style.error}>{formik.errors.time}</div>
+              {formik.touched.localidad && formik.errors.localidad && (
+                <div className={style.error}>{formik.errors.localidad}</div>
               )}
             </div>
 
-            <div className={style['input-div'] + ' ' + style.pass}>
+            <div className={style["input-div"] + " " + style.pass}>
               <div className={style.i}></div>
               <div className={style.div}>
-                <h5>Métodos de Pago</h5>
-                <div>
-                  <label>
-                    <input
-                      type="checkbox"
-                      name="payment"
-                      value="Efectivo"
-                      checked={formik.values.payment === 'Efectivo'}
-                      onChange={formik.handleChange}
-                    /> Efectivo
-                  </label>
-                </div>
-                <div>
-                  <label>
-                    <input
-                      type="checkbox"
-                      name="payment"
-                      value="Pago Online/Tarjeta"
-                      checked={formik.values.payment === 'Pago Online/Tarjeta'}
-                      onChange={formik.handleChange}
-                    /> Pago Online/Tarjeta
-                  </label>
-                </div>
-                {/* <input
-                  type="text"
+                <h5
+                  style={{ display: formik.touched.phone ? "none" : "block" }}
+                >
+                  Teléfono
+                </h5>
+                <Input
+                  type="tel"
                   className={style.input}
-                  name="payment"
-                  onChange={formik.handleChange}
+                  name="phone"
+                  onChange={(e) => {
+                    formik.handleChange(e);
+                    handleInputChange("phone");
+                  }}
                   onBlur={formik.handleBlur}
-                  value={formik.values.payment}
-                /> */}
+                  value={formik.values.phone}
+                />
               </div>
-              {formik.touched.payment && formik.errors.payment && (
-                <div className={style.error}>{formik.errors.payment}</div>
+              {formik.touched.phone && formik.errors.phone && (
+                <div className={style.error}>{formik.errors.phone}</div>
               )}
             </div>
 
-            <div className={style['input-div'] + ' ' + style.pass}>
+            <div className={style["input-div"] + " " + style.pass}>
               <div className={style.i}></div>
               <div className={style.div}>
                 <h5>Imagen</h5>
-                <FormGroup >
-                  <Input type="file" placeholder="carga tu imagen" onChange={handlerCloudinary} />
+                <FormGroup>
+                  <Input
+                    type="file"
+                    placeholder="Carga tu imagen"
+                    onChange={handlerCloudinary}
+                  />
                   {loading ? (
                     <h3>Cargando imagen...</h3>
                   ) : (
-                    formik.values.image &&
-                    <div >
-                      <img src={formik.values.image} />
-                    </div>
+                    formik.values.image && (
+                      <div>
+                        <img src={formik.values.image} alt="Imagen" />
+                      </div>
+                    )
                   )}
                 </FormGroup>
               </div>
@@ -395,15 +367,27 @@ const FormComercio = () => {
               )}
             </div>
 
-            <div className={style['input-div'] + ' ' + style.pass}>
+            <div className={style["input-div"] + " " + style.pass}>
               <div className={style.i}></div>
               <div className={style.div}>
-                <h5>Contraseña</h5>
+                <h5
+                  style={{
+                    display:
+                      formik.touched.password || formik.values.password
+                        ? "none"
+                        : "block",
+                  }}
+                >
+                  Contraseña
+                </h5>
                 <input
                   type="password"
                   className={style.input}
                   name="password"
-                  onChange={formik.handleChange}
+                  onChange={(e) => {
+                    formik.handleChange(e);
+                    handleInputChange("password");
+                  }}
                   onBlur={formik.handleBlur}
                   value={formik.values.password}
                 />
@@ -421,4 +405,4 @@ const FormComercio = () => {
   );
 };
 
-export default FormComercio;
+export default FormLogin;
