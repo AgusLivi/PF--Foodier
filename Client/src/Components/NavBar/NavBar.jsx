@@ -52,7 +52,7 @@ function Navbar() {
         
         </Link>
         <Link to={'/'}>
-          <a onClick={handleClick}><FaDoorOpen/></a>
+          <a onClick={handleCloseSesion}><FaDoorOpen/></a>
         </Link>
         <button
           className={`${styles["nav-btn"]} ${styles["nav-close-btn"]}`} 
