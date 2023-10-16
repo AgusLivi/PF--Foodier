@@ -76,6 +76,8 @@
   transition: .5s all;
   background-color: #eee9e1;
  
+
+  box-shadow: 0px 0px 10px 0.3px;
 }
 .slide-out::after{
   content: '';
@@ -87,19 +89,18 @@
   transform: rotate(130deg);
   top: 27%;
   left: 25%;
-  
+
 }
 
 .slide-in {
   left: 100; 
-  border-top-left-radius: 25px;
-  border-bottom-left-radius: 25px;
+  border-radius: 25px;
+  box-shadow: 0px 0px 10px 0.3px;
   transition: .5s all;
   width: 50px;
 }
 .slide-in::before{
   content: '';
-  
 }
 .slide-in::after{
   content: '';
@@ -189,7 +190,7 @@
   background: none;
 
   font-size: 20px;
-  margin: 0px 5px;
+  margin: 20px;
 
   border-radius: 20px;
 }
