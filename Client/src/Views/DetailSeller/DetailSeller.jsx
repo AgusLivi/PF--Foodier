@@ -9,7 +9,8 @@ const SellerDetails = () => {
     const { seller_ID } = useParams(); 
     const seller = useSelector((state) => state.getSellerById); 
     const user = useSelector((state) => state.getUserById)
-
+   
+    
     useEffect(() => {
       dispatch(getSellerById(seller_ID));
       dispatch(getUserById())
