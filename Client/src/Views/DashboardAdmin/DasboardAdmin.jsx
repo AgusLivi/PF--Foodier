@@ -7,14 +7,14 @@ import CardContainerAdmin from './CardContainerAdmin/CardContainerAdmin';
 const DashboardAdmin = () => {
     const dispatch = useDispatch();
 
-    /*useEffect(() => {
+    useEffect(() => {
         dispatch(getAllSeller());
         dispatch(getAllUser());
-    }, []);*/
+    }, []);
     //hacer esto o hacer card aparte
     return (
         <div>
-            <h1>ola soy el dash</h1>
+            <h1>Bienvenido al DashBoard Admin</h1>
             <CardContainerAdmin />
         </div>
     );

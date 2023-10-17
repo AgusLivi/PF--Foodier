@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useParams, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { getAllUser, getAllSeller } from '../../../Redux/actions';
-
+import CardAdmin from '../CardAdmin/CardAdmin';
 
 const CardContainerAdmin = () => {
     const dispatch = useDispatch();
@@ -10,6 +9,9 @@ const CardContainerAdmin = () => {
     const sellers = useSelector((state) => state.sellers);
     const [userState, setUserState] = useState(false);
     const [sellerState, setSellerState] = useState(false);
+
+    console.log('users: ', users);
+    console.log('sellers: ', sellers);
 
     const handlerUser = () => {
         setUserState(true);
@@ -20,12 +22,7 @@ const CardContainerAdmin = () => {
         setSellerState(true);
         setUserState(false)
     };
-
-    /*ESTO SE DEBE HACER SOLO EN EL DASHBOARDADMIN, NO EN EL CARD CONTAINER
-    useEffect(() => {
-        dispatch(getAllUser());
-        dispatch(getAllSeller());
-    }, []);*/ 
+    
 
     return (
         <div>
@@ -55,6 +52,8 @@ const CardContainerAdmin = () => {
                         name={user.name}
                         email={user.email}
                         location={user.location}
+                        user_ID={user.user_ID}
+                        deleted={user.deleted}
                     />
                 ))
             }
@@ -64,7 +63,9 @@ const CardContainerAdmin = () => {
                         key={index}
                         name={seller.name}
                         email={seller.email}
-                        location={seller.location}
+                        address={seller.address}
+                        seller_ID={seller.seller_ID}
+                        deleted={seller.deleted}
                     />
                 ))
             }
