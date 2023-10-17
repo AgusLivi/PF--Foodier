@@ -2,21 +2,24 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Card from "../Card/card";
 import styles from "./CardContainer.module.css";
-import { getSellerById } from "../../Redux/actions";
+import { getSellerById, getUserById, postFav } from "../../Redux/actions";
 
 const CardContainer =  () => {
 
   const products =  useSelector((state) => state.products);
-  const seller = useSelector((state) => state.getSellerById)
-  const [selectedSeller, setSelectedSeller] = useState(null)
+  const seller = useSelector((state) => state.getSellerById);
+  const [selectedSeller, setSelectedSeller] = useState(null);
+  const dispatch = useDispatch();
 
   useEffect(() => {
     if (selectedSeller) {
       // Realiza la solicitud GET a la URL con selectedSeller
+      dispatch(getUserById());
       dispatch(getSellerById(selectedSeller));
+      dispatch(postFav(selectedSeller));
     }
   }, [selectedSeller]);
-
+console.log(selectedSeller);
   return (
     <div className={styles.cardContainer}>
       {products.length === 0 ? (
@@ -37,7 +40,7 @@ const CardContainer =  () => {
             seller_ID={product.SellerSellerID}
             onSellerClick={(seller_ID) => setSelectedSeller(seller_ID)}
             sellerImage={seller.image}
-
+            onClickAddFav={(seller_ID) => setSelectedSeller(seller_ID)}
           />
         ))
       )}

@@ -56,7 +56,7 @@ router.get("/users/:admin_id", adminControler.getAllUsers);// admin
 router.put('/sellers/:seller_ID', sellerController.updateSeller); // seller
 
 // Rutas de favoritos
-router.post('/favorites/:id', favController.addFavorites); //user
+router.post('/favorites/', favController.addFavorites); //user
 router.get('/favorites/', favController.getFavorites); //user
 
 // Rutas de pagos
