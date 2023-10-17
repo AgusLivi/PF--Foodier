@@ -345,8 +345,8 @@ export const login = (formData) => {
       const { data } = await axios.post(`/login`, formData);
       console.log(data);
       const { token, error } = data;
-      localStorage.setItem("token" ,token)
-      axios.defaults.headers = {"token": localStorage.getItem("token")}
+      localStorage.setItem("token", token)
+      axios.defaults.headers = { "token": localStorage.getItem("token") }
     } catch (error) {
       alert("Error al iniciar sesión" + error.message);
     }
@@ -434,7 +434,7 @@ export const getAllUser = () => {
 
 export const banSeller = (id) => {
   return async () => {
-    try { 
+    try {
       const { data } = await axios.put(`/admin/seller/${id}`);
       console.log(data);
       return data
@@ -442,11 +442,11 @@ export const banSeller = (id) => {
       alert(error.message);
     }
   }
-}
+};
 
 export const banUser = (id) => {
   return async () => {
-    try { 
+    try {
       const { data } = await axios.put(`/admin/user/${id}`);
       console.log(data);
       return data
@@ -454,4 +454,50 @@ export const banUser = (id) => {
       alert(error.message);
     }
   }
-}
+};
+
+export const enableSeller = (id) => {
+  return async () => {
+    try {
+      const { data } = await axios.put(`/admin/enableSeller/${id}`);
+      console.log(data);
+      return data
+    } catch (error) {
+      alert(error.message);
+    }
+  }
+};
+
+export const enableUser = (id) => {
+  return async () => {
+    try {
+      const { data } = await axios.put(`/admin/enableUser/${id}`);
+      console.log(data);
+      return data
+    } catch (error) {
+      alert(error.message);
+    }
+  }
+};
+
+export const deleteSellerAdmin = (id) => {
+  return async () => {
+    try {
+      const { data } = await axios.delete(`/admin/sellers/${id}`);
+      return data
+    } catch (error) {
+      alert(error.message);
+    }
+  }
+};
+
+export const deleteUserAdmin = (id) => {
+  return async () => {
+    try {
+      const { data } = await axios.delete(`/admin/user/${id}`);
+      return data
+    } catch (error) {
+      alert(error.message);
+    }
+  }
+};

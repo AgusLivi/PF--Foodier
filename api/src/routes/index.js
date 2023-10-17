@@ -65,13 +65,14 @@ router.post('/payments', paymentController.createPayment); // user
 // Rutas de admin
 router.put('/admin/seller/:id', adminControler.banSeller); // admin
 router.put('/admin/user/:id', adminControler.banUser); // admin
+router.put('/admin/enableSeller/:id', adminControler.enableSeller); //admin
+router.put('/admin/enableUser/:id', adminControler.enableUser); //admin
 
 router.get('/admin/user', adminControler.getAllUsers); // admin
 router.get('/admin/sellers', adminControler.getAllSellers); // admin
 
-
-
-
+router.delete('/admin/user/:id', adminControler.deleteUser); //admin
+router.delete('/admin/sellers/:id', adminControler.deleteSeller); //admin
 
 
 module.exports = router; 
