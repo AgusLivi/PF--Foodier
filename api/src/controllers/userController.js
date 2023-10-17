@@ -56,25 +56,20 @@ const createUser = async (req, res) => {
     }
 
     // Configura el correo electrónico de confirmación
-    const info = {
-      from: "helpfoodier@outlook.com",
+    const info = await transporter.sendMail({
+      from: 'onboarding@resend.dev',
       to: email,
-      subject: "Hello World",
-      html: "<strong>Bienvenido a Foodier, muchas gracias por registrarte, combatamos el desperdicio de alimentos juntos!!!</strong>",
-    };
+      subject: 'Foodier',
+      html: '<strong>Bienvenido a Foodier, muchas gracias por registrarte, combatamos el desperdicio de alimentos juntos!!!</strong>',
 
+    });
+    console.log('Message sent: %s', info.messageId);
     // Envía el correo electrónico de confirmación
     transporter.sendMail(info, (error, info) => {
       if (error) {
-        console.error(
-          "Error al enviar el correo electrónico de confirmación:",
-          error
-        );
+        console.error('Error al enviar el correo electrónico de confirmación:', error);
       } else {
-        console.log(
-          "Correo electrónico de confirmación enviado:",
-          info.response
-        );
+        console.log('Correo electrónico de confirmación enviado:', info.response);
       }
     });
 
