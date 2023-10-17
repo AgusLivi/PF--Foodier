@@ -64,7 +64,7 @@ const FormLogin = () => {
         password: values.password,
         location: `${values.provincia}, ${values.municipio}, ${values.localidad}`,
         image: values.image,
-        phone: values.phone,
+        contact: values.contact,
       };
 
       await dispatch(createUser(userData));
@@ -107,8 +107,8 @@ const FormLogin = () => {
       errors.localidad = "La localidad es obligatoria";
     }
 
-    if (!values.phone) {
-      errors.phone = "El teléfono es obligatorio";
+    if (!values.contact) {
+      errors.contact = "El teléfono es obligatorio";
     }
 
     return errors;
@@ -122,7 +122,7 @@ const FormLogin = () => {
       provincia: "",
       municipio: "",
       localidad: "",
-      phone: "",
+      contact: "",
       image: "", // Campo para Cloudinary
     },
     onSubmit: submitForm,
@@ -320,24 +320,24 @@ const FormLogin = () => {
               <div className={style.i}></div>
               <div className={style.div}>
                 <h5
-                  style={{ display: formik.touched.phone ? "none" : "block" }}
+                  style={{ display: formik.touched.contact ? "none" : "block" }}
                 >
                   Teléfono
                 </h5>
                 <Input
                   type="tel"
                   className={style.input}
-                  name="phone"
+                  name="contact"
                   onChange={(e) => {
                     formik.handleChange(e);
-                    handleInputChange("phone");
+                    handleInputChange("contact");
                   }}
                   onBlur={formik.handleBlur}
-                  value={formik.values.phone}
+                  value={formik.values.contact}
                 />
               </div>
-              {formik.touched.phone && formik.errors.phone && (
-                <div className={style.error}>{formik.errors.phone}</div>
+              {formik.touched.contact && formik.errors.contact && (
+                <div className={style.error}>{formik.errors.contact}</div>
               )}
             </div>
 
