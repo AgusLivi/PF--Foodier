@@ -24,6 +24,7 @@ import SellerDetails from './Views/DetailSeller/DetailSeller';
 import { CartProvider } from './Utils/CartContext';
 import DashboardAdmin from './Views/DashboardAdmin/DasboardAdmin';
 import LoginAdmin from './Views/LoginAdmin/LoginAdmin';
+import { toast } from 'react-hot-toast';
 
 const App = () => {
   const location = useLocation();
@@ -43,13 +44,13 @@ const App = () => {
   // Comprueba si el usuario es invitado  
   if (!token) {
     if (!allowedRoutesForGuest.includes(location.pathname) && !location.pathname.startsWith('/products')) {
-      alert("Debes estar logueado para acceder a esta página.");
+      toast.error('Debes estar logueado para acceder a esta pagina.');
       return <Navigate to="/login" />;
     }
   }
   // Comprueba si el usuario es un usuario regular
   if (isUser === 'user' && location.pathname === '/create') {
-    alert("No tienes permiso para acceder a la página de creación.");
+    toast.error('No tienes permiso para acceder a la pagina de creción.');
     return <Navigate to="/home" />;
   }
 
