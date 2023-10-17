@@ -2,6 +2,7 @@ import { initializeApp } from "firebase/app";
 import { getAuth, FacebookAuthProvider } from "firebase/auth";
 
 const FBConfig = import.meta.env
+console.log(FBConfig);
 
 const firebaseConfig = {
     apiKey: FBConfig.VITE_REACT_APP_API_KEY,
