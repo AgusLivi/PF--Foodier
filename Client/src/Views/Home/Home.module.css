@@ -183,16 +183,13 @@
 }
 .searchBar input {
   width: 50%;
-  
+  border: none;
   padding: 16px;
   height: 2em;
-  border-bottom: 3px solid #333;
+  border-bottom: 3px solid #d9d9d9;
   background: none;
-
   font-size: 20px;
   margin: 20px;
-
-  border-radius: 20px;
 }
 .searchBar input:active {
   background: none;
@@ -201,7 +198,8 @@
 .containerChild {
   display: flex;
   flex-direction: row;
-  
+  height: 90vh;
+  align-items: center;
 }
 
 .containerChildFilterContainer {
