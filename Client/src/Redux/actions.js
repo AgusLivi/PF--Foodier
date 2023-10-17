@@ -19,7 +19,6 @@ import {
   GET_SELLER_FAV,
   GET_ALL_SELLERS,
   GET_SELLER_BY_ID,
-  POST_FAVORITES,
   GET_ALL_FAV,
 
   //location actionTypes:
@@ -181,11 +180,10 @@ export const createUser = (userData) => {
   };
 };
 
-export const getAllFav = (id) => {
-  //en realidad obtiene el fav del usuario
+export const getAllFav = () => {
   return async (dispatch) => {
     try {
-      const { data } = await axios(`/favorites/${id}`); //definir despues como pusieron la ruta en el back
+      const { data } = await axios(`/favorites/`); //definir despues como pusieron la ruta en el back
       return dispatch({
         type: GET_ALL_FAV,
         payload: data,
@@ -197,13 +195,11 @@ export const getAllFav = (id) => {
 };
 
 export const postFav = (dataForm) => {
-  return async (dispatch) => {
+  console.log('id action:',dataForm);
+  return async () => {
     try {
       const { data } = await axios.post(`/favorites`, dataForm);
-      return dispatch({
-        type: POST_FAVORITES,
-        payload: data,
-      });
+      alert(data);
     } catch (error) {
       alert(error.message);
     }
@@ -436,7 +432,7 @@ export const banSeller = (id) => {
     try {
       const { data } = await axios.put(`/admin/seller/${id}`);
       console.log(data);
-      return data
+      alert(data);
     } catch (error) {
       alert(error.message);
     }
@@ -448,7 +444,7 @@ export const banUser = (id) => {
     try {
       const { data } = await axios.put(`/admin/user/${id}`);
       console.log(data);
-      return data
+      alert(data);
     } catch (error) {
       alert(error.message);
     }
@@ -460,7 +456,7 @@ export const enableSeller = (id) => {
     try {
       const { data } = await axios.put(`/admin/enableSeller/${id}`);
       console.log(data);
-      return data
+      alert(data);
     } catch (error) {
       alert(error.message);
     }
@@ -472,7 +468,7 @@ export const enableUser = (id) => {
     try {
       const { data } = await axios.put(`/admin/enableUser/${id}`);
       console.log(data);
-      return data
+      alert(data);
     } catch (error) {
       alert(error.message);
     }
@@ -483,7 +479,7 @@ export const deleteSellerAdmin = (id) => {
   return async () => {
     try {
       const { data } = await axios.delete(`/admin/sellers/${id}`);
-      return data
+      alert(data);
     } catch (error) {
       alert(error.message);
     }
@@ -494,7 +490,7 @@ export const deleteUserAdmin = (id) => {
   return async () => {
     try {
       const { data } = await axios.delete(`/admin/user/${id}`);
-      return data
+      alert(data);
     } catch (error) {
       alert(error.message);
     }
