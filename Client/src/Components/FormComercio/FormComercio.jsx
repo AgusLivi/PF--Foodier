@@ -45,6 +45,23 @@ const FormLogin = () => {
     formik.handleChange(event);
     formik.setFieldTouched("address", true);
   };
+  const handlePaymentChange = (event) => {
+    const selectedValue = event.target.value;
+    const updatedPayments = [...formik.values.payment];
+
+    if (updatedPayments.includes(selectedValue)) {
+      // Si ya está seleccionado, quitarlo
+      const index = updatedPayments.indexOf(selectedValue);
+      if (index > -1) {
+        updatedPayments.splice(index, 1);
+      }
+    } else {
+      // Si no está seleccionado, agregarlo
+      updatedPayments.push(selectedValue);
+    }
+
+    formik.setFieldValue('payment', updatedPayments); // Actualizar el campo "payment"
+  };
 
   const handlerCloudinary = async (event) => {
     setLoading(true);
@@ -62,13 +79,13 @@ const FormLogin = () => {
         name: values.name,
         email: values.email,
         password: values.password,
-        address: `${values.provincia}, ${values.municipio}, ${values.address}`,
+        address: `${values.provincia}, ${values.municipio}, ${values.localidad}`,
         image: values.image,
         contact: values.contact,
         time: values.time,
         payment: values.payment,
       };
-
+      console.log(userData);
       await dispatch(createSeller(userData));
 
       setLoading(false);
@@ -114,6 +131,9 @@ const FormLogin = () => {
     }
     if (!values.time) {
       errors.time = "El horario es obligatorio";
+    }
+    if (!values.payment) {
+      errors.payment = 'Los métodos de pago son obligatorios';
     }
 
     return errors;
@@ -343,7 +363,7 @@ const FormLogin = () => {
                   )}
                 </select>
               </div>
-              {formik.touched.address && formik.errors.adderss && (
+              {formik.touched.address && formik.errors.address && (
                 <div className={style.error}>{formik.errors.address}</div>
               )}
             </div>
