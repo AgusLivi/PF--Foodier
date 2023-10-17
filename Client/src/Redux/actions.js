@@ -289,11 +289,11 @@ export const getUserById = () => {
 };
 
 // Sellers actions
-export const createSeller = (sellerData) => {
+export const createSeller = (userData) => {
 
   return async () => {
     try {
-      const { data } = await axios.post(`/sellers`, sellerData);
+      const { data } = await axios.post(`/sellers`, userData);
       alert(`vendedor ${data.name} creado correctamente`);
     } catch (error) {
       alert(error.message);

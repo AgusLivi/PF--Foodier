@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { useFormik } from "formik";
 import { useDispatch, useSelector } from "react-redux";
 import {
-  createUser,
+  createSeller,
   locationLocalidad,
   locationMunicipio,
   locationProvincia,
@@ -43,7 +43,7 @@ const FormLogin = () => {
 
   const handleLocalChange = (event) => {
     formik.handleChange(event);
-    formik.setFieldTouched("localidad", true);
+    formik.setFieldTouched("address", true);
   };
 
   const handlerCloudinary = async (event) => {
@@ -62,12 +62,14 @@ const FormLogin = () => {
         name: values.name,
         email: values.email,
         password: values.password,
-        location: `${values.provincia}, ${values.municipio}, ${values.localidad}`,
+        address: `${values.provincia}, ${values.municipio}, ${values.address}`,
         image: values.image,
         contact: values.contact,
+        time: values.time,
+        payment: values.payment,
       };
 
-      await dispatch(createUser(userData));
+      await dispatch(createSeller(userData));
 
       setLoading(false);
       navigate("/home");
@@ -103,12 +105,15 @@ const FormLogin = () => {
     if (!values.municipio) {
       errors.municipio = "El municipio es obligatorio";
     }
-    if (!values.localidad) {
-      errors.localidad = "La localidad es obligatoria";
+    if (!values.address) {
+      errors.address = "La localidad es obligatoria";
     }
 
     if (!values.contact) {
       errors.contact = "El teléfono es obligatorio";
+    }
+    if (!values.time) {
+      errors.time = "El horario es obligatorio";
     }
 
     return errors;
@@ -121,9 +126,11 @@ const FormLogin = () => {
       password: "",
       provincia: "",
       municipio: "",
-      localidad: "",
+      address: "",
       contact: "",
       image: "", // Campo para Cloudinary
+      time: "",
+      payment: [],   
     },
     onSubmit: submitForm,
     validate: validateForm,
@@ -190,6 +197,31 @@ const FormLogin = () => {
               </div>
               {formik.touched.email && formik.errors.email && (
                 <div className={style.error}>{formik.errors.email}</div>
+              )}
+            </div>
+
+            <div className={style["input-div"] + " " + style.one}>
+              <div className={style.i}></div>
+              <div className={style.div}>
+                <h5
+                  style={{ display: formik.touched.time ? "none" : "block" }}
+                >
+                Hora Apertura - Hora Cierre
+                </h5>
+                <input
+                  type="text"
+                  className={style.input}
+                  name="time"
+                  onChange={(e) => {
+                    formik.handleChange(e);
+                    handleInputChange("time");
+                  }}
+                  onBlur={formik.handleBlur}
+                  value={formik.values.time}
+                />
+              </div>
+              {formik.touched.time && formik.errors.time && (
+                <div className={style.error}>{formik.errors.time}</div>
               )}
             </div>
 
@@ -280,20 +312,20 @@ const FormLogin = () => {
               <div className={style.div}>
                 <h5
                   style={{
-                    display: formik.touched.localidad ? "none" : "block",
+                    display: formik.touched.address ? "none" : "block",
                   }}
                 >
                   Localidad
                 </h5>
                 <select
                   className={style.input}
-                  name="localidad"
+                  name="address"
                   onChange={(e) => {
                     handleLocalChange(e);
-                    handleInputChange("localidad");
+                    handleInputChange("address");
                   }}
                   onBlur={formik.handleBlur}
-                  value={formik.values.localidad}
+                  value={formik.values.address}
                 >
                   <option value="" disabled></option>
                   {localidades.length ? (
@@ -311,8 +343,8 @@ const FormLogin = () => {
                   )}
                 </select>
               </div>
-              {formik.touched.localidad && formik.errors.localidad && (
-                <div className={style.error}>{formik.errors.localidad}</div>
+              {formik.touched.address && formik.errors.adderss && (
+                <div className={style.error}>{formik.errors.address}</div>
               )}
             </div>
 
@@ -366,7 +398,45 @@ const FormLogin = () => {
                 <div className={style.error}>{formik.errors.image}</div>
               )}
             </div>
-
+     <div className={style['input-div'] + ' ' + style.pass}>
+              <div className={style.i}></div>
+              <div className={style.div}>
+                <h5>Métodos de Pago</h5>
+                <div>
+                  <label>
+                    <input
+                      type="checkbox"
+                      name="payment"
+                      value="Efectivo"
+                      checked={formik.values.payment === 'Efectivo'}
+                      onChange={formik.handleChange}
+                    /> Efectivo
+                  </label>
+                </div>
+                <div>
+                  <label>
+                    <input
+                      type="checkbox"
+                      name="payment"
+                      value="Pago Online/Tarjeta"
+                      checked={formik.values.payment === 'Pago Online/Tarjeta'}
+                      onChange={formik.handleChange}
+                    /> Pago Online/Tarjeta
+                  </label>
+                </div>
+                {/* <input
+                  type="text"
+                  className={style.input}
+                  name="payment"
+                  onChange={formik.handleChange}
+                  onBlur={formik.handleBlur}
+                  value={formik.values.payment}
+                /> */}
+              </div>
+              {formik.touched.payment && formik.errors.payment && (
+                <div className={style.error}>{formik.errors.payment}</div>
+              )}
+            </div>
             <div className={style["input-div"] + " " + style.pass}>
               <div className={style.i}></div>
               <div className={style.div}>
