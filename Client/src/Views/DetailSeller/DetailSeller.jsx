@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { getSellerById } from '../../Redux/actions';
+import { getSellerById, getUserById } from '../../Redux/actions';
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from 'react-router-dom';
 import style from './DetailSeller.module.css'
@@ -8,9 +8,11 @@ const SellerDetails = () => {
     const dispatch = useDispatch()
     const { seller_ID } = useParams(); 
     const seller = useSelector((state) => state.getSellerById); 
+    const user = useSelector((state) => state.getUserById)
 
     useEffect(() => {
       dispatch(getSellerById(seller_ID));
+      dispatch(getUserById())
     }, [dispatch, seller_ID]);
 
     
