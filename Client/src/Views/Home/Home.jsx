@@ -202,7 +202,7 @@ const Home = () => {
           <input
             type="text"
             name="name"
-            placeholder="Nombre del producto"
+            placeholder="Buscar"
             value={formData.name}
             onChange={handleInputChange}
           />
