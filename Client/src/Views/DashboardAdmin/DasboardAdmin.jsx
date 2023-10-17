@@ -12,6 +12,7 @@ const DashboardAdmin = () => {
         dispatch(getAllUser());
     }, []);
     //hacer esto o hacer card aparte
+    //comentario random
     return (
         <div>
             <h1>Bienvenido al DashBoard Admin</h1>
