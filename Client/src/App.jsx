@@ -28,24 +28,31 @@ import LoginAdmin from './Views/LoginAdmin/LoginAdmin';
 const App = () => {
   const location = useLocation();
   const token = localStorage.getItem('token');
-  const isUser = localStorage.getItem('isUser');
+  const isUser = localStorage.getItem('rol');
 
-  if ((!token || isUser === 'true') &&
-    location.pathname !== '/login'
-    && location.pathname !== "/"
-    && location.pathname !== '/home'
-    && location.pathname !== "/formcomercio"
-    && location.pathname !== "/formuser"
-    && location.pathname !== "/userlogin"
-    && !location.pathname.startsWith("/seller/")
-    && location.pathname !== '/politica-de-privacidad'
-    && location.pathname !== "/terminos-y-condiciones"
-    && !location.pathname.startsWith("/products/")
-  ) {
-    alert("Debes estar logueado como vendedor para crear un producto.");
-    return <Navigate to="/login" />;
+  const allowedRoutesForGuest = [
+    '/login',
+    '/',
+    '/home',
+    '/formcomercio',
+    '/formuser',
+    '/userlogin',
+    '/politica-de-privacidad',
+    '/terminos-y-condiciones',
+  ];
+  // Comprueba si el usuario es invitado  
+  if (!token) {
+    if (!allowedRoutesForGuest.includes(location.pathname) && !location.pathname.startsWith('/products')) {
+      alert("Debes estar logueado para acceder a esta página.");
+      return <Navigate to="/login" />;
+    }
   }
-  
+  // Comprueba si el usuario es un usuario regular
+  if (isUser === 'user' && location.pathname === '/create') {
+    alert("No tienes permiso para acceder a la página de creación.");
+    return <Navigate to="/home" />;
+  }
+
   return (
     <div className="App">
       <CartProvider>

@@ -344,6 +344,10 @@ export const login = (formData) => {
     try {
       const { data } = await axios.post(`/login`, formData);
 
+
+      localStorage.setItem('rol', formData.rol);
+
+
       const { token, error } = data;
       localStorage.setItem("token", token)
       axios.defaults.headers = { "token": localStorage.getItem("token") }
