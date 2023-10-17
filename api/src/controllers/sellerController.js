@@ -1,6 +1,7 @@
 const { Seller, Product } = require("../db.js");
 const bcrypt = require("bcrypt"); // npm install bcrypt
-const nodemailer = require("../mailing/nodemailer.js").default; // Importa la configuración de nodemailer
+const createTransporter = require("../mailing/nodemailer");; // Importa la configuración de nodemailer
+const transporter = createTransporter()
 
 // Obtener un vendedor por ID
 const getSellerById = async (req, res) => {
@@ -46,25 +47,24 @@ const createSeller = async (req, res) => {
         email,
       },
     });
-    if (!created)
+    if (!created){
       return res.status(400).json("ya existe un vendedor con ese email");
+    }
     // Configura el correo electrónico de bienvenida
-    const mailOptions = {
-      from: "helpfoodier@outlook.com", // Cambia esto a tu dirección de correo
-      to: email, // Utiliza la dirección de correo electrónico del vendedor registrado
-      subject: "Bienvenido a Foodier",
-      html: `<p>Bienvenido ${name} a Foodier.</p><p>Gracias por registrarte como vendedor.</p>`,
-    };
+    const info = await transporter.sendMail({
+      from: 'onboarding@resend.dev',
+      to: email,
+      subject: 'Foodier',
+      html: '<strong>Bienvenido a Foodier, muchas gracias por registrarte, combatamos el desperdicio de alimentos juntos!!!</strong>',
 
-    // Envía el correo electrónico de bienvenida
-    nodemailer.sendMail(mailOptions, (error, info) => {
+    });
+    console.log('Message sent: %s', info.messageId);
+    // Envía el correo electrónico de confirmación
+    transporter.sendMail(info, (error, info) => {
       if (error) {
-        console.error(
-          "Error al enviar el correo electrónico de bienvenida:",
-          error
-        );
+        console.error('Error al enviar el correo electrónico de confirmación:', error);
       } else {
-        console.log("Correo electrónico de bienvenida enviado:", info.response);
+        console.log('Correo electrónico de confirmación enviado:', info.response);
       }
     });
 

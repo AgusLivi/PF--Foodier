@@ -26,7 +26,7 @@ admin.initializeApp({
 const firebaseAuth = admin.auth();
 
 module.exports = async (req, res, next) => {
-  const  idToken  = req.headers('Authorization');
+  const  idToken  = req.headers['Authorization'];
   const { token } = req.headers;
   if (idToken) {
     try {
