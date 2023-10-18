@@ -6,18 +6,30 @@ import { useSelector, useDispatch } from 'react-redux';
 import { getSellerProfile, getUserById } from '../../Redux/actions';
 
 const PerfilUsuario = () => {
+
   const typeuser = localStorage.getItem('rol')
-  const seller = useSelector((state) => state.getSellerProfile)
+  const sellerData = useSelector((state) => state.getSellerProfile)
   const user = useSelector((state) => state.getUserById)
   const dispatch = useDispatch();
- 
+
+  if (sellerData) {
+    const sellerDataString = JSON.stringify(sellerData);
+    localStorage.setItem("sellerData", sellerDataString);
+  }
+
+  const sellerDataString = localStorage.getItem('sellerData');
+  const seller = JSON.parse(sellerDataString);
+
+console.log(seller);
+
   useEffect(() => {
+    if (!seller) {
     if (typeuser === 'user') {
       dispatch(getUserById())
     } else {
       dispatch(getSellerProfile())
     }
-  }, [])
+  }}, [])
 
   return (
     <div className={styles.container}>
