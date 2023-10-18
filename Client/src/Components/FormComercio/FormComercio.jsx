@@ -89,7 +89,7 @@ const FormLogin = () => {
       await dispatch(createSeller(userData));
 
       setLoading(false);
-      navigate("/home");
+      navigate("/userlogin");
     } catch (error) {
       setLoading(false);
       console.error(error);
