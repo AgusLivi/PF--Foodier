@@ -23,7 +23,7 @@ console.log(selectedSeller);
   return (
     <div className={styles.cardContainer}>
       {products.length === 0 ? (
-        <h1>No hay productos disponibles</h1>
+        <h1 className={styles.textNotFound}>No hay productos disponibles</h1>
       ) : ( 
        products?.map((product, index) => 
             (
