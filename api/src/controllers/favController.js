@@ -5,6 +5,7 @@ const addFavorites = async (req, res) => {
   
   try {
     const userToken = req.user;
+
     if (!userToken) return res.status(401).json("Debe tener una cuenta para acceder");
     if (userToken.rol !== "user")
       return res.status(401).json("Usted no esta autorizado");
@@ -18,7 +19,7 @@ const addFavorites = async (req, res) => {
 
     // Verificar si el usuario y el vendedor existen antes de agregar a favoritos
     const user = await User.findByPk(user_ID);
-    const seller = await Seller.findByPk(seller_ID);
+    const seller = await Seller.findByPk(id);
 
     if (!user || !seller) {
       return res.status(400).json({ error: 'El usuario o el vendedor no existen.' });

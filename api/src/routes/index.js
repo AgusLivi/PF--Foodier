@@ -54,7 +54,7 @@ router.get("/users/:admin_id", adminControler.getAllUsers);// admin
 
 // Rutas relacionadas a los vendedores
 router.put('/sellers/:seller_ID', sellerController.updateSeller); // seller
-
+router.get('/sellers/', sellerController.getSellerPorIdToken); // seller
 // Rutas de favoritos
 router.post('/favorites/', favController.addFavorites); //user
 router.get('/favorites/', favController.getFavorites); //user
