@@ -35,7 +35,8 @@ import {
 
     //token login
     SET_AUTH_TOKEN,
-    LOGIN_SUCCESS
+    LOGIN_SUCCESS,
+    GET_SELLER_PROFILE
 } from "./actionsType";
 
 const initialState = {
@@ -58,7 +59,8 @@ const initialState = {
   loading: false,
   paymentUrl: null,
   error: null,
-  token: null
+  token: null,
+  getSellerProfile: []
   //tengo q agregar mas
 };
 
@@ -224,6 +226,12 @@ const reducer = (state = initialState, { type, payload }) => {
           ...state,
           userData: payload,
       };
+
+    case GET_SELLER_PROFILE:
+      return {
+        ...state,
+        getSellerProfile: payload
+      }
 
     default:
       return state;
