@@ -129,6 +129,9 @@ const FormLogin = () => {
     if (!values.payment) {
       errors.payment = "Los métodos de pago son obligatorios";
     }
+    if (!values.shopaddress) {
+      errors.shopaddress = "La dirección es obligatoria";
+    }
 
     return errors;
   };
@@ -145,6 +148,7 @@ const FormLogin = () => {
       image: "", // Campo para Cloudinary
       time: "",
       payment: [],
+      shopaddress:"",
     },
     onSubmit: submitForm,
     validate: validateForm,
@@ -451,6 +455,31 @@ const FormLogin = () => {
               </div>
               {formik.touched.contact && formik.errors.contact && (
                 <div className={style.error}>{formik.errors.contact}</div>
+              )}
+            </div>
+
+            <div className={style["input-div"] + " " + style.pass}>
+              <div className={style.i}></div>
+              <div className={style.div}>
+                <h5
+                  style={{ display: formik.touched.shopaddress ? "none" : "block" }}
+                >
+                  Calle y nro
+                </h5>
+                <Input
+                  type="text"
+                  className={style.input}
+                  name="shopaddress"
+                  onChange={(e) => {
+                    formik.handleChange(e);
+                    handleInputChange("shopaddress");
+                  }}
+                  onBlur={formik.handleBlur}
+                  value={formik.values.shopaddress}
+                />
+              </div>
+              {formik.touched.shopaddress && formik.errors.shopaddress && (
+                <div className={style.error}>{formik.errors.shopaddress}</div>
               )}
             </div>
            
