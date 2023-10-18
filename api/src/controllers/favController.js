@@ -2,16 +2,18 @@ const { conn, Seller, User } = require('../db'); // Importo la instancia de conn
 
 // Controlador para agregar un vendedor a la lista de favoritos de un usuario
 const addFavorites = async (req, res) => {
-  const userToken = req.user;
-  if (!userToken) return res.status(401).json("Debe tener una cuenta para acceder");
-  if (userToken.rol !== "user")
-    return res.status(401).json("Usted no esta autorizado");
-
+  
   try {
+    const userToken = req.user;
+    if (!userToken) return res.status(401).json("Debe tener una cuenta para acceder");
+    if (userToken.rol !== "user")
+      return res.status(401).json("Usted no esta autorizado");
+
     const user_ID = userToken.id; // Obtengo el ID del usuario
     if (!user_ID) return res.status(401).json("Envie un id de usuario");
 
     const { seller_ID } = req.body; // Obtengo el ID del vendedor
+    console.log('seller id en controller:', seller_ID);
     if (!seller_ID) return res.status(401).json("Seleccione un vendedor");
 
     // Verificar si el usuario y el vendedor existen antes de agregar a favoritos
@@ -36,8 +38,6 @@ const addFavorites = async (req, res) => {
 const getFavorites = async (req, res) => {
   try {
     const userlog = req.user;
-
-    // const { user_ID } = req.params; // Obtengo el id del usuario
 
     // Obtener la lista de vendedores favoritos del usuario utilizando Sequelize
     const user = await User.findByPk(userlog.id, {

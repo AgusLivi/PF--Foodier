@@ -198,7 +198,7 @@ export const postFav = (dataForm) => {
   console.log('id action:',dataForm);
   return async () => {
     try {
-      const { data } = await axios.post(`/favorites`, dataForm);
+      const { data } = await axios.post(`/favorites/`, dataForm);
       alert(data);
     } catch (error) {
       alert(error.message);
