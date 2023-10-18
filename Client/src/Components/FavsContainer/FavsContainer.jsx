@@ -22,6 +22,7 @@ const FavsContainer = () => {
                                     <FavCard
                                         name={seller.name}
                                         image={seller.image}
+                                        sellerId={seller.seller_ID}
                                     />
                                 </div>
                             )

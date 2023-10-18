@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import styles from './FavCard.module.css';
 
 const FavCard = ({ name, image, sellerId }) => {
+  
   return (
     <div className={styles.card}>
       <Link to={`/seller/${sellerId}`}>
