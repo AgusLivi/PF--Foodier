@@ -90,12 +90,6 @@ const FormLogin = () => {
     if (!values.provincia) {
       errors.provincia = 'La provincia es obligatoria';
     }
-    if (!values.municipio) {
-      errors.municipio = 'El municipio es obligatorio';
-    }
-    if (!values.localidad) {
-      errors.localidad = 'La localidad es obligatoria';
-    }
 
     return errors;
   };
