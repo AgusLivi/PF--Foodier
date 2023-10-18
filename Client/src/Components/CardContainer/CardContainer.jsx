@@ -16,14 +16,17 @@ const CardContainer =  () => {
       // Realiza la solicitud GET a la URL con selectedSeller
       dispatch(getUserById());
       dispatch(getSellerById(selectedSeller));
-      dispatch(postFav(selectedSeller));
     }
   }, [selectedSeller]);
 console.log(selectedSeller);
+
+const onPostFav = (id) => {
+  dispatch(postFav({id: id}))
+}
   return (
     <div className={styles.cardContainer}>
       {products.length === 0 ? (
-        <h1>No hay productos disponibles</h1>
+        <h1 className={styles.textNotFound}>No hay productos disponibles</h1>
       ) : ( 
        products?.map((product, index) => 
             (
@@ -40,7 +43,7 @@ console.log(selectedSeller);
             seller_ID={product.SellerSellerID}
             onSellerClick={(seller_ID) => setSelectedSeller(seller_ID)}
             sellerImage={seller.image}
-            onClickAddFav={(seller_ID) => setSelectedSeller(seller_ID)}
+            onClickAddFav={onPostFav}
           />
         ))
       )}

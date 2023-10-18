@@ -13,10 +13,10 @@
   padding: 20px;
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  height: 100vh; /* Altura del sidebar igual a la altura de la ventana */
+  justify-content: flex-start;
+  height: 70vh; /* Altura del sidebar igual a la altura de la ventana */
   position: fixed; /* Fijar el sidebar en la ventana */
-  top: 0; /* Alinear el sidebar en la parte superior */
+  top: 20%; /* Alinear el sidebar en la parte superior */
   left: -100%; /* Oculta inicialmente los filtros fuera de la pantalla */
   transition: left 0.5s ease-in-out;
 }
@@ -198,8 +198,7 @@
 .containerChild {
   display: flex;
   flex-direction: row;
-  height: 90vh;
-  align-items: center;
+
 }
 
 .containerChildFilterContainer {
