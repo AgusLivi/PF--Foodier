@@ -62,8 +62,8 @@ const App = () => {
           && location.pathname !== "/formcomercio"
           && location.pathname !== "/formuser"
           && location.pathname !== "/userlogin"
-          && location.pathname !== "/dashboard-admin"
-          && location.pathname !== "/login-admin"
+          && location.pathname !== "/admin/dashboard"
+          && location.pathname !== "/admin/login"
           && <NavBar />}
 
 
@@ -88,8 +88,8 @@ const App = () => {
           <Route path='/terminos-y-condiciones' element={<Terminos />} />
           <Route path='/politica-de-privacidad' element={<Politica />} />
           <Route path='/seller/:seller_ID' element={<SellerDetails />} />
-          <Route path='/dashboard-admin' element={<DashboardAdmin />} />
-          <Route path='/login-admin' element={<LoginAdmin />} />
+          <Route path='/admin/dashboard' element={<DashboardAdmin />} />
+          <Route path='/admin/login' element={<LoginAdmin />} />
         </Routes>
       </CartProvider>
 
