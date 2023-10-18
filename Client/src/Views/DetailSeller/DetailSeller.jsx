@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import { getSellerById, getUserById } from '../../Redux/actions';
+import { cleanSeller, getSellerById, getUserById } from '../../Redux/actions';
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from 'react-router-dom';
 import style from './DetailSeller.module.css'
 import CommentSection from '../Comments/Comments'
+
 const SellerDetails = () => {
     const dispatch = useDispatch()
     const { seller_ID } = useParams(); 
@@ -13,7 +14,8 @@ const SellerDetails = () => {
     
     useEffect(() => {
       dispatch(getSellerById(seller_ID));
-      dispatch(getUserById())
+      dispatch(getUserById());
+      return () => dispatch(cleanSeller());
     }, [dispatch, seller_ID]);
 
     
