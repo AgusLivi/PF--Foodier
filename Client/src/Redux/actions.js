@@ -341,7 +341,7 @@ export const login = (formData) => {
     try {
       const { data } = await axios.post(`/login`, formData);
 
-
+      
       localStorage.setItem('rol', formData.rol);
 
 
