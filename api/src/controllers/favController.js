@@ -2,21 +2,21 @@ const { conn, Seller, User } = require('../db'); // Importo la instancia de conn
 
 // Controlador para agregar un vendedor a la lista de favoritos de un usuario
 const addFavorites = async (req, res) => {
-  const userToken = req.user;
-  if (!userToken) return res.status(401).json("Debe tener una cuenta para acceder");
-  if (userToken.rol !== "user")
-    return res.status(401).json("Usted no esta autorizado");
-
+  
   try {
+    const userToken = req.user;
+    const { id } = req.body; // Obtengo el ID del vendedor
+    if (!userToken) return res.status(401).json("Debe tener una cuenta para acceder");
+    if (userToken.rol !== "user")
+      return res.status(401).json("Usted no esta autorizado");
     const user_ID = userToken.id; // Obtengo el ID del usuario
     if (!user_ID) return res.status(401).json("Envie un id de usuario");
-
-    const { seller_ID } = req.body; // Obtengo el ID del vendedor
-    if (!seller_ID) return res.status(401).json("Seleccione un vendedor");
+    console.log(id);
+    if (!id) return res.status(401).json("Seleccione un vendedor");
 
     // Verificar si el usuario y el vendedor existen antes de agregar a favoritos
     const user = await User.findByPk(user_ID);
-    const seller = await Seller.findByPk(seller_ID);
+    const seller = await Seller.findByPk(id);
 
     if (!user || !seller) {
       return res.status(400).json({ error: 'El usuario o el vendedor no existen.' });
