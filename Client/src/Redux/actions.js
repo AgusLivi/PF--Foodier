@@ -392,8 +392,6 @@ export const createPaymentRequest = (paymentData) => async (dispatch) => {
 
     const response = await axios.post(`/payments`, paymentData, axiosConfig);
 
-
-
     dispatch({
       type: CREATE_PAYMENT_SUCCESS,
       payload: response.data.url_pago,
