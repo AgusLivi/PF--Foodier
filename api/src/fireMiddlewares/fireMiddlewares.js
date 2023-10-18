@@ -2,6 +2,8 @@ const admin = require("firebase-admin");
 const jwt = require("jsonwebtoken"); // npm install jsonwebtoken
 const { JWT_SECRET } = process.env;
 const {SERVER_URL} = process.env
+const { User, Post } = require("../db.js");
+
 
 const cert = {
   type:process.env.TYPE,
@@ -26,26 +28,34 @@ admin.initializeApp({
 const firebaseAuth = admin.auth();
 
 module.exports = async (req, res, next) => {
-  const  idToken  = req.headers['Authorization'];
   const { token } = req.headers;
-  if (idToken) {
-    try {
-      const decToken = await firebaseAuth.verifyIdToken(cert);
-      req.user = decToken;
-      next();
-    } catch (error) {
-      console.error("Error al verificar el token:", error);
-      res.status(401).json({ message: "Autenticación fallida" });
-    }
-  } else if(token) {
+   if(token) {
     try {
       const decode = jwt.verify(token, JWT_SECRET);
       req.user = decode;
       console.log(decode);
       next();
     } catch (error) {
+      if (error.message === "invalid algorithm") {
+        const decToken = await firebaseAuth.verifyIdToken(token);
+        decToken.rol = "user"
+        const user = await User.findOne({where: {email: decToken.email}})
+        if (user) {
+          decToken.id = user.user_ID
+        } else {
+          const singUp = {
+            name: decToken.name,
+            email: decToken.email,
+            password: decToken.user_id
+          }
+          await User.create(singUp)
+        }
+        req.user = decToken;
+        console.log(decToken);
+        next();
+      }else{
       console.error("Error al verificar el token:", error);
-      res.status(401).json({ message: "Autenticación fallida" });
+      res.status(401).json({ message: "Autenticación fallida" });}
     }
   }
   else{

@@ -68,7 +68,6 @@ const App = () => {
           && location.pathname !== "/admin/dashboard"
           && <NavBar />}
 
-
         <Routes>
           <Route path='/' element={<Landing />} />
           <Route path='/admin' element={<LoginAdmin />} />
