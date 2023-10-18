@@ -7,6 +7,7 @@ const login = async (req, res) => {
   try {
     const { email, password, rol } = req.body;
     console.log(email, password, rol);
+    console.log(JWT_SECRET)
     let user;
 
     switch (rol) {
