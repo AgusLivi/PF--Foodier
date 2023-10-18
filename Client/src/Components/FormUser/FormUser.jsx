@@ -61,7 +61,7 @@ const FormLogin = () => {
 
       if (Object.keys(formik.errors).length === 0) {
         localStorage.setItem('isUser', 'true');
-        navigate('/home');
+        navigate('/userlogin');
       }
     } catch (error) {
       console.error(error);

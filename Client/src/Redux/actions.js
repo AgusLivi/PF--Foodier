@@ -274,7 +274,7 @@ export const deleteUser = () => {
 export const getUserById = () => {
   return async (dispatch) => {
     try {
-      const { data } = await axios.get(`/users/`);
+      const { data } = await axios.get(`/users/`, null, axios.defaults.headers = { "token": localStorage.getItem("token") });
       return dispatch({
         type: GET_USER_BY_ID,
         payload: data,
@@ -501,7 +501,7 @@ export const deleteUserAdmin = (id) => {
 export const getSellerProfile = () => {
 return async (dispatch) => {
   try {
-    const { data } = await axios.get(`/sellers/`);
+    const { data } = await axios.get(`/sellers/`, null, axios.defaults.headers = { "token": localStorage.getItem("token") });
     return dispatch({
       type: GET_SELLER_PROFILE,
       payload: data,
