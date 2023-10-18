@@ -1,4 +1,5 @@
 import axios from "axios";
+import { toast } from 'react-hot-toast';
 
 import {
   //product actionTypes:
@@ -19,6 +20,7 @@ import {
   GET_SELLER_FAV,
   GET_ALL_SELLERS,
   GET_SELLER_BY_ID,
+  CLEAN_DETAIL_SELLER,
   GET_ALL_FAV,
   GET_SELLER_PROFILE,
 
@@ -55,7 +57,7 @@ export const getProducts = (querys) => {
   return async (dispatch) => {
     const { data } = await axios.get(`/products/?${querys}`);
 
-  
+
 
     return dispatch({
       type: GET_PRODUCTS,
@@ -195,16 +197,17 @@ export const getAllFav = () => {
   };
 };
 
-export const postFav = async (id) => {
-  
-  try {
-      console.log('id action:',id);
-      const { data } = await axios.post(`/favorites`,id);
-      alert(data);
+
+export const postFav = (dataForm) => {
+  console.log('id action:', dataForm);
+  return async () => {
+    try {
+      const { data } = await axios.post(`/favorites/`, dataForm);
+      data && toast.success('Has agregado el vendedor a tus favoritos.');
     } catch (error) {
       alert(error.message);
     }
-
+  };
 };
 
 export const createPost = (post) => {
@@ -334,6 +337,12 @@ export const getSellerById = (id) => {
   };
 };
 
+export const cleanSeller = () => {
+  return {
+    type: CLEAN_DETAIL_SELLER
+  }
+};
+
 //login
 export const login = (formData) => {
 
@@ -341,7 +350,7 @@ export const login = (formData) => {
     try {
       const { data } = await axios.post(`/login`, formData);
 
-  
+
       localStorage.setItem('rol', formData.rol);
 
 
@@ -383,7 +392,7 @@ export const createPaymentRequest = (paymentData) => async (dispatch) => {
 
     const response = await axios.post(`/payments`, paymentData, axiosConfig);
 
-   
+
 
     dispatch({
       type: CREATE_PAYMENT_SUCCESS,
@@ -499,6 +508,7 @@ export const deleteUserAdmin = (id) => {
 };
 
 export const getSellerProfile = () => {
+
 return async (dispatch) => {
   try {
     const { data } = await axios.get(`/sellers/`, null, axios.defaults.headers = { "token": localStorage.getItem("token") });
@@ -511,4 +521,5 @@ return async (dispatch) => {
   }
 };
 };
+
 

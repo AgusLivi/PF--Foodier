@@ -7,7 +7,7 @@
 }
 .containerChildFilter .form{
   width: 20%; /* Ancho del sidebar */
-  color: #fff;
+  color: #000000;
   background-color: #f5f5f5;
   border-right: 1px solid #dddada;
   padding: 20px;

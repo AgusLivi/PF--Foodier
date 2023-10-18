@@ -24,7 +24,7 @@ const LoginAdmin = () => {
       console.log(userData);
       await dispatch(login(userData));
       if (Object.keys(formik.errors).length === 0) {
-        navigate("/dashboard-admin");
+        navigate("/admin/dashboard");
       }
     } catch (error) {
       console.error(error);

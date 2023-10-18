@@ -40,6 +40,8 @@ const App = () => {
     '/userlogin',
     '/politica-de-privacidad',
     '/terminos-y-condiciones',
+    '/admin',
+
   ];
   // Comprueba si el usuario es invitado  
   if (!token) {
@@ -50,7 +52,7 @@ const App = () => {
   }
   // Comprueba si el usuario es un usuario regular
   if (isUser === 'user' && location.pathname === '/create') {
-    toast.error('No tienes permiso para acceder a la pagina de creción.');
+    toast.error('No tienes permiso para acceder a la página de creación.');
     return <Navigate to="/home" />;
   }
 
@@ -62,13 +64,15 @@ const App = () => {
           && location.pathname !== "/formcomercio"
           && location.pathname !== "/formuser"
           && location.pathname !== "/userlogin"
+          && location.pathname !== "/admin"
           && location.pathname !== "/admin/dashboard"
-          && location.pathname !== "/admin/login"
           && <NavBar />}
 
 
         <Routes>
           <Route path='/' element={<Landing />} />
+          <Route path='/admin' element={<LoginAdmin />} />
+          <Route path='/admin/dashboard' element={<DashboardAdmin />} />
           <Route path='/profile' element={<PerfilUsuario />} />
           <Route path="/home" element={<Home />} />
           <Route path='/login' element={<Login />} />
@@ -88,8 +92,6 @@ const App = () => {
           <Route path='/terminos-y-condiciones' element={<Terminos />} />
           <Route path='/politica-de-privacidad' element={<Politica />} />
           <Route path='/seller/:seller_ID' element={<SellerDetails />} />
-          <Route path='/admin/dashboard' element={<DashboardAdmin />} />
-          <Route path='/admin/login' element={<LoginAdmin />} />
         </Routes>
       </CartProvider>
 

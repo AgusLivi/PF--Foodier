@@ -16,13 +16,9 @@ const CardContainer =  () => {
       // Realiza la solicitud GET a la URL con selectedSeller
       dispatch(getUserById());
       dispatch(getSellerById(selectedSeller));
+      dispatch(postFav({seller_ID: selectedSeller}));
     }
   }, [selectedSeller]);
-console.log(selectedSeller);
-
-const onPostFav = (id) => {
-  dispatch(postFav({id: id}))
-}
   return (
     <div className={styles.cardContainer}>
       {products.length === 0 ? (
@@ -43,7 +39,7 @@ const onPostFav = (id) => {
             seller_ID={product.SellerSellerID}
             onSellerClick={(seller_ID) => setSelectedSeller(seller_ID)}
             sellerImage={seller.image}
-            onClickAddFav={onPostFav}
+            onClickAddFav={(seller_ID) => setSelectedSeller(seller_ID)}
           />
         ))
       )}
