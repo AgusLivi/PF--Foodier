@@ -69,6 +69,8 @@ const App = () => {
 
         <Routes>
           <Route path='/' element={<Landing />} />
+          <Route path='/admin' element={<LoginAdmin />} />
+          <Route path='/admin/dashboard' element={<DashboardAdmin />} />
           <Route path='/profile' element={<PerfilUsuario />} />
           <Route path="/home" element={<Home />} />
           <Route path='/login' element={<Login />} />
@@ -88,8 +90,6 @@ const App = () => {
           <Route path='/terminos-y-condiciones' element={<Terminos />} />
           <Route path='/politica-de-privacidad' element={<Politica />} />
           <Route path='/seller/:seller_ID' element={<SellerDetails />} />
-          <Route path='/admin/dashboard' element={<DashboardAdmin />} />
-          <Route path='/admin/login' element={<LoginAdmin />} />
         </Routes>
       </CartProvider>
 
