@@ -50,7 +50,7 @@ const App = () => {
   }
   // Comprueba si el usuario es un usuario regular
   if (isUser === 'user' && location.pathname === '/create') {
-    toast.error('No tienes permiso para acceder a la pagina de creción.');
+    toast.error('No tienes permiso para acceder a la página de creación.');
     return <Navigate to="/home" />;
   }
 
