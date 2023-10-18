@@ -59,6 +59,8 @@ const Detalle = () => {
     }
   };
 
+  const otherProducts = products.filter(product => product.product_ID !== productDetail.product_ID);
+
   const handleSellerClick = () => {
     if (productDetail.Seller) {
       const seller_ID = productDetail.Seller.seller_ID;
@@ -66,14 +68,13 @@ const Detalle = () => {
     }
   };
 
-  const handleProductClick = () => {
-    navigate(`/detalle/${product_ID}`)
-  }
+  const handleProductClick = (product_ID) => {
+    navigate(`/products/${product_ID}`);
+  };
 
   console.log(productDetail);
 
   console.log(products);
-  
 
   return (
     <div className={styles.detailContainer}>
@@ -136,8 +137,12 @@ const Detalle = () => {
           <div className={styles.relatedProducts}>
             <h2>Agrega otros productos</h2>
             <div className={styles.productList}>
-              {products.map((product) => (
-                <div className={styles.productCard} key={product.product_ID} onClick={handleProductClick}>
+              {otherProducts.map((product) => (
+                <div
+                  className={styles.productCard}
+                  key={product.product_ID}
+                  onClick={() => handleProductClick(product.product_ID)} // Llama a handleProductClick
+                >
                   <img src={product.image} alt={product.name} />
                   <h4>{product.name}</h4>
                   <h4>${product.price}</h4>
