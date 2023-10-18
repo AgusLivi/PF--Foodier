@@ -32,7 +32,6 @@ const Card = ({ name, description, price, old_price, image, amount, date, produc
           <div className={styles.info}>
             <div className={styles.nameDescription}>
             <h2 className={styles.name}>{name}</h2>
-            
             <p className={styles.description}>{description}</p>
           
             <p className={styles.amount}>Stock: {amount}</p>
