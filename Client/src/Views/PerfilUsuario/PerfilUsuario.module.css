@@ -55,14 +55,16 @@
 }
 
 .profile {
-  
+  overflow: hidden;  
   width: 150px;
   height: 150px;
-  background-color: #f0f0f0;
+  background-color: #000000;
   border-radius: 50%;
   /* Puedes agregar estilos para la imagen de perfil aquí */
 }
-
+.imgProfile {
+  object-fit: cover;
+}
 .profileName {
   margin: 20px auto;
   font-size: 24px;
