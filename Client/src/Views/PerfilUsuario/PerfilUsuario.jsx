@@ -19,6 +19,8 @@ const PerfilUsuario = () => {
     }
   }, [])
 
+  
+
   return (
     <div className={styles.container}>
       {typeuser === 'user' ? (
@@ -56,8 +58,9 @@ const PerfilUsuario = () => {
         <div className={styles.containerChild}>
           <div className={styles.profileBackGround}>
             <div className={styles.containerChildProfile}>
-              <img src={seller.image}/>
-              <div className={styles.profile}></div>
+              <div className={styles.profile}>
+                <img src={seller.image} className={styles.imgProfile}/>
+              </div>
               <div className={styles.profileName}>{seller.name}</div>
               {/* <RatingStars average={userData.average_rating} /> */}
             </div>
