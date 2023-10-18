@@ -79,13 +79,13 @@ const FormLogin = () => {
         name: values.name,
         email: values.email,
         password: values.password,
-        address: `${values.provincia}, ${values.municipio}, ${values.localidad}`,
+        address: `${values.provincia}${values.municipio ? ', ' + values.municipio : ''}${values.localidad ? ', ' + values.localidad : ''}, ${values.shopaddress}`,
         image: values.image,
         contact: values.contact,
         time: values.time,
-        payment: values.payment,
+        payment: values.payment.split(','),
       };
-      console.log(userData);
+      console.log( userData);
       await dispatch(createSeller(userData));
 
       setLoading(false);
@@ -147,7 +147,7 @@ const FormLogin = () => {
       contact: "",
       image: "", // Campo para Cloudinary
       time: "",
-      payment: [],
+      payment:"",
       shopaddress:"",
     },
     onSubmit: submitForm,
@@ -370,6 +370,42 @@ const FormLogin = () => {
             <div className={style["input-div"] + " " + style.pass}>
               <div className={style.i}></div>
               <div className={style.div}>
+                <h5
+                  style={{ display: formik.touched.shopaddress ? "none" : "block" }}
+                >
+                  Calle y nro
+                </h5>
+                {/* <input
+                    type="text"
+                    className={style.input}
+                    name="name"
+                    onChange={(e) => {
+                      formik.handleChange(e);
+                      handleInputChange("name");
+                    }}
+                    onBlur={formik.handleBlur}
+                    value={formik.values.name}
+                  /> */}
+                <input
+                  type="text"
+                  className={style.input}
+                  name="shopaddress"
+                  onChange={(e) => {
+                    formik.handleChange(e);
+                    handleInputChange("shopaddress");
+                  }}
+                  onBlur={formik.handleBlur}
+                  value={formik.values.shopaddress}
+                />
+              </div>
+              {formik.touched.shopaddress && formik.errors.shopaddress && (
+                <div className={style.error}>{formik.errors.shopaddress}</div>
+              )}
+            </div>
+
+            <div className={style["input-div"] + " " + style.pass}>
+              <div className={style.i}></div>
+              <div className={style.div}>
                 {formik.values.payment.length === 0 ? (
                   <h5
                     style={{
@@ -398,6 +434,7 @@ const FormLogin = () => {
                       <option value="Pago Online/Tarjeta">
                         Pago Online/Tarjeta
                       </option>
+                      <option value="Pago Online/Tarjeta, Efectivo">Ambas opciones</option>
                     </select>
                   </label>
                 </div>
@@ -458,31 +495,6 @@ const FormLogin = () => {
               </div>
               {formik.touched.contact && formik.errors.contact && (
                 <div className={style.error}>{formik.errors.contact}</div>
-              )}
-            </div>
-
-            <div className={style["input-div"] + " " + style.pass}>
-              <div className={style.i}></div>
-              <div className={style.div}>
-                <h5
-                  style={{ display: formik.touched.shopaddress ? "none" : "block" }}
-                >
-                  Calle y nro
-                </h5>
-                <Input
-                  type="text"
-                  className={style.input}
-                  name="shopaddress"
-                  onChange={(e) => {
-                    formik.handleChange(e);
-                    handleInputChange("shopaddress");
-                  }}
-                  onBlur={formik.handleBlur}
-                  value={formik.values.shopaddress}
-                />
-              </div>
-              {formik.touched.shopaddress && formik.errors.shopaddress && (
-                <div className={style.error}>{formik.errors.shopaddress}</div>
               )}
             </div>
            
