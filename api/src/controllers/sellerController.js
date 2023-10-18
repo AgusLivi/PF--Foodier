@@ -159,7 +159,31 @@ const deleteSeller = async (req, res) => {
     res.status(400).json("Algo salio mal con la eliminacion del vendedor");
   }
 };
-
+const getSellerPorIdToken = async (req, res) => {
+  try {
+    const login = req.user
+    if (!login)
+    return res.status(401).json("Debe tener una cuenta para acceder");
+  if (login.rol !== "seller")
+    return res.status(401).json("Debe acceder como vendedor")
+  ;
+    const seller = await Seller.findByPk(login.id, {
+      include: [
+        {
+          model: Product,
+        },
+      ],
+    });
+    if (seller) {
+      return res.json(seller);
+    } else {
+      return res.status(404).json({ error: "Vendedor no encontrado." });
+    }
+  } catch (error) {
+    console.error(error);
+    return res.status(500).json({ error: "Error al obtener el vendedor." });
+  }
+};
 // ... otros métodos para crear, actualizar y eliminar vendedores
 
 module.exports = {
@@ -167,4 +191,5 @@ module.exports = {
   createSeller,
   updateSeller,
   deleteSeller,
+  getSellerPorIdToken
 };

@@ -20,6 +20,7 @@ import {
   GET_ALL_SELLERS,
   GET_SELLER_BY_ID,
   GET_ALL_FAV,
+  GET_SELLER_PROFILE,
 
   //location actionTypes:
   MUNICIPIOS,
@@ -495,4 +496,18 @@ export const deleteUserAdmin = (id) => {
       alert(error.message);
     }
   }
+};
+
+export const getSellerProfile = () => {
+return async (dispatch) => {
+  try {
+    const { data } = await axios.get(`/sellers/`);
+    return dispatch({
+      type: GET_SELLER_PROFILE,
+      payload: data,
+    });
+  } catch (error) {
+    alert(error.message);
+  }
+};
 };
