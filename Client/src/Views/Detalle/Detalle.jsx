@@ -4,14 +4,13 @@ import { useDispatch, useSelector } from "react-redux";
 import { cleanDetail, getProductById } from '../../Redux/actions';
 import styles from './Detalle.module.css';
 import { toast, Toaster } from 'react-hot-toast';
-
-
 import { CartContext } from '../../Utils/CartContext';
 
 const Detalle = () => {
   const { product_ID } = useParams();
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const products = useSelector((state) => state.products);
   const productDetail = useSelector((state) => state.productDetail);
   const cartContext = useContext(CartContext);
   const token = localStorage.getItem('token');
@@ -44,10 +43,6 @@ const Detalle = () => {
     navigate('/reserva');
   };
 
-  const handleFavorite = () => {
-    // Implementar la funcionalidad de favoritos
-  };
-
   const addCartHandler = () => {
     const productAlreadyExists = cartItems.some((item) => item.product_ID === productDetail.product_ID);
   
@@ -63,17 +58,29 @@ const Detalle = () => {
       toast.success('El producto se ha agregado al carrito.');
     }
   };
+
+  const handleSellerClick = () => {
+    if (productDetail.Seller) {
+      const seller_ID = productDetail.Seller.seller_ID;
+      navigate(`/seller/${seller_ID}`);
+    }
+  };
+
+  const handleProductClick = () => {
+    const product_ID = products.product_ID;
+    navigate(`/detalle/${product_ID}`)
+  }
+
+  console.log(productDetail);
+
+  console.log(products);
   
 
   return (
     <div className={styles.detailContainer}>
-      {<img src={productDetail.image} alt={productDetail.name} className={styles.detailImg} />}
+      <img src={productDetail.image} alt={productDetail.name} className={styles.detailImg} />
       <div className={styles.detailContent}>
         <h2>{productDetail.name}</h2>
-        <div onClick={handleFavorite} className={styles.detailFav}>
-          {productDetail.favorite ? '❤️' : '🤍'}
-          <p>{productDetail.average_rating}</p>
-        </div>
         <p>{productDetail.description}</p>
         <p>Fecha de publicación: {productDetail.date}</p>
         {productDetail.categories ? (
@@ -84,32 +91,61 @@ const Detalle = () => {
         <p className={styles.oldPrice}>Precio anterior: ${productDetail.old_price}</p>
         <p>Precio: ${productDetail.price}</p>
         {token ? (
-        <>
-          <button className={styles.paymentButton} onClick={addCartHandler}>
-            Añadir al carrito
-          </button>
-          <button className={styles.paymentButton} onClick={handleReserva}>
-            Reservar
-          </button>
-          <button className={styles.paymentButton} onClick={handlePayment}>
-            Pagar
-          </button>
-        </>
-      ) : (
-        <>
-          <p className='disabled-buttons'>Debes estar logueado para realizar acciones de compra</p>
-          <button className={styles.disabledButton} disabled>
-            Añadir al carrito
-          </button>
-          <button className={styles.disabledButton} disabled>
-            Reservar
-          </button>
-          <button className={styles.disabledButton} disabled>
-            Pagar
-          </button>
-        </>
-      )}
+          <>
+            <button className={styles.paymentButton} onClick={addCartHandler}>
+              Añadir al carrito
+            </button>
+            <button className={styles.paymentButton} onClick={handleReserva}>
+              Reservar
+            </button>
+            <button className={styles.paymentButton} onClick={handlePayment}>
+              Pagar
+            </button>
+          </>
+        ) : (
+          <>
+            <p className={styles.disableOption}>Debes estar logueado para realizar acciones de compra</p>
+            <button className={styles.disabledButton} disabled>
+              Añadir al carrito
+            </button>
+            <button className={styles.disabledButton} disabled>
+              Reservar
+            </button>
+            <button className={styles.disabledButton} disabled>
+              Pagar
+            </button>
+          </>
+        )}
         <button className={styles.closeButton} onClick={handleClose}>Cerrar</button>
+      </div>
+
+      <div className={styles.sellerInfo}>
+        {productDetail.Seller ? (
+          <div>
+            <h2 onClick={handleSellerClick} style={{ cursor: 'pointer' }}>{productDetail.Seller.name}</h2>
+            <p>Dirección: {productDetail.Seller.address}</p>
+            <p>Contacto: {productDetail.Seller.contact}</p>
+            <p>Horario de atención: {productDetail.Seller.time}</p>
+            <p>Rating: {productDetail.Seller.average_rating}</p>
+            {/* Agrega más detalles del vendedor según tus necesidades */}
+          </div>
+        ) : (
+          <p>Información del vendedor no disponible</p>
+        )}
+        </div>
+
+          <div className={styles.relatedProducts}>
+            <h2>Agrega otros productos</h2>
+            <div className={styles.productList}>
+              {products.map((product) => (
+                <div className={styles.productCard} key={product.product_ID} onClick={handleProductClick}>
+                  <img src={product.image} alt={product.name} />
+                  <h4>{product.name}</h4>
+                  <h4>${product.price}</h4>
+                  {/* Agrega un botón o enlace para agregar el producto al carrito */}
+                </div>
+              ))}
+        </div>
       </div>
     </div>
   );
