@@ -19,7 +19,7 @@ const addFavorites = async (req, res) => {
 
     // Verificar si el usuario y el vendedor existen antes de agregar a favoritos
     const user = await User.findByPk(user_ID);
-    const seller = await Seller.findByPk(id);
+    const seller = await Seller.findByPk(seller_ID);
 
     if (!user || !seller) {
       return res.status(400).json({ error: 'El usuario o el vendedor no existen.' });
