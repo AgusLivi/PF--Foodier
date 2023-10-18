@@ -10,7 +10,7 @@ const PerfilUsuario = () => {
   const seller = useSelector((state) => state.getSellerProfile)
   const user = useSelector((state) => state.getUserById)
   const dispatch = useDispatch();
-
+ 
   useEffect(() => {
     if (typeuser === 'user') {
       dispatch(getUserById())
@@ -84,7 +84,7 @@ const PerfilUsuario = () => {
               </div>
               <div className={styles.info}>
                 <strong><i className='bx bx-envelope'></i> <label>Metodos de Pago:</label></strong>
-                {seller.payment.map((paymentMethod, index) => (
+                {seller.payment?.map((paymentMethod, index) => (
                   <p key={index}>{paymentMethod}</p>
                 ))}
                 <hr />
