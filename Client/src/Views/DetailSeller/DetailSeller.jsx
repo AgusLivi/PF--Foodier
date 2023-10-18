@@ -18,7 +18,7 @@ const SellerDetails = () => {
       dispatch(getUserById());
       dispatch(getPostsBySellerById(seller_ID))
       return () => dispatch(cleanSeller());
-    }, [seller_ID, posts]);
+    }, [seller_ID]);
 
     
     return (
