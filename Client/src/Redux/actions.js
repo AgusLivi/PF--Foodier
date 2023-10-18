@@ -176,7 +176,7 @@ export const createUser = (userData) => {
   return async () => {
     try {
       const { data } = await axios.post(`/users`, userData);
-      alert(`Usuario ${data.name} creado correctamente`);
+     data && toast.success('El usuario se ha creado correctamente.');
     } catch (error) {
       alert(error.message);
     }
@@ -294,7 +294,7 @@ export const createSeller = (userData) => {
   return async () => {
     try {
       const { data } = await axios.post(`/sellers`, userData);
-      alert(`vendedor ${data.name} creado correctamente`);
+      data && toast.success('El vendedor se ha creado correctamente.');
     } catch (error) {
       alert(error.message);
     }
