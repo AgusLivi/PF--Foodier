@@ -165,59 +165,61 @@ const FormLogin = () => {
         <div className={style.img}></div>
         <div className={style["login-content"]}>
           <form
-            onSubmit={formik.handleSubmit}
-            action="index.html"
-            className={style.form}
+            onSubmit={formik.handleSubmit} action="index.html" className={style.form}
           >
-            <h2 className={style.title}>Sign Up</h2>
-            <div className={style["input-div"] + " " + style.one}>
-              <div className={style.i}></div>
-              <div className={style.div}>
-                <h5 style={{ display: formik.touched.name ? "none" : "block" }}>
-                  Nombre
-                </h5>
-                <input
-                  type="text"
-                  className={style.input}
-                  name="name"
-                  onChange={(e) => {
-                    formik.handleChange(e);
-                    handleInputChange("name");
-                  }}
-                  onBlur={formik.handleBlur}
-                  value={formik.values.name}
-                />
+             <div className={style.formTitle}>
+              <h2 className={style.title}>Sign Up</h2>
               </div>
-              {formik.touched.name && formik.errors.name && (
-                <div className={style.error}>{formik.errors.name}</div>
-              )}
-            </div>
+              <div  className={style.formOne}>
+                <div className={style["input-div"] + " " + style.one}>
+                <div className={style.i}></div>
+                <div className={style.div}>
+                  <h5 style={{ display: formik.touched.name ? "none" : "block" }}>
+                    Nombre
+                  </h5>
+                  <input
+                    type="text"
+                    className={style.input}
+                    name="name"
+                    onChange={(e) => {
+                      formik.handleChange(e);
+                      handleInputChange("name");
+                    }}
+                    onBlur={formik.handleBlur}
+                    value={formik.values.name}
+                  />
+                </div>
+                {formik.touched.name && formik.errors.name && (
+                  <div className={style.error}>{formik.errors.name}</div>
+                )}
+              </div>
 
-            <div className={style["input-div"] + " " + style.one}>
-              <div className={style.i}></div>
-              <div className={style.div}>
-                <h5
-                  style={{ display: formik.touched.email ? "none" : "block" }}
-                >
-                  Email
-                </h5>
-                <input
-                  type="email"
-                  className={style.input}
-                  name="email"
-                  onChange={(e) => {
-                    formik.handleChange(e);
-                    handleInputChange("email");
-                  }}
-                  onBlur={formik.handleBlur}
-                  value={formik.values.email}
-                />
+              <div className={style["input-div"] + " " + style.one}>
+                <div className={style.i}></div>
+                <div className={style.div}>
+                  <h5
+                    style={{ display: formik.touched.email ? "none" : "block" }}
+                  >
+                    Email
+                  </h5>
+                  <input
+                    type="email"
+                    className={style.input}
+                    name="email"
+                    onChange={(e) => {
+                      formik.handleChange(e);
+                      handleInputChange("email");
+                    }}
+                    onBlur={formik.handleBlur}
+                    value={formik.values.email}
+                  />
+                </div>
               </div>
               {formik.touched.email && formik.errors.email && (
                 <div className={style.error}>{formik.errors.email}</div>
               )}
-            </div>
-
+            
+           
             <div className={style["input-div"] + " " + style.one}>
               <div className={style.i}></div>
               <div className={style.div}>
@@ -322,7 +324,8 @@ const FormLogin = () => {
                 <div className={style.error}>{formik.errors.municipio}</div>
               )}
             </div>
-
+            </div>
+            <div className={style.formTwo}>
             <div className={style["input-div"] + " " + style.pass}>
               <div className={style.i}></div>
               <div className={style.div}>
@@ -404,7 +407,7 @@ const FormLogin = () => {
             {formik.touched.payment && formik.errors.payment && (
               <div className={style.error}>{formik.errors.payment}</div>
             )}
-
+           
            
 
             <div className={style["input-div"] + " " + style.pass}>
@@ -512,8 +515,10 @@ const FormLogin = () => {
                 <div className={style.error}>{formik.errors.password}</div>
               )}
             </div>
-
+            </div>
+            <div className={style.containerBtn}>
             <input type="submit" className={style.btn} value="Register" />
+            </div>
           </form>
         </div>
       </div>
