@@ -40,6 +40,8 @@ const App = () => {
     '/userlogin',
     '/politica-de-privacidad',
     '/terminos-y-condiciones',
+    '/admin',
+    '/admin/dashboard'
   ];
   // Comprueba si el usuario es invitado  
   if (!token) {
@@ -62,8 +64,8 @@ const App = () => {
           && location.pathname !== "/formcomercio"
           && location.pathname !== "/formuser"
           && location.pathname !== "/userlogin"
+          && location.pathname !== "/admin"
           && location.pathname !== "/admin/dashboard"
-          && location.pathname !== "/admin/login"
           && <NavBar />}
 
 
