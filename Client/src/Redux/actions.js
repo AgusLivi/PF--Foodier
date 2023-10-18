@@ -195,11 +195,12 @@ export const getAllFav = () => {
   };
 };
 
-export const postFav = async (id) => {
-  
-  try {
-      console.log('id action:',id);
-      const { data } = await axios.post(`/favorites`,id);
+
+export const postFav = (dataForm) => {
+  console.log('id action:',dataForm);
+  return async () => {
+    try {
+      const { data } = await axios.post(`/favorites/`, dataForm);
       alert(data);
     } catch (error) {
       alert(error.message);

@@ -16,13 +16,10 @@ const CardContainer =  () => {
       // Realiza la solicitud GET a la URL con selectedSeller
       dispatch(getUserById());
       dispatch(getSellerById(selectedSeller));
+      dispatch(postFav({seller_ID: selectedSeller}));
     }
   }, [selectedSeller]);
-console.log(selectedSeller);
 
-const onPostFav = (id) => {
-  dispatch(postFav({id: id}))
-}
   return (
     <div className={styles.cardContainer}>
       {products.length === 0 ? (
