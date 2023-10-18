@@ -205,7 +205,7 @@ export const postFav = (dataForm) => {
     } catch (error) {
       alert(error.message);
     }
-
+  };
 };
 
 export const createPost = (post) => {
