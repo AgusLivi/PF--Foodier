@@ -1,4 +1,5 @@
 import axios from "axios";
+import { toast } from 'react-hot-toast';
 
 import {
   //product actionTypes:
@@ -202,7 +203,7 @@ export const postFav = (dataForm) => {
   return async () => {
     try {
       const { data } = await axios.post(`/favorites/`, dataForm);
-      alert(data);
+      data && toast.success('Has agregado el vendedor a tus favoritos.');
     } catch (error) {
       alert(error.message);
     }
