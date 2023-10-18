@@ -39,7 +39,7 @@ console.log(selectedSeller);
             product_ID={product.product_ID}
             seller_ID={product.SellerSellerID}
             onSellerClick={(seller_ID) => setSelectedSeller(seller_ID)}
-            sellerImage={seller.image}
+            sellerImage={seller.sellerImage}
             onClickAddFav={(seller_ID) => setSelectedSeller(seller_ID)}
           />
         ))
