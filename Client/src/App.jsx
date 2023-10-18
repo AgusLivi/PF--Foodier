@@ -40,8 +40,8 @@ const App = () => {
     '/userlogin',
     '/politica-de-privacidad',
     '/terminos-y-condiciones',
-    '/mas18',
-    '/mas18/dashboard'
+    '/admin',
+
   ];
   // Comprueba si el usuario es invitado  
   if (!token) {
@@ -64,15 +64,15 @@ const App = () => {
           && location.pathname !== "/formcomercio"
           && location.pathname !== "/formuser"
           && location.pathname !== "/userlogin"
-          && location.pathname !== "/mas18"
-          && location.pathname !== "/mas18/dashboard"
+          && location.pathname !== "/admin"
+          && location.pathname !== "/admin/dashboard"
           && <NavBar />}
 
 
         <Routes>
           <Route path='/' element={<Landing />} />
-          <Route path='/mas18' element={<LoginAdmin />} />
-          <Route path='/mas18/dashboard' element={<DashboardAdmin />} />
+          <Route path='/admin' element={<LoginAdmin />} />
+          <Route path='/admin/dashboard' element={<DashboardAdmin />} />
           <Route path='/profile' element={<PerfilUsuario />} />
           <Route path="/home" element={<Home />} />
           <Route path='/login' element={<Login />} />

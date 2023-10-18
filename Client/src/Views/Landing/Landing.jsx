@@ -57,6 +57,10 @@ const Home = () => {
     navigate("/politica-de-privacidad");
   };
 
+  const linkAdmin = () => {
+    navigate("/admin")
+  }
+
   const handleSubscribe = () => {
     if (email) {
       // Realiza alguna validación adicional del correo si es necesario
@@ -169,6 +173,7 @@ const Home = () => {
           <div className={style.footersectioncolumns}>
             <span onClick={linkTerminos}>Términos y Condiciones</span>
             <span onClick={linkPolitica}>Política de Privacidad</span>
+            <span onClick={linkAdmin}>admin</span>
           </div>
         </div>
       </div>
