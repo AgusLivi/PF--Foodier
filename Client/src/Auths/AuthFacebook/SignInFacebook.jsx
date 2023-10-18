@@ -11,8 +11,10 @@ const SignInFacebook = () => {
     const handleClick = () => {
         signInWithPopup(auth, provider).then((result) => {
             const user = result.user;
-            setValue(user.email);
-            localStorage.setItem("email", user.email);
+            setValue(user.accessToken);
+            localStorage.setItem("token", user.accessToken)
+            localStorage.setItem('rol', "user");
+            axios.defaults.headers = { "token": user.accessToken }
             // Redirige a /home después de la autenticación exitosa
             navigate("/home");
         }).catch((error) => {
