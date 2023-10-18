@@ -3,6 +3,10 @@
     flex-wrap:wrap;
     flex-direction: row;
     justify-content: space-around;
+    position: relative;
+    text-align: center;
   }
   
-  
+  .textNotFound{
+   margin-top: 6em;    
+  }
