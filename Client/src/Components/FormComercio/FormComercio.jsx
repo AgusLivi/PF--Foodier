@@ -83,7 +83,7 @@ const FormLogin = () => {
         image: values.image,
         contact: values.contact,
         time: values.time,
-        payment: values.payment.split(','),
+        payment: values.payment.split(',').map(item => item.trim()),
       };
       console.log( userData);
       await dispatch(createSeller(userData));

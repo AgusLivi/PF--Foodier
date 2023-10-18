@@ -100,7 +100,7 @@ export const createProduct = (formmData,) => {
   return async () => {
     try {
       const { data } = await axios.post(`/products`, formmData); // despues de la barra tengo que poner la ruta que definieron en el back
-      alert(`${data.name} fue creado correctamente`);
+      toast.success('el producto se creo correctamente')
     } catch (error) {
       alert('Hubo un error', error.message);
     }
