@@ -60,7 +60,7 @@ const FormLogin = () => {
       updatedPayments.push(selectedValue);
     }
 
-    formik.setFieldValue('payment', updatedPayments); // Actualizar el campo "payment"
+    formik.setFieldValue("payment", updatedPayments); // Actualizar el campo "payment"
   };
 
   const handlerCloudinary = async (event) => {
@@ -127,7 +127,7 @@ const FormLogin = () => {
       errors.time = "El horario es obligatorio";
     }
     if (!values.payment) {
-      errors.payment = 'Los métodos de pago son obligatorios';
+      errors.payment = "Los métodos de pago son obligatorios";
     }
 
     return errors;
@@ -144,7 +144,7 @@ const FormLogin = () => {
       contact: "",
       image: "", // Campo para Cloudinary
       time: "",
-      payment: [],   
+      payment: [],
     },
     onSubmit: submitForm,
     validate: validateForm,
@@ -217,10 +217,8 @@ const FormLogin = () => {
             <div className={style["input-div"] + " " + style.one}>
               <div className={style.i}></div>
               <div className={style.div}>
-                <h5
-                  style={{ display: formik.touched.time ? "none" : "block" }}
-                >
-                Hora Apertura - Hora Cierre
+                <h5 style={{ display: formik.touched.time ? "none" : "block" }}>
+                  Hora Apertura - Hora Cierre
                 </h5>
                 <input
                   type="text"
@@ -365,32 +363,50 @@ const FormLogin = () => {
             <div className={style["input-div"] + " " + style.pass}>
               <div className={style.i}></div>
               <div className={style.div}>
-                <h5
-                  style={{ display: formik.touched.contact ? "none" : "block" }}
-                >
-                  Teléfono
-                </h5>
-                <Input
-                  type="tel"
-                  className={style.input}
-                  name="contact"
-                  onChange={(e) => {
-                    formik.handleChange(e);
-                    handleInputChange("contact");
-                  }}
-                  onBlur={formik.handleBlur}
-                  value={formik.values.contact}
-                />
+                {formik.values.payment.length === 0 ? (
+                  <h5
+                    style={{
+                      display:
+                        formik.touched.payment ||
+                        formik.values.payment.length > 0
+                          ? "none"
+                          : "block",
+                    }}
+                  >
+                    Métodos de Pago
+                  </h5>
+                ) : null}
+                <div>
+                  <label>
+                    <select
+                      name="payment"
+                      value={formik.values.payment}
+                      onChange={(e) => {
+                        formik.handleChange(e);
+                        handleInputChange("payment");
+                      }}
+                    >
+                      <option value=""></option>
+                      <option value="Efectivo">Efectivo</option>
+                      <option value="Pago Online/Tarjeta">
+                        Pago Online/Tarjeta
+                      </option>
+                    </select>
+                  </label>
+                </div>
               </div>
-              {formik.touched.contact && formik.errors.contact && (
-                <div className={style.error}>{formik.errors.contact}</div>
-              )}
             </div>
+
+            {formik.touched.payment && formik.errors.payment && (
+              <div className={style.error}>{formik.errors.payment}</div>
+            )}
+
+           
 
             <div className={style["input-div"] + " " + style.pass}>
               <div className={style.i}></div>
               <div className={style.div}>
-                <h5>Imagen</h5>
+                
                 <FormGroup>
                   <Input
                     type="file"
@@ -412,45 +428,32 @@ const FormLogin = () => {
                 <div className={style.error}>{formik.errors.image}</div>
               )}
             </div>
-     <div className={style['input-div'] + ' ' + style.pass}>
+
+            <div className={style["input-div"] + " " + style.pass}>
               <div className={style.i}></div>
               <div className={style.div}>
-                <h5>Métodos de Pago</h5>
-                <div>
-                  <label>
-                    <input
-                      type="checkbox"
-                      name="payment"
-                      value="Efectivo"
-                      checked={formik.values.payment === 'Efectivo'}
-                      onChange={formik.handleChange}
-                    /> Efectivo
-                  </label>
-                </div>
-                <div>
-                  <label>
-                    <input
-                      type="checkbox"
-                      name="payment"
-                      value="Pago Online/Tarjeta"
-                      checked={formik.values.payment === 'Pago Online/Tarjeta'}
-                      onChange={formik.handleChange}
-                    /> Pago Online/Tarjeta
-                  </label>
-                </div>
-                {/* <input
-                  type="text"
+                <h5
+                  style={{ display: formik.touched.contact ? "none" : "block" }}
+                >
+                  Teléfono
+                </h5>
+                <Input
+                  type="tel"
                   className={style.input}
-                  name="payment"
-                  onChange={formik.handleChange}
+                  name="contact"
+                  onChange={(e) => {
+                    formik.handleChange(e);
+                    handleInputChange("contact");
+                  }}
                   onBlur={formik.handleBlur}
-                  value={formik.values.payment}
-                /> */}
+                  value={formik.values.contact}
+                />
               </div>
-              {formik.touched.payment && formik.errors.payment && (
-                <div className={style.error}>{formik.errors.payment}</div>
+              {formik.touched.contact && formik.errors.contact && (
+                <div className={style.error}>{formik.errors.contact}</div>
               )}
             </div>
+           
             <div className={style["input-div"] + " " + style.pass}>
               <div className={style.i}></div>
               <div className={style.div}>
