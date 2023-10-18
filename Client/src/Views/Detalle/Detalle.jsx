@@ -67,7 +67,6 @@ const Detalle = () => {
   };
 
   const handleProductClick = () => {
-    const product_ID = products.product_ID;
     navigate(`/detalle/${product_ID}`)
   }
 
