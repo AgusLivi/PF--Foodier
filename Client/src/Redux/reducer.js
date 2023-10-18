@@ -37,7 +37,8 @@ import {
   //token login
   SET_AUTH_TOKEN,
   LOGIN_SUCCESS,
-  GET_SELLER_PROFILE
+  GET_SELLER_PROFILE,
+  GET_POST_SELLER_BY_ID
 } from "./actionsType";
 
 const initialState = {
@@ -61,7 +62,8 @@ const initialState = {
   paymentUrl: null,
   error: null,
   token: null,
-  getSellerProfile: []
+  getSellerProfile: [],
+  getPostBySellerId: []
   //tengo q agregar mas
 };
 
@@ -242,6 +244,11 @@ const reducer = (state = initialState, { type, payload }) => {
       return {
         ...state,
         getSellerProfile: payload
+      }
+    case GET_POST_SELLER_BY_ID:
+      return {
+        ...state,
+        getPostBySellerId: payload
       }
 
     default:
