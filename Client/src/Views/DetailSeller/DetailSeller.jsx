@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { cleanSeller, getSellerById, getUserById } from '../../Redux/actions';
+import { cleanSeller, getPostsBySellerById, getSellerById, getUserById } from '../../Redux/actions';
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from 'react-router-dom';
 import style from './DetailSeller.module.css'
@@ -10,13 +10,15 @@ const SellerDetails = () => {
     const { seller_ID } = useParams(); 
     const seller = useSelector((state) => state.getSellerById); 
     const user = useSelector((state) => state.getUserById)
-   
+    const posts = useSelector((state) => state.getPostBySellerId); 
+    console.log("POSTEOS BRODEL",posts);
     
     useEffect(() => {
       dispatch(getSellerById(seller_ID));
       dispatch(getUserById());
+      dispatch(getPostsBySellerById(seller_ID))
       return () => dispatch(cleanSeller());
-    }, [dispatch, seller_ID]);
+    }, [seller_ID, posts]);
 
     
     return (
@@ -40,6 +42,13 @@ const SellerDetails = () => {
           <div className={style['comment-section-container']}>
             <CommentSection seller_ID={seller_ID} />
           </div>
+          <div>
+           {posts?.map((post) => (
+          <div key={post.post_ID}>
+          <p>{post.comments}</p>
+         </div>
+        ))}
+    </div>
         </div>
     </div>
 

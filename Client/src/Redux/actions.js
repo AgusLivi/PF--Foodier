@@ -15,6 +15,7 @@ import {
   GET_POST_BY_ID,
   CREATE_POST,
   GET_POST,
+  GET_POST_SELLER_BY_ID,
 
   //Seller actionTypes:
   GET_SELLER_FAV,
@@ -523,3 +524,16 @@ return async (dispatch) => {
 };
 
 
+export const getPostsBySellerById = (id) => {
+  return async (dispatch) => {
+    try {
+      const { data } = await axios.get(`/posts/seller/${id}`);
+      return dispatch({
+        type: GET_POST_SELLER_BY_ID,
+        payload: data,
+      });
+    } catch (error) {
+      alert(error.message);
+    }
+  };
+};

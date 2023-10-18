@@ -31,7 +31,7 @@ router.get('/sellers/:seller_ID', sellerController.getSellerById);
 //Rutas de creacion de usuario y seller
 router.post("/users", userController.createUser);
 router.post('/sellers', sellerController.createSeller);
-
+router.get('/posts/seller/:seller_ID', postController.getAllPostsBySellerId);
 //**Rutas privadas**
 router.use(autenticacion)
 
@@ -45,6 +45,7 @@ router.post("/products", productController.createProduct); // seller
 router.post('/posts', postController.createPost); // user
 router.get('/posts/:post_ID', postController.getPostById); // user / admin
 router.delete('/posts/',  ) // user / admin
+
 
 // Rutas relacionadas a los usuarios
 router.put("/users/", userController.updateUser); //user

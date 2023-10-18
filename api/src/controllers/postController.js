@@ -69,9 +69,21 @@ const deletePost = async (req, res) => {
   }
 };
 
+const getAllPostsBySellerId = async (req, res) => {
+  const { seller_ID } = req.params; // Aquí asumimos que seller_ID es el ID del vendedor.
+  try {
+    const posts = await Post.findAll({ where: { SellerSellerID: seller_ID } });
+    res.json(posts);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: "Error al obtener los posteos del vendedor." });
+  }
+};
+
 module.exports = {
   getAllPost,
   getPostById,
   createPost,
-  deletePost
+  deletePost,
+  getAllPostsBySellerId
 };
