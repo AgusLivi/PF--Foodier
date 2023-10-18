@@ -9,7 +9,7 @@ import { FiArrowRight } from "react-icons/fi";
 import { SiLinkedin } from "react-icons/si";
 import { BiLogoInstagram } from "react-icons/bi";
 import { FaFacebookF } from "react-icons/fa";
-import Logo from "../../assets/Logo.svg";
+import Logo from '../../assets/logoNaranjaDos.png'
 import style from './Landing.module.css';
 import { Link, useNavigate } from 'react-router-dom';
 import { toast } from 'react-hot-toast'; // Importa 'toast'
@@ -84,7 +84,7 @@ const Home = () => {
   return (
     <>
       <div className={style.homecontainer}>
-        <img src={Logo} alt="Logo" />
+        <img className={style.logo} src={Logo} alt="Logo" />
         <div className={style.homebannercontainer}>
           <div className={style.homebannerimagecontainer}>
             <img src={BannerBackground} alt="" />
