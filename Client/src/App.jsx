@@ -66,6 +66,9 @@ const App = () => {
           && location.pathname !== "/userlogin"
           && location.pathname !== "/admin"
           && location.pathname !== "/admin/dashboard"
+          && location.pathname !== "/terminos-y-condiciones"
+          && location.pathname !== "/politica-de-privacidad"
+
           && <NavBar />}
 
         <Routes>
