@@ -10,6 +10,8 @@
     height: 100vh;
     flex-wrap: wrap;
     margin: 50px auto;
+    border: 1px solid #333;
+    justify-content: space-around;
   }
   
   .fav {
