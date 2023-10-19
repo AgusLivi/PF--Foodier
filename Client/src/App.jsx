@@ -17,7 +17,6 @@ import SuccessPage from "./Components/Payment/SuccessPage";
 import PendingPage from "./Components/Payment/PendingPage";
 import FailurePage from "./Components/Payment/FailurePage";
 import ShoppingCart from './Components/ShoppingCart/ShoppingCart';
-import Reserva from "./Components/Reserva/Reserva";
 import Terminos from "./Views/TerminosYCondiciones/Terminos";
 import Politica from "./Views/PoliticaDePrivacidad/Politica";
 import SellerDetails from './Views/DetailSeller/DetailSeller';
@@ -87,7 +86,6 @@ const App = () => {
           <Route path="/payments/pending" element={<PendingPage />} />
           <Route path="/payments/failure" element={<FailurePage />} />
           <Route path='/carrito' element={<ShoppingCart />} />
-          <Route path='/reserva' element={<Reserva />} />
           <Route path='/terminos-y-condiciones' element={<Terminos />} />
           <Route path='/politica-de-privacidad' element={<Politica />} />
           <Route path='/seller/:seller_ID' element={<SellerDetails />} />
