@@ -46,11 +46,7 @@
     border-radius: 50%; /* Hacer que la imagen sea circular */
   }
   
-.seller-details p {
-    font-size: 1.2em;
-    margin: 10px;
 
-}
 
 .seller-details {
     display: flex;
@@ -58,4 +54,18 @@
   }
 .seller-logo{
     font-size: 30px;
+}
+.comment-container{
+    border: 1px solid #333;
+    display: flex;
+    flex-direction: column;
+    max-height: 150px;
+    overflow: scroll;
+}
+.comment-container-child{
+    display: flex;
+    border: 1px solid #333;
+    padding: 8px;
+    background: #fff;
+    font-size: 20px;
 }
