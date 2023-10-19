@@ -46,11 +46,7 @@
     border-radius: 50%; /* Hacer que la imagen sea circular */
   }
   
-.seller-details p {
-    font-size: 1.2em;
-    margin: 10px;
 
-}
 
 .seller-details {
     display: flex;
