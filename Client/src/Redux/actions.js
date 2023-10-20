@@ -45,7 +45,7 @@ export const createPayment = (pay) => {
   return async () => {
     try {
       const { data } = await axios.post(`/payments`, pay);
-      alert(`orden ${data} creado`);
+      toast.success("El pago fue exitoso.");
     } catch (error) {
       alert(error.message);
     }
@@ -71,7 +71,7 @@ export const deleteProduct = (id) => {
   return async () => {
     try {
       const { data } = await axios.delete(`/products/${id}`); //definir las rutas del back
-      alert(`${data.name} fue borrado correctamente`);
+     data && toast.success("El producto se ha borrado.");
     } catch (error) {
       alert(error.message);
     }
@@ -100,7 +100,9 @@ export const createProduct = (formmData,) => {
   return async () => {
     try {
       const { data } = await axios.post(`/products`, formmData); // despues de la barra tengo que poner la ruta que definieron en el back
-      toast.success('el producto se creo correctamente')
+
+     data && toast.success("El producto fue creado exitosamente.");
+
     } catch (error) {
       alert('Hubo un error', error.message);
     }
@@ -257,7 +259,8 @@ export const updateUser = (updatedUserData) => {
   return async () => {
     try {
       const { data } = await axios.put(`/users/`, updatedUserData);
-      alert(`Usuario ${data.name} actualizado correctamente`);
+     data && toast.success("El usuario ha sido actualizado");
+
     } catch (error) {
       alert(error.message);
     }
@@ -268,7 +271,7 @@ export const deleteUser = () => {
   return async () => {
     try {
       const { data } = await axios.delete(`/users/`); //definir las rutas del back
-      alert(`Usuario ${data.name} borrado correctamente`);
+      data && toast.success("El usuario ha sido borrado.");
     } catch (error) {
       alert(error.message);
     }
@@ -306,7 +309,7 @@ export const updateSeller = (updatedSellerData) => {
   return async () => {
     try {
       const { data } = await axios.put(`/sellers/`, updatedSellerData);
-      alert(`vendedor ${data.name} actualizado correctamente`);
+      data && toast.success("El vendedor ha sido actualizado.");
     } catch (error) {
       alert(error.message);
     }
@@ -317,7 +320,7 @@ export const deleteSeller = () => {
   return async () => {
     try {
       const { data } = await axios.delete(`/sellers/`); //definir las rutas del back
-      alert(`vendedor ${data.name} borrado correctamente`);
+     data && toast.success("El vendedor ha sido borrado.");
     } catch (error) {
       alert(error.message);
     }
@@ -441,7 +444,8 @@ export const banSeller = (id) => {
     try {
       const { data } = await axios.put(`/admin/seller/${id}`);
       console.log(data);
-      alert(data);
+      toast.success("El vendedor ha sido baneado.");
+      ;
     } catch (error) {
       alert(error.message);
     }
@@ -453,7 +457,7 @@ export const banUser = (id) => {
     try {
       const { data } = await axios.put(`/admin/user/${id}`);
       console.log(data);
-      alert(data);
+      toast.success("El usuario ha sido baneado.");
     } catch (error) {
       alert(error.message);
     }
@@ -465,7 +469,7 @@ export const enableSeller = (id) => {
     try {
       const { data } = await axios.put(`/admin/enableSeller/${id}`);
       console.log(data);
-      alert(data);
+      toast.success("El vendedor ha sido habilitado.");
     } catch (error) {
       alert(error.message);
     }
@@ -477,7 +481,8 @@ export const enableUser = (id) => {
     try {
       const { data } = await axios.put(`/admin/enableUser/${id}`);
       console.log(data);
-      alert(data);
+      toast.success("El usuario ha sido habilitado.");
+
     } catch (error) {
       alert(error.message);
     }
@@ -488,7 +493,7 @@ export const deleteSellerAdmin = (id) => {
   return async () => {
     try {
       const { data } = await axios.delete(`/admin/sellers/${id}`);
-      alert(data);
+      toast.success("El vendedor ha sido eliminado.");
     } catch (error) {
       alert(error.message);
     }
@@ -499,7 +504,7 @@ export const deleteUserAdmin = (id) => {
   return async () => {
     try {
       const { data } = await axios.delete(`/admin/user/${id}`);
-      alert(data);
+      toast.success("El usuario ha sido eliminado.");
     } catch (error) {
       alert(error.message);
     }

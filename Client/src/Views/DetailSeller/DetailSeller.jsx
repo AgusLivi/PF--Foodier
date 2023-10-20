@@ -42,9 +42,9 @@ const SellerDetails = () => {
           <div className={style['comment-section-container']}>
             <CommentSection seller_ID={seller_ID} />
           </div>
-          <div>
+          <div className={style['comment-container']}>
            {posts?.map((post) => (
-          <div key={post.post_ID}>
+          <div className={style['comment-container-child']} key={post.post_ID}>
           <p>{post.comments}</p>
          </div>
         ))}

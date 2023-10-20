@@ -18,7 +18,7 @@ const Favoritos = () => {
   }, []);
 
   return (
-    <div>
+    <div className={Style.container}>
       <FavsContainer />
     </div>
   );

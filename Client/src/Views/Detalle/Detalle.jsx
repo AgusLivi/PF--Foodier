@@ -39,10 +39,6 @@ const Detalle = () => {
     navigate(`/payments/${monto}/${descripcion}`);
   };
 
-  const handleReserva = () => {
-    navigate('/reserva');
-  };
-
   const addCartHandler = () => {
     const productAlreadyExists = cartItems.some((item) => item.product_ID === productDetail.product_ID);
   
@@ -94,9 +90,6 @@ const Detalle = () => {
           <>
             <button className={styles.paymentButton} onClick={addCartHandler}>
               Añadir al carrito
-            </button>
-            <button className={styles.paymentButton} onClick={handleReserva}>
-              Reservar
             </button>
             <button className={styles.paymentButton} onClick={handlePayment}>
               Pagar

@@ -19,12 +19,13 @@
 .notiCarrito{
 	position: absolute;
 	top: 8px;
-	left: -10px;
+	left: -4px;
 	z-index: 1000;
 	background-color: red;
 	border-radius: 25px;
 	width: 1em;
 	text-align: center;
+	font-size: 14px;
 }
 header {
 
